@@ -15,6 +15,14 @@ class CreateDocumentSectionsTable extends Migration
     {
         Schema::create('document_sections', function (Blueprint $table) {
             $table->bigIncrements('id');
+<<<<<<< Updated upstream
+=======
+            $table->string('sectionType');
+            $table->string('content');
+            $table->timestamp('date');
+            $table->bigInteger('idProject');
+            $table->foreign('idProject')->references('id')->on('projects');
+>>>>>>> Stashed changes
             $table->timestamps();
         });
     }
