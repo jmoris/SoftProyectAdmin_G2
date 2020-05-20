@@ -15,14 +15,11 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->bigIncrements('id');
-<<<<<<< Updated upstream
-=======
             $table->string('name');
             $table->integer('year');
             $table->string('semester');
             $table->integer('idUser');
             $table->foreign('idUser')->references('id')->on('users');
->>>>>>> Stashed changes
             $table->timestamps();
         });
     }
