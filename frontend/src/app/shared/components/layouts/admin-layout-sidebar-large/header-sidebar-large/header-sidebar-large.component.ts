@@ -76,13 +76,13 @@ export class HeaderSidebarLargeComponent implements OnInit {
         return state.sidenavOpen = false;
       }
       // item has child items
-      if (!state.sidenavOpen && !state.childnavOpen 
+      /*if (!state.sidenavOpen && !state.childnavOpen 
         && this.navService.selectedItem.type === 'dropDown') {
           state.sidenavOpen = true;
           setTimeout(() => {
               state.childnavOpen = true;
           }, 50);
-      }
+      }*/
       // item has no child items
       if (!state.sidenavOpen && !state.childnavOpen) {
         state.sidenavOpen = true;

@@ -85,14 +85,12 @@ export class SidebarLargeComponent implements OnInit {
           item.sub.forEach(subItem => {
             subItem.active = false;
             if (activeRoute.indexOf(subItem.state) !== -1) {
-              console.log('hola');
               this.navService.selectedItem = item;
               item.active = true;
             }
             if (subItem.sub) {
               subItem.sub.forEach(subChildItem => {
                 if (activeRoute.indexOf(subChildItem.state) !== -1) {
-                  console.log('hola2');
                   this.navService.selectedItem = item;
                   item.active = true;
                   subItem.active = true;
