@@ -19,7 +19,6 @@ class CreateDocumentSectionsTable extends Migration
             $table->string('content');
             $table->timestamp('date');
             $table->bigInteger('idProject');
-            $table->foreign('idProject')->references('id')->on('projects');
             $table->timestamps();
         });
     }
