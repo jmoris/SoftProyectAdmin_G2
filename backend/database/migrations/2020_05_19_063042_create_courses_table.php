@@ -18,8 +18,7 @@ class CreateCoursesTable extends Migration
             $table->string('name');
             $table->integer('year');
             $table->string('semester');
-            $table->integer('idUser');
-            $table->foreign('idUser')->references('id')->on('users');
+            $table->bigInteger('idUser');
             $table->timestamps();
         });
     }

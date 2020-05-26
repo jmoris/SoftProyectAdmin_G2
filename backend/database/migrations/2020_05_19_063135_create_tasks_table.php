@@ -18,11 +18,10 @@ class CreateTasksTable extends Migration
             $table->string('user');
             $table->string('description');
             $table->string('state');
-            $table->timestamp('initDate');
-            $table->timestamp('deadLine');
-            $table->timestamp('deliveryDate');
+            $table->timestamp('initDate', 0)->nullable();
+            $table->timestamp('deadLine', 0)->nullable();
+            $table->timestamp('deliveryDate', 0)->nullable();
             $table->bigInteger('idProject');
-            $table->foreign('idProject')->references('id')->on('projects');
             $table->timestamps();
         });
     }
