@@ -30,13 +30,6 @@
         <i [class]="'nav-icon ' + item.icon"></i>
         <span class="nav-text">{{ item.name }}</span>
       </div>
-      <div class="nav-item-hold" *ngIf="item.type === 'extLink'">
-        <a [href]="item.state" target="_blank">
-          <i [class]="'nav-icon ' + item.icon"></i>
-          <span class="nav-text">{{ item.name }}</span>
-        </a>
-      </div>
-
       <div class="triangle"></div>
     </li>
   </ul>
