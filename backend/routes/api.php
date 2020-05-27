@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,7 +14,10 @@ use Illuminate\Http\Request;
 Route::post('login', 'AuthController@login');
 Route::post('register', 'AuthController@register');
 
-Route::group(['middleware' => 'auth.jwt'], function () {
+Route::group(['middleware' => 'api'], function () {
     Route::get('logout', 'AuthController@logout');
 
+    Route::post('admin/users', 'AdminController@crearUsuario');
+    Route::put('admin/users/{id}', 'AdminController@editarUsuario');
+    Route::delete('admin/users/{id}', 'AdminController@eliminarUsuario');
 });
