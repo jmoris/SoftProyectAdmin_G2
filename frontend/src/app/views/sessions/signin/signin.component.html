@@ -3,7 +3,7 @@
       <div class="col-md-6">
         <div class="p-4">
           <div class="auth-logo text-center mb-4">
-            <img src="assets/images/aprodes_logo.png" alt="">
+            <img src="assets/images/logo_logIn.png" alt="">
           </div>
           <h1 class="mb-3 text-18">Iniciar Sesión</h1>
           <form [formGroup]="signinForm" (ngSubmit)="signin()">
@@ -28,18 +28,15 @@
       </div>
       <div class="col-md-6 text-center " style="background-size: cover;background-image: url(./assets/images/log-in_menu_image.jpg)">
         <div class="pr-3 auth-right">
-          <button class="btn btn-rounded btn-outline-primary btn-outline-email btn-block btn-icon-text" routerLink="/sessions/signup">
-            <i class="i-Mail-with-At-Sign"></i>
-            Iniciar Sesión con Correo
-          </button>
-          <button class="btn btn-rounded btn-outline-primary btn-outline-google btn-block btn-icon-text">
-            <i class="i-Google-Plus"></i>
-            Iniciar Sesión con Google
-          </button>
-          <button class="btn btn-rounded btn-outline-primary btn-block btn-icon-text btn-outline-facebook">
-            <i class="i-Facebook-2"></i>
-            Iniciar Sesión con Facebook
-          </button>
+          <label>
+            <h3><b>¿Necesitas Ayuda?</b></h3>
+            <h4><small>Póngase en Contacto con Nosotros</small></h4>
+            <p><b>Teléfono de Soporte Técnico:
+            <br></b><a href="tel:+5612345678">+5612345678</a></p>
+            <p><b>Correo Electrónico de Contacto:
+            </b><a href="mailto:aprodes@info.universidad.cl">aprodes@info.universidad.cl</a></p>
+            
+          </label>
         </div>
       </div>
     </div>
