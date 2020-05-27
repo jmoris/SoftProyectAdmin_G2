@@ -94,9 +94,10 @@ export class NavigationService {
             type: 'dropDown',
             icon: 'i-Administrator',
             sub: [
-                { icon: 'i-Add-User', name: 'Sign up', state: '/sessions/signup', type: 'link' },
-                { icon: 'i-Checked-User', name: 'Sign in', state: '/sessions/signin', type: 'link' },
-                { icon: 'i-Find-User', name: 'Forgot', state: '/sessions/forgot', type: 'link' }
+                { icon: 'i-Add-User', name: 'Registrar usuario', state: '/sessions/signup', type: 'link' },
+                { icon: 'i-Checked-User', name: 'Ver usuarios', state: '/sessions/signin', type: 'link' },
+                { icon: 'i-Find-User', name: 'Gestionar usuarios', state: '/sessions/forgot', type: 'link' }
+                
             ]
         },
         {

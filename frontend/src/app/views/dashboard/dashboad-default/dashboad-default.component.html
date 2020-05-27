@@ -1,12 +1,21 @@
 <div class="">
-    <div class="breadcrumb">
-        <h1>Proyectos</h1>
-        <ul>
-            <li><a href="">Dashboard</a></li>
-            <li>Proyectos</li>
-        </ul>
-    </div>
 
+    <div class="row">
+        <div class="breadcrumb col-md-9">
+            <h1>Proyectos</h1>
+            <ul>
+                <li><a href="">Dashboard</a></li>
+                <li>Proyectos</li>
+            </ul>
+
+
+        </div>
+        <div class="col-md-3 text-right">
+            <button class="btn btn-primary btn-rounded" (click)="open(modalBasic)">
+                <i class="fas fa-cloud"></i> + Nuevo proyecto
+            </button>
+        </div>
+    </div>
     <div class="separator-breadcrumb border-top"></div>
 
     <div class="row">
@@ -79,25 +88,31 @@
             <form>
                 <div class="form-group">
                     <div class="row">
-                        <div class="form-group col-md-6 mb-3">
-                            <label for="firstName">Nombre</label>
-                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Nombre"
-                                [(ngModel)]="data.firstName">
+                        <div class="form-group col-md-12 mb-3">
+                            <label for="firstName">Jefe de proyecto</label>
+                            <input type="text" [readonly]="true" class="form-control" id="firstName" name="firstName"
+                                placeholder="Thomas Taylor" [(ngModel)]="data.firstName">
                         </div>
-                        <div class="form-group col-md-6 mb-3">
-                            <label for="lastName">Apellido</label>
-                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Apellido"
-                                [(ngModel)]="data.lastName">
+                        <div class="form-group col-md-12 mb-3">
+                            <label for="lastName">Nombre de proyecto</label>
+                            <input type="text" [readonly]="true" class="form-control" id="lastName" name="lastName"
+                                placeholder="Página web aprodes" [(ngModel)]="data.lastName">
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="exampleInputEmail1">Email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" name="exampleInputEmail1"
-                                aria-describedby="emailHelp" placeholder="Email" [(ngModel)]="data.email">
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">Cantidad de participantes</label>
+                            <input type="email" [readonly]="true" class="form-control" id="exampleInputEmail1"
+                                name="exampleInputEmail1" aria-describedby="emailHelp" placeholder="20"
+                                [(ngModel)]="data.email">
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="phone">Celular</label>
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Celular"
-                                [(ngModel)]="data.phone">
+                        <div class="form-group col-md-12">
+                            <label for="phone">Fecha de creación</label>
+                            <input type="text" [readonly]="true" class="form-control" id="phone" name="phone"
+                                placeholder="20-04-2020" [(ngModel)]="data.phone">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="phone">Última modificación</label>
+                            <input type="text" [readonly]="true" class="form-control" id="phone" name="phone"
+                                placeholder="27-05-2020" [(ngModel)]="data.phone">
                         </div>
                     </div>
 
