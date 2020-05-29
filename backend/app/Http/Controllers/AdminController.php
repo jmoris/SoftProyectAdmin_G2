@@ -16,11 +16,11 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'rut' => 'required',
             'enrollment' => 'required',
-            'email' => 'required',
-            'name' => 'required|email',
+            'email' => 'required|email',
+            'name' => 'required',
             'surname' => 'required',
             'password' => 'required',
-            'role' => 'required',
+            'profile' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -33,7 +33,7 @@ class AdminController extends Controller
         $name = $request->input('name');
         $surname = $request->input('surname');
         $password = $request->input('password');
-        $role = $request->input('role');
+        $profile = $request->input('profile');
 
         $user = User::create(
         [
@@ -43,7 +43,7 @@ class AdminController extends Controller
         'name' => $name,
         'surname' => $surname,
         'password' => bcrypt($password),
-        'role' => $role,
+        'profile' => $profile,
         ]);
 
         $user->save();
