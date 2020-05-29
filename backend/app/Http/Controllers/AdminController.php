@@ -59,11 +59,11 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'rut' => 'required',
             'enrollment' => 'required',
-            'email' => 'required',
-            'name' => 'required|email',
+            'email' => 'required|email',
+            'name' => 'required',
             'surname' => 'required',
             'password' => 'required',
-            'role' => 'required',
+            'profile' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -76,7 +76,7 @@ class AdminController extends Controller
         $name = $request->input('name');
         $surname = $request->input('surname');
         $password = $request->input('password');
-        $role = $request->input('role');
+        $profile = $request->input('profile');
 
 
         $user = User::find($id);
@@ -87,15 +87,24 @@ class AdminController extends Controller
         $user->name=$name;
         $user->surname = $surname;
         $user->password = $password;
-        $user->role = $role;
+        $user->profile = $profile;
 
         $user->save();
+
+        return response()->json([
+            'status' => 200,
+            'msg' => 'Usuario modificado correctamente.'
+        ]);
     }
 
     public function eliminarUsuario($idEstudiante)
     {
         $user = User::find($idEstudiante);
         $user->delete();
+        return response()->json([
+            'status' => 200,
+            'msg' => 'Usuario eliminado correctamente.'
+        ]);
     }
 
     /**
@@ -118,6 +127,11 @@ class AdminController extends Controller
         $curso->semester = $request->semester;
         $curso->idUser = auth()->user()->id;
         $curso->save();
+
+        return response()->json([
+            'status' => 200,
+            'msg' => 'Curso creado correctamente.'
+        ]);
     }
 
     /**

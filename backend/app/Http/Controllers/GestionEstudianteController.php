@@ -22,15 +22,15 @@ class GestionEstudianteController extends Controller
     public function eliminarEstudianteDeUnProyecto(Request $request)
     {
 
-    }  
-
-    
+    }
 
 
 
 
 
-   
+
+
+
 
 
 }
