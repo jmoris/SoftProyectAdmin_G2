@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Validator;
 
 class EstudianteController extends Controller
 {
@@ -26,32 +28,32 @@ class EstudianteController extends Controller
 
     public function addRequerimientoSoftware(Request $request)
     {
-        
+
     }
 
     public function eliminarRequerimientoSoftware(Request $request)
     {
-        
+
     }
 
     public function editarRequerimientoSoftware(Request $request)
     {
-        
+
     }
 
     public function addCasoDePrueba(Request $request)
     {
-        
+
     }
 
     public function eliminarCasoDePrueba(Request $request)
     {
-        
+
     }
 
     public function editarCasoDePrueba(Request $request)
     {
-        
+
     }
 
     public function editarUsuario(Request $request)
@@ -64,7 +66,7 @@ class EstudianteController extends Controller
             'name' => 'required|email',
             'surname' => 'required',
             'password' => 'required',
-            'role' => 'required',
+            'profile' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -80,7 +82,7 @@ class EstudianteController extends Controller
         $name = $request->input('name');
         $surname = $request->input('surname');
         $password = $request->input('password');
-        $role = $request->input('role');
+        $profile = $request->input('profile');
 
         $user = User::find($id);
         $user->rut=$rut;
@@ -89,7 +91,7 @@ class EstudianteController extends Controller
         $user->name=$name;
         $user->surname = $surname;
         $user->password = $password;
-        $user->role = $role;
+        $user->profile = $profile;
         $user->save();
     }
 

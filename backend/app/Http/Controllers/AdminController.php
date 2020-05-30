@@ -6,7 +6,7 @@ use App\Course;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use \App\Tools\UserProfile as UserProfile;
 class AdminController extends Controller
 {
     //
@@ -139,8 +139,31 @@ class AdminController extends Controller
      */
     public function asignarProfesorACurso(Request $request)
     {
-
-
+        $this->validate($request, [
+            'iduser' => 'required',
+            'idcourse' => 'required',
+        ]);
+        $user = User::find($request->iduser);
+        $course = Course::find($request->idcourse);
+        if($user!=null&&$course!=null){
+            if(UserProfile::isTeacher($user)){
+                $course->users()->sync($user, false);
+                return response()->json([
+                    'status' => 200,
+                    'msg' => 'Profesor asignado correctamente.'
+                ]);
+            }else{
+                return response()->json([
+                    'status' => 500,
+                    'msg' => 'El usuario no es profesor.'
+                ]);
+            }
+        }else{
+            return response()->json([
+                'status' => 500,
+                'msg' => 'El usuario/curso no existe.'
+            ]);
+        }
     }
 
 
