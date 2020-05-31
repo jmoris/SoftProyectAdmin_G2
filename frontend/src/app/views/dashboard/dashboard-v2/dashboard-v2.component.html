@@ -14,8 +14,8 @@
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="card card-icon mb-4">
           <div class="card-body text-center">
-            <i class="i-Add-UserStar"></i>
-            <p class="text-muted mt-2 mb-2">Usuario Admin</p>
+            <i class="i-Lock-User"></i>
+            <p class="text-muted mt-2 mb-2">Usuarios Administrador</p>
             <p class="text-primary text-24 line-height-1 m-0">21</p>
             <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
           </div>
@@ -26,7 +26,7 @@
         <div class="card card-icon mb-4">
           <div class="card-body text-center">
             <i class="i-Add-User"></i>
-            <p class="text-muted mt-2 mb-2">Usuarios Docente</p>
+            <p class="text-muted mt-2 mb-2">Usuarios Docentes</p>
             <p class="text-primary text-24 line-height-1 m-0">21</p>
             <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
           </div>
@@ -37,8 +37,8 @@
         <div class="card card-icon mb-4">
           <div class="card-body text-center">
             <i class="i-Find-User"></i>
-            <p class="text-muted mt-2 mb-2">Usuarios ayudantes</p>
-            <p class="text-primary text-24 line-height-1 m-0">4021</p>
+            <p class="text-muted mt-2 mb-2">Usuarios Ayudantes</p>
+            <p class="text-primary text-24 line-height-1 m-0">421</p>
             <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
           </div>
         </div>
@@ -47,14 +47,13 @@
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="card card-icon mb-4">
           <div class="card-body text-center">
-            <i class="i-Lock-User"></i>
-            <p class="text-muted mt-2 mb-2">Usuarios estudiantes</p>
+            <i class="i-Find-User"></i>
+            <p class="text-muted mt-2 mb-2">Usuarios Estudiantes</p>
             <p class="text-primary text-24 line-height-1 m-0">4021</p>
             <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
           </div>
         </div>
       </div>  
-    
     </div>
   </div>
 
@@ -108,43 +107,76 @@
         <div class="row">
           <div class="col-md-6">
             <table class="table">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Item</th>
-                  <th scope="col">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Portable Speaker</td>
-                  <td class="font-weight-bold text-success">+ $1200</td>
-                </tr>
-                <tr>
-                  <td>Portable Headphone</td>
-                  <td class="font-weight-bold">In Stock</td>
-                </tr>
-                <tr>
-                  <td>Speaker</td>
-                  <td class="text-danger font-weight-bold">Out of stock</td>
-                </tr>
-                <tr>
-                  <td>Watch</td>
-                  <td class="text-warning font-weight-bold">Low stock</td>
-                </tr>
-                
-              </tbody>
+              <div ng-controller="ExampleController">
+                <form name="myForm">
+                  <label> Nombre:
+                    <input type="text" name="userName" ng-model="user.name" required>
+                  </label>
+                  <label> Email: 
+                    <input type="email" name="input" ng-model="email.text" required>
+                  </label>
+                  <table class="table">
+                    <ng-container>
+                      <td>
+                        Administrador
+                        <input type="checkbox" ng-model="checkboxModel.Administrador">
+                        Docente
+                        <input type="checkbox" ng-model="checkboxModel.docente">
+                      </td>
+                    </ng-container>
+                    <ng-container>
+                      <td>
+                        Ayudante
+                        <input type="checkbox" ng-model="checkboxModel.Ayudante">
+                        Estudiante
+                        <input type="checkbox" ng-model="checkboxModel.Estudiante">
+                      </td>
+                    </ng-container>
+                  </table>
+                </form>
+                <input type="submit" value="Agregar Usuario">
+              </div>
             </table>
-          </div>
-          <div class="col-md-6">
-              <div echarts [options]="chartPie1" [autoResize]="true" style="height: 200px;"></div>
           </div>
         </div>
       </div>
     </div>
   </div>
   
-
   <div class="col-lg-6 col-md-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="card-title">Iniciar Proyecto</div>
+        <div class="row">
+          <div class="col-md-6">
+            <table class="table">
+              <div ng-controller="ExampleController">
+                <form name="myForm">
+                  <label> Nombre:
+                    <input type="text" name="userName" ng-model="user.name" required>
+                  </label>
+                  <label> Curso: 
+                    <input type="text" name="input" ng-model="curso.text" required>
+                  </label><br/>
+                  <label>
+                    Standard
+                    <input type="checkbox" ng-model="checkboxModel.Administrador">
+                  </label><br/>
+                  <label>
+                    Simplificado
+                    <input type="checkbox" ng-model="checkboxModel.docente">
+                  </label>
+                </form>
+                <input type="submit" value="Iniciar Proyecto">
+              </div>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--div class="col-lg-6 col-md-12">
     <div class="card mb-4">
       <div class="card-body">
         <div class="card-title">Top Usuarios</div>
@@ -180,7 +212,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div-->
 
   <div class="col-md-12">
     <div class="card o-hidden mb-4">
