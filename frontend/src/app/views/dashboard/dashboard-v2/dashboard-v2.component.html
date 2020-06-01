@@ -1,87 +1,67 @@
 <div class="breadcrumb">
-  <h1>Version 2</h1>
+  <h1>Administrar Usuarios</h1>
   <ul>
     <li><a href="">Dashboard</a></li>
-    <li>Version 2</li>
+    <li>Administrar Usuarios</li>
   </ul>
 </div>
 <div class="separator-breadcrumb border-top"></div>
 
 <div class="row">
-  <div class="col-lg-6 col-md-12">
+  <div class="col-lg-8 col-md-12">
     <!-- CARD ICON -->
   <div class="row">
-      <div class="col-lg-4 col-md-6 col-sm-6">
+      <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="card card-icon mb-4">
           <div class="card-body text-center">
-            <i class="i-Share-on-Cloud"></i>
-            <p class="text-muted mt-2 mb-2">Today's Upload</p>
+            <i class="i-Lock-User"></i>
+            <p class="text-muted mt-2 mb-2">Usuarios Administrador</p>
             <p class="text-primary text-24 line-height-1 m-0">21</p>
+            <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
           </div>
         </div>
       </div>
   
-      <div class="col-lg-4 col-md-6 col-sm-6">
+      <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="card card-icon mb-4">
           <div class="card-body text-center">
             <i class="i-Add-User"></i>
-            <p class="text-muted mt-2 mb-2">New Users</p>
+            <p class="text-muted mt-2 mb-2">Usuarios Docentes</p>
             <p class="text-primary text-24 line-height-1 m-0">21</p>
+            <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
           </div>
         </div>
       </div>
   
-      <div class="col-lg-4 col-md-6 col-sm-6">
+      <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="card card-icon mb-4">
           <div class="card-body text-center">
-            <i class="i-Money-2"></i>
-            <p class="text-muted mt-2 mb-2">Total sales</p>
+            <i class="i-Find-User"></i>
+            <p class="text-muted mt-2 mb-2">Usuarios Ayudantes</p>
+            <p class="text-primary text-24 line-height-1 m-0">421</p>
+            <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-icon mb-4">
+          <div class="card-body text-center">
+            <i class="i-Find-User"></i>
+            <p class="text-muted mt-2 mb-2">Usuarios Estudiantes</p>
             <p class="text-primary text-24 line-height-1 m-0">4021</p>
+            <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
           </div>
         </div>
-      </div>
-  
-    
-      <div class="col-lg-4 col-md-6 col-sm-6">
-        <div class="card card-icon-big mb-4">
-          <div class="card-body text-center">
-            <i class="i-Money-2"></i>
-            <p class="line-height-1 text-title text-18 mt-2 mb-0">4021</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-6">
-        <div class="card card-icon-big mb-4">
-          <div class="card-body text-center">
-            <i class="i-Gear"></i>
-            <p class="line-height-1 text-title text-18 mt-2 mb-0">4021</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-6">
-        <div class="card card-icon-big mb-4">
-          <div class="card-body text-center">
-            <i class="i-Bell"></i>
-            <p class="line-height-1 text-title text-18 mt-2 mb-0">4021</p>
-          </div>
-        </div>
-      </div>
+      </div>  
     </div>
   </div>
 
-  <div class="col-lg-6 col-md-12">
-    <div class="card mb-4">
-      <div class="card-body p-0">
-        <h5 class="card-title m-0 p-3">Sales</h5>
-        <div echarts [options]="chartLineOption3" style="height: 300px"></div>
-      </div>
-    </div>
-  </div>
 
-  <div class="col-lg-6 col-md-12">
+  <!--div class="col-lg-6 col-md-12">
     <div class="card mb-4">
       <div class="card-body">
-        <div class="card-title">Last Month Summary</div>
+        <div class="card-title">Agregar usuario</div>
         <div class="row">
           <div class="col-md-6">
             <table class="table">
@@ -118,12 +98,88 @@
         </div>
       </div>
     </div>
-  </div>
+  </!--div-->
 
   <div class="col-lg-6 col-md-12">
     <div class="card mb-4">
       <div class="card-body">
-        <div class="card-title">Top Authors</div>
+        <div class="card-title">Agregar usuario</div>
+        <div class="row">
+          <div class="col-md-6">
+            <table class="table">
+              <div ng-controller="ExampleController">
+                <form name="myForm">
+                  <label> Nombre:
+                    <input type="text" name="userName" ng-model="user.name" required>
+                  </label>
+                  <label> Email: 
+                    <input type="email" name="input" ng-model="email.text" required>
+                  </label>
+                  <table class="table">
+                    <ng-container>
+                      <td>
+                        Administrador
+                        <input type="checkbox" ng-model="checkboxModel.Administrador">
+                        Docente
+                        <input type="checkbox" ng-model="checkboxModel.docente">
+                      </td>
+                    </ng-container>
+                    <ng-container>
+                      <td>
+                        Ayudante
+                        <input type="checkbox" ng-model="checkboxModel.Ayudante">
+                        Estudiante
+                        <input type="checkbox" ng-model="checkboxModel.Estudiante">
+                      </td>
+                    </ng-container>
+                  </table>
+                </form>
+                <input type="submit" value="Agregar Usuario">
+              </div>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-lg-6 col-md-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="card-title">Iniciar Proyecto</div>
+        <div class="row">
+          <div class="col-md-6">
+            <table class="table">
+              <div ng-controller="ExampleController">
+                <form name="myForm">
+                  <label> Nombre:
+                    <input type="text" name="userName" ng-model="user.name" required>
+                  </label>
+                  <label> Curso: 
+                    <input type="text" name="input" ng-model="curso.text" required>
+                  </label><br/>
+                  <label>
+                    Standard
+                    <input type="checkbox" ng-model="checkboxModel.Administrador">
+                  </label><br/>
+                  <label>
+                    Simplificado
+                    <input type="checkbox" ng-model="checkboxModel.docente">
+                  </label>
+                </form>
+                <input type="submit" value="Iniciar Proyecto">
+              </div>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--div class="col-lg-6 col-md-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="card-title">Top Usuarios</div>
         <div class="d-flex align-items-center border-bottom-dotted-dim pb-3 mb-3">
           <img class="avatar-md rounded mr-3" src="./assets/images/faces/2.jpg" alt="">
           <div class="flex-grow-1">
@@ -156,7 +212,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div-->
 
   <div class="col-md-12">
     <div class="card o-hidden mb-4">
@@ -171,9 +227,13 @@
       [scrollbarH]="true"
       [limit]="10"
       [rows]="products$ | async">
-        <ngx-datatable-column name="photo" [maxWidth]="100">
+        <ngx-datatable-column name="photo" [maxWidth]="250">
           <ng-template ngx-datatable-header-template>
-            Thumbnail
+            <label>
+              Nombre:
+              <input type="text" name="userName" ng-model="user.name" required>
+           </label>
+
           </ng-template>
             <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
                 <img height="32px" width="32px" style="border-radius: 4px" [src]="value" alt="">
@@ -181,17 +241,26 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="name" [width]="300">
           <ng-template ngx-datatable-header-template>
-            Title
+            <label>
+              Tipo:
+              <input type="text" name="userName" ng-model="user.name" required>
+           </label>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="category">
           <ng-template ngx-datatable-header-template>
-            Category
+            <label>
+              Rol:
+              <input type="text" name="userName" ng-model="user.name" required>
+           </label>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="subtitle">
           <ng-template ngx-datatable-header-template>
-            Description
+            <label>
+              Curso:
+              <input type="text" name="userName" ng-model="user.name" required>
+           </label>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
