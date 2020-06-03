@@ -16,6 +16,8 @@ class CreateGuestTeachersTable extends Migration
         Schema::create('guest_teachers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            // Aca deberian ir las relacion mucho a muchos
+            
         });
     }
 

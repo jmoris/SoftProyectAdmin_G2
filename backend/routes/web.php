@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('nologin', function(){
+    return response()->json([
+        'status' => 400,
+        'msg' => 'No autorizado'
+    ], 400);
+});
