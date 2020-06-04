@@ -15,6 +15,7 @@ export class SigninComponent implements OnInit {
     loading: boolean;
     loadingText: string;
     signinForm: FormGroup;
+    check:boolean = true;
     constructor(
         private fb: FormBuilder,
         private auth: AuthenticationService,
@@ -52,6 +53,7 @@ export class SigninComponent implements OnInit {
                 error => {
                     //this.error = error;
                     //console.log(error);
+                    this.check = false;
                     this.loading = false;
                 });
     }
