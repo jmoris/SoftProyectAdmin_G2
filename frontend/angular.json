@@ -92,8 +92,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [
-            ],
+            "scripts": [],
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -142,5 +141,8 @@
       }
     }
   },
-  "defaultProject": "gull"
+  "defaultProject": "gull",
+  "cli": {
+    "analytics": "c86a02f4-e3f6-4ce8-88b1-6379521e4550"
+  }
 }
