@@ -109,32 +109,49 @@
             <table class="table">
               <div ng-controller="ExampleController">
                 <form name="myForm">
-                  <label> Nombre:
-                    <input type="text" name="userName" ng-model="user.name" required>
-                  </label>
-                  <label> Email: 
-                    <input type="email" name="input" ng-model="email.text" required>
-                  </label>
                   <table class="table">
-                    <ng-container>
-                      <td>
-                        Administrador
-                        <input type="checkbox" ng-model="checkboxModel.Administrador">
-                        Docente
-                        <input type="checkbox" ng-model="checkboxModel.docente">
-                      </td>
-                    </ng-container>
-                    <ng-container>
-                      <td>
-                        Ayudante
-                        <input type="checkbox" ng-model="checkboxModel.Ayudante">
-                        Estudiante
-                        <input type="checkbox" ng-model="checkboxModel.Estudiante">
-                      </td>
-                    </ng-container>
+                    <tbody>
+                      <tr>
+                        <td>Nombre:</td>
+                        <td><input type="text" name="userName" ng-model="user.name" size="25" maxlength="100" required></td>
+                      </tr>
+                      <tr>
+                        <td>Email:</td>
+                        <td><input type="email" name="input" ng-model="email.text" size="25" maxlength="100" required></td>
+                      </tr>
+                      <tr>
+                        <td>Tipo:</td>
+                        <td>
+                          <div>        
+                            <select class="form-control" id="UserType" name="User-Type" required>         
+                              <option value="" selected disabled> Seleccionar Opcion</option>             
+                              <option value="Administrador"> Administrador</option>             
+                              <option value="Docente"> Docente </option>
+                              <option value="Ayudante"> Ayudante</option>             
+                              <option value="Estudiante"> Estudiante </option>         
+                            </select>     
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Rol:</td>
+                        <td>
+                          <div>        
+                            <select class="form-control" id="UserTypeRol" name="User-Type-Rol" required>         
+                              <option value="" selected disabled> Seleccionar Opcion</option>             
+                              <option value="Jefe de Proyecto"> Jefe de Proyecto</option>             
+                              <option value="Analista"> Analista </option>
+                              <option value="Diseñador"> Diseñador</option>             
+                              <option value="Implementador"> Impelementador </option>
+                              <option value="Tester"> Tester </option>         
+                            </select>     
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
                   </table>
                 </form>
-                <input type="submit" value="Agregar Usuario">
+                <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Agregar Usuario</button>
               </div>
             </table>
           </div>
@@ -142,32 +159,26 @@
       </div>
     </div>
   </div>
-  
+
   <div class="col-lg-6 col-md-12">
     <div class="card mb-4">
       <div class="card-body">
-        <div class="card-title">Iniciar Proyecto</div>
+        <div class="card-title">Agregar lista de Usuarios</div>
         <div class="row">
           <div class="col-md-6">
             <table class="table">
               <div ng-controller="ExampleController">
                 <form name="myForm">
-                  <label> Nombre:
-                    <input type="text" name="userName" ng-model="user.name" required>
-                  </label>
-                  <label> Curso: 
-                    <input type="text" name="input" ng-model="curso.text" required>
-                  </label><br/>
-                  <label>
-                    Standard
-                    <input type="checkbox" ng-model="checkboxModel.Administrador">
-                  </label><br/>
-                  <label>
-                    Simplificado
-                    <input type="checkbox" ng-model="checkboxModel.docente">
-                  </label>
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>Archivo:</td>
+                        <td><input type="file" name="UserFile" ng-model="user.file" required></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </form>
-                <input type="submit" value="Iniciar Proyecto">
+                <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Agregar Usuario</button>
               </div>
             </table>
           </div>
