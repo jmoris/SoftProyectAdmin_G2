@@ -166,8 +166,92 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * Funcion que retorna todos los estudiantes del sistema en formato json
+     */
+    public function getEstudiantes()
+    {
+        $array = User::where('profile', '=', 'estudiante');
+        if(empty($array))
+        {
+            return response()->json([
+                'status' => 500,
+                'msg' => 'No existen estudiantes'
+            ]);
+        }
+        return response()->json($array);
+    }
+
+    /**
+     * Funcion que retorna todos los profesores del sistema en formato json
+     */
+    public function getProfesores()
+    {
+        $array = User::where('profile', '=', 'profesor');
+        if(empty($array))
+        {
+            return response()->json([
+                'status' => 500,
+                'msg' => 'No existen profesores'
+            ]);
+        }
+        return response()->json($array);
+    }
+
+    /**
+     * Funcion que retorna todos los usuarios del sistema (Excepto la informacion del admin)
+     */
+    public function getUsuarios()
+    {
+        $array = User::where('profile', '=', 'profesor')->orWhere('profile', '=', 'estudiante');
+        if(empty($array))
+        {
+            return response()->json([
+                'status' => 500,
+                'msg' => 'No hay existencias profesores/estudiantes'
+            ]);
+        }
+        return response()->json($array);
+
+    }
+
+    /**
+     * Retorna la informacion de un usuario en especifico.
+     */
+    public function getUser(Request $request)
+    {
+        $id = $request->input('id');
+        $array = User::find($id);
+        if(empty($array))
+        {
+            return response()->json([
+                'status' => 500,
+                'msg' => 'Usuario no encontrado'
+            ]);
+        }
+        return response()->json($array);
+    }
 
 
+    /*
+
+    public function asignarAyudanteACurso(Request $request)
+    {
+        $this->validate($request, [
+            'idCurso' => 'required',
+            'idAyudante' => 'required',
+        ]);
+
+        $idCurso = $request->input('idCurso');
+        $idAyudante = $request->input('idAyudante');
+
+        $curso = Course::find($idCurso);
+        $ayudante = User::find($idAyudante);
+
+
+    */
+
+    
 
 
 
