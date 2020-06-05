@@ -3,6 +3,10 @@ import { ProductService } from 'src/app/shared/services/product.service';
 import { UsuariosService } from 'src/app/_services/usuarios.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { FormGroup, FormControl } from '@angular/forms';
+
+
+
 
 @Component({
   selector: 'app-gestion',
@@ -10,7 +14,16 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./gestion.component.scss']
 })
 export class GestionComponent implements OnInit {
-	usuarios: any;
+  usuarios: any;
+  
+  addUserForm = new FormGroup({
+    name: new FormControl('name'),
+    surname: new FormControl('surname'),
+    email: new FormControl('email'),
+    password: new FormControl('password'),
+    rut: new FormControl('rut'),
+    profile: new FormControl('profile')
+  });
 
   constructor(
         private modalService: NgbModal,
@@ -42,4 +55,20 @@ export class GestionComponent implements OnInit {
         }, (reason) => {
         });
   }
+
+  addUser(modal, event) {
+    event.target.parentElement.parentElement.blur();
+    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })
+        .result.then((result) => {
+            
+                
+        }, (reason) => {
+        });
+  }
+
+  addUserOnSubmit()
+  {
+    console.log('se supone que aca se deberia agregar o no c xd');
+  }
+
 }
