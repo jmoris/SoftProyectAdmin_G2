@@ -16,7 +16,7 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'rut' => 'required',
             'enrollment' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'name' => 'required',
             'surname' => 'required',
             'password' => 'required',
@@ -24,7 +24,7 @@ class AdminController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return $validator->errors();
+            return ['errors'=>$validator->errors()];
         }
 
         $rut = $request->input('rut');
@@ -203,7 +203,7 @@ class AdminController extends Controller
      */
     public function getUsuarios()
     {
-        $array = User::where('profile', '=', 'teacher')->orWhere('profile', '=', 'student')->whereNot('id', auth()->user()->id)->get();
+        $array = User::where('profile', '=', 'teacher')->orWhere('profile', '=', 'student')->get();
         if(empty($array))
         {
             return response()->json([

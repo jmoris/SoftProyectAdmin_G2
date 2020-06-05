@@ -3,7 +3,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
 import { UsuariosService } from 'src/app/_services/usuarios.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 
 
@@ -15,20 +15,23 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class GestionComponent implements OnInit {
   usuarios: any;
-  
-  addUserForm = new FormGroup({
-    name: new FormControl('name'),
-    surname: new FormControl('surname'),
-    email: new FormControl('email'),
-    password: new FormControl('password'),
-    rut: new FormControl('rut'),
-    profile: new FormControl('profile')
+  checked = true;
+
+  addUserForm = this.fb.group({
+    name:  ['', Validators.required],
+    surname:['', Validators.required],
+    email:['', Validators.required],
+    password:['', Validators.required],
+    rut:['', Validators.required],
+    profile:['', Validators.required],
+    enrollment: ['', Validators.required]
   });
 
   constructor(
         private modalService: NgbModal,
         private toastr: ToastrService,
-		private usuariosService: UsuariosService
+        private usuariosService: UsuariosService,
+        private fb: FormBuilder,
 	) { }
 
   ngOnInit() {
@@ -56,19 +59,48 @@ export class GestionComponent implements OnInit {
         });
   }
 
+  cleanForm(){
+      this.addUserForm = this.fb.group({
+        name:  ['', Validators.required],
+        surname:['', Validators.required],
+        email:['', Validators.required],
+        password:['', Validators.required],
+        rut:['', Validators.required],
+        profile:['', Validators.required],
+        enrollment: ['', Validators.required]
+      });
+  }
+
   addUser(modal, event) {
     event.target.parentElement.parentElement.blur();
     this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })
         .result.then((result) => {
-            
-                
+            this.checked = true;
+            var frm = this.addUserForm.value;
+            this.usuariosService.insert(frm).subscribe((resp:any)=>{
+                if(resp.errors){
+                    this.toastr.error('No se puede insertar el usuario en la base de datos.', 'Notificación de error', { timeOut: 3000 });
+                    return;
+                }
+                this.toastr.success('Usuario insertado correctamente', 'Notificación de inserción', { timeOut: 3000 });
+                this.cleanForm();
+                this.loadData();
+            }, (error:any)=>{
+                console.log(error);
+            });
         }, (reason) => {
         });
   }
 
-  addUserOnSubmit()
-  {
-    console.log('se supone que aca se deberia agregar o no c xd');
+  formatProfile(value){
+    switch(value){
+        case 'teacher':
+            return 'Docente';
+        case 'student':
+            return 'Estudiante';
+        case 'admin':
+            return 'Administrador';
+    }
   }
 
 }

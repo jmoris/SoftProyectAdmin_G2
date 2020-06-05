@@ -247,35 +247,38 @@
                 [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="60" [scrollbarV]="true"
                 [scrollbarH]="true" [limit]="10" [rows]="usuarios">
 
-                <ngx-datatable-column name="name" [maxWidth]="250">
+                <ngx-datatable-column name="name" [flexGrow]="25">
                     <ng-template ngx-datatable-header-template>
                         <label>
                             Nombre
                         </label>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="surname" [width]="300">
+                <ngx-datatable-column name="surname" [flexGrow]="25">
                     <ng-template ngx-datatable-header-template>
                         <label>
                             Apellido
                         </label>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="email">
+                <ngx-datatable-column name="email" [flexGrow]="25">
                     <ng-template ngx-datatable-header-template>
                         <label>
                             Email
                         </label>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="profile">
+                <ngx-datatable-column name="profile" [flexGrow]="20">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <div [innerHTML]="formatProfile(value)"></div>
+                      </ng-template>
                     <ng-template ngx-datatable-header-template>
                         <label>
                             Perfil
                         </label>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column [cellClass]="'va-middle'" name="Accion" [flexGrow]="15" [sortable]="false" prop="id">
+                <ngx-datatable-column [cellClass]="'va-middle'" name="Accion" [flexGrow]="5" [sortable]="false" prop="id">
                     <ng-template ngx-datatable-cell-template let-value="value">
                         <button class="btn btn-sm btn-outline-danger" (click)="deleteData(value, deleteConfirmModal, $event)"><i
                             class="i-Close-Window icon-md"></i></button>
@@ -323,42 +326,49 @@
           </tr>
           <tr>
             <td>Apellido:</td>
-            <td><input type="email" formControlName="surname" ng-model="email.text" size="25" maxlength="100" required></td>
+            <td><input type="text" formControlName="surname" ng-model="email.text" size="25" maxlength="100" required></td>
           </tr>
           <tr>
             <td>Email:</td>
-            <td><input type="email" formControlName="email" ng-model="email.text" size="25" maxlength="100" required></td>
+            <td><input type="text" formControlName="email" ng-model="email.text" size="25" maxlength="100" required></td>
           </tr>
           <tr>
             <td>Contraseña:</td>
-            <td><input type="email" formControlName="password" ng-model="email.text" size="25" maxlength="100" required></td>
+            <td><input type="password" formControlName="password" ng-model="email.text" size="25" maxlength="100" required></td>
           </tr>
           <tr>
             <td>Rut:</td>
-            <td><input type="email" formControlName="rut" ng-model="email.text" size="25" maxlength="100" required></td>
+            <td><input type="text" formControlName="rut" ng-model="email.text" size="25" maxlength="100" required></td>
+          </tr>
+          <tr>
+            <td>Matricula:</td>
+            <td><input type="text" formControlName="enrollment" ng-model="email.text" size="25" maxlength="100" required></td>
           </tr>
           <tr>
             <td>Perfil:</td>
             <td>
-              <div>        
-                <select class="form-control" id="UserType" formControlName="profile" required>         
-                  <option value="" selected disabled> Seleccionar Opcion</option>             
-                  <option value="Administrador"> Administrador</option>             
-                  <option value="Docente"> Docente </option>
-                  <option value="Ayudante"> Ayudante</option>             
-                  <option value="Estudiante"> Estudiante </option>         
-                </select>     
+              <div>
+                <select class="form-control" id="UserType" formControlName="profile" required>
+                  <option value="" selected disabled> Seleccionar Opcion</option>
+                  <option value="admin"> Administrador</option>
+                  <option value="teacher"> Docente </option>
+                  <!--<option value="Ayudante"> Ayudante</option>-->
+                  <option value="student"> Estudiante </option>
+                </select>
               </div>
             </td>
           </tr>
         </tbody>
       </table>
+      <div *ngIf="!checked">
+          <label style="color:red;"><b>* Todos los campos deben ser completados.</b></label>
+      </div>
     </form>
 
   </div>
   <div class="modal-footer">
     <button type="button" ngbAutofocus class="btn btn-wide btn-success btn-rounded"
-      (click)="modal.close('Ok')">Agregar </button>
+      (click)="((this.addUserForm.invalid)?checked=false:modal.close('Ok'))">Agregar </button>
     <button type="button" class="btn btn-outline-secondary btn-rounded"
       (click)="modal.dismiss('cancel')">Cancelar</button>
   </div>

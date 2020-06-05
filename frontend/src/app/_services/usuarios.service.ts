@@ -17,7 +17,7 @@ export class UsuariosService {
     }
 
     insert(data) {
-        return this.http.post<any>(`${environment.apiUrl}/admin/users`, {data});
+        return this.http.post<any>(`${environment.apiUrl}/admin/users`, data);
     }
 
     delete(id){
