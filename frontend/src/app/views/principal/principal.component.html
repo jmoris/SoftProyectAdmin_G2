@@ -37,8 +37,8 @@
         <!-- Masthead-->
         <header class="masthead">
             <div id="Inicio" class="container">
-                <div class="masthead-subheading">Trabaja con tu equipo</div>
-                <div class="masthead-heading text-uppercase">En cualquier lugar</div>
+                <div id="fondol" class="masthead-subheading">Trabaja con tu equipo</div>
+                <div id="fondol" class="masthead-heading text-uppercase">En cualquier lugar</div>
                 <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" routerLink="/sessions/signin">Iniciar Sesión</a>
             </div>
         </header>
@@ -83,18 +83,38 @@
         </section>
 
         <section id="Contacto">
+            <div>
+                <div id="cuerpo2" class="container" style="z-index:100%">
+                    <div align="center" >
+                    <h1 id="fondol">Contactanos</h1>
+                </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12 ">
+                           
+                            <b><h4 id="fondol">  <i class="i-Mail"></i> Al correo electronico:</h4></b>
+                            <b><h4 id="fondol"> correoDeEjemplo@aprodes.com </h4></b>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 ">
+                            <b><h4 id="fondol">  <i class="i-Telephone"></i> Al celular o whatsapp:</h4></b>
+                            <b><h4 id="fondol"> +569 xxx xx xxx </h4></b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div id="cuerpo2" class="container" style="z-index:100%">
+                    <div align="center" >
+                    <h1 id="fondol">O llena el siguiente formulario</h1>
+                </div>
+            </div>
+            </div>
             <div class="container">
                 <div class="row">
-                     <div class="col-md-offset-1 col-md-10 col-sm-12">
-                       <h1 class="heading">Contáctanos via correo:</h1>
-                            <b><h4 font size="22"> correoDeEjemplo@aprodes.com <br>
-                             Llenando el siguiente formulario </h4></b>
-                        </div>
                         <div class="col-md-offset-1 col-md-10 col-sm-12 wow fadeIn">
                             <form method="post" action="<?= base_url()?>/Welcome/enviarCorreo" enctype="multipart/form-data">
                                 <div class="col-md-6 col-sm-6">
                                     <input type="text" class="form-control" name="name" id="name" placeholder="Nombre" required>
-                              </div>
+                              </div> 
                                 <div class="col-md-6 col-sm-6">
                                     <input type="email" class="form-control" name="email" id="email" placeholder="Correo" required>
                               </div>
