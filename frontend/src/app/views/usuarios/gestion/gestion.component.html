@@ -11,49 +11,59 @@
     <div class="col-lg-8 col-md-12">
         <!-- CARD ICON -->
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="col-lg-2 col-md-6 col-sm-6">
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center">
                         <i class="i-Lock-User"></i>
-                        <p class="text-muted mt-2 mb-2">Usuarios Administrador</p>
+                        <p class="text-muted mt-2 mb-2">Administrador</p>
                         <p class="text-primary text-24 line-height-1 m-0">21</p>
                         <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="col-lg-2 col-md-6 col-sm-6">
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center">
                         <i class="i-Add-User"></i>
-                        <p class="text-muted mt-2 mb-2">Usuarios Docentes</p>
+                        <p class="text-muted mt-2 mb-2">Docentes</p>
                         <p class="text-primary text-24 line-height-1 m-0">21</p>
                         <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="col-lg-2 col-md-6 col-sm-6">
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center">
                         <i class="i-Find-User"></i>
-                        <p class="text-muted mt-2 mb-2">Usuarios Ayudantes</p>
+                        <p class="text-muted mt-2 mb-2">Ayudantes</p>
                         <p class="text-primary text-24 line-height-1 m-0">421</p>
                         <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="col-lg-2 col-md-6 col-sm-6">
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center">
                         <i class="i-Find-User"></i>
-                        <p class="text-muted mt-2 mb-2">Usuarios Estudiantes</p>
+                        <p class="text-muted mt-2 mb-2">Estudiantes</p>
                         <p class="text-primary text-24 line-height-1 m-0">4021</p>
                         <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
                     </div>
                 </div>
             </div>
+            <div class="col-lg-2 col-md-6 col-sm-6">
+              <div class="card card-icon mb-4">
+                  <div class="card-body text-center">
+                      <i class="i-Find-User"></i>
+                      <p class="text-muted mt-2 mb-2">Nuevo Usuario </p>
+                      <p class="text-primary text-24 line-height-1 m-0"> <br /> </p>
+                      <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded" (click)="addUser(userAddConfirmModal, $event)" > Agregar </button>
+                  </div>
+              </div>
+          </div>
         </div>
     </div>
 
@@ -92,13 +102,10 @@
               </tbody>
             </table>
           </div>
-          <div class="col-md-6">
-              <div echarts [options]="chartPie1" [autoResize]="true" style="height: 200px;"></div>
-          </div>
         </div>
       </div>
     </div>
-  </!--div-->
+  </div>
 
     <div class="col-lg-6 col-md-12">
         <div class="card mb-4">
@@ -296,4 +303,64 @@
         (click)="modal.close('Ok')">Borrar</button>
     </div>
   </ng-template>
+
+  <!-- VENTANA MODAL QUE SE DESPLEGA PARA AGREGAR UN USUARIO -->
+<ng-template #userAddConfirmModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Agregar un usuario</h4>
+    <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+      (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="addUserForm"  (ngSubmit)="addUserOnSubmit()" >
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Nombre:</td>
+            <td><input type="text" formControlName="name" ng-model="user.name" size="25" maxlength="100" required></td>
+          </tr>
+          <tr>
+            <td>Apellido:</td>
+            <td><input type="email" formControlName="surname" ng-model="email.text" size="25" maxlength="100" required></td>
+          </tr>
+          <tr>
+            <td>Email:</td>
+            <td><input type="email" formControlName="email" ng-model="email.text" size="25" maxlength="100" required></td>
+          </tr>
+          <tr>
+            <td>Contraseña:</td>
+            <td><input type="email" formControlName="password" ng-model="email.text" size="25" maxlength="100" required></td>
+          </tr>
+          <tr>
+            <td>Rut:</td>
+            <td><input type="email" formControlName="rut" ng-model="email.text" size="25" maxlength="100" required></td>
+          </tr>
+          <tr>
+            <td>Perfil:</td>
+            <td>
+              <div>        
+                <select class="form-control" id="UserType" formControlName="profile" required>         
+                  <option value="" selected disabled> Seleccionar Opcion</option>             
+                  <option value="Administrador"> Administrador</option>             
+                  <option value="Docente"> Docente </option>
+                  <option value="Ayudante"> Ayudante</option>             
+                  <option value="Estudiante"> Estudiante </option>         
+                </select>     
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" ngbAutofocus class="btn btn-wide btn-success btn-rounded"
+      (click)="modal.close('Ok')">Agregar </button>
+    <button type="button" class="btn btn-outline-secondary btn-rounded"
+      (click)="modal.dismiss('cancel')">Cancelar</button>
+  </div>
+</ng-template>
 </div>
