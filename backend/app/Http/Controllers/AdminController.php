@@ -171,7 +171,7 @@ class AdminController extends Controller
      */
     public function getEstudiantes()
     {
-        $array = User::where('profile', '=', 'estudiante');
+        $array = User::where('profile', '=', 'student');
         if(empty($array))
         {
             return response()->json([
@@ -187,7 +187,7 @@ class AdminController extends Controller
      */
     public function getProfesores()
     {
-        $array = User::where('profile', '=', 'profesor');
+        $array = User::where('profile', '=', 'teacher');
         if(empty($array))
         {
             return response()->json([
@@ -203,7 +203,7 @@ class AdminController extends Controller
      */
     public function getUsuarios()
     {
-        $array = User::where('profile', '=', 'profesor')->orWhere('profile', '=', 'estudiante');
+        $array = User::where('profile', '=', 'teacher')->orWhere('profile', '=', 'student')->get();
         if(empty($array))
         {
             return response()->json([
@@ -251,7 +251,7 @@ class AdminController extends Controller
 
     */
 
-    
+
 
 
 

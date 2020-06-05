@@ -25,7 +25,7 @@ export class SigninComponent implements OnInit {
     ngOnInit() {
         this.router.events.subscribe(event => {
             if (event instanceof RouteConfigLoadStart || event instanceof ResolveStart) {
-                this.loadingText = 'Loading Dashboard Module...';
+                this.loadingText = 'Cargando modulos...';
 
                 this.loading = true;
             }
