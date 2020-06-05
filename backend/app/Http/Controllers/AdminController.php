@@ -203,7 +203,7 @@ class AdminController extends Controller
      */
     public function getUsuarios()
     {
-        $array = User::where('profile', '=', 'teacher')->orWhere('profile', '=', 'student')->get();
+        $array = User::where('profile', '=', 'teacher')->orWhere('profile', '=', 'student')->whereNot('id', auth()->user()->id)->get();
         if(empty($array))
         {
             return response()->json([

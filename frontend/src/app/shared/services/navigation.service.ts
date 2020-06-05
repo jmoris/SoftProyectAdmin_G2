@@ -89,6 +89,13 @@ export class NavigationService {
             ]
         },*/
         {
+            name: 'Home',
+            description: 'Página principal o dashboard',
+            type: 'link',
+            icon: 'i-Home1',
+            state: '/dashboard/v1'
+        },
+        {
             name: 'Usuarios',
             description: 'Gestión de los usuarios',
             type: 'link',
