@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationService } from '../../../../services/navigation.service';
 import { SearchService } from '../../../../services/search.service';
-import { AuthService } from '../../../../services/auth.service';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 @Component({
   selector: 'app-header-sidebar-large',
@@ -15,7 +15,7 @@ export class HeaderSidebarLargeComponent implements OnInit {
     constructor(
       private navService: NavigationService,
       public searchService: SearchService,
-      private auth: AuthService
+      private auth: AuthenticationService
     ) {
       this.notifications = [
         {
@@ -63,10 +63,10 @@ export class HeaderSidebarLargeComponent implements OnInit {
         }
       ];
     }
-  
+
     ngOnInit() {
     }
-  
+
     toggelSidebar() {
       const state = this.navService.sidebarState;
       if (state.childnavOpen && state.sidenavOpen) {
@@ -76,7 +76,7 @@ export class HeaderSidebarLargeComponent implements OnInit {
         return state.sidenavOpen = false;
       }
       // item has child items
-      /*if (!state.sidenavOpen && !state.childnavOpen 
+      /*if (!state.sidenavOpen && !state.childnavOpen
         && this.navService.selectedItem.type === 'dropDown') {
           state.sidenavOpen = true;
           setTimeout(() => {
@@ -88,9 +88,9 @@ export class HeaderSidebarLargeComponent implements OnInit {
         state.sidenavOpen = true;
       }
     }
-  
+
     signout() {
-      this.auth.signout();
+      this.auth.logout();
     }
 
 }

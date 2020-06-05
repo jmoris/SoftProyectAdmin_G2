@@ -1,0 +1,131 @@
+<div class="">
+
+    <div class="row">
+        <div class="breadcrumb col-md-9">
+            <h1>Proyectos</h1>
+            <ul>
+                <li><a href="">Dashboard</a></li>
+                <li>Proyectos</li>
+            </ul>
+
+
+        </div>
+        <div class="col-md-3 text-right">
+            <button class="btn btn-primary btn-rounded" (click)="open(modalBasic)">
+                <i class="fas fa-cloud"></i> + Nuevo proyecto
+            </button>
+        </div>
+    </div>
+    <div class="separator-breadcrumb border-top"></div>
+
+    <div class="row">
+        <!-- ICON BG -->
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-profile-1 mb-4">
+                <div class="card-body text-center">
+                    <div class="avatar box-shadow-2 mb-3">
+                        <img src="./assets/images/faces/7.jpg" alt="">
+                    </div>
+                    <h5 class="m-0">Ignacio Hoffman</h5>
+                    <p class="mt-0">Jefe proyecto</p>
+                    <p>Proyecto web</p>
+                    <button class="btn btn-primary btn-rounded" (click)="open(modalBasic)">Ver detalles</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-profile-1 mb-4">
+                <div class="card-body text-center">
+                    <div class="avatar box-shadow-2 mb-3">
+                        <img src="./assets/images/faces/6.jpg" alt="">
+                    </div>
+                    <h5 class="m-0">Amelia Jones</h5>
+                    <p class="mt-0">Jefe proyecto</p>
+                    <p>Proyecto móvil</p>
+                    <button class="btn btn-primary btn-rounded" (click)="open(modalBasic)">Ver detalles</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-profile-1 mb-4">
+                <div class="card-body text-center">
+                    <div class="avatar box-shadow-2 mb-3">
+                        <img src="./assets/images/faces/8.jpg" alt="">
+                    </div>
+                    <h5 class="m-0">Thomas Taylor</h5>
+                    <p class="mt-0">Jefe proyecto</p>
+                    <p>Proyecto web APRODES</p>
+                    <button class="btn btn-primary btn-rounded" (click)="open(modalBasic)">Ver detalles</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-profile-1 mb-4">
+                <div class="card-body text-center">
+                    <div class="avatar box-shadow-2 mb-3">
+                        <img src="./assets/images/faces/12.jpg" alt="">
+                    </div>
+                    <h5 class="m-0">Lily Wilson</h5>
+                    <p class="mt-0">Jefe proyecto</p>
+                    <p>Proyecto móvil pastelerías</p>
+                    <button class="btn btn-primary btn-rounded" (click)="open(modalBasic)">Ver detalles</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #modalBasic let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Detalles del proyecto</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="form-group col-md-12 mb-3">
+                            <label for="firstName">Jefe de proyecto</label>
+                            <input type="text" [readonly]="true" class="form-control" id="firstName" name="firstName"
+                                placeholder="Thomas Taylor" [(ngModel)]="data.firstName">
+                        </div>
+                        <div class="form-group col-md-12 mb-3">
+                            <label for="lastName">Nombre de proyecto</label>
+                            <input type="text" [readonly]="true" class="form-control" id="lastName" name="lastName"
+                                placeholder="Página web aprodes" [(ngModel)]="data.lastName">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">Cantidad de participantes</label>
+                            <input type="email" [readonly]="true" class="form-control" id="exampleInputEmail1"
+                                name="exampleInputEmail1" aria-describedby="emailHelp" placeholder="20"
+                                [(ngModel)]="data.email">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="phone">Fecha de creación</label>
+                            <input type="text" [readonly]="true" class="form-control" id="phone" name="phone"
+                                placeholder="20-04-2020" [(ngModel)]="data.phone">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="phone">Última modificación</label>
+                            <input type="text" [readonly]="true" class="form-control" id="phone" name="phone"
+                                placeholder="27-05-2020" [(ngModel)]="data.phone">
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark btn-rounded"
+                (click)="modal.close('Close')">Cerrar</button>
+        </div>
+    </ng-template>
+
+
+
+
+</div>

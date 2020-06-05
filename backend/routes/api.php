@@ -17,7 +17,9 @@ Route::post('register', 'AuthController@register');
 Route::group(['middleware' => 'api'], function () {
     Route::get('logout', 'AuthController@logout');
 
+    Route::get('admin/users', 'AdminController@getUsuarios');
     Route::post('admin/users', 'AdminController@crearUsuario');
     Route::put('admin/users/{id}', 'AdminController@editarUsuario');
     Route::delete('admin/users/{id}', 'AdminController@eliminarUsuario');
+    Route::post('admin/courses/assign', 'AdminController@asignarProfesorACurso');
 });
