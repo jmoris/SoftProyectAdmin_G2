@@ -45,12 +45,12 @@ export class NavigationService {
         childnavOpen: false
     };
     selectedItem: IMenuItem;
-    
+
     constructor() {
     }
 
     defaultMenu: IMenuItem[] = [
-        /*{   
+        /*{
             name: 'Dashboard',
             description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
             type: 'dropDown',
@@ -62,7 +62,7 @@ export class NavigationService {
                 { icon: 'i-Clock', name: 'Version 4', state: '/dashboard/v4', type: 'link' },
             ]
         },*/
-        
+
         /*{
             name: 'Apps',
             description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
@@ -75,7 +75,7 @@ export class NavigationService {
                 { icon: 'i-Calendar', name: 'Calendar', state: '/calendar', type: 'link' },
             ]
         },*/
-        
+
         /*{
             name: 'Data Tables',
             description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
@@ -90,17 +90,26 @@ export class NavigationService {
         },*/
         {
             name: 'Usuarios',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-            type: 'dropDown',
+            description: 'Gestión de los usuarios',
+            type: 'link',
             icon: 'i-Administrator',
-            sub: [
-                { icon: 'i-Add-User', name: 'Registrar usuario', state: '/sessions/signup', type: 'link' },
-                { icon: 'i-Checked-User', name: 'Ver usuarios', state: '/sessions/signin', type: 'link' },
-                { icon: 'i-Find-User', name: 'Gestionar usuarios', state: '/sessions/forgot', type: 'link' }
-                
-            ]
+            state: '/usuarios/gestion'
         },
         {
+            name: 'Cursos',
+            description: 'Gestión de los cursos',
+            type: 'link',
+            icon: 'i-Library',
+            state: '/cursos/gestion'
+        },
+        {
+            name: 'Proyectos',
+            description: 'Gestión de los proyectos',
+            type: 'link',
+            icon: 'i-File-Clipboard-File--Text',
+            state: '/proyectos/gestion'
+        },
+       /* {
             name: 'Cursos',
             description: 'Lorem ipsum dolor sit amet, consectetur adipisicing.',
             type: 'dropDown',
@@ -142,8 +151,8 @@ export class NavigationService {
                 { icon: 'i-Width-Window', name: 'Wizard', state: '/forms/wizard', type: 'link' },
                 { icon: 'i-Crop-2', name: 'Image Cropper', state: '/forms/img-cropper', type: 'link' },
             ]
-        }
-
+        },
+*/
         /*,
         {
             name: 'Pages',

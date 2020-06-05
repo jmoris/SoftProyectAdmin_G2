@@ -7,10 +7,14 @@ import { PrincipalComponent } from './views/principal/principal.component';
 import { AuthGuard } from './_helpers/auth.guard';
 
 const adminRoutes: Routes = [
-    
+
    {
       path: 'dashboard',
       loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
+    },
+    {
+        path: 'usuarios',
+        loadChildren: () => import('./views/usuarios/usuarios.module').then(m => m.UsuarioModule)
     },
     {
       path: 'uikits',
