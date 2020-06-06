@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+
 import { EChartOption } from 'echarts';
 import { echartStyles } from '../../../shared/echart-styles';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialog } from '@angular/material/dialog';
+import { AddProjectComponent } from '../add-project/add-project.component';
+import { NotifierService } from 'angular-notifier';
+
+
 
 @Component({
     selector: 'app-gestion',
@@ -10,19 +16,21 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
     styleUrls: ['./gestion.component.css']
 })
 export class GestionComponent implements OnInit {
+    private readonly notifier: NotifierService;
     chartLineOption1: EChartOption;
     chartLineOption2: EChartOption;
     chartLineOption3: EChartOption;
     salesChartBar: EChartOption;
     salesChartPie: EChartOption;
     isCompleted: boolean;
+    dialogResult = "";
     data: any = {
         email: ''
     };
     step2Form: FormGroup;
 
-    constructor(private modalService: NgbModal, private fb: FormBuilder) {
-
+    constructor(private modalService: NgbModal, private fb: FormBuilder, private dialog: MatDialog, notifierService: NotifierService) {
+        this.notifier = notifierService;
     }
 
     ngOnInit() {
@@ -230,6 +238,28 @@ export class GestionComponent implements OnInit {
             }, (reason) => {
                 console.log('Err!', reason);
             });
+    }
+
+    openAddDialog() {
+        let dialogRef = this.dialog.open(AddProjectComponent, {
+            width: '600px',
+            data: 'This text is passed into the dialog',
+            disableClose: true,
+            autoFocus: true
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog closed: ${result}`);
+            this.dialogResult = result;
+            if (result == 'Confirm') {
+                this.refreshTable();
+                this.notifier.notify('info', 'Usuario agregado exitosamente');
+            }
+        })
+    }
+
+    //Método que actualiza los proyectos.
+    refreshTable() {
+
     }
 
 
