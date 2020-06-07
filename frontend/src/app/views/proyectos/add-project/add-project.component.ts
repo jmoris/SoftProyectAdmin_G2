@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ProjectService } from 'src/app/_services/project.service';
 
 @Component({
   selector: 'app-add-project',
@@ -14,7 +15,11 @@ export class AddProjectComponent implements OnInit {
   hide = true;
 
 
-  constructor(public thisDialogRef: MatDialogRef<AddProjectComponent>, @Inject(MAT_DIALOG_DATA) public data: String) {
+  constructor(
+    public dialogRef: MatDialogRef<AddProjectComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: String,
+    private projectService: ProjectService
+  ) {
     this.form = new FormGroup({
       name: new FormControl("", [Validators.required]),
       description: new FormControl("", [Validators.required])
@@ -33,8 +38,7 @@ export class AddProjectComponent implements OnInit {
     }
     let projectData = this.form.value;
     console.log('Info name: ' + projectData.name);
-    this.thisDialogRef.close('Confirm');
-    //Abajo va la función que añade con el service de project.
+    this.dialogRef.close('Confirm');
     /*this.projectService.addProject(projectData).subscribe({
       next: result => {
         console.log(result);
@@ -45,7 +49,7 @@ export class AddProjectComponent implements OnInit {
   }
 
   onCloseCancel() {
-    this.thisDialogRef.close("Cancel");
+    this.dialogRef.close("Cancel");
   }
 
   public hasError = (controlName: string, errorName: string) => {

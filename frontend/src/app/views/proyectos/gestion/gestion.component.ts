@@ -7,6 +7,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog } from '@angular/material/dialog';
 import { AddProjectComponent } from '../add-project/add-project.component';
 import { NotifierService } from 'angular-notifier';
+import { ToastrService } from 'ngx-toastr';
+
+import { ProjectService } from 'src/app/_services/project.service';
 
 
 
@@ -29,11 +32,12 @@ export class GestionComponent implements OnInit {
     };
     step2Form: FormGroup;
 
-    constructor(private modalService: NgbModal, private fb: FormBuilder, private dialog: MatDialog, notifierService: NotifierService) {
+    constructor(private modalService: NgbModal, private projectService: ProjectService, private toastr: ToastrService, private fb: FormBuilder, private dialog: MatDialog, notifierService: NotifierService) {
         this.notifier = notifierService;
     }
 
     ngOnInit() {
+        this.loadProjects();
         this.step2Form = this.fb.group({
             experience: [2]
         });
@@ -242,7 +246,7 @@ export class GestionComponent implements OnInit {
 
     openAddDialog() {
         let dialogRef = this.dialog.open(AddProjectComponent, {
-            width: '600px',
+            width: '500px',
             data: 'This text is passed into the dialog',
             disableClose: true,
             autoFocus: true
@@ -251,15 +255,20 @@ export class GestionComponent implements OnInit {
             console.log(`Dialog closed: ${result}`);
             this.dialogResult = result;
             if (result == 'Confirm') {
-                this.refreshTable();
-                this.notifier.notify('info', 'Usuario agregado exitosamente');
+                this.toastr.success('Proyecto agregado exitosamente', 'Notificación', { timeOut: 3000 });
+                this.loadProjects();
             }
         })
     }
 
     //Método que actualiza los proyectos.
-    refreshTable() {
-
+    loadProjects() {
+        this.projectService.getAllProjects().subscribe({
+            next: (result) => {
+                //Agregar de alguna manera
+            },
+            error: (err) => { console.log(err); }
+        });
     }
 
 
