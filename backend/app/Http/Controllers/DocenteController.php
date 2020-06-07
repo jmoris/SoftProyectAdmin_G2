@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project;
+use App\Role;
+use App\RoleUser;
+use App\User;
 use Illuminate\Support\Facades\Validator;
 
 class DocenteController extends Controller
 {
     /**
      * Obtener todos los proyectos en los que participa un docente
-     * 
+     *
      */
     public function getProyectos(Request $request)
     {
-        
+
         $projecto = Project::All();
         if (empty($projecto))
         {
@@ -22,17 +25,16 @@ class DocenteController extends Controller
                 'status' => 'error',
                 'message' => 'An error occurred!'
             );
-            return Response::json($returnData, 500);
+            return response()->json($returnData, 500);
         }
-        return Response::json($projecto);
+        return response()->json($projecto);
     }
 
     /**
      * Obtener todo lo necesario de un proyecto
      */
-    public function getProyecto(Request $request)
+    public function getProyecto(Request $request, $id)
     {
-        $id = $request->input('id');
         $projecto = Project::where('id', $id)->get();
         if (empty($projecto))
         {
@@ -40,9 +42,9 @@ class DocenteController extends Controller
                 'status' => 'error',
                 'message' => 'An error occurred!'
             );
-            return Response::json($returnData, 500);
+            return response()->json($returnData, 500);
         }
-        return Response::json($projecto);
+        return response()->json($projecto);
     }
 
     /**
@@ -52,23 +54,23 @@ class DocenteController extends Controller
     {
         $id = $request->input('id');
 
-        try { 
+        try {
             $projecto = Project::find($id);
             $projecto->delete();
             $returnData = array(
                 'status' => 'complete',
                 'message' => 'Eliminado'
             );
-            return Response::json($returnData);
+            return response()->json($returnData);
 
-          } catch(\Illuminate\Database\QueryException $ex){ 
-            dd($ex->getMessage()); 
+          } catch(\Illuminate\Database\QueryException $ex){
+            dd($ex->getMessage());
             // Note any method of class PDOException can be called on $ex.
             $returnData = array(
                 'status' => 'error',
                 'message' => 'No se ha podido eliminar el proyecto'
             );
-            return Response::json($returnData, 500);
+            return response()->json($returnData, 500);
           }
     }
 
@@ -89,7 +91,7 @@ class DocenteController extends Controller
                 'status' => 'error',
                 'message' => 'An error occurred!'
             );
-            return Response::json($returnData, 500);
+            return response()->json($returnData, 500);
         }
         else
         {
@@ -101,7 +103,7 @@ class DocenteController extends Controller
                 'status' => 'complete',
                 'message' => 'Editado exitosamente'
             );
-            return Response::json($returnData);
+            return response()->json($returnData);
         }
     }
 
@@ -121,58 +123,96 @@ class DocenteController extends Controller
         $projecto->name = $name;
         $projecto->description = $description;
 
-        try { 
+        try {
             $projecto->save();
             $returnData = array(
                 'status' => 'complete',
                 'message' => 'Se ha creado el proyecto de forma correcta'
             );
-            return Response::json($returnData);
+            return response()->json($returnData);
 
-          } catch(\Illuminate\Database\QueryException $ex){ 
-            dd($ex->getMessage()); 
+          } catch(\Illuminate\Database\QueryException $ex){
+            dd($ex->getMessage());
             // Note any method of class PDOException can be called on $ex.
             $returnData = array(
                 'status' => 'error',
                 'message' => 'No se ha podido crear el proyecto'
             );
-            return Response::json($returnData, 500);
+            return response()->json($returnData, 500);
           }
     }
 
 
     /**
-     * Agregar una lista de alumnos a un proyecto 
+     * Agregar una lista de alumnos a un proyecto
      */
     public function agregarAlumnosAProyecto(Request $request)
     {
-        /*
-        $this->validate($request, [
-            'arrayAlumnos' => 'required|array|min:3',
-            'id' => 'required',
+        $validator = Validator::make($request->all(), [
+            'students' => 'required|array',
+            'project_id' => 'required',
         ]);
 
-        $arrayAlumnos = $request->input('arrayAlumnos');
-        $idProyecto = $request->('id');
-        */
+        if ($validator->fails()) {
+            return ['errors'=>$validator->errors()];
+        }
+
+        $proyecto = Project::find($request->project_id);
+        $n = 0;
+        foreach($request->students as $student){
+            $role = Role::find($student['role_id']);
+            $user = User::find($student['user_id']);
+            $user->roles()->sync($role);
+
+            $role_user = RoleUser::where('user_id', $user->id)->where('role_id', $role->id)->first();
+            $proyecto->user_roles()->sync($role_user, false);
+            $n++;
+        }
+
+        return response()->json(["status" => "complete", "enrolled" => $n]);
     }
-    
+
+    public function getAlumnosProyecto(Request $request, $id) {
+        $proyecto = Project::find($id);
+        $user_roles = $proyecto->user_roles;
+        $data = [];
+        foreach($user_roles as $usr){
+            $userr = RoleUser::find($usr->id);
+            $selected_user = $userr->user;
+            $selected_user['project_role'] = $usr->role->name;
+            array_push($data, $selected_user);
+        }
+        return $data;
+    }
+
     /**
      * Elimina un alumno de un proyecto
      */
     public function eliminarAlumnoDeUnProyecto(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'project_id' => 'required',
+        ]);
 
+        if ($validator->fails()) {
+            return ['errors'=>$validator->errors()];
+        }
+
+        $proyecto = Project::find($request->project_id);
+        $user = User::find($request->user_id);
+        $buscado =  $proyecto->user_roles()->where('user_id', $user->id)->first();
+        return ($proyecto->user_roles()->detach($buscado))?response()->json(['status' => 'ok']):response()->json(['status' => 'failed']);
 
     }
-    
 
 
 
 
 
 
-    
+
+
 
 
 
