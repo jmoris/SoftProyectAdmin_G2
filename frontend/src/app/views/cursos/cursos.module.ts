@@ -7,7 +7,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TagInputModule } from 'ngx-chips';
 
-import { UsuarioRoutingmodule } from './usuarios-routing.module';
+import { CursosRoutingmodule } from './cursos-routing.module';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
 import { GestionComponent } from './gestion/gestion.component';
@@ -23,10 +23,10 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     NgxEchartsModule,
     NgxDatatableModule,
     NgbModule,
-    UsuarioRoutingmodule,
+    CursosRoutingmodule,
     CustomFormsModule,
     TagInputModule
   ],
   declarations: [GestionComponent]
 })
-export class UsuarioModule { }
+export class CursosModule { }

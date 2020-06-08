@@ -17,14 +17,21 @@ export class GestionComponent implements OnInit {
   usuarios: any;
   checked = true;
 
-  addUserForm = this.fb.group({
+  addCourseForm = this.fb.group({
     name:  ['', Validators.required],
-    surname:['', Validators.required],
-    email:['', Validators.required],
-    password:['', Validators.required],
-    rut:['', Validators.required],
-    profile:['', Validators.required],
-    enrollment: ['', Validators.required]
+    year:  ['', Validators.required],
+    semester:  ['', Validators.required],
+    teacher:  ['', Validators.required]
+  });
+  
+  addGuestTeacherForm = this.fb.group({
+    course:  ['', Validators.required],
+    guestTeacher:  ['', Validators.required]
+  });
+
+  addHelperForm = this.fb.group({
+    course:  ['', Validators.required],
+    helper:  ['', Validators.required]
   });
 
   constructor(
@@ -46,51 +53,23 @@ export class GestionComponent implements OnInit {
     );
   }
 
-  deleteData(id, modal, event) {
+  addCourse(modal, event) {
     event.target.parentElement.parentElement.blur();
-    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })
-        .result.then((result) => {
-            this.usuariosService.delete(id)
-                .subscribe(res => {
-                    this.toastr.success('Usuario eliminado correctamente', 'Notificación de eliminación', { timeOut: 3000 });
-                    this.loadData();
-                })
-        }, (reason) => {
-        });
+    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true });
   }
 
-  cleanForm(){
-      this.addUserForm = this.fb.group({
-        name:  ['', Validators.required],
-        surname:['', Validators.required],
-        email:['', Validators.required],
-        password:['', Validators.required],
-        rut:['', Validators.required],
-        profile:['', Validators.required],
-        enrollment: ['', Validators.required]
-      });
+  addGuestTeacher(modal, event) {
+    event.target.parentElement.parentElement.blur();
+    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true });
   }
 
-  addUser(modal, event) {
+  addHelper(modal, event) {
     event.target.parentElement.parentElement.blur();
-    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })
-        .result.then((result) => {
-            this.checked = true;
-            var frm = this.addUserForm.value;
-            this.usuariosService.insert(frm).subscribe((resp:any)=>{
-                if(resp.errors){
-                    this.toastr.error('No se puede insertar el usuario en la base de datos.', 'Notificación de error', { timeOut: 3000 });
-                    return;
-                }
-                this.toastr.success('Usuario insertado correctamente', 'Notificación de inserción', { timeOut: 3000 });
-                this.cleanForm();
-                this.loadData();
-            }, (error:any)=>{
-                console.log(error);
-            });
-        }, (reason) => {
-        });
+    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true });
   }
+
+
+  
 
   formatProfile(value){
     switch(value){

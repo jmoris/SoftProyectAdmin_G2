@@ -1,13 +1,13 @@
-import { UsuarioModule } from './usuarios.module';
+import { CursosModule } from './cursos.module';
 
 describe('DashboardModule', () => {
-  let usuarioModule: UsuarioModule;
+  let cursosModule: CursosModule;
 
   beforeEach(() => {
-    usuarioModule = new UsuarioModule();
+    cursosModule = new CursosModule();
   });
 
   it('should create an instance', () => {
-    expect(usuarioModule).toBeTruthy();
+    expect(cursosModule).toBeTruthy();
   });
 });
