@@ -14,6 +14,7 @@ class ProjectUserRole extends Migration
     public function up()
     {
         Schema::create('project_role_user', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->bigInteger('role_user_id');
             $table->bigInteger('project_id');
         });
