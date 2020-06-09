@@ -23,7 +23,7 @@ const adminRoutes: Routes = [
     {
       path: 'cursos',
       loadChildren: () => import('./views/cursos/cursos.module').then(m => m.CursosModule)
-  },
+    },
     {
       path: 'uikits',
       loadChildren: () => import('./views/ui-kits/ui-kits.module').then(m => m.UiKitsModule)
