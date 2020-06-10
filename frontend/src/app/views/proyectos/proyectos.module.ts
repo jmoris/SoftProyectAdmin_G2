@@ -14,6 +14,7 @@ import { ProyectoRoutingModule } from './proyectos-routing.module';
 import { GestionComponent } from './gestion/gestion.component';
 import { AddProjectComponent } from './add-project/add-project.component';
 import { MaterialModule } from 'src/app/material.module';
+import { DetailsProjectComponent } from './gestion/details-project/details-project.component';
 
 
 @NgModule({
@@ -30,6 +31,6 @@ import { MaterialModule } from 'src/app/material.module';
     TagInputModule,
     MaterialModule
   ],
-  declarations: [GestionComponent, AddProjectComponent]
+  declarations: [GestionComponent, AddProjectComponent, DetailsProjectComponent]
 })
 export class ProyectoModule { }

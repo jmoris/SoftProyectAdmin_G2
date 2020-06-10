@@ -10,6 +10,7 @@ import { NotifierService } from 'angular-notifier';
 import { ToastrService } from 'ngx-toastr';
 
 import { ProjectService } from 'src/app/_services/project.service';
+import { DetailsProjectComponent } from './details-project/details-project.component';
 
 
 
@@ -32,7 +33,12 @@ export class GestionComponent implements OnInit {
     };
     step2Form: FormGroup;
 
-    constructor(private modalService: NgbModal, private projectService: ProjectService, private toastr: ToastrService, private fb: FormBuilder, private dialog: MatDialog, notifierService: NotifierService) {
+    constructor(private modalService: NgbModal,
+        private projectService: ProjectService,
+        private toastr: ToastrService,
+        private fb: FormBuilder,
+        private dialog: MatDialog,
+        notifierService: NotifierService) {
         this.notifier = notifierService;
     }
 
@@ -244,7 +250,7 @@ export class GestionComponent implements OnInit {
             });
     }
 
-    openAddDialog() {
+    openAddDialog(): void {
         let dialogRef = this.dialog.open(AddProjectComponent, {
             width: '500px',
             data: 'This text is passed into the dialog',
@@ -259,6 +265,17 @@ export class GestionComponent implements OnInit {
                 this.loadProjects();
             }
         })
+    }
+
+    openDetails(): void {
+        //let selected;
+        //recorrer arreglo de proyecto y obtener el proyecto seleccionado.
+        //selected = idProject;//
+        //pasar item seleccionado al componente de detalles.
+        this.dialog.open(DetailsProjectComponent, {
+            width: '500px',
+            data: 'This text is passed into the dialog'//selected
+        });
     }
 
     //Método que actualiza los proyectos.
