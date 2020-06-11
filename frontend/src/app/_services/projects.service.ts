@@ -13,16 +13,9 @@ export class ProjectsService {
 
   constructor(private http: HttpClient) { }
 
-  addProject(data: Project): Observable<boolean> {
-    const body = new HttpParams()
-      .set("name", data.name)
-      .set("description", data.description);
+  insert(data): Observable<boolean> {
 
-    return this.http.post<any>(`${env.apiUrl}'/projects`, body)
-      .pipe(map(result => {
-        console.log(result.msg);
-        return true;
-      }));
+    return this.http.post<any>(`${env.apiUrl}/projects`, data);
   }
 
   getAll(): Observable<Project[]> {
@@ -31,6 +24,10 @@ export class ProjectsService {
         console.log(result.msg);
         return result;
       }));
+  }
+
+  delete(id){
+    return this.http.delete<any>(`${env.apiUrl}/projects/` + id);
   }
 
 }

@@ -39,6 +39,11 @@ export class AddProjectComponent implements OnInit {
     let projectData = this.form.value;
     console.log('Info name: ' + projectData.name);
     this.dialogRef.close('Confirm');
+    console.log('what wea pasa');
+    let frm = this.form.value;
+    this.projectService.insert(frm).subscribe((resp:any) => {
+        console.log(resp);
+    });
     /*this.projectService.addProject(projectData).subscribe({
       next: result => {
         console.log(result);

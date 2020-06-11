@@ -50,10 +50,8 @@ class ProjectsController extends Controller
     /**
      * Eliminar un proyecto en el que participa un docente
      */
-    public function eliminarProyecto(Request $request)
+    public function eliminarProyecto(Request $request, $id)
     {
-        $id = $request->input('id');
-
         try {
             $projecto = Project::find($id);
             $projecto->delete();
