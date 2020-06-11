@@ -23,6 +23,9 @@ Route::group(['middleware' => 'api'], function () {
     Route::delete('admin/users/{id}', 'AdminController@eliminarUsuario');
     Route::post('admin/courses/assign', 'AdminController@asignarProfesorACurso');
 
+    Route::get('courses', 'AyudanteController@getCursos');
+    Route::post('courses', 'AdminController@crearCurso');
+    Route::post('courses/assign', 'AdminController@asignarProfesorACurso');
 
     Route::get('teacher/projects', 'DocenteController@getProyectos');
     Route::get('teacher/projects/{id}', 'DocenteController@getProyecto');
