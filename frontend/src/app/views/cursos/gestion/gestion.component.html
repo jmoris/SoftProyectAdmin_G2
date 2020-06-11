@@ -53,31 +53,28 @@
               <ngx-datatable-column name="name" [flexGrow]="25">
                   <ng-template ngx-datatable-header-template>
                       <label>
-                          Nombre
+                          Nombre del curso
                       </label>
                   </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column name="surname" [flexGrow]="25">
+              <ngx-datatable-column name="year" [flexGrow]="25">
                   <ng-template ngx-datatable-header-template>
                       <label>
-                          Apellido
+                          Año del curso
                       </label>
                   </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column name="email" [flexGrow]="25">
+              <ngx-datatable-column name="semester" [flexGrow]="25">
                   <ng-template ngx-datatable-header-template>
                       <label>
-                          Email
+                          Semestre del curso
                       </label>
                   </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column name="profile" [flexGrow]="20">
-                  <ng-template let-value="value" ngx-datatable-cell-template>
-                      <div [innerHTML]="formatProfile(value)"></div>
-                    </ng-template>
+              <ngx-datatable-column name="idUser" [flexGrow]="20">
                   <ng-template ngx-datatable-header-template>
                       <label>
-                          Perfil
+                          Profesor a cargo
                       </label>
                   </ng-template>
               </ngx-datatable-column>

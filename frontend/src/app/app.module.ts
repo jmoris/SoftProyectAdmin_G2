@@ -9,10 +9,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PrincipalComponent } from './views/principal/principal.component';
 import { ConfirmationDialogComponent } from './views/core/confirmation-dialog/confirmation-dialog.component';
 import { NotifierOptions, NotifierModule } from 'angular-notifier';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
 
 /**
  * Custom angular notifier options
@@ -77,7 +79,10 @@ const customNotifierOptions: NotifierOptions = {
     ReactiveFormsModule,
     NotifierModule.withConfig(customNotifierOptions)
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

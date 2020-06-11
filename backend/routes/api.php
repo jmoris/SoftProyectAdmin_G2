@@ -11,6 +11,9 @@
 |
 */
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 Route::post('login', 'AuthController@login');
 Route::post('register', 'AuthController@register');
 
@@ -38,5 +41,11 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('projects/assign', 'ProjectsController@agregarAlumnosAProyecto');
     Route::get('projects/list/{id}', 'ProjectsController@getAlumnosProyecto');
     Route::delete('projects/detach', 'ProjectsController@eliminarAlumnoDeUnProyecto');
+
+    Route::get('user', function(Request $request){
+       // $token = Str::substr($request->header('Authorization', ''), 7);
+        //$user = JWTAuth::toUser($token);
+        return Auth::user();
+    });
 
 });

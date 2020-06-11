@@ -21,23 +21,30 @@
     </div>
 
     <div class="separator-breadcrumb border-top"></div>
-    
+
     <div class="row">
         <!-- ICON BG -->
-        <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let item of array; let i = index">
             <div class="card card-profile-1 mb-4">
                 <div class="card-body text-center">
                     <div class="avatar box-shadow-2 mb-3">
-                        <img src="./assets/images/faces/7.jpg" alt="">
+                        <img src="./assets/images/faces/6.jpg" alt="">
                     </div>
-                    <h5 class="m-0">Ignacio Hoffman</h5>
+                    <h5 class="m-0">{{ item.scrum_master }}</h5>
                     <p class="mt-0">Jefe proyecto</p>
-                    <p>Proyecto web</p>
-                    <button class="btn btn-primary btn-rounded" (click)="open(modalBasic)">Ver detalles</button>
+                    <div class="card mb-4">
+                        <div class="card-body" style="background-color: rgb(245, 246, 252);">
+                          <h6 class="mb-2 text-muted">{{ item.name }}</h6>
+                          <p class="mb-1 text-22 font-weight-light" style="font-size: 12px;">25%</p>
+                          <p class="mb-1"><ngb-progressbar type="warning" [value]="25" height="4px"></ngb-progressbar></p>
+                        </div>
+                      </div>
+                    <button style="margin: 3px;" class="btn btn-primary btn-rounded" (click)="open(modalBasic)">Ver detalles</button>
+                    <button style="margin: 3px;" class="btn btn-danger btn-rounded" (click)="open(modalBasic)">Ver proyecto</button>
                 </div>
             </div>
         </div>
-
+<!--
         <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-profile-1 mb-4">
                 <div class="card-body text-center">
@@ -101,7 +108,7 @@
             </div>
         </div>
     </div>
-
+-->
     <ng-template #modalBasic let-modal>
         <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title">Detalles del proyecto</h4>
