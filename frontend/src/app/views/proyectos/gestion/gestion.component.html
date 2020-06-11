@@ -11,13 +11,17 @@
 
         </div>
         <div class="col-md-3 text-right">
-            <button class="btn btn-primary btn-rounded" (click)="open(modalBasic)">
+            <button style="margin: 1px;" class="btn btn-primary btn-rounded" (click)="open(modalBasic)">
                 <i class="fas fa-cloud"></i> + Nuevo proyecto
+            </button>
+            <button style="margin: 1px;" class="btn btn-light btn-rounded" (click)="open(modalBasic2)">
+                <i class="datatable-icon-search"></i>  Buscar proyecto
             </button>
         </div>
     </div>
-    <div class="separator-breadcrumb border-top"></div>
 
+    <div class="separator-breadcrumb border-top"></div>
+    
     <div class="row">
         <!-- ICON BG -->
         <div class="col-lg-3 col-md-6 col-sm-6">
@@ -28,8 +32,15 @@
                     </div>
                     <h5 class="m-0">Ignacio Hoffman</h5>
                     <p class="mt-0">Jefe proyecto</p>
-                    <p>Proyecto web</p>
-                    <button class="btn btn-primary btn-rounded" (click)="open(modalBasic)">Ver detalles</button>
+                    <div class="card mb-4">
+                        <div class="card-body" style="background-color: rgb(245, 246, 252);">
+                          <h6 class="mb-2 text-muted">Proyecto web</h6>
+                          <p class="mb-1 text-22 font-weight-light" style="font-size: 12px;">50%</p>
+                          <p class="mb-1"><ngb-progressbar type="info" [value]="50" height="4px"></ngb-progressbar></p>
+                        </div>
+                      </div>
+                    <button style="margin: 3px;" class="btn btn-primary btn-rounded" (click)="open(modalBasic)">Ver detalles</button>
+                    <button style="margin: 3px;" class="btn btn-danger btn-rounded" (click)="open(modalBasic)">Ver proyecto</button>
                 </div>
             </div>
         </div>
@@ -42,8 +53,15 @@
                     </div>
                     <h5 class="m-0">Amelia Jones</h5>
                     <p class="mt-0">Jefe proyecto</p>
-                    <p>Proyecto móvil</p>
-                    <button class="btn btn-primary btn-rounded" (click)="open(modalBasic)">Ver detalles</button>
+                    <div class="card mb-4">
+                        <div class="card-body" style="background-color: rgb(245, 246, 252);">
+                          <h6 class="mb-2 text-muted">Proyecto móvil</h6>
+                          <p class="mb-1 text-22 font-weight-light" style="font-size: 12px;">25%</p>
+                          <p class="mb-1"><ngb-progressbar type="warning" [value]="25" height="4px"></ngb-progressbar></p>
+                        </div>
+                      </div>
+                    <button style="margin: 3px;" class="btn btn-primary btn-rounded" (click)="open(modalBasic)">Ver detalles</button>
+                    <button style="margin: 3px;" class="btn btn-danger btn-rounded" (click)="open(modalBasic)">Ver proyecto</button>
                 </div>
             </div>
         </div>
@@ -56,8 +74,15 @@
                     </div>
                     <h5 class="m-0">Thomas Taylor</h5>
                     <p class="mt-0">Jefe proyecto</p>
-                    <p>Proyecto web APRODES</p>
-                    <button class="btn btn-primary btn-rounded" (click)="open(modalBasic)">Ver detalles</button>
+                    <div class="card mb-4">
+                        <div class="card-body" style="background-color: rgb(245, 246, 252);">
+                          <h6 class="mb-2 text-muted">Proyecto web APRODES</h6>
+                          <p class="mb-1 text-22 font-weight-light" style="font-size: 12px;">80%</p>
+                          <p class="mb-1"><ngb-progressbar type="success" [value]="80" height="4px"></ngb-progressbar></p>
+                        </div>
+                      </div>
+                    <button style="margin: 3px;" class="btn btn-primary btn-rounded" (click)="open(modalBasic)">Ver detalles</button>
+                    <button style="margin: 3px;" class="btn btn-danger btn-rounded" (click)="open(modalBasic)">Ver proyecto</button>
                 </div>
             </div>
         </div>
@@ -70,8 +95,15 @@
                     </div>
                     <h5 class="m-0">Lily Wilson</h5>
                     <p class="mt-0">Jefe proyecto</p>
-                    <p>Proyecto móvil pastelerías</p>
-                    <button class="btn btn-primary btn-rounded" (click)="open(modalBasic)">Ver detalles</button>
+                    <div class="card mb-4">
+                        <div class="card-body" style="background-color: rgb(245, 246, 252);">
+                          <h6 class="mb-2 text-muted">Proyecto móvil pastelerías</h6>
+                          <p class="mb-1 text-22 font-weight-light" style="font-size: 12px;">3%</p>
+                          <p class="mb-1"><ngb-progressbar type="danger" [value]="3" height="4px"></ngb-progressbar></p>
+                        </div>
+                      </div>
+                    <button style="margin: 3px;" class="btn btn-primary btn-rounded" (click)="open(modalBasic)">Ver detalles</button>
+                    <button style="margin: 3px;" class="btn btn-danger btn-rounded" (click)="open(modalBasic)">Ver proyecto</button>
                 </div>
             </div>
         </div>
@@ -85,39 +117,36 @@
             </button>
         </div>
         <div class="modal-body">
-            <form>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="form-group col-md-12 mb-3">
-                            <label for="firstName">Jefe de proyecto</label>
-                            <input type="text" [readonly]="true" class="form-control" id="firstName" name="firstName"
-                                placeholder="Thomas Taylor" [(ngModel)]="data.firstName">
-                        </div>
-                        <div class="form-group col-md-12 mb-3">
-                            <label for="lastName">Nombre de proyecto</label>
-                            <input type="text" [readonly]="true" class="form-control" id="lastName" name="lastName"
-                                placeholder="Página web aprodes" [(ngModel)]="data.lastName">
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Cantidad de participantes</label>
-                            <input type="email" [readonly]="true" class="form-control" id="exampleInputEmail1"
-                                name="exampleInputEmail1" aria-describedby="emailHelp" placeholder="20"
-                                [(ngModel)]="data.email">
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="phone">Fecha de creación</label>
-                            <input type="text" [readonly]="true" class="form-control" id="phone" name="phone"
-                                placeholder="20-04-2020" [(ngModel)]="data.phone">
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="phone">Última modificación</label>
-                            <input type="text" [readonly]="true" class="form-control" id="phone" name="phone"
-                                placeholder="27-05-2020" [(ngModel)]="data.phone">
-                        </div>
-                    </div>
+            <form [formGroup]="addUserForm"  (ngSubmit)="addUserOnSubmit()" >
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>Jefe de proyecto</td>
+                      <td><input type="text" formControlName="bossname" ng-model="data.bossname" size="25" maxlength="100" required></td>
 
+                    </tr>
+                    <tr>
+                      <td>Nombre de proyecto</td>
+                      <td><input type="text" formControlName="proyectoname" ng-model="dala.proyectoname" size="25" maxlength="100" required></td>
+                    </tr>
+                    <tr>
+                      <td>Cantidad de participantes</td>
+                      <td><input type="text" formControlName="email" ng-model="email.text" size="25" maxlength="100" required></td>
+                    </tr>
+                    <tr>
+                      <td>Fecha de creación</td>
+                      <td><input type="password" formControlName="password" ng-model="email.text" size="25" maxlength="100" required></td>
+                    </tr>
+                    <tr>
+                      <td>Última modificación</td>
+                      <td><input type="text" formControlName="rut" ng-model="email.text" size="25" maxlength="100" required></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div *ngIf="!checked">
+                    <label style="color:red;"><b>* Todos los campos deben ser completados.</b></label>
                 </div>
-            </form>
+              </form>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-outline-dark btn-rounded"
@@ -125,7 +154,40 @@
         </div>
     </ng-template>
 
+    <ng-template #modalBasic2 let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Buscar proyecto</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="form-group col-md-12 mb-3">
+                            <label for="firstName">Buscar por jefe de proyecto</label>
+                            <input type="text" [readonly]="true" class="form-control" id="firstName" name="firstName"
+                                placeholder="Thomas Taylor" [(ngModel)]="data.firstName">
+                        </div>
+                        <div class="form-group col-md-12 mb-3">
+                            <label for="lastName">Buscar por nombre de proyecto</label>
+                            <input type="text" [readonly]="true" class="form-control" id="lastName" name="lastName"
+                                placeholder="Página web aprodes" [(ngModel)]="data.lastName">
+                        </div>
 
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary btn-rounded"
+                (click)="modal.close('Close')">Buscar</button>
+            <button type="button" class="btn btn-danger btn-rounded"
+                (click)="modal.close('Close')">Cerrar</button>
+        </div>
+    </ng-template>
 
 
 </div>
