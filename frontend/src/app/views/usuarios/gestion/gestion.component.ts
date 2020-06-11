@@ -16,6 +16,7 @@ import { UsuariosService } from 'src/app/_services/usuarios.service';
 export class GestionComponent implements OnInit {
   usuarios: any = [];
   checked = true;
+  cargando = false;
 
   addUserForm = this.fb.group({
     name:  ['', Validators.required],
@@ -39,9 +40,11 @@ export class GestionComponent implements OnInit {
   }
 
   loadData(){
+      this.cargando = true;
     this.usuariosService.getAll().subscribe(
         (resp:any) => {
             this.usuarios = resp;
+            this.cargando = false;
         }
     );
   }
