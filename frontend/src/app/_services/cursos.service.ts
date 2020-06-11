@@ -12,14 +12,14 @@ export class CursosService {
     constructor(private http: HttpClient, private router: Router) {}
 
     getAll() {
-        return this.http.get<any>(`${environment.apiUrl}/admin/users`);
+        return this.http.get<any>(`${environment.apiUrl}/courses`);
     }
 
     insert(data) {
-        return this.http.post<any>(`${environment.apiUrl}/admin/users`, data);
+        return this.http.post<any>(`${environment.apiUrl}/courses`, data);
     }
 
     delete(id){
-        return this.http.delete<any>(`${environment.apiUrl}/admin/users/` + id);
+        return this.http.delete<any>(`${environment.apiUrl}/courses/` + id);
     }
 }

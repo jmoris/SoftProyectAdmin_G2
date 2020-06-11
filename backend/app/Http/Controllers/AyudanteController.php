@@ -15,10 +15,7 @@ class AyudanteController extends Controller
      */
     public function getCursos(Request $request)
     {
-        $this->validate($request, [
-            'iduser' => 'required',
-        ]);
-        $user = User::find($request->iduser);
+        $user = User::find(auth()->user()->id);
         if($user!=null){
             if(UserProfile::isAssistant($user)){
                 return $user->courses;

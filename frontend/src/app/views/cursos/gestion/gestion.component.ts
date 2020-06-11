@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/shared/services/product.service';
-import { UsuariosService } from 'src/app/_services/usuarios.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { CursosService } from 'src/app/_services/cursos.service';
 
 
 
@@ -14,7 +14,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
   styleUrls: ['./gestion.component.scss']
 })
 export class GestionComponent implements OnInit {
-  usuarios: any;
+  cursos: any;
   checked = true;
 
   addCourseForm = this.fb.group({
@@ -23,7 +23,7 @@ export class GestionComponent implements OnInit {
     semester:  ['', Validators.required],
     teacher:  ['', Validators.required]
   });
-  
+
   addGuestTeacherForm = this.fb.group({
     course:  ['', Validators.required],
     guestTeacher:  ['', Validators.required]
@@ -37,7 +37,7 @@ export class GestionComponent implements OnInit {
   constructor(
         private modalService: NgbModal,
         private toastr: ToastrService,
-        private usuariosService: UsuariosService,
+        private cursosService: CursosService,
         private fb: FormBuilder,
 	) { }
 
@@ -46,9 +46,9 @@ export class GestionComponent implements OnInit {
   }
 
   loadData(){
-    this.usuariosService.getAll().subscribe(
+    this.cursosService.getAll().subscribe(
         (resp:any) => {
-            this.usuarios = resp;
+            this.cursos = resp;
         }
     );
   }
@@ -69,7 +69,7 @@ export class GestionComponent implements OnInit {
   }
 
 
-  
+
 
   formatProfile(value){
     switch(value){
