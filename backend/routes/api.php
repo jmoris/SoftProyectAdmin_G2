@@ -17,22 +17,25 @@ Route::post('register', 'AuthController@register');
 Route::group(['middleware' => 'api'], function () {
     Route::get('logout', 'AuthController@logout');
 
-    Route::get('admin/users', 'AdminController@getUsuarios');
-    Route::post('admin/users', 'AdminController@crearUsuario');
-    Route::put('admin/users/{id}', 'AdminController@editarUsuario');
-    Route::delete('admin/users/{id}', 'AdminController@eliminarUsuario');
-    Route::post('admin/courses/assign', 'AdminController@asignarProfesorACurso');
+    Route::get('users', 'UsersController@getUsuarios');
+    Route::get('users/{id}', 'UsersController@getUser');
+    Route::post('users', 'UsersController@crearUsuario');
+    Route::put('users/{id}', 'UsersController@editarUsuario');
+    Route::delete('users/{id}', 'UsersController@eliminarUsuario');
 
-    Route::get('courses', 'AyudanteController@getCursos');
-    Route::post('courses', 'AdminController@crearCurso');
-    Route::post('courses/assign', 'AdminController@asignarProfesorACurso');
+    Route::get('courses', 'CoursesController@getCursos');
+    Route::post('courses', 'CoursesController@crearCurso');
+    Route::put('courses/{id}', 'CoursesController@editarCurso');
+    Route::delete('courses/{id}', 'CoursesController@eliminarCurso');
+    Route::post('courses/assign', 'CoursesController@asignarProfesorACurso');
 
-    Route::get('teacher/projects', 'DocenteController@getProyectos');
-    Route::get('teacher/projects/{id}', 'DocenteController@getProyecto');
-    Route::post('teacher/projects', 'DocenteController@crearProyecto');
-    Route::put('teacher/projects/{id}', 'DocenteController@editarProyecto');
-    Route::delete('teacher/projects', 'DocenteController@eliminarProyecto');
-    Route::post('teacher/projects/assign', 'DocenteController@agregarAlumnosAProyecto');
-    Route::get('teacher/projects/list/{id}', 'DocenteController@getAlumnosProyecto');
-    Route::delete('teacher/projects/detach', 'DocenteController@eliminarAlumnoDeUnProyecto');
+    Route::get('projects', 'ProjectsController@getProyectos');
+    Route::get('projects/{id}', 'ProjectsController@getProyecto');
+    Route::post('projects', 'ProjectsController@crearProyecto');
+    Route::put('projects/{id}', 'ProjectsController@editarProyecto');
+    Route::delete('projects/{id}', 'ProjectsController@eliminarProyecto');
+    Route::post('projects/assign', 'ProjectsController@agregarAlumnosAProyecto');
+    Route::get('projects/list/{id}', 'ProjectsController@getAlumnosProyecto');
+    Route::delete('projects/detach', 'ProjectsController@eliminarAlumnoDeUnProyecto');
+
 });

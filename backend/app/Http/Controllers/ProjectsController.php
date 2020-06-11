@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Project;
 use App\Role;
 use App\RoleUser;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class DocenteController extends Controller
+class ProjectsController extends Controller
 {
-    /**
+     /**
      * Obtener todos los proyectos en los que participa un docente
      *
      */
@@ -205,16 +205,4 @@ class DocenteController extends Controller
         return ($proyecto->user_roles()->detach($buscado))?response()->json(['status' => 'ok']):response()->json(['status' => 'failed']);
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
