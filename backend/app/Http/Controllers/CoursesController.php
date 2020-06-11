@@ -10,6 +10,22 @@ use Illuminate\Support\Facades\Validator;
 
 class CoursesController extends Controller
 {
+
+    public function getCursos(){
+        return Course::all();
+    }
+
+    public function getCurso($id){
+        $curso = Course::find($id);
+        if($curso!=null){
+            return response()->json($curso);
+        }else{
+            return response()->json([
+                'msg' => 'El curso no existe'
+            ], 500);
+        }
+    }
+
     /**
      * Crear un curso
      */
@@ -66,7 +82,7 @@ class CoursesController extends Controller
 
     public function eliminarCurso($id)
     {
-        $user = Course::find($idEstudiante);
+        $user = Course::find($id);
         $user->delete();
         return response()->json([
             'status' => 200,

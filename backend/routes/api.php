@@ -24,6 +24,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::delete('users/{id}', 'UsersController@eliminarUsuario');
 
     Route::get('courses', 'CoursesController@getCursos');
+    Route::get('courses/{id}', 'CoursesController@getCurso');
     Route::post('courses', 'CoursesController@crearCurso');
     Route::put('courses/{id}', 'CoursesController@editarCurso');
     Route::delete('courses/{id}', 'CoursesController@eliminarCurso');
