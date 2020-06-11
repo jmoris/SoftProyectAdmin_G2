@@ -6,6 +6,7 @@ use App\Course;
 use App\Tools\UserProfile;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class CoursesController extends Controller
@@ -40,11 +41,12 @@ class CoursesController extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         }
+        $user = Auth::user();
         $curso = new Course();
         $curso->name = $request->name;
         $curso->year = $request->year;
         $curso->semester = $request->semester;
-        $curso->idUser = auth()->user()->id;
+        $curso->idUser = $user->id;
         $curso->save();
 
         return response()->json([
@@ -71,7 +73,7 @@ class CoursesController extends Controller
         $curso->name = $request->name;
         $curso->year = $request->year;
         $curso->semester = $request->semester;
-        $curso->idUser = auth()->user()->id;
+        $curso->idUser = Auth::user()->id;
         $curso->save();
 
         return response()->json([

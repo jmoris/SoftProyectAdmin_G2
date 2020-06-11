@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ProjectService } from 'src/app/_services/project.service';
+import { ProjectsService } from 'src/app/_services/projects.service';
 
 @Component({
   selector: 'app-add-project',
@@ -18,7 +18,7 @@ export class AddProjectComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddProjectComponent>,
     @Inject(MAT_DIALOG_DATA) public data: String,
-    private projectService: ProjectService
+    private projectService: ProjectsService
   ) {
     this.form = new FormGroup({
       name: new FormControl("", [Validators.required]),

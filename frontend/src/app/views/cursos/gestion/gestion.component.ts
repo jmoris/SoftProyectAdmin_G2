@@ -55,7 +55,32 @@ export class GestionComponent implements OnInit {
 
   addCourse(modal, event) {
     event.target.parentElement.parentElement.blur();
-    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true });
+    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })
+        .result.then((result) => {
+            this.checked = true;
+            var frm = this.addCourseForm.value;
+            this.cursosService.insert(frm).subscribe((resp:any)=>{
+            if(resp.errors){
+                this.toastr.error('No se puede insertar el curso en la base de datos.', 'Notificación de error', { timeOut: 3000 });
+                return;
+            }
+            this.toastr.success('Curso insertado correctamente', 'Notificación de inserción', { timeOut: 3000 });
+            this.cleanForm();
+            this.loadData();
+        }, (error:any)=>{
+            console.log(error);
+        });
+    }, (reason) => {
+    });
+  }
+
+  cleanForm(){
+    this.addCourseForm = this.fb.group({
+        name:  ['', Validators.required],
+        year:  ['', Validators.required],
+        semester:  ['', Validators.required],
+        teacher:  ['', Validators.required]
+    });
   }
 
   addGuestTeacher(modal, event) {

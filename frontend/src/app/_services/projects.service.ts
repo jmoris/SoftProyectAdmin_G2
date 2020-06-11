@@ -9,7 +9,7 @@ import { environment as env } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectService {
+export class ProjectsService {
 
   constructor(private http: HttpClient) { }
 
@@ -18,15 +18,15 @@ export class ProjectService {
       .set("name", data.name)
       .set("description", data.description);
 
-    return this.http.post<any>(`${env.apiUrl}'teacher/projects`, body)
+    return this.http.post<any>(`${env.apiUrl}'/projects`, body)
       .pipe(map(result => {
         console.log(result.msg);
         return true;
       }));
   }
 
-  getAllProjects(): Observable<Project[]> {
-    return this.http.get<any>(`${env.apiUrl}teacher/projects`)
+  getAll(): Observable<Project[]> {
+    return this.http.get<any>(`${env.apiUrl}/projects`)
       .pipe(map(result => {
         console.log(result.msg);
         return result;
