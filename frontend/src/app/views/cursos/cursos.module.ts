@@ -7,14 +7,11 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TagInputModule } from 'ngx-chips';
 
+import { CursosRoutingmodule } from './cursos-routing.module';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { ProyectoRoutingModule } from './proyectos-routing.module';
 import { GestionComponent } from './gestion/gestion.component';
-import { AddProjectComponent } from './add-project/add-project.component';
-import { MaterialModule } from 'src/app/material.module';
-import { DetailsProjectComponent } from './gestion/details-project/details-project.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 @NgModule({
@@ -26,11 +23,10 @@ import { DetailsProjectComponent } from './gestion/details-project/details-proje
     NgxEchartsModule,
     NgxDatatableModule,
     NgbModule,
-    ProyectoRoutingModule,
+    CursosRoutingmodule,
     CustomFormsModule,
-    TagInputModule,
-    MaterialModule
+    TagInputModule
   ],
-  declarations: [GestionComponent, AddProjectComponent, DetailsProjectComponent]
+  declarations: [GestionComponent]
 })
-export class ProyectoModule { }
+export class CursosModule { }

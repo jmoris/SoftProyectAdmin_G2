@@ -21,6 +21,10 @@ const adminRoutes: Routes = [
         loadChildren: () => import('./views/proyectos/proyectos.module').then(m => m.ProyectoModule)
     },
     {
+      path: 'cursos',
+      loadChildren: () => import('./views/cursos/cursos.module').then(m => m.CursosModule)
+    },
+    {
       path: 'uikits',
       loadChildren: () => import('./views/ui-kits/ui-kits.module').then(m => m.UiKitsModule)
     },
@@ -72,6 +76,7 @@ const routes: Routes = [
     redirectTo: 'dashboard/v1',
     pathMatch: 'full'
   },
+  
   {
     path: '',
     component: AuthLayoutComponent,

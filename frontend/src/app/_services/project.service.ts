@@ -18,7 +18,7 @@ export class ProjectService {
       .set("name", data.name)
       .set("description", data.description);
 
-    return this.http.post<any>(`${env.apiUrl}/project/addProject`, body)
+    return this.http.post<any>(`${env.apiUrl}'teacher/projects`, body)
       .pipe(map(result => {
         console.log(result.msg);
         return true;
@@ -26,7 +26,7 @@ export class ProjectService {
   }
 
   getAllProjects(): Observable<Project[]> {
-    return this.http.get<any>(`${env.apiUrl}/project/getAll`)
+    return this.http.get<any>(`${env.apiUrl}teacher/projects`)
       .pipe(map(result => {
         console.log(result.msg);
         return result;
