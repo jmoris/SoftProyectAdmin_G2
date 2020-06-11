@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/shared/services/product.service';
-import { UsuariosService } from 'src/app/_services/usuarios.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { CursosService } from 'src/app/_services/cursos.service';
 
 
 
@@ -14,8 +14,9 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
   styleUrls: ['./gestion.component.scss']
 })
 export class GestionComponent implements OnInit {
-  usuarios: any;
+  cursos: any;
   checked = true;
+  cargando = false;
 
   addCourseForm = this.fb.group({
     name:  ['', Validators.required],
@@ -23,7 +24,7 @@ export class GestionComponent implements OnInit {
     semester:  ['', Validators.required],
     teacher:  ['', Validators.required]
   });
-  
+
   addGuestTeacherForm = this.fb.group({
     course:  ['', Validators.required],
     guestTeacher:  ['', Validators.required]
@@ -37,7 +38,7 @@ export class GestionComponent implements OnInit {
   constructor(
         private modalService: NgbModal,
         private toastr: ToastrService,
-        private usuariosService: UsuariosService,
+        private cursosService: CursosService,
         private fb: FormBuilder,
 	) { }
 
@@ -46,16 +47,43 @@ export class GestionComponent implements OnInit {
   }
 
   loadData(){
-    this.usuariosService.getAll().subscribe(
+      this.cargando = true;
+    this.cursosService.getAll().subscribe(
         (resp:any) => {
-            this.usuarios = resp;
+            this.cursos = resp;
+            this.cargando = false;
         }
     );
   }
 
   addCourse(modal, event) {
     event.target.parentElement.parentElement.blur();
-    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true });
+    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })
+        .result.then((result) => {
+            this.checked = true;
+            var frm = this.addCourseForm.value;
+            this.cursosService.insert(frm).subscribe((resp:any)=>{
+            if(resp.errors){
+                this.toastr.error('No se puede insertar el curso en la base de datos.', 'Notificación de error', { timeOut: 3000 });
+                return;
+            }
+            this.toastr.success('Curso insertado correctamente', 'Notificación de inserción', { timeOut: 3000 });
+            this.cleanForm();
+            this.loadData();
+        }, (error:any)=>{
+            console.log(error);
+        });
+    }, (reason) => {
+    });
+  }
+
+  cleanForm(){
+    this.addCourseForm = this.fb.group({
+        name:  ['', Validators.required],
+        year:  ['', Validators.required],
+        semester:  ['', Validators.required],
+        teacher:  ['', Validators.required]
+    });
   }
 
   addGuestTeacher(modal, event) {
@@ -69,7 +97,7 @@ export class GestionComponent implements OnInit {
   }
 
 
-  
+
 
   formatProfile(value){
     switch(value){

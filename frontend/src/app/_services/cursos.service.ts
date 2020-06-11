@@ -4,23 +4,22 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { User } from '../../_models/user';
 import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
-export class UsuariosService {
+export class CursosService {
 
     constructor(private http: HttpClient, private router: Router) {}
 
     getAll() {
-        return this.http.get<any>(`${environment.apiUrl}/users`);
+        return this.http.get<any>(`${environment.apiUrl}/courses`);
     }
 
     insert(data) {
-        return this.http.post<any>(`${environment.apiUrl}/users`, data);
+        return this.http.post<any>(`${environment.apiUrl}/courses`, data);
     }
 
     delete(id){
-        return this.http.delete<any>(`${environment.apiUrl}/users/` + id);
+        return this.http.delete<any>(`${environment.apiUrl}/courses/` + id);
     }
 }
