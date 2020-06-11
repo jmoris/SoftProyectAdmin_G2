@@ -11,7 +11,7 @@
 
         </div>
         <div class="col-md-3 text-right">
-            <button style="margin: 1px;" class="btn btn-primary btn-rounded" (click)="open(modalBasic)">
+            <button class="btn btn-primary btn-rounded" (click)="openAddDialog()">
                 <i class="fas fa-cloud"></i> + Nuevo proyecto
             </button>
             <button style="margin: 1px;" class="btn btn-light btn-rounded" (click)="open(modalBasic2)">
@@ -32,15 +32,8 @@
                     </div>
                     <h5 class="m-0">Ignacio Hoffman</h5>
                     <p class="mt-0">Jefe proyecto</p>
-                    <div class="card mb-4">
-                        <div class="card-body" style="background-color: rgb(245, 246, 252);">
-                          <h6 class="mb-2 text-muted">Proyecto web</h6>
-                          <p class="mb-1 text-22 font-weight-light" style="font-size: 12px;">50%</p>
-                          <p class="mb-1"><ngb-progressbar type="info" [value]="50" height="4px"></ngb-progressbar></p>
-                        </div>
-                      </div>
-                    <button style="margin: 3px;" class="btn btn-primary btn-rounded" (click)="open(modalBasic)">Ver detalles</button>
-                    <button style="margin: 3px;" class="btn btn-danger btn-rounded" (click)="open(modalBasic)">Ver proyecto</button>
+                    <p>Proyecto web</p>
+                    <button class="btn btn-primary btn-rounded" (click)="open(modalBasic)">Ver detalles</button>
                 </div>
             </div>
         </div>
