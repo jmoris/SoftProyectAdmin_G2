@@ -16,7 +16,7 @@
                   <div class="card-body text-center">
                       <i class="i-Address-Book"></i>
                       <p class="text-muted mt-2 mb-2"> Nuevo Curso </p>
-                      
+
                       <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded" (click)="addCourse(addCourseConfirmModal, $event)" > Agregar </button>
                   </div>
               </div>
@@ -41,43 +41,40 @@
             </div>
         </div>
 </div>
-    
+
 
 
     <div class="col-md-12">
       <div class="card o-hidden mb-4">
           <ngx-datatable style="height: calc(100vh - 270px); box-shadow: none" class="material fullscreen"
               [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="60" [scrollbarV]="true"
-              [scrollbarH]="true" [limit]="10" [rows]="usuarios">
+              [scrollbarH]="true" [limit]="10" [rows]="cursos" [loadingIndicator]="cargando">
 
               <ngx-datatable-column name="name" [flexGrow]="25">
                   <ng-template ngx-datatable-header-template>
                       <label>
-                          Nombre
+                          Nombre del curso
                       </label>
                   </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column name="surname" [flexGrow]="25">
+              <ngx-datatable-column name="year" [flexGrow]="25">
                   <ng-template ngx-datatable-header-template>
                       <label>
-                          Apellido
+                          Año del curso
                       </label>
                   </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column name="email" [flexGrow]="25">
+              <ngx-datatable-column name="semester" [flexGrow]="25">
                   <ng-template ngx-datatable-header-template>
                       <label>
-                          Email
+                          Semestre del curso
                       </label>
                   </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column name="profile" [flexGrow]="20">
-                  <ng-template let-value="value" ngx-datatable-cell-template>
-                      <div [innerHTML]="formatProfile(value)"></div>
-                    </ng-template>
+              <ngx-datatable-column name="idUser" [flexGrow]="20">
                   <ng-template ngx-datatable-header-template>
                       <label>
-                          Perfil
+                          Profesor a cargo
                       </label>
                   </ng-template>
               </ngx-datatable-column>
@@ -89,10 +86,10 @@
                 </ngx-datatable-column>
           </ngx-datatable>
       </div>
-  </div>    
+  </div>
 
 
-  
+
 
 
 <!-- VENTANA MODAL QUE SE DESPLEGA PARA CONFIRMAR LA ELIMINACIÓN DE UN DATO-->
@@ -163,7 +160,7 @@
             </div>
           </td>
         </tr>
-          
+
         </tbody>
       </table>
       <div *ngIf="!checked">
@@ -229,7 +226,7 @@
             <label style="color:red;"><b>* Todos los campos deben ser completados.</b></label>
         </div>
       </form>
-  
+
     </div>
     <div class="modal-footer">
       <button type="button" ngbAutofocus class="btn btn-wide btn-success btn-rounded"
@@ -288,7 +285,7 @@
             <label style="color:red;"><b>* Todos los campos deben ser completados.</b></label>
         </div>
       </form>
-  
+
     </div>
     <div class="modal-footer">
       <button type="button" ngbAutofocus class="btn btn-wide btn-success btn-rounded"

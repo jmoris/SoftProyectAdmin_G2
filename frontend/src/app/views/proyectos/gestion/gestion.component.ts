@@ -1,8 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+
 import { EChartOption } from 'echarts';
 import { echartStyles } from '../../../shared/echart-styles';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialog } from '@angular/material/dialog';
+import { AddProjectComponent } from '../add-project/add-project.component';
+import { NotifierService } from 'angular-notifier';
+import { ToastrService } from 'ngx-toastr';
+
+import { DetailsProjectComponent } from './details-project/details-project.component';
+import { ProjectsService } from 'src/app/_services/projects.service';
+
+
 
 @Component({
     selector: 'app-gestion',
@@ -10,212 +20,30 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
     styleUrls: ['./gestion.component.css']
 })
 export class GestionComponent implements OnInit {
-    chartLineOption1: EChartOption;
-    chartLineOption2: EChartOption;
-    chartLineOption3: EChartOption;
-    salesChartBar: EChartOption;
-    salesChartPie: EChartOption;
+    private readonly notifier: NotifierService;
+
+    proyectos: any = [];
     isCompleted: boolean;
+    dialogResult = "";
     data: any = {
         email: ''
     };
     step2Form: FormGroup;
 
-    constructor(private modalService: NgbModal, private fb: FormBuilder) {
-
+    constructor(private modalService: NgbModal,
+        private projectsService: ProjectsService,
+        private toastr: ToastrService,
+        private fb: FormBuilder,
+        private dialog: MatDialog,
+        notifierService: NotifierService) {
+        this.notifier = notifierService;
     }
 
     ngOnInit() {
+        this.loadProjects();
         this.step2Form = this.fb.group({
             experience: [2]
         });
-        this.chartLineOption1 = {
-            ...echartStyles.lineFullWidth, ...{
-                series: [{
-                    data: [30, 40, 20, 50, 40, 80, 90],
-                    ...echartStyles.smoothLine,
-                    markArea: {
-                        label: {
-                            show: true
-                        }
-                    },
-                    areaStyle: {
-                        color: 'rgba(102, 51, 153, .2)',
-                        origin: 'start'
-                    },
-                    lineStyle: {
-                        color: '#663399',
-                    },
-                    itemStyle: {
-                        color: '#663399'
-                    }
-                }]
-            }
-        };
-        this.chartLineOption2 = {
-            ...echartStyles.lineFullWidth, ...{
-                series: [{
-                    data: [30, 10, 40, 10, 40, 20, 90],
-                    ...echartStyles.smoothLine,
-                    markArea: {
-                        label: {
-                            show: true
-                        }
-                    },
-                    areaStyle: {
-                        color: 'rgba(255, 193, 7, 0.2)',
-                        origin: 'start'
-                    },
-                    lineStyle: {
-                        color: '#FFC107'
-                    },
-                    itemStyle: {
-                        color: '#FFC107'
-                    }
-                }]
-            }
-        };
-        this.chartLineOption2.xAxis.data = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-
-        this.chartLineOption3 = {
-            ...echartStyles.lineNoAxis, ...{
-                series: [{
-                    data: [40, 80, 20, 90, 30, 80, 40, 90, 20, 80, 30, 45, 50, 110, 90, 145, 120, 135, 120, 140],
-                    lineStyle: {
-                        color: 'rgba(102, 51, 153, 0.86)',
-                        width: 3,
-                        ...echartStyles.lineShadow
-                    },
-                    label: { show: true, color: '#212121' },
-                    type: 'line',
-                    smooth: true,
-                    itemStyle: {
-                        borderColor: 'rgba(102, 51, 153, 1)'
-                    }
-                }]
-            }
-        };
-        // this.chartLineOption3.xAxis.data = ['1', '2', '3', 'Thu', 'Fri', 'Sat', 'Sun'];
-        this.salesChartBar = {
-            legend: {
-                borderRadius: 0,
-                orient: 'horizontal',
-                x: 'right',
-                data: ['Online', 'Offline']
-            },
-            grid: {
-                left: '8px',
-                right: '8px',
-                bottom: '0',
-                containLabel: true
-            },
-            tooltip: {
-                show: true,
-                backgroundColor: 'rgba(0, 0, 0, .8)'
-            },
-            xAxis: [{
-                type: 'category',
-                data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
-                axisTick: {
-                    alignWithLabel: true
-                },
-                splitLine: {
-                    show: false
-                },
-                axisLine: {
-                    show: true
-                }
-            }],
-            yAxis: [{
-                type: 'value',
-                axisLabel: {
-                    formatter: '${value}'
-                },
-                min: 0,
-                max: 100000,
-                interval: 25000,
-                axisLine: {
-                    show: false
-                },
-                splitLine: {
-                    show: true,
-                    interval: 'auto'
-                }
-            }
-
-            ],
-
-            series: [{
-                name: 'Online',
-                data: [35000, 69000, 22500, 60000, 50000, 50000, 30000, 80000, 70000, 60000, 20000, 30005],
-                label: { show: false, color: '#0168c1' },
-                type: 'bar',
-                barGap: 0,
-                color: '#bcbbdd',
-                smooth: true,
-
-            },
-            {
-                name: 'Offline',
-                data: [45000, 82000, 35000, 93000, 71000, 89000, 49000, 91000, 80200, 86000, 35000, 40050],
-                label: { show: false, color: '#639' },
-                type: 'bar',
-                color: '#7569b3',
-                smooth: true
-            }
-
-            ]
-        };
-
-        this.salesChartPie = {
-            color: ['#62549c', '#7566b5', '#7d6cbb', '#8877bd', '#9181bd', '#6957af'],
-            tooltip: {
-                show: true,
-                backgroundColor: 'rgba(0, 0, 0, .8)'
-            },
-
-            xAxis: [{
-                axisLine: {
-                    show: false
-                },
-                splitLine: {
-                    show: false
-                }
-            }
-
-            ],
-            yAxis: [{
-                axisLine: {
-                    show: false
-                },
-                splitLine: {
-                    show: false
-                }
-            }
-            ],
-            series: [{
-                name: 'Sales by Country',
-                type: 'pie',
-                radius: '75%',
-                center: ['50%', '50%'],
-                data: [
-                    { value: 535, name: 'USA' },
-                    { value: 310, name: 'Brazil' },
-                    { value: 234, name: 'France' },
-                    { value: 155, name: 'Germany' },
-                    { value: 130, name: 'UK' },
-                    { value: 348, name: 'India' }
-                ],
-                itemStyle: {
-                    emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-            ]
-        };
     }
 
     onStep1Next(e) { }
@@ -231,6 +59,54 @@ export class GestionComponent implements OnInit {
                 console.log('Err!', reason);
             });
     }
+
+    openAddDialog(): void {
+        let dialogRef = this.dialog.open(AddProjectComponent, {
+            width: '500px',
+            data: 'This text is passed into the dialog',
+            disableClose: true,
+            autoFocus: true
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog closed: ${result}`);
+            this.dialogResult = result;
+            if (result == 'Confirm') {
+                this.toastr.success('Proyecto agregado exitosamente', 'Notificación', { timeOut: 3000 });
+                this.loadProjects();
+            }
+        })
+    }
+
+    openDetails(): void {
+        //let selected;
+        //recorrer arreglo de proyecto y obtener el proyecto seleccionado.
+        //selected = idProject;//
+        //pasar item seleccionado al componente de detalles.
+        this.dialog.open(DetailsProjectComponent, {
+            width: '500px',
+            data: 'This text is passed into the dialog'//selected
+        });
+    }
+
+    //Método que actualiza los proyectos.
+    loadProjects() {
+        this.projectsService.getAll().subscribe((proyectos:any) => {
+            this.proyectos = proyectos;
+        });
+    }
+
+    deleteData(id, modal, event) {
+        event.target.parentElement.parentElement.blur();
+        this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })
+            .result.then((result) => {
+                this.projectsService.delete(id)
+                    .subscribe(res => {
+                        this.toastr.success('Proyecto eliminado correctamente', 'Notificación de eliminación', { timeOut: 3000 });
+                        this.loadProjects();
+                    })
+            }, (reason) => {
+            });
+      }
 
 
 }

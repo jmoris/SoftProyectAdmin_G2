@@ -17,27 +17,128 @@
     </head>
     <body id="page-top">
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top"><img style="width:25%;height:auto;" src="../../../assets/images/logo-taller.png" alt="" /></a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fas fa-bars ml-1"></i></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ml-auto">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="">Acerca de</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="">Servicio</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="">Contacto</a></li>
-                    </ul>
-                </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand js-scroll-trigger" href="#page-top"><img style="width:13%;height:auto;" src="assets/images/logo_Aprodes.png" alt="" /></a>          
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav text-uppercase ml-auto">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Acerca de</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#Servicio">Servicio</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#Contacto">Contacto</a></li>
+                </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-success my-2 my-sm-0" routerLink="/sessions/signin" >Iniciar sesion</button>
+              </form>
             </div>
-        </nav>
+          </nav>
         <!-- Masthead-->
         <header class="masthead">
-            <div class="container">
-                <div class="masthead-subheading">Trabaja con tu equipo</div>
-                <div class="masthead-heading text-uppercase">En cualquier lugar</div>
+            <div id="Inicio" class="container">
+                <div id="fondol" class="masthead-subheading">Trabaja con tu equipo</div>
+                <div id="fondol" class="masthead-heading text-uppercase">En cualquier lugar</div>
                 <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" routerLink="/sessions/signin">Iniciar Sesión</a>
             </div>
         </header>
+
+        <section id="about" class="masthead">
+            <div>
+                <div id="cuerpo2" class="container" style="z-index:100%">
+                    <div align="center" >
+                    <h1>APRODES</h1>
+                    <h2>Administracion de proyectos de desarrollo de software</h2>
+                    <br>
+                </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12 ">
+                            <b><p>Trabaja multiples proyectos en diferentes equipos desde la comodidad de tu hogar.<br><br>
+                                Aprovecha las ventajas del sistema:<br>
+                                - Tabaja desde casa.<br>   
+                                - Gestionar proyectos.<br>
+                                - Revisa avances <br>
+                                - Crea documentos sobre un proyecto<br>
+                            </p></b><br>
+
+                            <p><b>¿Aun no te unes a nuestra comunidad?.</b><br>
+                                Atravete al cambio con un solo clik.
+                            </p>
+
+                            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" routerLink="/sessions/signin">Iniciar Sesión</a>
+        
+                        </div>
+                        <div class="col-lg-6 col-sm-12 ">
+                            
+                            <b><p>
+                                <img src="https://www.aner.com/images/blog/coordinacion-remota-de-equipos-eficiente.jpg"
+                                width="400"
+                                height="341">
+                            </p></b>
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="Contacto">
+            <div>
+                <div id="cuerpo2" class="container" style="z-index:100%">
+                    <div align="center" >
+                    <h1 id="fondol">Contactanos</h1>
+                </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12 ">
+                           
+                            <b><h4 id="fondol">  <i class="i-Mail"></i> Al correo electronico:</h4></b>
+                            <b><h4 id="fondol"> correoDeEjemplo@aprodes.com </h4></b>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 ">
+                            <b><h4 id="fondol">  <i class="i-Telephone"></i> Al celular o whatsapp:</h4></b>
+                            <b><h4 id="fondol"> +569 xxx xx xxx </h4></b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div id="cuerpo2" class="container" style="z-index:100%">
+                    <div align="center" >
+                    <h1 id="fondol">O llena el siguiente formulario</h1>
+                </div>
+            </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                        <div class="col-md-offset-1 col-md-10 col-sm-12 wow fadeIn">
+                            <form method="post" action="<?= base_url()?>/Welcome/enviarCorreo" enctype="multipart/form-data">
+                                <div class="col-md-6 col-sm-6">
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Nombre" required>
+                              </div> 
+                                <div class="col-md-6 col-sm-6">
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="Correo" required>
+                              </div>
+                                  <div class="col-md-8 col-sm-8">
+                                    <input type="texto" class="form-control" name="asunto" id="asunto" placeholder="Asunto" required>
+                              </div>
+                                <div class="col-md-12 col-sm-12">
+                                    <textarea rows="8" class="form-control" name="mensaje" id="mensaje" placeholder="Mensaje" required style="height: 99px;"></textarea>
+                                </div>
+                                <div class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6">
+                                    <button type="submit" class="btn btn-dark ">Enviar</button>
+                                    <button type="reset" class="btn btn-secondary ">Cancelar</button>	
+                                    <br>
+                                    <br>
+                                  </div>
+                            </form>
+                        </div>
+                        <div class="col-md-2 col-sm-1"></div>
+                    </div>
+                </div>
+        </section>
+
+
+
 
 
 

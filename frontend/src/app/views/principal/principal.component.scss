@@ -10451,3 +10451,26 @@ header.masthead .masthead-heading {
   font-size: 0.9rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+
+.parallax-section {
+  background-attachment: fixed !important;
+  background-size: cover !important;
+}
+
+#Contacto {
+  background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1)),url('https://newcall.cl/img/Slider/contacto-1.png') 50% 0 repeat-y fixed;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center;
+  color: #FFFFFF;
+  padding-top: 20px;
+  padding-bottom: 80px;
+  font-size: large;
+}
+
+#fondol{
+  background-color: rgba(254,249,54,0.5);
+  /*border: 1px solid black;*/
+  /*opacity: 1;*/
+  /*color:rgb(250,250,200);*/
+}
