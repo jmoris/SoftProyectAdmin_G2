@@ -12,6 +12,9 @@ import { SharedComponentsModule } from 'src/app/shared/components/shared-compone
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ProyectoRoutingModule } from './proyectos-routing.module';
 import { GestionComponent } from './gestion/gestion.component';
+import { AddProjectComponent } from './add-project/add-project.component';
+import { MaterialModule } from 'src/app/material.module';
+import { DetailsProjectComponent } from './gestion/details-project/details-project.component';
 
 
 @NgModule({
@@ -25,8 +28,9 @@ import { GestionComponent } from './gestion/gestion.component';
     NgbModule,
     ProyectoRoutingModule,
     CustomFormsModule,
-    TagInputModule
+    TagInputModule,
+    MaterialModule
   ],
-  declarations: [GestionComponent]
+  declarations: [GestionComponent, AddProjectComponent, DetailsProjectComponent]
 })
 export class ProyectoModule { }
