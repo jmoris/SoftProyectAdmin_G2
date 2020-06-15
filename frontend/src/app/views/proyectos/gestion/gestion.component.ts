@@ -22,7 +22,7 @@ import { ProjectsService } from 'src/app/_services/projects.service';
 export class GestionComponent implements OnInit {
     private readonly notifier: NotifierService;
 
-    proyectos: any = [];
+    projects: any = [];
     isCompleted: boolean;
     dialogResult = "";
     data: any = {
@@ -78,9 +78,9 @@ export class GestionComponent implements OnInit {
     }
 
     openDetails(): void {
-        //let selected;
+        let selected;
         //recorrer arreglo de proyecto y obtener el proyecto seleccionado.
-        //selected = idProject;//
+        
         //pasar item seleccionado al componente de detalles.
         this.dialog.open(DetailsProjectComponent, {
             width: '500px',
@@ -90,8 +90,8 @@ export class GestionComponent implements OnInit {
 
     //Método que actualiza los proyectos.
     loadProjects() {
-        this.projectsService.getAll().subscribe((proyectos:any) => {
-            this.proyectos = proyectos;
+        this.projectsService.getAll().subscribe((projects:any) => {
+            this.projects = projects;
         });
     }
 

@@ -1,74 +1,75 @@
 <div class="breadcrumb">
-    <h1>Administrar Usuarios</h1>
-    <ul>
-        <li><a href="">Dashboard</a></li>
-        <li>Administrar Usuarios</li>
-    </ul>
+  <h1>Administrar Usuarios</h1>
+  <ul>
+    <li><a href="">Dashboard</a></li>
+    <li>Administrar Usuarios</li>
+  </ul>
 </div>
 <div class="separator-breadcrumb border-top"></div>
 
 <div class="row">
-    <div class="col-lg-8 col-md-12">
-        <!-- CARD ICON -->
-        <div class="row">
-            <div class="col-lg-2 col-md-6 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center">
-                        <i class="i-Lock-User"></i>
-                        <p class="text-muted mt-2 mb-2">Administrador</p>
-                        <p class="text-primary text-24 line-height-1 m-0">21</p>
-                        <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-2 col-md-6 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center">
-                        <i class="i-Add-User"></i>
-                        <p class="text-muted mt-2 mb-2">Docentes</p>
-                        <p class="text-primary text-24 line-height-1 m-0">21</p>
-                        <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-2 col-md-6 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center">
-                        <i class="i-Find-User"></i>
-                        <p class="text-muted mt-2 mb-2">Ayudantes</p>
-                        <p class="text-primary text-24 line-height-1 m-0">421</p>
-                        <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-2 col-md-6 col-sm-6">
-                <div class="card card-icon mb-4">
-                    <div class="card-body text-center">
-                        <i class="i-Find-User"></i>
-                        <p class="text-muted mt-2 mb-2">Estudiantes</p>
-                        <p class="text-primary text-24 line-height-1 m-0">4021</p>
-                        <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-sm-6">
-              <div class="card card-icon mb-4">
-                  <div class="card-body text-center">
-                      <i class="i-Find-User"></i>
-                      <p class="text-muted mt-2 mb-2">Nuevo Usuario </p>
-                      <p class="text-primary text-24 line-height-1 m-0"> <br /> </p>
-                      <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded" (click)="addUser(userAddConfirmModal, $event)" > Agregar </button>
-                  </div>
-              </div>
+  <div class="col-lg-8 col-md-12">
+    <!-- CARD ICON -->
+    <div class="row">
+      <div class="col-lg-2 col-md-6 col-sm-6">
+        <div class="card card-icon mb-4">
+          <div class="card-body text-center">
+            <i class="i-Lock-User"></i>
+            <p class="text-muted mt-2 mb-2">Administrador</p>
+            <p class="text-primary text-24 line-height-1 m-0">21</p>
+            <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
           </div>
         </div>
+      </div>
+
+      <div class="col-lg-2 col-md-6 col-sm-6">
+        <div class="card card-icon mb-4">
+          <div class="card-body text-center">
+            <i class="i-Add-User"></i>
+            <p class="text-muted mt-2 mb-2">Docentes</p>
+            <p class="text-primary text-24 line-height-1 m-0">21</p>
+            <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-6 col-sm-6">
+        <div class="card card-icon mb-4">
+          <div class="card-body text-center">
+            <i class="i-Find-User"></i>
+            <p class="text-muted mt-2 mb-2">Ayudantes</p>
+            <p class="text-primary text-24 line-height-1 m-0">421</p>
+            <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-6 col-sm-6">
+        <div class="card card-icon mb-4">
+          <div class="card-body text-center">
+            <i class="i-Find-User"></i>
+            <p class="text-muted mt-2 mb-2">Estudiantes</p>
+            <p class="text-primary text-24 line-height-1 m-0">4021</p>
+            <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Ver detalles</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-6 col-sm-6">
+        <div class="card card-icon mb-4">
+          <div class="card-body text-center">
+            <i class="i-Find-User"></i>
+            <p class="text-muted mt-2 mb-2">Nuevo Usuario </p>
+            <p class="text-primary text-24 line-height-1 m-0"> <br /> </p>
+            <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded" (click)="openAddDialog()"> Agregar
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
 
-    <!--div class="col-lg-6 col-md-12">
+  <!--div class="col-lg-6 col-md-12">
     <div class="card mb-4">
       <div class="card-body">
         <div class="card-title">Agregar usuario</div>
@@ -241,8 +242,8 @@
     </div>
   </div-->
 
-    <div class="col-md-12">
-        <div class="card o-hidden mb-4">
+  <div class="col-md-12">
+    <!--div class="card o-hidden mb-4">
             <ngx-datatable style="height: calc(100vh - 270px); box-shadow: none" class="material fullscreen"
                 [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="60" [scrollbarV]="true"
                 [scrollbarH]="true" [limit]="10" [rows]="usuarios" [loadingIndicator]="cargando">
@@ -285,10 +286,59 @@
                     </ng-template>
                   </ngx-datatable-column>
             </ngx-datatable>
-        </div>
+        </div-->
+    <div fxFlex="50">
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" matSortActive="run"
+        matSortDirection="asc" matSortDisableClear>
+        <ng-container matColumnDef="run">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> R.U.N </th>
+          <td mat-cell *matCellDef="let element"> {{element.rut}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="surname">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
+          <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+        <ng-container matColumnDef="profile">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Perfil </th>
+          <td mat-cell *matCellDef="let element"> {{formatProfile(element.profile)}} </td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="warn" (click)="deleteUser(element.id)">
+              <mat-icon svgIcon="delete" class="mat-18"></mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <!--Progress spinner -->
+      <mat-card *ngIf="isDataLoading" style="display: flex; justify-content: center; align-items: center">
+        <mat-progress-spinner color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+      </mat-card>
+
+      <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" class="mat-elevation-z8">
+      </mat-paginator>
+
     </div>
-<!-- VENTANA MODAL QUE SE DESPLEGA PARA CONFIRMAR LA ELIMINACIÓN DE UN DATO-->
-<ng-template #deleteConfirmModal let-modal>
+  </div>
+  <!-- VENTANA MODAL QUE SE DESPLEGA PARA CONFIRMAR LA ELIMINACIÓN DE UN DATO-->
+  <ng-template #deleteConfirmModal let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-title">Eliminación de usuario</h4>
       <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
@@ -308,69 +358,75 @@
   </ng-template>
 
   <!-- VENTANA MODAL QUE SE DESPLEGA PARA AGREGAR UN USUARIO -->
-<ng-template #userAddConfirmModal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-title">Agregar un usuario</h4>
-    <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
-      (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form [formGroup]="addUserForm"  (ngSubmit)="addUserOnSubmit()" >
-      <table class="table">
-        <tbody>
-          <tr>
-            <td>Nombre:</td>
-            <td><input type="text" formControlName="name" ng-model="user.name" size="25" maxlength="100" required></td>
-          </tr>
-          <tr>
-            <td>Apellido:</td>
-            <td><input type="text" formControlName="surname" ng-model="email.text" size="25" maxlength="100" required></td>
-          </tr>
-          <tr>
-            <td>Email:</td>
-            <td><input type="text" formControlName="email" ng-model="email.text" size="25" maxlength="100" required></td>
-          </tr>
-          <tr>
-            <td>Contraseña:</td>
-            <td><input type="password" formControlName="password" ng-model="email.text" size="25" maxlength="100" required></td>
-          </tr>
-          <tr>
-            <td>Rut:</td>
-            <td><input type="text" formControlName="rut" ng-model="email.text" size="25" maxlength="100" required></td>
-          </tr>
-          <tr>
-            <td>Matricula:</td>
-            <td><input type="text" formControlName="enrollment" ng-model="email.text" size="25" maxlength="100" required></td>
-          </tr>
-          <tr>
-            <td>Perfil:</td>
-            <td>
-              <div>
-                <select class="form-control" id="UserType" formControlName="profile" required>
-                  <option value="" selected disabled> Seleccionar Opcion</option>
-                  <option value="admin"> Administrador</option>
-                  <option value="teacher"> Docente </option>
-                  <!--<option value="Ayudante"> Ayudante</option>-->
-                  <option value="student"> Estudiante </option>
-                </select>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div *ngIf="!checked">
+  <ng-template #userAddConfirmModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">Agregar un usuario</h4>
+      <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+        (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="addUserForm" (ngSubmit)="addUserOnSubmit()">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Nombre:</td>
+              <td><input type="text" formControlName="name" ng-model="user.name" size="25" maxlength="100" required>
+              </td>
+            </tr>
+            <tr>
+              <td>Apellido:</td>
+              <td><input type="text" formControlName="surname" ng-model="email.text" size="25" maxlength="100" required>
+              </td>
+            </tr>
+            <tr>
+              <td>Email:</td>
+              <td><input type="text" formControlName="email" ng-model="email.text" size="25" maxlength="100" required>
+              </td>
+            </tr>
+            <tr>
+              <td>Contraseña:</td>
+              <td><input type="password" formControlName="password" ng-model="email.text" size="25" maxlength="100"
+                  required></td>
+            </tr>
+            <tr>
+              <td>Rut:</td>
+              <td><input type="text" formControlName="rut" ng-model="email.text" size="25" maxlength="100" required>
+              </td>
+            </tr>
+            <tr>
+              <td>Matricula:</td>
+              <td><input type="text" formControlName="enrollment" ng-model="email.text" size="25" maxlength="100"
+                  required></td>
+            </tr>
+            <tr>
+              <td>Perfil:</td>
+              <td>
+                <div>
+                  <select class="form-control" id="UserType" formControlName="profile" required>
+                    <option value="" selected disabled> Seleccionar Opcion</option>
+                    <option value="admin"> Administrador</option>
+                    <option value="teacher"> Docente </option>
+                    <!--<option value="Ayudante"> Ayudante</option>-->
+                    <option value="student"> Estudiante </option>
+                  </select>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="!checked">
           <label style="color:red;"><b>* Todos los campos deben ser completados.</b></label>
-      </div>
-    </form>
+        </div>
+      </form>
 
-  </div>
-  <div class="modal-footer">
-    <button type="button" ngbAutofocus class="btn btn-wide btn-success btn-rounded"
-      (click)="((this.addUserForm.invalid)?checked=false:modal.close('Ok'))">Agregar </button>
-    <button type="button" class="btn btn-outline-secondary btn-rounded"
-      (click)="modal.dismiss('cancel')">Cancelar</button>
-  </div>
-</ng-template>
+    </div>
+    <div class="modal-footer">
+      <button type="button" ngbAutofocus class="btn btn-wide btn-success btn-rounded"
+        (click)="((this.addUserForm.invalid)?checked=false:modal.close('Ok'))">Agregar </button>
+      <button type="button" class="btn btn-outline-secondary btn-rounded"
+        (click)="modal.dismiss('cancel')">Cancelar</button>
+    </div>
+  </ng-template>
 </div>
