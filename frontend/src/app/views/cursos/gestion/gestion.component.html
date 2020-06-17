@@ -25,7 +25,7 @@
               <div class="card card-icon mb-4">
                   <div class="card-body text-center">
                       <i class="i-Add-User"></i>
-                      <p class="text-muted mt-2 mb-2"> Asignar P. Guesped </p>
+                      <p class="text-muted mt-2 mb-2"> Asignar P. Huesped </p>
                       <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded" (click)="addGuestTeacher(addGuestTeacherConfirmModal, $event)" > Agregar </button>
                   </div>
               </div>
@@ -105,9 +105,9 @@
       <p><strong>¿Estas seguro de querer eliminar este usuario?</strong></p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary btn-rounded"
+      <button type="button" class="btn btn-primary btn-rounded"
         (click)="modal.dismiss('cancel')">Cancelar</button>
-      <button type="button" ngbAutofocus class="btn btn-wide btn-danger btn-rounded"
+      <button type="button" ngbAutofocus class="btn btn-danger btn-rounded"
         (click)="modal.close('Ok')">Borrar</button>
     </div>
   </ng-template>
@@ -170,9 +170,9 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" ngbAutofocus class="btn btn-wide btn-success btn-rounded"
+    <button type="button" ngbAutofocus class="btn btn-primary btn-rounded"
       (click)="((this.addCourseForm.invalid)?checked=false:modal.close('Ok'))">Agregar </button>
-    <button type="button" class="btn btn-outline-secondary btn-rounded"
+    <button type="button" class="btn btn-danger btn-rounded"
       (click)="modal.dismiss('cancel')">Cancelar</button>
   </div>
 </ng-template>
@@ -229,9 +229,9 @@
 
     </div>
     <div class="modal-footer">
-      <button type="button" ngbAutofocus class="btn btn-wide btn-success btn-rounded"
+      <button type="button" ngbAutofocus class="btn btn-primary btn-rounded"
         (click)="((this.addCourseForm.invalid)?checked=false:modal.close('Ok'))">Agregar </button>
-      <button type="button" class="btn btn-outline-secondary btn-rounded"
+      <button type="button" class="btn btn-danger btn-rounded"
         (click)="modal.dismiss('cancel')">Cancelar</button>
     </div>
   </ng-template>
@@ -288,9 +288,9 @@
 
     </div>
     <div class="modal-footer">
-      <button type="button" ngbAutofocus class="btn btn-wide btn-success btn-rounded"
+      <button type="button" ngbAutofocus class="btn btn-primary btn-rounded"
         (click)="((this.addCourseForm.invalid)?checked=false:modal.close('Ok'))">Agregar </button>
-      <button type="button" class="btn btn-outline-secondary btn-rounded"
+      <button type="button" class="btn btn-danger btn-rounded"
         (click)="modal.dismiss('cancel')">Cancelar</button>
     </div>
   </ng-template>

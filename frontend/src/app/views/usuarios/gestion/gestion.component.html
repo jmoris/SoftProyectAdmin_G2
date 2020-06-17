@@ -356,11 +356,11 @@
     <div class="modal-body">
       <p><strong>¿Estas seguro de querer eliminar este usuario?</strong></p>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary btn-rounded"
-        (click)="modal.dismiss('cancel')">Cancelar</button>
-      <button type="button" ngbAutofocus class="btn btn-wide btn-danger btn-rounded"
+    <div alignt="rowHeight" class="modal-footer">
+      <button type="button" ngbAutofocus class="btn btn-primary btn-rounded"
         (click)="modal.close('Ok')">Borrar</button>
+        <button type="button" class="btn btn-danger btn-rounded"
+        (click)="modal.dismiss('cancel')">Cancelar</button>
     </div>
   </ng-template>
 
