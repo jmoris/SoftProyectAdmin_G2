@@ -14,7 +14,6 @@ export class ProjectsService {
   constructor(private http: HttpClient) { }
 
   insert(data): Observable<boolean> {
-
     return this.http.post<any>(`${env.apiUrl}/projects`, data);
   }
 

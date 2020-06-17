@@ -15,6 +15,8 @@ import { ConfirmationDialogComponent } from './views/core/confirmation-dialog/co
 import { NotifierOptions, NotifierModule } from 'angular-notifier';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { getSpanishPaginatorIntl } from './spanish-paginator-intl';
 
 /**
  * Custom angular notifier options
@@ -80,6 +82,7 @@ const customNotifierOptions: NotifierOptions = {
     NotifierModule.withConfig(customNotifierOptions)
   ],
   providers: [
+    { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
