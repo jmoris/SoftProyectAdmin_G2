@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ProjectService } from 'src/app/_services/project.service';
+import { ProjectsService } from 'src/app/_services/projects.service';
 
 @Component({
   selector: 'app-add-project',
@@ -18,7 +18,7 @@ export class AddProjectComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddProjectComponent>,
     @Inject(MAT_DIALOG_DATA) public data: String,
-    private projectService: ProjectService
+    private projectService: ProjectsService
   ) {
     this.form = new FormGroup({
       name: new FormControl("", [Validators.required]),
@@ -39,6 +39,11 @@ export class AddProjectComponent implements OnInit {
     let projectData = this.form.value;
     console.log('Info name: ' + projectData.name);
     this.dialogRef.close('Confirm');
+    console.log('what wea pasa');
+    let frm = this.form.value;
+    this.projectService.insert(frm).subscribe((resp:any) => {
+        console.log(resp);
+    });
     /*this.projectService.addProject(projectData).subscribe({
       next: result => {
         console.log(result);

@@ -36,5 +36,13 @@ export class ConfiguracionUsuarioComponent implements OnInit {
     );
   }
 
+  addUser(modal, event) {
+    event.target.parentElement.parentElement.blur();
+    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })
+        .result.then((result) => {
+
+        }, (reason) => {
+        });
+  }
 
 }
