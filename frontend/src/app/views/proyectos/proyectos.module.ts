@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
 import { CustomFormsModule } from 'ngx-custom-validators';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -15,6 +14,8 @@ import { GestionComponent } from './gestion/gestion.component';
 import { AddProjectComponent } from './add-project/add-project.component';
 import { MaterialModule } from 'src/app/material.module';
 import { DetailsProjectComponent } from './gestion/details-project/details-project.component';
+import { ProjectComponent } from './project/project.component';
+
 
 
 @NgModule({
@@ -29,8 +30,8 @@ import { DetailsProjectComponent } from './gestion/details-project/details-proje
     ProyectoRoutingModule,
     CustomFormsModule,
     TagInputModule,
-    MaterialModule
+    MaterialModule,
   ],
-  declarations: [GestionComponent, AddProjectComponent, DetailsProjectComponent]
+  declarations: [GestionComponent, AddProjectComponent, DetailsProjectComponent,ProjectComponent]
 })
 export class ProyectoModule { }

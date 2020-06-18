@@ -24,7 +24,7 @@
 
     <div class="row">
         <!-- ICON BG -->
-        <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let item of proyectos; let i = index">
+        <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let item of projects; let i = index">
             <div class="card card-profile-1 mb-4">
                 <div class="card-body">
                     <div class="text-right">
@@ -43,7 +43,7 @@
                               <p class="mb-1"><ngb-progressbar type="warning" [value]="25" height="4px"></ngb-progressbar></p>
                             </div>
                           </div>
-                        <button style="margin: 3px;" class="btn btn-primary btn-rounded" (click)="open(modalBasic)">Ver detalles</button>
+                        <button style="margin: 3px;" class="btn btn-primary btn-rounded" (click)="openDetails()">Ver detalles</button>
                         <button style="margin: 3px;" class="btn btn-danger btn-rounded" (click)="open(modalBasic)">Ver proyecto</button>
                     </div>
                 </div>
