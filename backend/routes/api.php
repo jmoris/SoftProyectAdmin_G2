@@ -21,10 +21,13 @@ Route::group(['middleware' => 'api'], function () {
     Route::get('logout', 'AuthController@logout');
 
     Route::get('users', 'UsersController@getUsuarios');
+    Route::get('students', 'UsersController@getEstudiantes');
     Route::get('users/{id}', 'UsersController@getUser');
     Route::post('users', 'UsersController@crearUsuario');
     Route::put('users/{id}', 'UsersController@editarUsuario');
     Route::delete('users/{id}', 'UsersController@eliminarUsuario');
+
+    Route::get('roles', 'ProjectsController@getRoles');
 
     Route::get('courses', 'CoursesController@getCursos');
     Route::get('courses/{id}', 'CoursesController@getCurso');
