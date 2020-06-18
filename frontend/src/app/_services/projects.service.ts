@@ -29,4 +29,8 @@ export class ProjectsService {
     return this.http.delete<any>(`${env.apiUrl}/projects/` + id);
   }
 
+  getRoles(){
+    return this.http.get<any>(`${env.apiUrl}/roles`);
+  }
+
 }

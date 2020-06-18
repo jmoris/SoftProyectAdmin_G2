@@ -109,7 +109,7 @@ class UsersController extends Controller
      */
     public function getEstudiantes()
     {
-        $array = User::where('profile', '=', 'student');
+        $array = User::where('profile', '=', 'student')->get();
         if(empty($array))
         {
             return response()->json([
