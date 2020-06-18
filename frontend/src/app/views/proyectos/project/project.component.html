@@ -549,7 +549,7 @@
 	<div class="modal-body">
 		<form>
 			<div class="row">
-				<div class="col-md-6 form-group mb-0">
+				<div class="col-md-4 form-group mb-0">
 					<label for="firstName">Codigo</label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -558,22 +558,19 @@
 						<input type="number" class="form-control" id="basic-url" aria-describedby="basic-addon3">
 					</div>
 				</div>
-				<div class="col-md-6 form-group mb-3">
+				<div class="col-md-4 form-group mb-3">
 					<label for="firstName">Estado</label>
 					<select class="form-control">
 						<option>Incompleto</option>
 						<option>Completo</option>
 					</select>
 				</div>
-				<div class="col-md-12">
-					<div class="card mb-4">
-						<div class="card-body">
-							<div class="card-title">Requerimientos de usuario</div>
-							<tag-input [formControl]="tagsCtrl1" (onSelect)="onSelect($event)" [modelAsStrings]="true"
-								theme='primary'>
-							</tag-input>
-						</div>
-					</div>
+				<div class="col-md-4 form-group mb-3">
+					<label for="firstName">Requerimiento de usuario</label>
+					<select class="form-control">
+						<option>RU001</option>
+						<option>RU002</option>
+					</select>
 				</div>
 				<div class="col-md-12 form-group mb-3">
 					<div class="input-group">
