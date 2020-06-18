@@ -6,8 +6,6 @@
 </div>
 
 <div class="separator-breadcrumb border-top"></div>
-
-
 <div class="row">
 	<div class="col-md-12">
 		<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
@@ -24,9 +22,9 @@
 												<h6 class="mb-2 text-muted">Requerimientos de usuario</h6>
 												<p class="mb-2 text-24 font-weight-light text-title">50%</p>
 												<p class="mb-1">
-													<ngb-progressbar type="success" [value]="50" height="10px"></ngb-progressbar>
+													<ngb-progressbar type="success" [value]="50" height="10px">
+													</ngb-progressbar>
 												</p>
-												
 											</div>
 										</div>
 									</div>
@@ -34,11 +32,11 @@
 										<div class="card mb-4 mt-4 mr-4">
 											<div class="card-body">
 												<h6 class="mb-2 text-muted">Requerimientos de sistema</h6>
-												<p class="mb-2 text-24 font-weight-light text-title " >50%</p>
+												<p class="mb-2 text-24 font-weight-light text-title ">50%</p>
 												<p class="mb-1">
-													<ngb-progressbar type="success" [value]="50" height="10px"></ngb-progressbar>
+													<ngb-progressbar type="success" [value]="50" height="10px">
+													</ngb-progressbar>
 												</p>
-												
 											</div>
 										</div>
 									</div>
@@ -48,54 +46,69 @@
 										<div class="card mb-4 ml-4 ">
 											<div class="card-body">
 												<div class="card-title">Equipo de trabajo </div>
-												<div class="d-flex align-items-center border-bottom-dotted-dim pb-3 mb-3">
-													<img class="avatar-md rounded mr-3" src="./assets/images/faces/2.jpg" alt="">
+												<div
+													class="d-flex align-items-center border-bottom-dotted-dim pb-3 mb-3">
+													<img class="avatar-md rounded mr-3"
+														src="./assets/images/faces/2.jpg" alt="">
 													<div class="flex-grow-1">
 														<h6 class="m-0">Jefe de proyecto</h6>
 														<p class="m-0 text-small text-muted">Jesus Moris.</p>
 													</div>
 													<div>
-														<button class="btn btn-outline-primary btn-rounded btn-sm"> + Info </button>
+														<button class="btn btn-outline-primary btn-rounded btn-sm"> +
+															Info </button>
 													</div>
 												</div>
-												<div class="d-flex align-items-center border-bottom-dotted-dim pb-3 mb-3">
-													<img class="avatar-md rounded mr-3" src="./assets/images/faces/2.jpg" alt="">
+												<div
+													class="d-flex align-items-center border-bottom-dotted-dim pb-3 mb-3">
+													<img class="avatar-md rounded mr-3"
+														src="./assets/images/faces/2.jpg" alt="">
 													<div class="flex-grow-1">
 														<h6 class="m-0">Scrum Master</h6>
 														<p class="m-0 text-small text-muted">Jesus Moris.</p>
 													</div>
 													<div>
-														<button class="btn btn-outline-primary btn-rounded btn-sm"> + Info </button>
+														<button class="btn btn-outline-primary btn-rounded btn-sm"> +
+															Info </button>
 													</div>
 												</div>
-												<div class="d-flex align-items-center border-bottom-dotted-dim pb-3 mb-3">
-													<img class="avatar-md rounded mr-3" src="./assets/images/faces/2.jpg" alt="">
+												<div
+													class="d-flex align-items-center border-bottom-dotted-dim pb-3 mb-3">
+													<img class="avatar-md rounded mr-3"
+														src="./assets/images/faces/2.jpg" alt="">
 													<div class="flex-grow-1">
 														<h6 class="m-0">Programador + Arquitecto </h6>
 														<p class="m-0 text-small text-muted">Jesus Moris.</p>
 													</div>
 													<div>
-														<button class="btn btn-outline-primary btn-rounded btn-sm"> + Info </button>
+														<button class="btn btn-outline-primary btn-rounded btn-sm"> +
+															Info </button>
 													</div>
 												</div>
-												<div class="d-flex align-items-center border-bottom-dotted-dim pb-3 mb-3">
-													<img class="avatar-md rounded mr-3" src="./assets/images/faces/2.jpg" alt="">
+												<div
+													class="d-flex align-items-center border-bottom-dotted-dim pb-3 mb-3">
+													<img class="avatar-md rounded mr-3"
+														src="./assets/images/faces/2.jpg" alt="">
 													<div class="flex-grow-1">
 														<h6 class="m-0">Diseñador </h6>
 														<p class="m-0 text-small text-muted">Jesus Moris.</p>
 													</div>
 													<div>
-														<button class="btn btn-outline-primary btn-rounded btn-sm"> + Info </button>
+														<button class="btn btn-outline-primary btn-rounded btn-sm"> +
+															Info </button>
 													</div>
 												</div>
-												<div class="d-flex align-items-center border-bottom-dotted-dim pb-3 mb-3">
-													<img class="avatar-md rounded mr-3" src="./assets/images/faces/2.jpg" alt="">
+												<div
+													class="d-flex align-items-center border-bottom-dotted-dim pb-3 mb-3">
+													<img class="avatar-md rounded mr-3"
+														src="./assets/images/faces/2.jpg" alt="">
 													<div class="flex-grow-1">
 														<h6 class="m-0">Tester </h6>
 														<p class="m-0 text-small text-muted">Jesus Moris.</p>
 													</div>
 													<div>
-														<button class="btn btn-outline-primary btn-rounded btn-sm"> + Info </button>
+														<button class="btn btn-outline-primary btn-rounded btn-sm"> +
+															Info </button>
 													</div>
 												</div>
 											</div>
@@ -106,7 +119,8 @@
 											<div class="card-body">
 												<div class="card-title">Casos de prueba</div>
 												<div class="col-md-12">
-													<div echarts [options]="chartPie1" [autoResize]="true" style="height: 200px;"></div>
+													<div echarts [options]="chartPie1" [autoResize]="true"
+														style="height: 200px;"></div>
 												</div>
 											</div>
 										</div>
@@ -142,7 +156,7 @@
 												</div>
 											</div>
 										</div>
-				
+
 										<div class="card o-hidden mb-4 mt-4 ml-4">
 											<div class="card-body text-center">
 												<div class="content">
@@ -151,17 +165,19 @@
 												</div>
 											</div>
 										</div>
-				
+
 										<div class="card o-hidden mb-4 ml-4 ">
 											<div class="card-body text-center">
 												<i class="i-Add-User"></i>
 												<div class="content">
-													<p class="text-muted mt-2 mb-0">Agregar Requerimiento de Usuario </p>
-													<button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Agregar</button>
+													<p class="text-muted mt-2 mb-0">Requerimiento de Usuario
+													</p>
+													<button _ngcontent-tkm-c169=""
+														class="btn btn-primary btn-rounded" (click)="addUserRequeriment(userRequerimentConfirmModal, $event)" >Nuevo</button>
 												</div>
 											</div>
 										</div>
-				
+
 									</div>
 									<div class="col-md-10">
 										<div class="card o-hidden mb-4 mt-4 mr-4">
@@ -169,25 +185,27 @@
 												class="material fullscreen" [columnMode]="'force'" [headerHeight]="50"
 												[footerHeight]="50" [rowHeight]="60" [scrollbarV]="true" [limit]="10"
 												[rows]="products$ | async">
-												<ngx-datatable-column name="photo" [maxWidth]="100">
+												<ngx-datatable-column name="photo" [maxWidth]="80">
 													<ng-template ngx-datatable-header-template>
 														Codigo
 													</ng-template>
-													<ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-														<img height="32px" width="32px" style="border-radius: 4px" [src]="value" alt="">
+													<ng-template ngx-datatable-cell-template let-value="value"
+														let-row="row">
+														<img height="32px" width="32px" style="border-radius: 4px"
+															[src]="value" alt="">
 													</ng-template>
 												</ngx-datatable-column>
-												<ngx-datatable-column name="name" [width]="300">
+												<ngx-datatable-column name="name" [width]="600">
 													<ng-template ngx-datatable-header-template>
-														Descripcion
+														Descripción
 													</ng-template>
 												</ngx-datatable-column>
-												<ngx-datatable-column name="category">
+												<ngx-datatable-column name="category" [maxWidth]="150">
 													<ng-template ngx-datatable-header-template>
 														Categoria
 													</ng-template>
 												</ngx-datatable-column>
-												<ngx-datatable-column name="subtitle">
+												<ngx-datatable-column name="subtitle" [maxWidth]="150">
 													<ng-template ngx-datatable-header-template>
 														Estatus
 													</ng-template>
@@ -237,8 +255,10 @@
 											<div class="card-body text-center">
 												<i class="i-Add-User"></i>
 												<div class="content">
-													<p class="text-muted mt-2 mb-0">Agregar Requerimiento de Software </p>
-													<button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Agregar</button>
+													<p class="text-muted mt-2 mb-0">Requerimiento de Software
+													</p>
+													<button _ngcontent-tkm-c169=""
+														class="btn btn-primary btn-rounded" (click)="addSoftwareRequeriment(softwareRequerimentConfirmModal, $event)">Nuevo</button>
 												</div>
 											</div>
 										</div>
@@ -249,30 +269,32 @@
 												class="material fullscreen" [columnMode]="'force'" [headerHeight]="50"
 												[footerHeight]="50" [rowHeight]="60" [scrollbarV]="true" [limit]="10"
 												[rows]="products$ | async">
-												<ngx-datatable-column name="photo" [maxWidth]="100">
+												<ngx-datatable-column name="photo" [maxWidth]="80">
 													<ng-template ngx-datatable-header-template>
 														Codigo
 													</ng-template>
-													<ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-														<img height="32px" width="32px" style="border-radius: 4px" [src]="value" alt="">
+													<ng-template ngx-datatable-cell-template let-value="value"
+														let-row="row">
+														<img height="32px" width="32px" style="border-radius: 4px"
+															[src]="value" alt="">
 													</ng-template>
 												</ngx-datatable-column>
 												<ngx-datatable-column name="subtitle">
+													<ng-template ngx-datatable-header-template>
+														Descripción
+													</ng-template>
+												</ngx-datatable-column>
+												<ngx-datatable-column name="name" [maxWidth]="100">
 													<ng-template ngx-datatable-header-template>
 														Req - Usuario
 													</ng-template>
 												</ngx-datatable-column>
-												<ngx-datatable-column name="name" [width]="300">
-													<ng-template ngx-datatable-header-template>
-														Descripcion
-													</ng-template>
-												</ngx-datatable-column>
-												<ngx-datatable-column name="category">
+												<ngx-datatable-column name="category" [maxWidth]="150" >
 													<ng-template ngx-datatable-header-template>
 														Categoria
 													</ng-template>
 												</ngx-datatable-column>
-												<ngx-datatable-column name="subtitle">
+												<ngx-datatable-column name="subtitle" [maxWidth]="150">
 													<ng-template ngx-datatable-header-template>
 														Estatus
 													</ng-template>
@@ -322,8 +344,9 @@
 											<div class="card-body text-center">
 												<i class="i-Add-User"></i>
 												<div class="content">
-													<p class="text-muted mt-2 mb-0">Agregar Caso de prueba  </p>
-													<button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded">Agregar</button>
+													<p class="text-muted mt-2 mb-0">Caso de prueba </p>
+													<button _ngcontent-tkm-c169=""
+														class="btn btn-primary btn-rounded" (click)="addTestCase(testCaseConfirmModal, $event)">Agregar</button>
 												</div>
 											</div>
 										</div>
@@ -334,12 +357,14 @@
 												class="material fullscreen" [columnMode]="'force'" [headerHeight]="50"
 												[footerHeight]="50" [rowHeight]="60" [scrollbarV]="true" [limit]="10"
 												[rows]="products$ | async">
-												<ngx-datatable-column name="photo" [maxWidth]="100">
+												<ngx-datatable-column name="photo" [maxWidth]="80">
 													<ng-template ngx-datatable-header-template>
 														Codigo
 													</ng-template>
-													<ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-														<img height="32px" width="32px" style="border-radius: 4px" [src]="value" alt="">
+													<ng-template ngx-datatable-cell-template let-value="value"
+														let-row="row">
+														<img height="32px" width="32px" style="border-radius: 4px"
+															[src]="value" alt="">
 													</ng-template>
 												</ngx-datatable-column>
 												<ngx-datatable-column name="name" [width]="300">
@@ -347,12 +372,12 @@
 														Descripcion
 													</ng-template>
 												</ngx-datatable-column>
-												<ngx-datatable-column name="category">
+												<ngx-datatable-column name="category" [maxWidth]="150">
 													<ng-template ngx-datatable-header-template>
 														Fecha
 													</ng-template>
 												</ngx-datatable-column>
-												<ngx-datatable-column name="subtitle">
+												<ngx-datatable-column name="subtitle" [maxWidth]="150">
 													<ng-template ngx-datatable-header-template>
 														Estatus
 													</ng-template>
@@ -368,10 +393,217 @@
 			</li>
 		</ul>
 		<div [ngbNavOutlet]="nav" class="mt-2"></div>
-
-
 	</div>
+
+<!-- VENTANA MODAL QUE SE DESPLEGA PARA AGREGA UN REQUERIMIENTO DE USUARIO-->
+<ng-template #userRequerimentConfirmModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-title">Nuevo requerimiento de usuario</h4>
+		<button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+			(click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<form>
+			<div class="row">
+				<div class="col-md-4 form-group mb-0">
+					<label for="firstName">Codigo</label>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3">RU</span>
+						</div>
+						<input type="number" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+					</div>
+				</div>
+				<div class="col-md-4 form-group mb-0">
+					<label for="firstName"> Prioridad </label>
+					<select class="form-control">
+						<option>Option 1</option>
+						<option>Option 1</option>
+						<option>Option 1</option>
+					</select>
+				</div>
+				<div class="col-md-4 form-group mb-0">
+					<label for="firstName"> Estabilidad </label>
+					<select class="form-control">
+						<option>Option 1</option>
+						<option>Option 1</option>
+						<option>Option 1</option>
+					</select>
+				</div>
+				<div class="col-md-4 form-group mb-3">
+					<label for="firstName">Estado</label>
+					<select class="form-control">
+						<option>Incompleto</option>
+						<option>Completo</option>
+					</select>
+				</div>
+				<div class="col-md-4 form-group mb-3">
+					<label for="firstName">Costo</label>
+					<input type="number" class="form-control" id="firstName" placeholder="1">
+				</div>
+				<div class="col-md-12 form-group mb-3">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Descripción</span>
+						</div>
+						<textarea class="form-control" aria-label="With textarea"></textarea>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-primary m-1">Agregar</button>
+		<button type="button" class="btn btn-secondary m-1">Cancelar</button>
+	</div>
+</ng-template>
+
+<!-- VENTANA MODAL QUE SE DESPLEGA PARA AGREGA UN REQUERIMIENTO DE SOFTWARE-->
+<ng-template #softwareRequerimentConfirmModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-title">Nuevo requerimiento de Software</h4>
+		<button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+			(click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<form>
+			<div class="row">
+				<div class="col-md-4 form-group mb-0">
+					<label for="firstName">Codigo</label>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3">RS</span>
+						</div>
+						<input type="number" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+					</div>
+				</div>
+				<div class="col-md-4 form-group mb-0">
+					<label for="firstName"> Prioridad </label>
+					<select class="form-control">
+						<option>Option 1</option>
+						<option>Option 1</option>
+						<option>Option 1</option>
+					</select>
+				</div>
+				<div class="col-md-4 form-group mb-0">
+					<label for="firstName"> Estabilidad </label>
+					<select class="form-control">
+						<option>Option 1</option>
+						<option>Option 1</option>
+						<option>Option 1</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 form-group mb-3">
+					<label for="firstName">Estado</label>
+					<select class="form-control">
+						<option>Incompleto</option>
+						<option>Completo</option>
+					</select>
+				</div>
+				<div class="col-md-4 form-group mb-3">
+					<label for="firstName">Costo</label>
+					<input type="number" class="form-control" id="firstName" placeholder="1">
+				</div>
+				<div class="col-md-4 form-group mb-3">
+					<label for="firstName">Referencia Requerimiento de usuario </label>
+					<select class="form-control">
+						<option>RU001</option>
+						<option>RU002</option>
+						<option>RU003</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 form-group mb-3">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Descripción</span>
+						</div>
+						<textarea class="form-control" aria-label="With textarea"></textarea>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-primary m-1">Agregar</button>
+		<button type="button" class="btn btn-secondary m-1">Cancelar</button>
+	</div>
+</ng-template>
+
+<!-- VENTANA MODAL QUE SE DESPLEGA PARA AGREGA UN CASO DE PRUEBA -->
+<ng-template #testCaseConfirmModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-title">Nuevo caso de prueba </h4>
+		<button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+			(click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<form>
+			<div class="row">
+				<div class="col-md-6 form-group mb-0">
+					<label for="firstName">Codigo</label>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3">TESTECASE-</span>
+						</div>
+						<input type="number" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+					</div>
+				</div>
+				<div class="col-md-6 form-group mb-3">
+					<label for="firstName">Estado</label>
+					<select class="form-control">
+						<option>Incompleto</option>
+						<option>Completo</option>
+					</select>
+				</div>
+				<div class="col-md-12">
+					<div class="card mb-4">
+						<div class="card-body">
+							<div class="card-title">Requerimientos de usuario</div>
+							<tag-input [formControl]="tagsCtrl1" (onSelect)="onSelect($event)" [modelAsStrings]="true"
+								theme='primary'>
+							</tag-input>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12 form-group mb-3">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Resultado Aceptable </span>
+						</div>
+						<textarea class="form-control" aria-label="With textarea"></textarea>
+					</div>
+				</div>
+
+				<div class="col-md-12 form-group mb-3">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Resultado optimo</span>
+						</div>
+						<textarea class="form-control" aria-label="With textarea"></textarea>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-primary m-1" (click)="imprimir()">Agregar</button>
+		<button type="button" class="btn btn-secondary m-1">Cancelar</button>
+	</div>
+</ng-template>
+
 </div>
+
+
   
 
 
