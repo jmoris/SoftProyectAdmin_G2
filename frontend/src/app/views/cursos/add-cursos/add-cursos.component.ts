@@ -19,9 +19,11 @@ export class AddCursosComponent implements OnInit {
   usuarios: any;
 
 
-  constructor(    public dialogRef: MatDialogRef<AddCursosComponent>,
+  constructor(    
+    public dialogRef: MatDialogRef<AddCursosComponent>,
     @Inject(MAT_DIALOG_DATA) public data: String,
-    private usersService: CursosService) {
+    
+    private cursosService: CursosService) {
     this.form = new FormGroup({
       name: new FormControl("", [Validators.required]),
       year: new FormControl("", [Validators.required]),
@@ -35,7 +37,7 @@ export class AddCursosComponent implements OnInit {
     }
 
     loadData() {
-      this.usersService.getAll().subscribe(
+      this.cursosService.getAll().subscribe(
         (resp: any) => {
           this.usuarios = resp;
         }
@@ -51,13 +53,13 @@ export class AddCursosComponent implements OnInit {
         return;
       }
   
-      let userData = this.form.value;
+      let cursoData = this.form.value;
       console.log('nombre: ' + cursoData.name);
       console.log('year: ' + cursoData.year);
       console.log('semester: '+ cursoData.semester);
       console.log('teacher: '+ cursoData.teacher);
   
-      this.usersService.insert(userData).subscribe({
+      this.cursosService.insert(cursoData).subscribe({
         next: result => {
           console.log(result);
           this.dialogRef.close('Confirm');
@@ -76,6 +78,5 @@ export class AddCursosComponent implements OnInit {
       return this.form.get(controlName).hasError(errorName);
     };
   
-  }
 
 }
