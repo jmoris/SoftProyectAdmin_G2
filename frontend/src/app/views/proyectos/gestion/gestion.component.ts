@@ -62,7 +62,7 @@ export class GestionComponent implements OnInit {
 
     openAddDialog(): void {
         let dialogRef = this.dialog.open(AddProjectComponent, {
-            width: '800px',
+            width: '850px',
             data: 'This text is passed into the dialog',
             disableClose: true,
             autoFocus: true

@@ -6,6 +6,7 @@ use App\Project;
 use App\Role;
 use App\RoleUser;
 use App\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -206,5 +207,50 @@ class ProjectsController extends Controller
 
     public function getRoles(Request $request){
         return Role::all();
+    }
+
+        /**
+     * Un docente crea un proyecto
+     */
+    public function createAndAdd(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'year' => 'required',
+            'semester' => 'required',
+            'description' => 'required',
+            'students' => 'required|array',
+        ]);
+
+        if ($validator->fails()) {
+            return ['errors'=>$validator->errors()];
+        }
+
+        $projecto = new Project();
+        $projecto->name = $request->name;
+        $projecto->description = $request->description;
+        $projecto->year = $request->year;
+        $projecto->semester = $request->semester;
+
+        try {
+            $projecto->save();
+            $n = 0;
+            foreach($request->students as $student){
+                $role = Role::find($student['role_id']);
+                $user = User::find($student['user_id']);
+                $user->roles()->sync($role);
+
+                $role_user = RoleUser::where('user_id', $user->id)->where('role_id', $role->id)->first();
+                $projecto->user_roles()->sync($role_user, false);
+                $n++;
+            }
+        }catch(Exception $ex){
+            return response()->json([
+                'status' => false,
+                'msg' => 'El proyecto no se pudo crear.'
+            ]);
+        }
+
+        return response()->json(["status" => true, "enrolled" => $n, "msg" => "Proyecto creado correctamente."]);
     }
 }
