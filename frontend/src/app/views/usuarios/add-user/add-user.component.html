@@ -94,9 +94,8 @@
             </div>
         </form>
     </mat-dialog-content>
-    <hr />
-    <mat-dialog-actions>
-        <button mat-raised-button (click)="onCloseConfirm()" [disabled]="form.invalid">Agregar</button>
-        <button mat-raised-button (click)="onCloseCancel()">Cancelar</button>
+    <mat-dialog-actions class="modal-footer">
+            <button class="btn btn-primary btn-rounded" mat-raised-button (click)="onCloseConfirm()" [disabled]="form.invalid">Agregar</button>
+            <button class="btn btn-danger btn-rounded" mat-raised-button (click)="onCloseCancel()">Cancelar</button>
     </mat-dialog-actions>
 </div>

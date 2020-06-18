@@ -203,4 +203,8 @@ class ProjectsController extends Controller
         return ($proyecto->user_roles()->detach($buscado))?response()->json(['status' => 'ok']):response()->json(['status' => 'failed']);
 
     }
+
+    public function getRoles(Request $request){
+        return Role::all();
+    }
 }
