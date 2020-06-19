@@ -20,6 +20,10 @@ export class UsuariosService {
         return this.http.get<any>(`${environment.apiUrl}/students`);
     }
 
+    getTeachers() {
+        return this.http.get<any>(`${environment.apiUrl}/teachers`);
+    }
+
     insert(data) {
         return this.http.post<any>(`${environment.apiUrl}/users`, data);
     }

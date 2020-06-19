@@ -27,7 +27,7 @@
         <i class="i-Add-User"></i>
         <div class="content">
           <p class="text-muted mt-2 mb-0">Nuevo Usuario</p>
-          <button type="button" class="btn btn-primary btn-rounded m-1" (click)="addUser(userAddConfirmModal,$event)">Agregar</button>
+          <button type="button" class="btn btn-primary btn-rounded m-1" (click)="openAddDialog()">Agregar</button>
         </div>
       </div>
     </div>
@@ -40,17 +40,17 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> R.U.N </th>
           <td mat-cell *matCellDef="let element"> {{element.rut}} </td>
         </ng-container>
-      
+
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
           <td mat-cell *matCellDef="let element"> {{element.name}} </td>
         </ng-container>
-      
+
         <ng-container matColumnDef="surname">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
           <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
         </ng-container>
-      
+
         <ng-container matColumnDef="email">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
           <td mat-cell *matCellDef="let element"> {{element.email}} </td>
@@ -67,20 +67,20 @@
             </button>
           </td>
         </ng-container>
-      
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      
+
       <!--Progress spinner -->
       <mat-card *ngIf="isDataLoading" style="display: flex; justify-content: center; align-items: center">
         <mat-progress-spinner color="primary" mode="indeterminate">
         </mat-progress-spinner>
       </mat-card>
-      
+
       <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" class="mat-elevation-z8">
       </mat-paginator>
-  
+
   <!-- VENTANA MODAL QUE SE DESPLEGA PARA CONFIRMAR LA ELIMINACIÓN DE UN DATO-->
   <ng-template #deleteConfirmModal let-modal>
     <div class="modal-header">
@@ -164,7 +164,7 @@
           <label style="color:red;"><b>* Todos los campos deben ser completados.</b></label>
         </div>
       </form>
-  
+
     </div>
     <div class="modal-footer">
       <button type="button" ngbAutofocus class="btn btn-wide btn-success btn-rounded"

@@ -144,6 +144,7 @@ class CoursesController extends Controller
             'name' => 'required',
             'year' => 'required',
             'semester' => 'required',
+            'teacher_id' => 'required',
             'students' => 'required|array',
         ]);
 
@@ -155,18 +156,20 @@ class CoursesController extends Controller
         $curso->name = $request->name;
         $curso->year = $request->year;
         $curso->semester = $request->semester;
+        $curso->idUser = $request->teacher_id;
 
         try {
             $curso->save();
             $n = 0;
             foreach($request->students as $student){
-                $curso->users()->sync($student, false);
+                $curso->users()->sync($student['user_id'], false);
                 $n++;
             }
         }catch(Exception $ex){
             return response()->json([
                 'status' => false,
-                'msg' => 'El proyecto no se pudo crear.'
+                'msg' => 'El curso no se pudo crear.',
+                'error' => $ex->getMessage()
             ]);
         }
 

@@ -22,4 +22,8 @@ export class CursosService {
     delete(id){
         return this.http.delete<any>(`${environment.apiUrl}/courses/` + id);
     }
+
+    insertComplete(data){
+        return this.http.post<any>(`${environment.apiUrl}/courses/createmass`, data);
+    }
 }

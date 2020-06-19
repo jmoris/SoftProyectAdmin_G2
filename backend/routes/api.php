@@ -23,6 +23,7 @@ Route::group(['middleware' => 'api'], function () {
 
     Route::get('users', 'UsersController@getUsuarios');
     Route::get('students', 'UsersController@getEstudiantes');
+    Route::get('teachers', 'UsersController@getProfesores');
     Route::get('users/{id}', 'UsersController@getUser');
     Route::post('users', 'UsersController@crearUsuario');
     Route::put('users/{id}', 'UsersController@editarUsuario');

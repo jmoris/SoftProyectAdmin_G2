@@ -4,7 +4,6 @@
         <div class="breadcrumb col-md-9">
             <h1>Proyectos</h1>
             <ul>
-                <li><a href="">Dashboard</a></li>
                 <li>Proyectos</li>
             </ul>
 
@@ -35,7 +34,7 @@
                             <img src="assets/images/faces/6.jpg" alt="">
                         </div>
                         <h5 class="m-0">{{ item.scrum_master }}</h5>
-                        <p class="mt-0">{{ (item.project_manager) ? item.project_manager.name : 'No asignado' }}</p>
+                        <p class="mt-0">{{ (item.project_manager) ? item.project_manager.name + " " + item.project_manager.surname : 'No asignado' }}</p>
                         <div class="card mb-4">
                             <div class="card-body" style="background-color: rgb(245, 246, 252);">
                               <h5 class="mb-2 text-muted">{{ item.name }}</h5>

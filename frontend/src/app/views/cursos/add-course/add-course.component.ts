@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
+import { CursosService } from 'src/app/_services/cursos.service';
 
 @Component({
   selector: 'app-add-course',
@@ -22,7 +23,6 @@ export class AddCourseComponent implements OnInit {
   isCompleted: boolean;
   asignarForm: FormGroup;
   currentYear: number = new Date().getFullYear();;
-  roles:any = [];
   estudiantes: any = [];
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
   dataSource2: MatTableDataSource<any> = new MatTableDataSource<any>();
@@ -33,7 +33,7 @@ export class AddCourseComponent implements OnInit {
   ColumnMode = ColumnMode;
   SelectionType = SelectionType;
   selection = new SelectionModel<any>(true, []);
-
+    teachers:any= [];
   @ViewChild('sort1') sort : MatSort;
   @ViewChild('sort2') sort2 : MatSort;
   @ViewChild('paginator') paginator : MatPaginator;
@@ -42,7 +42,7 @@ export class AddCourseComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddCourseComponent>,
     @Inject(MAT_DIALOG_DATA) public data: String,
-    private projectService: ProjectsService,
+    private cursosService: CursosService,
     private userService: UsuariosService,
     private formBuilder: FormBuilder
   ) {
@@ -56,47 +56,22 @@ export class AddCourseComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
           this.isDataLoading = false;
     });
-    this.projectService.getRoles().subscribe((data) => {
-        this.roles = data;
+    this.userService.getTeachers().subscribe((data) => {
+        this.teachers = data;
     });
     this.form = new FormGroup({
       name: new FormControl("", [Validators.required]),
-      description: new FormControl("", [Validators.required]),
+      teacher_id: new FormControl("", [Validators.required]),
       year: new FormControl(this.currentYear, [Validators.required]),
       semester: new FormControl("", [Validators.required]),
     });
     this.seleccionarForm = new FormGroup({
         usuarios: new FormArray([], [Validators.required, Validators.minLength(1)])
     });
-    this.asignarForm = new FormGroup({
-        usuarios: new FormArray([], [Validators.required, Validators.minLength(this.dataSource2.data.length)])
-      });
   }
 
 
   ngOnInit(): void {
-  }
-
-  onCloseConfirm() {
-    if (this.form.invalid) {
-      (<any>Object).values(this.form.controls).forEach(control => {
-        control.markAsTouched();
-      });
-      return;
-    }
-    let projectData = this.form.value;
-    console.log('Info name: ' + projectData.name);
-    this.projectService.insert(projectData).subscribe({
-      next: result => {
-        console.log(result);
-
-      },
-      error: result => { }
-    });
-  }
-
-  onCloseCancel() {
-    this.dialogRef.close("Cancel");
   }
 
   public hasError = (controlName: string, errorName: string) => {
@@ -104,22 +79,14 @@ export class AddCourseComponent implements OnInit {
   };
 
   onStep1Next(e) {}
-  onStep2Next(e) {
-    this.dataSource2.data = this.selection.selected;
-    this.dataSource2.sort = this.sort2;
-    this.dataSource2.paginator = this.paginator2;
-    this.asignarForm = new FormGroup({
-        usuarios: new FormArray([], [Validators.required, Validators.minLength(this.dataSource2.data.length)])
-      });
-  }
 
   onComplete(e) {
-      let frm = this.form.value;
-      frm.students = this.asignarForm.value.usuarios;
-      this.projectService.insertComplete(frm).subscribe((data) => {
-          console.log(data);
-          this.dialogRef.close('Confirm');
-      })
+        let frm = this.form.value;
+        frm.students = this.seleccionarForm.controls.usuarios.value;
+        this.cursosService.insertComplete(frm).subscribe((data) => {
+            console.log(data);
+            this.dialogRef.close('Confirm');
+        });
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -153,26 +120,5 @@ export class AddCourseComponent implements OnInit {
         usersControl.removeAt(usersControl.value.findIndex(student => student.id === row.id))
     }
   }
-
-  searchById(id){
-    let usuarios : any = this.seleccionarForm.controls.usuarios.value;
-    let search : any = null;
-    usuarios.forEach(element => {
-        if (element.user_id==id){
-            search = element;
-        }
-    });
-    return search;;
-  }
-
-    selectRol(user, rol){
-        let searched = this.searchById(user.id);
-        searched.role_id = rol.id;
-        let usersControl = <FormArray>this.asignarForm.controls.usuarios;
-        usersControl.push(this.formBuilder.group({
-            user_id: new FormControl(searched.user_id, [Validators.required]),
-            role_id: new FormControl(searched.role_id, [Validators.required])
-        }));
-    }
 
 }
