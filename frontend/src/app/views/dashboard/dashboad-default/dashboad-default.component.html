@@ -1,5 +1,4 @@
 <div class="">
-
     <div class="row">
         <div class="breadcrumb col-md-9">
             <h1>Dashboard</h1>
@@ -9,170 +8,111 @@
         </div>
     </div>
     <div class="separator-breadcrumb border-top"></div>
-
     <div class="row">
-        <div class="col-lg-12 col-md-12">
+        <div class="col-lg-8 col-md-12">
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="card-title">Usuarios</div>
                     <div class="row">
-                        <div class="col-lg-8 col-md-12">
-                            <!-- CARD ICON -->
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="card card-icon mb-4">
-                                    <div class="card-body text-center">
-                                        <i class="i-Add-User"></i>
-                                        <p class="text-muted mt-2 mb-2">Administradores</p>
-                                        <p class="text-primary text-24 line-height-1 m-0">{{ info.usuarios.admin }}</p>
-                                    </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="card card-icon mb-4">
+                                <div class="card-body text-center">
+                                    <i class="i-Administrator"></i>
+                                    <p class="text-muted mt-2 mb-2">Administradores</p>
+                                    <p class="text-primary text-24 line-height-1 m-0">{{ info.usuarios.admin }}</p>
                                 </div>
                             </div>
-
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="card card-icon mb-4">
-                                    <div class="card-body text-center">
-                                        <i class="i-Find-User"></i>
-                                        <p class="text-muted mt-2 mb-2">Docentes</p>
-                                        <p class="text-primary text-24 line-height-1 m-0">{{ info.usuarios.teacher }}</p>
-                                    </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="card card-icon mb-4">
+                                <div class="card-body text-center">
+                                    <i class="i-Business-Mens"></i>
+                                    <p class="text-muted mt-2 mb-2">Docentes</p>
+                                    <p class="text-primary text-24 line-height-1 m-0">{{ info.usuarios.teacher }}</p>
                                 </div>
                             </div>
-
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="card card-icon mb-4">
-                                    <div class="card-body text-center">
-                                        <i class="i-Find-User"></i>
-                                        <p class="text-muted mt-2 mb-2">Estudiantes</p>
-                                        <p class="text-primary text-24 line-height-1 m-0">{{ info.usuarios.student }}</p>
-                                    </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="card card-icon mb-4">
+                                <div class="card-body text-center">
+                                    <i class="i-Business-Mens"></i>
+                                    <p class="text-muted mt-2 mb-2">Estudiantes</p>
+                                    <p class="text-primary text-24 line-height-1 m-0">{{ info.usuarios.student }}</p>
                                 </div>
-                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 col-md-12">
+        <div class="col-lg-4 col-sm-12">
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="card-title">Proyectos</div>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-12">
-                            <!-- CARD ICON -->
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="card card-icon mb-4">
-                                    <div class="card-body text-center">
-                                        <i class="i-Add-User"></i>
-                                        <p class="text-muted mt-2 mb-2">Totales</p>
-                                        <p class="text-primary text-24 line-height-1 m-0">{{ info.proyectos[1].inactivos + info.proyectos[0].activos}}</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="card card-icon mb-4">
-                                    <div class="card-body text-center">
-                                        <i class="i-Find-User"></i>
-                                        <p class="text-muted mt-2 mb-2">En progreso</p>
-                                        <p class="text-primary text-24 line-height-1 m-0">{{ info.proyectos[0].activos }}</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="card card-icon mb-4">
-                                    <div class="card-body text-center">
-                                        <i class="i-Find-User"></i>
-                                        <p class="text-muted mt-2 mb-2">Finalinados</p>
-                                        <p class="text-primary text-24 line-height-1 m-0">{{ info.proyectos[1].inactivos }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div echarts [options]="salesChartPie" [autoResize]="true" style="height: 182px;"></div>
+        
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12 col-md-12">
+        <div class="col-lg-4 col-sm-12">
             <div class="card mb-4">
-                <div class="card-body ">
+                <div class="card-body">
+                    <div class="card-title">Cursos</div>
+                    <div echarts [options]="salesChartPie" [autoResize]="true" style="height: 182px;"></div>
+        
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8 col-md-12">
+            <div class="card mb-4">
+                <div class="card-body">
                     <div class="card-title">Cursos</div>
                     <div class="row">
-                        <div class="col-lg-4 col-md-12">
-                            <!-- CARD ICON -->
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="card card-icon mb-4">
-                                    <div class="card-body text-center">
-                                        <i class="i-Add-User"></i>
-                                        <p class="text-muted mt-2 mb-2">Creados</p>
-                                        <p class="text-primary text-24 line-height-1 m-0">{{ info.cursos[1].inactivos + info.cursos[0].activos}}</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="card card-icon mb-4">
-                                    <div class="card-body text-center">
-                                        <i class="i-Find-User"></i>
-                                        <p class="text-muted mt-2 mb-2">Activos</p>
-                                        <p class="text-primary text-24 line-height-1 m-0">{{ info.cursos[0].activos }}</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="card card-icon mb-4">
-                                    <div class="card-body text-center">
-                                        <i class="i-Find-User"></i>
-                                        <p class="text-muted mt-2 mb-2">Finalizados</p>
-                                        <p class="text-primary text-24 line-height-1 m-0">{{ info.cursos[1].inactivos }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                                <div class="col-lg-4 col-md-6 col-sm-6">
-                                    <div class="card card-icon mb-4">
-                                        <div class="card-body text-center">
-                                            <i class="i-Add-User"></i>
-                                            <p class="text-muted mt-2 mb-2">Totales</p>
-                                            <p class="text-primary text-24 line-height-1 m-0">-</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-6 col-sm-6">
-                                    <div class="card card-icon mb-4">
-                                        <div class="card-body text-center">
-                                            <i class="i-Find-User"></i>
-                                            <p class="text-muted mt-2 mb-2">Trabajando</p>
-                                            <p class="text-primary text-24 line-height-1 m-0">-</p>
-                                        </div>
-                                    </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-icon mb-4">
+                                <div class="card-body text-center">
+                                    <i class="i-Library"></i>
+                                    <p class="text-muted mt-2 mb-2">Totales</p>
+                                    <p class="text-primary text-24 line-height-1 m-0">{{ info.usuarios.admin }}</p>
                                 </div>
                             </div>
                         </div>
-
-
-                        
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-icon mb-4">
+                                <div class="card-body text-center">
+                                    <i class="i-Close-Window"></i>
+                                    <p class="text-muted mt-2 mb-2">Finalizados</p>
+                                    <p class="text-primary text-24 line-height-1 m-0">{{ info.usuarios.teacher }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-icon mb-4">
+                                <div class="card-body text-center">
+                                    <i class="i-Book"></i>
+                                    <p class="text-muted mt-2 mb-2">Activos</p>
+                                    <p class="text-primary text-24 line-height-1 m-0">{{ info.usuarios.student }}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+    </div>
+
+
+
+    
+  
     </div>
     
 
-    
-    
-</div>
+
 
 
 
