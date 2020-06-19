@@ -39,8 +39,6 @@ export class DashboadDefaultComponent implements OnInit {
     }
 
     ngOnInit() {
-
-        
         this.salesChartPie = {
             color: ['#62549c', '#7566b5', '#7d6cbb', '#8877bd', '#9181bd', '#6957af'],
             tooltip: {
