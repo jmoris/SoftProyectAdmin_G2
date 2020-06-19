@@ -13,6 +13,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 Route::post('login', 'AuthController@login');
 Route::post('register', 'AuthController@register');
@@ -35,6 +36,8 @@ Route::group(['middleware' => 'api'], function () {
     Route::put('courses/{id}', 'CoursesController@editarCurso');
     Route::delete('courses/{id}', 'CoursesController@eliminarCurso');
     Route::post('courses/assign', 'CoursesController@asignarProfesorACurso');
+    Route::post('courses/createmass', 'CoursesController@createAndAdd');
+    Route::get('courses/list/{id}', 'CoursesController@getUserList');
 
     Route::get('projects', 'ProjectsController@getProyectos');
     Route::get('projects/{id}', 'ProjectsController@getProyecto');
@@ -45,11 +48,33 @@ Route::group(['middleware' => 'api'], function () {
     Route::get('projects/list/{id}', 'ProjectsController@getAlumnosProyecto');
     Route::delete('projects/detach', 'ProjectsController@eliminarAlumnoDeUnProyecto');
     Route::post('projects/createmass', 'ProjectsController@createAndAdd');
+    Route::get('projects/getpm/{id}', 'ProjectsController@getJefeProyecto');
+
+    Route::get('info', function(){
+
+        $results = DB::select( DB::raw("SELECT COUNT(profile) as count, profile FROM users GROUP BY profile;") );
+
+        $cursos_activos = DB::select( DB::raw("SELECT count(*) as activos FROM courses WHERE deleted_at IS NULL;") );
+        $cursos_inactivos = DB::select( DB::raw("SELECT count(*) as inactivos FROM courses WHERE deleted_at IS NOT NULL;") );
+
+        $proyectos_activos = DB::select( DB::raw("SELECT count(*) as activos FROM projects WHERE deleted_at IS NULL;") );
+        $proyectos_inactivos = DB::select( DB::raw("SELECT count(*) as inactivos FROM projects WHERE deleted_at IS NOT NULL;") );
+
+        return response()->json([
+            "usuarios" => $results,
+            "cursos" => [
+                $cursos_activos[0],
+                $cursos_inactivos[0]
+            ],
+            "proyectos" => [
+                $proyectos_activos[0],
+                $proyectos_inactivos[0]
+            ],
+        ]);
+    });
 
 
     Route::get('user', function(Request $request){
-       // $token = Str::substr($request->header('Authorization', ''), 7);
-        //$user = JWTAuth::toUser($token);
         return Auth::user();
     });
 

@@ -4,10 +4,10 @@ use App\Role;
 use App\User;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class SeederInicial extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
@@ -43,5 +43,6 @@ class DatabaseSeeder extends Seeder
         $user->enrollment = "201540701";
         $user->profile = "admin";
         $user->save();
+
     }
 }

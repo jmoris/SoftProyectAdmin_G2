@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('rut');
             $table->string('profile');
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

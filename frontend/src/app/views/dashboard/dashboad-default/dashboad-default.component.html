@@ -24,31 +24,31 @@
                                 <div class="card card-icon mb-4">
                                     <div class="card-body text-center">
                                         <i class="i-Add-User"></i>
-                                        <p class="text-muted mt-2 mb-2">Docentes</p>
-                                        <p class="text-primary text-24 line-height-1 m-0">21</p>
+                                        <p class="text-muted mt-2 mb-2">Administradores</p>
+                                        <p class="text-primary text-24 line-height-1 m-0">{{ info.usuarios.admin }}</p>
                                     </div>
                                 </div>
                             </div>
-                        
+
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="card card-icon mb-4">
                                     <div class="card-body text-center">
                                         <i class="i-Find-User"></i>
-                                        <p class="text-muted mt-2 mb-2">Ayudantes</p>
-                                        <p class="text-primary text-24 line-height-1 m-0">421</p>
+                                        <p class="text-muted mt-2 mb-2">Docentes</p>
+                                        <p class="text-primary text-24 line-height-1 m-0">{{ info.usuarios.teacher }}</p>
                                     </div>
                                 </div>
                             </div>
-                        
+
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="card card-icon mb-4">
                                     <div class="card-body text-center">
                                         <i class="i-Find-User"></i>
                                         <p class="text-muted mt-2 mb-2">Estudiantes</p>
-                                        <p class="text-primary text-24 line-height-1 m-0">4021</p>
+                                        <p class="text-primary text-24 line-height-1 m-0">{{ info.usuarios.student }}</p>
                                     </div>
                                 </div>
-                            </div>  
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -68,30 +68,30 @@
                                     <div class="card-body text-center">
                                         <i class="i-Add-User"></i>
                                         <p class="text-muted mt-2 mb-2">Totales</p>
-                                        <p class="text-primary text-24 line-height-1 m-0">121</p>
+                                        <p class="text-primary text-24 line-height-1 m-0">{{ info.proyectos[1].inactivos + info.proyectos[0].activos}}</p>
                                     </div>
                                 </div>
                             </div>
-                        
+
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="card card-icon mb-4">
                                     <div class="card-body text-center">
                                         <i class="i-Find-User"></i>
                                         <p class="text-muted mt-2 mb-2">En progreso</p>
-                                        <p class="text-primary text-24 line-height-1 m-0">21</p>
+                                        <p class="text-primary text-24 line-height-1 m-0">{{ info.proyectos[0].activos }}</p>
                                     </div>
                                 </div>
                             </div>
-                        
+
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="card card-icon mb-4">
                                     <div class="card-body text-center">
                                         <i class="i-Find-User"></i>
                                         <p class="text-muted mt-2 mb-2">Finalinados</p>
-                                        <p class="text-primary text-24 line-height-1 m-0">100</p>
+                                        <p class="text-primary text-24 line-height-1 m-0">{{ info.proyectos[1].inactivos }}</p>
                                     </div>
                                 </div>
-                            </div>  
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -113,30 +113,30 @@
                                     <div class="card-body text-center">
                                         <i class="i-Add-User"></i>
                                         <p class="text-muted mt-2 mb-2">Creados</p>
-                                        <p class="text-primary text-24 line-height-1 m-0">121</p>
+                                        <p class="text-primary text-24 line-height-1 m-0">{{ info.cursos[1].inactivos + info.cursos[0].activos}}</p>
                                     </div>
                                 </div>
                             </div>
-                        
+
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="card card-icon mb-4">
                                     <div class="card-body text-center">
                                         <i class="i-Find-User"></i>
                                         <p class="text-muted mt-2 mb-2">Activos</p>
-                                        <p class="text-primary text-24 line-height-1 m-0">21</p>
+                                        <p class="text-primary text-24 line-height-1 m-0">{{ info.cursos[0].activos }}</p>
                                     </div>
                                 </div>
                             </div>
-                        
+
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="card card-icon mb-4">
                                     <div class="card-body text-center">
                                         <i class="i-Find-User"></i>
                                         <p class="text-muted mt-2 mb-2">Finalizados</p>
-                                        <p class="text-primary text-24 line-height-1 m-0">100</p>
+                                        <p class="text-primary text-24 line-height-1 m-0">{{ info.cursos[1].inactivos }}</p>
                                     </div>
                                 </div>
-                            </div>  
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -156,20 +156,20 @@
                                         <div class="card-body text-center">
                                             <i class="i-Add-User"></i>
                                             <p class="text-muted mt-2 mb-2">Totales</p>
-                                            <p class="text-primary text-24 line-height-1 m-0">10</p>
+                                            <p class="text-primary text-24 line-height-1 m-0">-</p>
                                         </div>
                                     </div>
                                 </div>
-                            
+
                                 <div class="col-lg-4 col-md-6 col-sm-6">
                                     <div class="card card-icon mb-4">
                                         <div class="card-body text-center">
                                             <i class="i-Find-User"></i>
                                             <p class="text-muted mt-2 mb-2">Trabajando</p>
-                                            <p class="text-primary text-24 line-height-1 m-0">6</p>
+                                            <p class="text-primary text-24 line-height-1 m-0">-</p>
                                         </div>
                                     </div>
-                                </div>  
+                                </div>
                             </div>
                         </div>
                     </div>
