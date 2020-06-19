@@ -117,6 +117,18 @@ export class GestionComponent implements OnInit {
     */
 }
 
+deleteData(id, modal, event) {
+    event.target.parentElement.parentElement.blur();
+    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })
+        .result.then((result) => {
+            this.cursosService.delete(id)
+                .subscribe(res => {
+                    this.toastr.success('Curso eliminado correctamente', 'Notificación de eliminación', { timeOut: 3000 });
+                    this.loadData();
+                })
+        }, (reason) => {
+        });
+  }
 
 
   formatProfile(value){
