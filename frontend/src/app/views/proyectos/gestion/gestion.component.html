@@ -49,6 +49,9 @@
                 </div>
             </div>
         </div>
+        <div class="module-loader" *ngIf="loading">
+            <div class="spinner spinner-bubble spinner-bubble-primary mr-3"></div>
+        </div>
 <!--
         <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-profile-1 mb-4">
@@ -192,6 +195,7 @@
             <button type="button" class="btn btn-danger btn-rounded"
                 (click)="modal.close('Close')">Cerrar</button>
         </div>
+
     </ng-template>
 
 <!-- VENTANA MODAL QUE SE DESPLEGA PARA CONFIRMAR LA ELIMINACIÓN DE UN DATO-->

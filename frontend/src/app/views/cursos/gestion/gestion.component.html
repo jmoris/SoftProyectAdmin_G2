@@ -6,7 +6,9 @@
     </ul>
 </div>
 <div class="separator-breadcrumb border-top"></div>
-
+<div class="module-loader" *ngIf="loading">
+    <div class="spinner spinner-bubble spinner-bubble-primary mr-3"></div>
+</div>
 <div class="row">
     <div class="col-lg-8 col-md-12">
         <!-- CARD ICON -->
@@ -53,7 +55,7 @@
       <div class="card o-hidden mb-4">
           <ngx-datatable style="height: calc(100vh - 270px); box-shadow: none" class="material fullscreen"
               [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="60" [scrollbarV]="true"
-              [scrollbarH]="true" [limit]="10" [rows]="cursos" [loadingIndicator]="cargando">
+              [scrollbarH]="true" [limit]="10" [rows]="cursos" [loadingIndicator]="loading">
 
               <ngx-datatable-column name="name" [flexGrow]="25">
                   <ng-template ngx-datatable-header-template>

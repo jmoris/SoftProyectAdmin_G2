@@ -12,8 +12,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
 import { GestionComponent } from './gestion/gestion.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { AddCursosComponent } from './add-cursos/add-cursos.component';
-
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   imports: [
@@ -26,8 +25,9 @@ import { AddCursosComponent } from './add-cursos/add-cursos.component';
     NgbModule,
     CursosRoutingmodule,
     CustomFormsModule,
-    TagInputModule
+    TagInputModule,
+    MatRadioModule
   ],
-  declarations: [GestionComponent, AddCursosComponent]
+  declarations: [GestionComponent]
 })
 export class CursosModule { }

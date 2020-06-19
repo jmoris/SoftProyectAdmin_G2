@@ -33,4 +33,8 @@ export class ProjectsService {
     return this.http.get<any>(`${env.apiUrl}/roles`);
   }
 
+  insertComplete(data){
+      return this.http.post<any>(`${env.apiUrl}/projects/createmass`, data);
+  }
+
 }

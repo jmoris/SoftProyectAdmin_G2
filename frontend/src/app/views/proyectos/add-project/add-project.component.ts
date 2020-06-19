@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, QueryList } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProjectsService } from 'src/app/_services/projects.service';
@@ -26,16 +26,19 @@ export class AddProjectComponent implements OnInit {
   roles:any = [];
   estudiantes: any = [];
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
+  dataSource2: MatTableDataSource<any> = new MatTableDataSource<any>();
   isDataLoading: boolean;
   selected = [];
   displayedColumns: string[] = [ "select", "name", "surname", "email"];
+  displayedColumns2: string[] = [ "name", "surname", "email", "rol"];
   ColumnMode = ColumnMode;
   SelectionType = SelectionType;
   selection = new SelectionModel<any>(true, []);
 
-
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild('sort1') sort : MatSort;
+  @ViewChild('sort2') sort2 : MatSort;
+  @ViewChild('paginator') paginator : MatPaginator;
+  @ViewChild('paginator2') paginator2 : MatPaginator;
 
   constructor(
     public dialogRef: MatDialogRef<AddProjectComponent>,
@@ -52,12 +55,10 @@ export class AddProjectComponent implements OnInit {
           this.dataSource.data = this.estudiantes;
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
-          console.log(this.paginator);
           this.isDataLoading = false;
     });
     this.projectService.getRoles().subscribe((data) => {
         this.roles = data;
-        console.log(data);
     });
     this.form = new FormGroup({
       name: new FormControl("", [Validators.required]),
@@ -69,7 +70,7 @@ export class AddProjectComponent implements OnInit {
         usuarios: new FormArray([], [Validators.required, Validators.minLength(1)])
     });
     this.asignarForm = new FormGroup({
-        usuarios: new FormArray([])
+        usuarios: new FormArray([], [Validators.required, Validators.minLength(this.dataSource2.data.length)])
       });
   }
 
@@ -89,7 +90,7 @@ export class AddProjectComponent implements OnInit {
     this.projectService.insert(projectData).subscribe({
       next: result => {
         console.log(result);
-        this.dialogRef.close('Confirm');
+
       },
       error: result => { }
     });
@@ -104,8 +105,23 @@ export class AddProjectComponent implements OnInit {
   };
 
   onStep1Next(e) {}
-  onStep2Next(e) {}
-  onComplete(e) {}
+  onStep2Next(e) {
+    this.dataSource2.data = this.selection.selected;
+    this.dataSource2.sort = this.sort2;
+    this.dataSource2.paginator = this.paginator2;
+    this.asignarForm = new FormGroup({
+        usuarios: new FormArray([], [Validators.required, Validators.minLength(this.dataSource2.data.length)])
+      });
+  }
+
+  onComplete(e) {
+      let frm = this.form.value;
+      frm.students = this.asignarForm.value.usuarios;
+      this.projectService.insertComplete(frm).subscribe((data) => {
+          console.log(data);
+          this.dialogRef.close('Confirm');
+      })
+  }
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -116,9 +132,17 @@ export class AddProjectComponent implements OnInit {
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
+    if(this.isAllSelected()){
+        this.seleccionarForm.controls.usuarios.setValue([]);
+        this.selection.clear();
+    }else{
+        let usersControl = <FormArray>this.seleccionarForm.controls.usuarios;
         this.dataSource.data.forEach(row => this.selection.select(row));
+        this.estudiantes.forEach(element => {
+            usersControl.push(this.formBuilder.group({user_id:element.id}));
+        });
+
+    }
   }
 
   seleccionar(row){
@@ -129,10 +153,27 @@ export class AddProjectComponent implements OnInit {
     }else{
         usersControl.removeAt(usersControl.value.findIndex(student => student.id === row.id))
     }
-    console.log(usersControl.value);
   }
 
+  searchById(id){
+    let usuarios : any = this.seleccionarForm.controls.usuarios.value;
+    let search : any = null;
+    usuarios.forEach(element => {
+        if (element.user_id==id){
+            search = element;
+        }
+    });
+    return search;;
+  }
 
-
+    selectRol(user, rol){
+        let searched = this.searchById(user.id);
+        searched.role_id = rol.id;
+        let usersControl = <FormArray>this.asignarForm.controls.usuarios;
+        usersControl.push(this.formBuilder.group({
+            user_id: new FormControl(searched.user_id, [Validators.required]),
+            role_id: new FormControl(searched.role_id, [Validators.required])
+        }));
+    }
 
 }

@@ -44,6 +44,8 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('projects/assign', 'ProjectsController@agregarAlumnosAProyecto');
     Route::get('projects/list/{id}', 'ProjectsController@getAlumnosProyecto');
     Route::delete('projects/detach', 'ProjectsController@eliminarAlumnoDeUnProyecto');
+    Route::post('projects/createmass', 'ProjectsController@createAndAdd');
+
 
     Route::get('user', function(Request $request){
        // $token = Str::substr($request->header('Authorization', ''), 7);

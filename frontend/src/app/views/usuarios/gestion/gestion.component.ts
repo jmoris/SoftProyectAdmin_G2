@@ -29,6 +29,7 @@ export class GestionComponent implements OnInit {
   dataSource: MatTableDataSource<Users> = new MatTableDataSource<Users>();
   dialogResult = "";
   isDataLoading: boolean;
+  loading: boolean;
 
   addUserForm = this.fb.group({
     name: ['', Validators.required],
@@ -51,7 +52,7 @@ export class GestionComponent implements OnInit {
   }
 
   getUsers() {
-    this.isDataLoading = true;
+    this.loading = true;
     this.cargando = true;
     this.usuariosService.getAll().subscribe(
       data => {
@@ -62,7 +63,7 @@ export class GestionComponent implements OnInit {
         this.dataSource.data = this.users;
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-        this.isDataLoading = false;
+        this.loading = false;
       });
   }
 
@@ -160,7 +161,7 @@ export class GestionComponent implements OnInit {
             this.refreshTable();
             this.toastr.success('Usuario eliminado correctamente', 'Notificación', { timeOut: 3000 });
           },
-          error: result => { 
+          error: result => {
             console.log(result);
           }
         });
