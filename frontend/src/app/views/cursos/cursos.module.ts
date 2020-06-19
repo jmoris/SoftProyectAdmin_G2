@@ -12,6 +12,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
 import { GestionComponent } from './gestion/gestion.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { AddCursosComponent } from './add-cursos/add-cursos.component';
 
 
 @NgModule({
@@ -27,6 +28,6 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     CustomFormsModule,
     TagInputModule
   ],
-  declarations: [GestionComponent]
+  declarations: [GestionComponent, AddCursosComponent]
 })
 export class CursosModule { }

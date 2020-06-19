@@ -12,6 +12,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
 import { GestionComponent } from './gestion/gestion.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { AddUserComponent } from './add-user/add-user.component';
+import { MaterialModule } from 'src/app/material.module';
 
 
 @NgModule({
@@ -24,9 +26,10 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     NgxDatatableModule,
     NgbModule,
     UsuarioRoutingmodule,
+    MaterialModule,
     CustomFormsModule,
     TagInputModule
   ],
-  declarations: [GestionComponent]
+  declarations: [GestionComponent, AddUserComponent]
 })
 export class UsuarioModule { }

@@ -15,6 +15,7 @@ import { AddProjectComponent } from './add-project/add-project.component';
 import { MaterialModule } from 'src/app/material.module';
 import { DetailsProjectComponent } from './gestion/details-project/details-project.component';
 import { ProjectComponent } from './project/project.component';
+import { FormWizardModule } from 'src/app/shared/components/form-wizard/form-wizard.module';
 
 
 
@@ -29,6 +30,7 @@ import { ProjectComponent } from './project/project.component';
     NgbModule,
     ProyectoRoutingModule,
     CustomFormsModule,
+    FormWizardModule,
     TagInputModule,
     MaterialModule,
   ],

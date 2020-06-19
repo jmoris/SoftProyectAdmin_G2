@@ -14,7 +14,6 @@ export class ProjectsService {
   constructor(private http: HttpClient) { }
 
   insert(data): Observable<boolean> {
-
     return this.http.post<any>(`${env.apiUrl}/projects`, data);
   }
 
@@ -28,6 +27,10 @@ export class ProjectsService {
 
   delete(id){
     return this.http.delete<any>(`${env.apiUrl}/projects/` + id);
+  }
+
+  getRoles(){
+    return this.http.get<any>(`${env.apiUrl}/roles`);
   }
 
 }
