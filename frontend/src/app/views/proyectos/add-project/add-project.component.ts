@@ -132,9 +132,17 @@ export class AddProjectComponent implements OnInit {
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
+    if(this.isAllSelected()){
+        this.seleccionarForm.controls.usuarios.setValue([]);
+        this.selection.clear();
+    }else{
+        let usersControl = <FormArray>this.seleccionarForm.controls.usuarios;
         this.dataSource.data.forEach(row => this.selection.select(row));
+        this.estudiantes.forEach(element => {
+            usersControl.push(this.formBuilder.group({user_id:element.id}));
+        });
+
+    }
   }
 
   seleccionar(row){
