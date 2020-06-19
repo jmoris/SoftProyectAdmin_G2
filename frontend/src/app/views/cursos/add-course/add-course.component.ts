@@ -10,12 +10,11 @@ import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
-  selector: 'app-add-project',
-  templateUrl: './add-project.component.html',
-  styleUrls: ['./add-project.component.scss']
+  selector: 'app-add-course',
+  templateUrl: './add-course.component.html',
+  styleUrls: ['./add-course.component.scss']
 })
-export class AddProjectComponent implements OnInit {
-
+export class AddCourseComponent implements OnInit {
 
   form: FormGroup;
   seleccionarForm: FormGroup;
@@ -41,7 +40,7 @@ export class AddProjectComponent implements OnInit {
   @ViewChild('paginator2') paginator2 : MatPaginator;
 
   constructor(
-    public dialogRef: MatDialogRef<AddProjectComponent>,
+    public dialogRef: MatDialogRef<AddCourseComponent>,
     @Inject(MAT_DIALOG_DATA) public data: String,
     private projectService: ProjectsService,
     private userService: UsuariosService,
