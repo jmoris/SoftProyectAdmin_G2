@@ -1,11 +1,12 @@
+
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { CursosService } from 'src/app/_services/cursos.service';
-
-
+import { MatDialog } from '@angular/material/dialog';
+import { AddCourseComponent } from '../add-course/add-course.component';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class GestionComponent implements OnInit {
   constructor(
         private modalService: NgbModal,
         private toastr: ToastrService,
+        private dialog: MatDialog,
         private cursosService: CursosService,
         private fb: FormBuilder,
 	) { }
@@ -96,6 +98,24 @@ export class GestionComponent implements OnInit {
     this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true });
   }
 
+  openAddDialog(): void {
+    let dialogRef = this.dialog.open(AddCourseComponent, {
+        width: '850px',
+        data: 'This text is passed into the dialog',
+        disableClose: true,
+        autoFocus: true
+    });
+    /*
+    dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog closed: ${result}`);
+        this.dialogResult = result;
+        if (result == 'Confirm') {
+            this.toastr.success('Proyecto agregado exitosamente', 'Notificación', { timeOut: 3000 });
+            this.loadProjects();
+        }
+    })
+    */
+}
 
 
 
