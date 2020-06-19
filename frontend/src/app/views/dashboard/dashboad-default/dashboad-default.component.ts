@@ -17,7 +17,22 @@ export class DashboadDefaultComponent implements OnInit {
     constructor(private userService: UsuariosService) {
         this.userService.infoDash().subscribe((data) => {
             this.info = data;
-            console.log(data.cursos[1].inactivos);
+            let info2 = null;
+            data.usuarios.forEach(element => {
+                info2 = {
+                        admin: 0,
+                        student: 0,
+                        teacher: 0
+                };
+                if(element.profile === 'admin'){
+                    info2.admin = element.count;
+                }else if(element.profile === 'student'){
+                    info2.student = element.count;
+                }else if(element.profile === 'teacher'){
+                    info2.teacher = element.count;
+                }
+            });
+            this.info.usuarios = info2;
         });
     }
 

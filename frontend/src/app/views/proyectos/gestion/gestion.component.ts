@@ -84,14 +84,13 @@ export class GestionComponent implements OnInit {
         this.router.navigateByUrl('/proyectos/gestion/' + id);
     }
 
-    openDetails(): void {
-        let selected;
+    openDetails(project): void {
         //recorrer arreglo de proyecto y obtener el proyecto seleccionado.
 
         //pasar item seleccionado al componente de detalles.
         this.dialog.open(DetailsProjectComponent, {
             width: '500px',
-            data: 'This text is passed into the dialog'//selected
+            data: project//selected
         });
     }
 

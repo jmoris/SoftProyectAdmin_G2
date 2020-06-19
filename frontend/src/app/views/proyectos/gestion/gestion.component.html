@@ -43,7 +43,7 @@
                               <p class="mb-1"><ngb-progressbar type="warning" [value]="25" height="4px"></ngb-progressbar></p>
                             </div>
                           </div>
-                        <button style="margin: 3px;" class="btn btn-primary btn-rounded" (click)="openDetails()">Ver detalles</button>
+                        <button style="margin: 3px;" class="btn btn-primary btn-rounded" (click)="openDetails(item)">Ver detalles</button>
                         <button style="margin: 3px;" class="btn btn-danger btn-rounded" (click)="verProyecto(item.id)">Ver proyecto</button>
                     </div>
                 </div>
@@ -130,24 +130,24 @@
                   <tbody>
                     <tr>
                       <td>Jefe de proyecto</td>
-                      <td><input type="text" formControlName="bossname" ng-model="data.bossname" size="25" maxlength="100" required></td>
+                      <td><input type="text"  [value]="proyecto.project_manager?.name" size="25" maxlength="100" required></td>
 
                     </tr>
                     <tr>
                       <td>Nombre de proyecto</td>
-                      <td><input type="text" formControlName="proyectoname" ng-model="dala.proyectoname" size="25" maxlength="100" required></td>
+                      <td><input type="text"  [value]="proyecto?.name" size="25" maxlength="100" required></td>
                     </tr>
                     <tr>
                       <td>Cantidad de participantes</td>
-                      <td><input type="text" formControlName="email" ng-model="email.text" size="25" maxlength="100" required></td>
+                      <td><input type="text" [value]="proyecto?.user_roles_count" size="25" maxlength="100" required></td>
                     </tr>
                     <tr>
                       <td>Fecha de creación</td>
-                      <td><input type="password" formControlName="password" ng-model="email.text" size="25" maxlength="100" required></td>
+                      <td><input type="password"ng-model="email.text" size="25" maxlength="100" required></td>
                     </tr>
                     <tr>
                       <td>Última modificación</td>
-                      <td><input type="text" formControlName="rut" ng-model="email.text" size="25" maxlength="100" required></td>
+                      <td><input type="text" ng-model="email.text" size="25" maxlength="100" required></td>
                     </tr>
                   </tbody>
                 </table>

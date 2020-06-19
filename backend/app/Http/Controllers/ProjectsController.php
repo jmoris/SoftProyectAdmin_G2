@@ -19,7 +19,7 @@ class ProjectsController extends Controller
     public function getProyectos(Request $request)
     {
 
-        $projecto = Project::All();
+        $projecto = Project::withCount('user_roles')->get();
         if (empty($projecto))
         {
             $returnData = array(
