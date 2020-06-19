@@ -45,12 +45,12 @@ export class NavigationService {
         childnavOpen: false
     };
     selectedItem: IMenuItem;
-    
+
     constructor() {
     }
 
     defaultMenu: IMenuItem[] = [
-        {   
+        /*{
             name: 'Dashboard',
             description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
             type: 'dropDown',
@@ -61,9 +61,63 @@ export class NavigationService {
                 { icon: 'i-Over-Time', name: 'Version 3', state: '/dashboard/v3', type: 'link' },
                 { icon: 'i-Clock', name: 'Version 4', state: '/dashboard/v4', type: 'link' },
             ]
+        },*/
+
+        /*{
+            name: 'Apps',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+            type: 'dropDown',
+            icon: 'i-Computer-Secure',
+            sub: [
+                { icon: 'i-Add-File', name: 'Invoice Builder', state: '/invoice', type: 'link' },
+                { icon: 'i-Email', name: 'Inbox', state: '/inbox', type: 'link' },
+                { icon: 'i-Speach-Bubble-3', name: 'Chat', state: '/chat', type: 'link' },
+                { icon: 'i-Calendar', name: 'Calendar', state: '/calendar', type: 'link' },
+            ]
+        },*/
+
+        /*{
+            name: 'Data Tables',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+            type: 'dropDown',
+            icon: 'i-File-Horizontal-Text',
+            sub: [
+                { icon: 'i-File-Horizontal-Text', name: 'List', state: '/tables/list', type: 'link' },
+                { icon: 'i-Full-View-Window', name: 'Fullscreen', state: '/tables/full', type: 'link' },
+                { icon: 'i-Code-Window', name: 'Paging', state: '/tables/paging', type: 'link' },
+                { icon: 'i-Filter-2', name: 'Filter', state: '/tables/filter', type: 'link' },
+            ]
+        },*/
+        {
+            name: 'Home',
+            description: 'Página principal o dashboard',
+            type: 'link',
+            icon: 'i-Home1',
+            state: '/dashboard/v1'
         },
         {
-            name: 'UI kits',
+            name: 'Usuarios',
+            description: 'Gestión de los usuarios',
+            type: 'link',
+            icon: 'i-Administrator',
+            state: '/usuarios/gestion'
+        },
+        {
+            name: 'Cursos',
+            description: 'Gestión de los cursos',
+            type: 'link',
+            icon: 'i-Library',
+            state: '/cursos/gestion'
+        },
+        {
+            name: 'Proyectos',
+            description: 'Gestión de los proyectos',
+            type: 'link',
+            icon: 'i-File-Clipboard-File--Text',
+            state: '/proyectos/gestion'
+        },
+       /* {
+            name: 'Cursos',
             description: 'Lorem ipsum dolor sit amet, consectetur adipisicing.',
             type: 'dropDown',
             icon: 'i-Library',
@@ -91,19 +145,7 @@ export class NavigationService {
             ]
         },
         {
-            name: 'Apps',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-            type: 'dropDown',
-            icon: 'i-Computer-Secure',
-            sub: [
-                { icon: 'i-Add-File', name: 'Invoice Builder', state: '/invoice', type: 'link' },
-                { icon: 'i-Email', name: 'Inbox', state: '/inbox', type: 'link' },
-                { icon: 'i-Speach-Bubble-3', name: 'Chat', state: '/chat', type: 'link' },
-                { icon: 'i-Calendar', name: 'Calendar', state: '/calendar', type: 'link' },
-            ]
-        },
-        {
-            name: 'Forms',
+            name: 'Proyectos',
             description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
             type: 'dropDown',
             icon: 'i-File-Clipboard-File--Text',
@@ -117,29 +159,8 @@ export class NavigationService {
                 { icon: 'i-Crop-2', name: 'Image Cropper', state: '/forms/img-cropper', type: 'link' },
             ]
         },
-        {
-            name: 'Data Tables',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-            type: 'dropDown',
-            icon: 'i-File-Horizontal-Text',
-            sub: [
-                { icon: 'i-File-Horizontal-Text', name: 'List', state: '/tables/list', type: 'link' },
-                { icon: 'i-Full-View-Window', name: 'Fullscreen', state: '/tables/full', type: 'link' },
-                { icon: 'i-Code-Window', name: 'Paging', state: '/tables/paging', type: 'link' },
-                { icon: 'i-Filter-2', name: 'Filter', state: '/tables/filter', type: 'link' },
-            ]
-        },
-        {
-            name: 'Sessions',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-            type: 'dropDown',
-            icon: 'i-Administrator',
-            sub: [
-                { icon: 'i-Add-User', name: 'Sign up', state: '/sessions/signup', type: 'link' },
-                { icon: 'i-Checked-User', name: 'Sign in', state: '/sessions/signin', type: 'link' },
-                { icon: 'i-Find-User', name: 'Forgot', state: '/sessions/forgot', type: 'link' }
-            ]
-        },
+*/
+        /*,
         {
             name: 'Pages',
             description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
@@ -171,7 +192,7 @@ export class NavigationService {
             tooltip: 'Documentation',
             icon: 'i-Safe-Box1',
             state: 'http://demos.ui-lib.com/gull-doc'
-        }
+        }*/
     ];
 
 
