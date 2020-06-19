@@ -6,7 +6,9 @@
     </ul>
 </div>
 <div class="separator-breadcrumb border-top"></div>
-
+<div class="module-loader" *ngIf="loading">
+    <div class="spinner spinner-bubble spinner-bubble-primary mr-3"></div>
+</div>
 <div class="row">
     <div class="col-lg-8 col-md-12">
         <!-- CARD ICON -->
@@ -15,8 +17,9 @@
               <div class="card card-icon mb-4">
                   <div class="card-body text-center">
                       <i class="i-Address-Book"></i>
-                      <p class="text-muted mt-2 mb-2"> Nuevo Curso </p>
-
+                      <div id="divAncho">
+                        <p class="text-muted mt-2 mb-2"> Nuevo Curso </p>
+                      </div>
                       <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded" (click)="addCourse(addCourseConfirmModal, $event)" > Agregar </button>
                   </div>
               </div>
@@ -25,7 +28,9 @@
               <div class="card card-icon mb-4">
                   <div class="card-body text-center">
                       <i class="i-Add-User"></i>
-                      <p class="text-muted mt-2 mb-2"> Asignar P. Guesped </p>
+                      <div id="divAncho">
+                        <p class="text-muted mt-2 mb-2"> Asignar P. Huesped </p>
+                      </div>
                       <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded" (click)="addGuestTeacher(addGuestTeacherConfirmModal, $event)" > Agregar </button>
                   </div>
               </div>
@@ -34,7 +39,9 @@
               <div class="card card-icon mb-4">
                   <div class="card-body text-center">
                       <i class="i-Add-User"></i>
-                      <p class="text-muted mt-2 mb-2"> Asignar Ayudante</p>
+                      <div id="divAncho">
+                        <p class="text-muted mt-2 mb-2"> Asignar Ayudante</p>
+                      </div>
                       <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded" (click)="addHelper(addHelperConfirmModal, $event)" > Agregar </button>
                   </div>
               </div>
@@ -48,7 +55,7 @@
       <div class="card o-hidden mb-4">
           <ngx-datatable style="height: calc(100vh - 270px); box-shadow: none" class="material fullscreen"
               [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="60" [scrollbarV]="true"
-              [scrollbarH]="true" [limit]="10" [rows]="cursos" [loadingIndicator]="cargando">
+              [scrollbarH]="true" [limit]="10" [rows]="cursos" [loadingIndicator]="loading">
 
               <ngx-datatable-column name="name" [flexGrow]="25">
                   <ng-template ngx-datatable-header-template>
@@ -105,9 +112,9 @@
       <p><strong>¿Estas seguro de querer eliminar este usuario?</strong></p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary btn-rounded"
+      <button type="button" class="btn btn-primary btn-rounded"
         (click)="modal.dismiss('cancel')">Cancelar</button>
-      <button type="button" ngbAutofocus class="btn btn-wide btn-danger btn-rounded"
+      <button type="button" ngbAutofocus class="btn btn-danger btn-rounded"
         (click)="modal.close('Ok')">Borrar</button>
     </div>
   </ng-template>
@@ -170,9 +177,9 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" ngbAutofocus class="btn btn-wide btn-success btn-rounded"
+    <button type="button" ngbAutofocus class="btn btn-primary btn-rounded"
       (click)="((this.addCourseForm.invalid)?checked=false:modal.close('Ok'))">Agregar </button>
-    <button type="button" class="btn btn-outline-secondary btn-rounded"
+    <button type="button" class="btn btn-danger btn-rounded"
       (click)="modal.dismiss('cancel')">Cancelar</button>
   </div>
 </ng-template>
@@ -229,9 +236,9 @@
 
     </div>
     <div class="modal-footer">
-      <button type="button" ngbAutofocus class="btn btn-wide btn-success btn-rounded"
+      <button type="button" ngbAutofocus class="btn btn-primary btn-rounded"
         (click)="((this.addCourseForm.invalid)?checked=false:modal.close('Ok'))">Agregar </button>
-      <button type="button" class="btn btn-outline-secondary btn-rounded"
+      <button type="button" class="btn btn-danger btn-rounded"
         (click)="modal.dismiss('cancel')">Cancelar</button>
     </div>
   </ng-template>
@@ -288,9 +295,9 @@
 
     </div>
     <div class="modal-footer">
-      <button type="button" ngbAutofocus class="btn btn-wide btn-success btn-rounded"
+      <button type="button" ngbAutofocus class="btn btn-primary btn-rounded"
         (click)="((this.addCourseForm.invalid)?checked=false:modal.close('Ok'))">Agregar </button>
-      <button type="button" class="btn btn-outline-secondary btn-rounded"
+      <button type="button" class="btn btn-danger btn-rounded"
         (click)="modal.dismiss('cancel')">Cancelar</button>
     </div>
   </ng-template>

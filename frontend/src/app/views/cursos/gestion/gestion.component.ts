@@ -16,7 +16,7 @@ import { CursosService } from 'src/app/_services/cursos.service';
 export class GestionComponent implements OnInit {
   cursos: any;
   checked = true;
-  cargando = false;
+  loading = false;
 
   addCourseForm = this.fb.group({
     name:  ['', Validators.required],
@@ -47,11 +47,11 @@ export class GestionComponent implements OnInit {
   }
 
   loadData(){
-      this.cargando = true;
+      this.loading = true;
     this.cursosService.getAll().subscribe(
         (resp:any) => {
             this.cursos = resp;
-            this.cargando = false;
+            this.loading = false;
         }
     );
   }
