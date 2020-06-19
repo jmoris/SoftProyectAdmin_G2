@@ -1,11 +1,19 @@
 <div>
-    <h2 mat-dialog-title>Agregar proyecto</h2>
+    <div class="row">
+        <div class="col-md-11">
+            <h2 mat-dialog-title>Agregar proyecto</h2>
+        </div>
+        <div class="col-md-1 ">
+            <mat-dialog-actions >
+                <i mat-button mat-dialog-close class="i-Close-Window text-danger"></i>
+            </mat-dialog-actions>
+        </div>
+    </div>
     <hr />
-    <mat-dialog-content>
+    <mat-dialog-content class="mat-dialog-content">
         <form-wizard>
             <wizard-step [title]="'Información básica'" [isValid]="form.valid" (onNext)="onStep1Next($event)">
                 <form [formGroup]="form">
-
                     <div class="form-div">
                         <mat-form-field appearance="standard" class="input">
                             <mat-label>Nombre</mat-label>
@@ -94,7 +102,7 @@
                 </form>
             </wizard-step>
             <wizard-step [title]="'Asignar roles'" [isValid]="asignarForm.valid" (onComplete)="onComplete($event)">
-                    <div class="col-md-12">
+                    <div class="col-md-12" >
                         <table mat-table style="width:100%" [dataSource]="dataSource2"  #sort2="matSort" matSort class="mat-elevation-z8"
                             matSortActive="run" matSortDirection="asc" matSortDisableClear>
                             <ng-container matColumnDef="name">
