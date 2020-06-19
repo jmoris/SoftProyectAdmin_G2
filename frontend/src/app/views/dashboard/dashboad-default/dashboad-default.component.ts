@@ -70,12 +70,12 @@ export class DashboadDefaultComponent implements OnInit {
         this.userService.infoDash().subscribe((data) => {
             this.info = data;
             let info2 = null;
+            info2 = {
+                admin: 0,
+                student: 0,
+                teacher: 0
+            };
             data.usuarios.forEach(element => {
-                info2 = {
-                        admin: 0,
-                        student: 0,
-                        teacher: 0
-                };
                 if(element.profile === 'admin'){
                     info2.admin = element.count;
                 }else if(element.profile === 'student'){
