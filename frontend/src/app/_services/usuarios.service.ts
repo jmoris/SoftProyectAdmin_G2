@@ -27,4 +27,8 @@ export class UsuariosService {
     delete(id){
         return this.http.delete<any>(`${environment.apiUrl}/users/` + id);
     }
+
+    infoDash(){
+        return this.http.get<any>(`${environment.apiUrl}/info`);
+    }
 }

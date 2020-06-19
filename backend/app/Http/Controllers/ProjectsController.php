@@ -28,6 +28,13 @@ class ProjectsController extends Controller
             );
             return response()->json($returnData, 500);
         }
+        foreach($projecto as &$proy){
+            $pm = $proy->user_roles()->where("role_id", 1)->first();
+            $user = null;
+            if($pm != null)
+                $user = User::find($pm->user_id);
+            $proy->project_manager = $user;;
+        }
         return response()->json($projecto);
     }
 
@@ -252,5 +259,16 @@ class ProjectsController extends Controller
         }
 
         return response()->json(["status" => true, "enrolled" => $n, "msg" => "Proyecto creado correctamente."]);
+    }
+
+    public function getJefeProyecto(Request $request, $id){
+        $proyecto = Project::find($id);
+        $user_roles = $proyecto->user_roles()->where("role_id", 1)->first();
+        if($user_roles==null){
+            return response()->json(["success" => false]);
+        }
+        $user = User::find($user_roles->user_id);
+        $user->success = true;
+        return $user;
     }
 }

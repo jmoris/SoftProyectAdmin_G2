@@ -1,7 +1,7 @@
 <div class="breadcrumb">
 	<h1>Proyecto </h1>
 	<ul>
-		<li>{{name}}</li>
+		<li>{{ proyecto.name }}</li>
 	</ul>
 </div>
 
@@ -46,65 +46,13 @@
 										<div class="card mb-4 ml-4 ">
 											<div class="card-body">
 												<div class="card-title">Equipo de trabajo </div>
-												<div
+												<div *ngFor="let miembro of equipo"
 													class="d-flex align-items-center border-bottom-dotted-dim pb-3 mb-3">
 													<img class="avatar-md rounded mr-3"
 														src="./assets/images/faces/2.jpg" alt="">
 													<div class="flex-grow-1">
-														<h6 class="m-0">Jefe de proyecto</h6>
-														<p class="m-0 text-small text-muted">Jesus Moris.</p>
-													</div>
-													<div>
-														<button class="btn btn-outline-primary btn-rounded btn-sm"> +
-															Info </button>
-													</div>
-												</div>
-												<div
-													class="d-flex align-items-center border-bottom-dotted-dim pb-3 mb-3">
-													<img class="avatar-md rounded mr-3"
-														src="./assets/images/faces/2.jpg" alt="">
-													<div class="flex-grow-1">
-														<h6 class="m-0">Scrum Master</h6>
-														<p class="m-0 text-small text-muted">Jesus Moris.</p>
-													</div>
-													<div>
-														<button class="btn btn-outline-primary btn-rounded btn-sm"> +
-															Info </button>
-													</div>
-												</div>
-												<div
-													class="d-flex align-items-center border-bottom-dotted-dim pb-3 mb-3">
-													<img class="avatar-md rounded mr-3"
-														src="./assets/images/faces/2.jpg" alt="">
-													<div class="flex-grow-1">
-														<h6 class="m-0">Programador + Arquitecto </h6>
-														<p class="m-0 text-small text-muted">Jesus Moris.</p>
-													</div>
-													<div>
-														<button class="btn btn-outline-primary btn-rounded btn-sm"> +
-															Info </button>
-													</div>
-												</div>
-												<div
-													class="d-flex align-items-center border-bottom-dotted-dim pb-3 mb-3">
-													<img class="avatar-md rounded mr-3"
-														src="./assets/images/faces/2.jpg" alt="">
-													<div class="flex-grow-1">
-														<h6 class="m-0">Diseñador </h6>
-														<p class="m-0 text-small text-muted">Jesus Moris.</p>
-													</div>
-													<div>
-														<button class="btn btn-outline-primary btn-rounded btn-sm"> +
-															Info </button>
-													</div>
-												</div>
-												<div
-													class="d-flex align-items-center border-bottom-dotted-dim pb-3 mb-3">
-													<img class="avatar-md rounded mr-3"
-														src="./assets/images/faces/2.jpg" alt="">
-													<div class="flex-grow-1">
-														<h6 class="m-0">Tester </h6>
-														<p class="m-0 text-small text-muted">Jesus Moris.</p>
+														<h6 class="m-0">{{miembro.project_role}}</h6>
+														<p class="m-0 text-small text-muted">{{miembro.name}}</p>
 													</div>
 													<div>
 														<button class="btn btn-outline-primary btn-rounded btn-sm"> +
@@ -601,9 +549,9 @@
 </div>
 
 
-  
 
 
-   
-    
-            
+
+
+
+

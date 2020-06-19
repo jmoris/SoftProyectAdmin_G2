@@ -35,7 +35,7 @@
                             <img src="assets/images/faces/6.jpg" alt="">
                         </div>
                         <h5 class="m-0">{{ item.scrum_master }}</h5>
-                        <p class="mt-0">Jefe proyecto</p>
+                        <p class="mt-0">{{ (item.project_manager) ? item.project_manager.name : 'No asignado' }}</p>
                         <div class="card mb-4">
                             <div class="card-body" style="background-color: rgb(245, 246, 252);">
                               <h5 class="mb-2 text-muted">{{ item.name }}</h5>
@@ -44,7 +44,7 @@
                             </div>
                           </div>
                         <button style="margin: 3px;" class="btn btn-primary btn-rounded" (click)="openDetails()">Ver detalles</button>
-                        <button style="margin: 3px;" class="btn btn-danger btn-rounded" (click)="open(modalBasic)">Ver proyecto</button>
+                        <button style="margin: 3px;" class="btn btn-danger btn-rounded" (click)="verProyecto(item.id)">Ver proyecto</button>
                     </div>
                 </div>
             </div>

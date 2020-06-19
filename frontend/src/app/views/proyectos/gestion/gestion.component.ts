@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { DetailsProjectComponent } from './details-project/details-project.component';
 import { ProjectsService } from 'src/app/_services/projects.service';
+import { Router } from '@angular/router';
 
 
 
@@ -36,6 +37,7 @@ export class GestionComponent implements OnInit {
         private toastr: ToastrService,
         private fb: FormBuilder,
         private dialog: MatDialog,
+        private router: Router,
         notifierService: NotifierService) {
         this.notifier = notifierService;
     }
@@ -76,6 +78,10 @@ export class GestionComponent implements OnInit {
                 this.loadProjects();
             }
         })
+    }
+
+    verProyecto(id){
+        this.router.navigateByUrl('/proyectos/gestion/' + id);
     }
 
     openDetails(): void {

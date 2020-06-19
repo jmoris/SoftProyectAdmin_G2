@@ -48,6 +48,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::get('projects/list/{id}', 'ProjectsController@getAlumnosProyecto');
     Route::delete('projects/detach', 'ProjectsController@eliminarAlumnoDeUnProyecto');
     Route::post('projects/createmass', 'ProjectsController@createAndAdd');
+    Route::get('projects/getpm/{id}', 'ProjectsController@getJefeProyecto');
 
     Route::get('info', function(){
 

@@ -4,6 +4,8 @@ import { echartStyles } from 'src/app/shared/echart-styles';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataLayerService } from 'src/app/shared/services/data-layer.service';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ProjectsService } from 'src/app/_services/projects.service';
 
 
 @Component({
@@ -13,7 +15,7 @@ import { FormControl } from '@angular/forms';
 })
 
 export class ProjectComponent implements OnInit {
-  
+
   active = 1;
   name="nombreProyecto";
   chartPie1: any;
@@ -23,18 +25,30 @@ export class ProjectComponent implements OnInit {
   items = ['Javascript', 'Typescript'];
   autocompletes$;
   tagsCtrl1 = new FormControl(this.items);
-
-  
+    id : any;
+proyecto : any;
+equipo:any = [];
   constructor(
+    private route: ActivatedRoute,
     private modalService: NgbModal,
     private dl: DataLayerService,
-  ) { }
+    private proyectoService : ProjectsService
+  ) {
+    this.id = this.route.snapshot.params['id'];
+    proyectoService.get(this.id).subscribe((data) => {
+        this.proyecto = data[0];
+        console.log(this.proyecto);
+        this.proyectoService.getUsersFromProject(this.id).subscribe((data2) => {
+            this.equipo = data2;
+        });
+    });
+  }
 
   public onSelect(item) {
     console.log('tag selected: value is ' + item);
   }
 
-  
+
 
   ngOnInit() {
     this.chartPie1 = {
@@ -70,14 +84,14 @@ export class ProjectComponent implements OnInit {
   {
     event.target.parentElement.parentElement.blur();
     this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true, size: 'lg' });
-       
+
   }
 
   addSoftwareRequeriment(modal, event)
   {
     event.target.parentElement.parentElement.blur();
     this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true, size: 'lg' });
-       
+
 
   }
 
@@ -85,7 +99,7 @@ export class ProjectComponent implements OnInit {
   {
     event.target.parentElement.parentElement.blur();
     this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true, size: 'lg' });
-       
+
 
   }
 
