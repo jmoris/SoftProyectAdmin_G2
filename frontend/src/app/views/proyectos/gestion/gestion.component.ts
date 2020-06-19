@@ -29,6 +29,7 @@ export class GestionComponent implements OnInit {
         email: ''
     };
     step2Form: FormGroup;
+    loading: boolean = false;
 
     constructor(private modalService: NgbModal,
         private projectsService: ProjectsService,
@@ -90,8 +91,10 @@ export class GestionComponent implements OnInit {
 
     //Método que actualiza los proyectos.
     loadProjects() {
+        this.loading = true;
         this.projectsService.getAll().subscribe((projects:any) => {
             this.projects = projects;
+            this.loading = false;
         });
     }
 

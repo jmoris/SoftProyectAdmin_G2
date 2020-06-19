@@ -40,7 +40,7 @@ export class SigninComponent implements OnInit {
         });
     }
 
-    signin(e) {
+    signin() {
         this.loading = true;
         this.loadingText = 'Conectando...';
         let f = this.signinForm.value;
