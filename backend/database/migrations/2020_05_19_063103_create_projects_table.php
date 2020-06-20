@@ -19,6 +19,7 @@ class CreateProjectsTable extends Migration
             $table->string('description');
             $table->integer('year');
             $table->integer('semester');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

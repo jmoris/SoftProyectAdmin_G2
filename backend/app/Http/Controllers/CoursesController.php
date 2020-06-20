@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Tools\UserProfile;
 use App\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -124,6 +125,55 @@ class CoursesController extends Controller
                 'msg' => 'El usuario/curso no existe.'
             ]);
         }
+    }
+
+    public function getUserList(Request $request, $id){
+        $curso = Course::find($id);
+        if($curso!=null){
+            return response()->json($curso->users);
+        }else{
+            return response()->json([
+                'msg' => 'El curso no existe'
+            ], 500);
+        }
+    }
+
+    public function createAndAdd(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'year' => 'required',
+            'semester' => 'required',
+            'teacher_id' => 'required',
+            'students' => 'required|array',
+        ]);
+
+        if ($validator->fails()) {
+            return ['errors'=>$validator->errors()];
+        }
+
+        $curso = new Course();
+        $curso->name = $request->name;
+        $curso->year = $request->year;
+        $curso->semester = $request->semester;
+        $curso->idUser = $request->teacher_id;
+
+        try {
+            $curso->save();
+            $n = 0;
+            foreach($request->students as $student){
+                $curso->users()->sync($student['user_id'], false);
+                $n++;
+            }
+        }catch(Exception $ex){
+            return response()->json([
+                'status' => false,
+                'msg' => 'El curso no se pudo crear.',
+                'error' => $ex->getMessage()
+            ]);
+        }
+
+        return response()->json(["status" => true, "enrolled" => $n, "msg" => "Proyecto creado correctamente."]);
     }
 
     /*

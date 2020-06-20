@@ -25,6 +25,10 @@ export class ProjectsService {
       }));
   }
 
+  get(id): Observable<Project[]> {
+    return this.http.get<any>(`${env.apiUrl}/projects/` + id);
+  }
+
   delete(id){
     return this.http.delete<any>(`${env.apiUrl}/projects/` + id);
   }
@@ -33,8 +37,13 @@ export class ProjectsService {
     return this.http.get<any>(`${env.apiUrl}/roles`);
   }
 
+  getUsersFromProject(id){
+    return this.http.get<any>(`${env.apiUrl}/projects/list/` + id);
+  }
+
   insertComplete(data){
       return this.http.post<any>(`${env.apiUrl}/projects/createmass`, data);
   }
+
 
 }
