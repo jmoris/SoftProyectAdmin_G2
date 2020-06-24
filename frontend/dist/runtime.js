@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"default~views-cursos-cursos-module~views-dashboard-dashboard-module~views-proyectos-proyectos-module~791ed546":"default~views-cursos-cursos-module~views-dashboard-dashboard-module~views-proyectos-proyectos-module~791ed546","views-cursos-cursos-module":"views-cursos-cursos-module","views-dashboard-dashboard-module":"views-dashboard-dashboard-module","views-proyectos-proyectos-module":"views-proyectos-proyectos-module","views-usuarios-usuarios-module":"views-usuarios-usuarios-module","views-others-others-module":"views-others-others-module","views-sessions-sessions-module":"views-sessions-sessions-module"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"default~views-cursos-cursos-module~views-dashboard-dashboard-module~views-proyectos-proyectos-module~791ed546":"default~views-cursos-cursos-module~views-dashboard-dashboard-module~views-proyectos-proyectos-module~791ed546","default~views-cursos-cursos-module~views-proyectos-proyectos-module":"default~views-cursos-cursos-module~views-proyectos-proyectos-module","views-cursos-cursos-module":"views-cursos-cursos-module","views-proyectos-proyectos-module":"views-proyectos-proyectos-module","views-dashboard-dashboard-module":"views-dashboard-dashboard-module","views-usuarios-usuarios-module":"views-usuarios-usuarios-module","views-others-others-module":"views-others-others-module","views-sessions-sessions-module":"views-sessions-sessions-module"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function

@@ -4,7 +4,6 @@
         <div class="breadcrumb col-md-9">
             <h1>Proyectos</h1>
             <ul>
-                <li><a href="">Dashboard</a></li>
                 <li>Proyectos</li>
             </ul>
 
@@ -24,7 +23,7 @@
 
     <div class="row">
         <!-- ICON BG -->
-        <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let item of proyectos; let i = index">
+        <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let item of projects; let i = index">
             <div class="card card-profile-1 mb-4">
                 <div class="card-body">
                     <div class="text-right">
@@ -32,10 +31,10 @@
                     </div>
                     <div class="text-center">
                         <div class="avatar box-shadow-2 mb-3">
-                            <img src="./assets/images/faces/6.jpg" alt="">
+                            <img src="assets/images/faces/6.jpg" alt="">
                         </div>
                         <h5 class="m-0">{{ item.scrum_master }}</h5>
-                        <p class="mt-0">Jefe proyecto</p>
+                        <p class="mt-0">{{ (item.project_manager) ? item.project_manager.name + " " + item.project_manager.surname : 'No asignado' }}</p>
                         <div class="card mb-4">
                             <div class="card-body" style="background-color: rgb(245, 246, 252);">
                               <h5 class="mb-2 text-muted">{{ item.name }}</h5>
@@ -43,11 +42,14 @@
                               <p class="mb-1"><ngb-progressbar type="warning" [value]="25" height="4px"></ngb-progressbar></p>
                             </div>
                           </div>
-                        <button style="margin: 3px;" class="btn btn-primary btn-rounded" (click)="open(modalBasic)">Ver detalles</button>
-                        <button style="margin: 3px;" class="btn btn-danger btn-rounded" (click)="open(modalBasic)">Ver proyecto</button>
+                        <button style="margin: 3px;" class="btn btn-primary btn-rounded" (click)="openDetails(item)">Ver detalles</button>
+                        <button style="margin: 3px;" class="btn btn-danger btn-rounded" (click)="verProyecto(item.id)">Ver proyecto</button>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="module-loader" *ngIf="loading">
+            <div class="spinner spinner-bubble spinner-bubble-primary mr-3"></div>
         </div>
 <!--
         <div class="col-lg-3 col-md-6 col-sm-6">
@@ -127,24 +129,24 @@
                   <tbody>
                     <tr>
                       <td>Jefe de proyecto</td>
-                      <td><input type="text" formControlName="bossname" ng-model="data.bossname" size="25" maxlength="100" required></td>
+                      <td><input type="text"  [value]="proyecto.project_manager?.name" size="25" maxlength="100" required></td>
 
                     </tr>
                     <tr>
                       <td>Nombre de proyecto</td>
-                      <td><input type="text" formControlName="proyectoname" ng-model="dala.proyectoname" size="25" maxlength="100" required></td>
+                      <td><input type="text"  [value]="proyecto?.name" size="25" maxlength="100" required></td>
                     </tr>
                     <tr>
                       <td>Cantidad de participantes</td>
-                      <td><input type="text" formControlName="email" ng-model="email.text" size="25" maxlength="100" required></td>
+                      <td><input type="text" [value]="proyecto?.user_roles_count" size="25" maxlength="100" required></td>
                     </tr>
                     <tr>
                       <td>Fecha de creación</td>
-                      <td><input type="password" formControlName="password" ng-model="email.text" size="25" maxlength="100" required></td>
+                      <td><input type="password"ng-model="email.text" size="25" maxlength="100" required></td>
                     </tr>
                     <tr>
                       <td>Última modificación</td>
-                      <td><input type="text" formControlName="rut" ng-model="email.text" size="25" maxlength="100" required></td>
+                      <td><input type="text" ng-model="email.text" size="25" maxlength="100" required></td>
                     </tr>
                   </tbody>
                 </table>
@@ -192,6 +194,7 @@
             <button type="button" class="btn btn-danger btn-rounded"
                 (click)="modal.close('Close')">Cerrar</button>
         </div>
+
     </ng-template>
 
 <!-- VENTANA MODAL QUE SE DESPLEGA PARA CONFIRMAR LA ELIMINACIÓN DE UN DATO-->

@@ -10,7 +10,9 @@ import { Project } from 'src/app/model-classes/project';
 export class DetailsProjectComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<DetailsProjectComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Project) { }
+    @Inject(MAT_DIALOG_DATA) public data: any ) {
+
+     }
 
   ngOnInit(): void {
   }

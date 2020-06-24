@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { DetailsProjectComponent } from './details-project/details-project.component';
 import { ProjectsService } from 'src/app/_services/projects.service';
+import { Router } from '@angular/router';
 
 
 
@@ -22,19 +23,21 @@ import { ProjectsService } from 'src/app/_services/projects.service';
 export class GestionComponent implements OnInit {
     private readonly notifier: NotifierService;
 
-    proyectos: any = [];
+    projects: any = [];
     isCompleted: boolean;
     dialogResult = "";
     data: any = {
         email: ''
     };
     step2Form: FormGroup;
+    loading: boolean = false;
 
     constructor(private modalService: NgbModal,
         private projectsService: ProjectsService,
         private toastr: ToastrService,
         private fb: FormBuilder,
         private dialog: MatDialog,
+        private router: Router,
         notifierService: NotifierService) {
         this.notifier = notifierService;
     }
@@ -62,7 +65,7 @@ export class GestionComponent implements OnInit {
 
     openAddDialog(): void {
         let dialogRef = this.dialog.open(AddProjectComponent, {
-            width: '500px',
+            width: '850px',
             data: 'This text is passed into the dialog',
             disableClose: true,
             autoFocus: true
@@ -77,21 +80,26 @@ export class GestionComponent implements OnInit {
         })
     }
 
-    openDetails(): void {
-        //let selected;
+    verProyecto(id){
+        this.router.navigateByUrl('/proyectos/gestion/' + id);
+    }
+
+    openDetails(project): void {
         //recorrer arreglo de proyecto y obtener el proyecto seleccionado.
-        //selected = idProject;//
+
         //pasar item seleccionado al componente de detalles.
         this.dialog.open(DetailsProjectComponent, {
             width: '500px',
-            data: 'This text is passed into the dialog'//selected
+            data: project//selected
         });
     }
 
     //Método que actualiza los proyectos.
     loadProjects() {
-        this.projectsService.getAll().subscribe((proyectos:any) => {
-            this.proyectos = proyectos;
+        this.loading = true;
+        this.projectsService.getAll().subscribe((projects:any) => {
+            this.projects = projects;
+            this.loading = false;
         });
     }
 

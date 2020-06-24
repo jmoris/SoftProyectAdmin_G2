@@ -16,11 +16,23 @@ export class UsuariosService {
         return this.http.get<any>(`${environment.apiUrl}/users`);
     }
 
+    getStudents() {
+        return this.http.get<any>(`${environment.apiUrl}/students`);
+    }
+
+    getTeachers() {
+        return this.http.get<any>(`${environment.apiUrl}/teachers`);
+    }
+
     insert(data) {
         return this.http.post<any>(`${environment.apiUrl}/users`, data);
     }
 
     delete(id){
         return this.http.delete<any>(`${environment.apiUrl}/users/` + id);
+    }
+
+    infoDash(){
+        return this.http.get<any>(`${environment.apiUrl}/info`);
     }
 }

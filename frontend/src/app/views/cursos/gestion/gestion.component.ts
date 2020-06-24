@@ -1,11 +1,12 @@
+
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { CursosService } from 'src/app/_services/cursos.service';
-
-
+import { MatDialog } from '@angular/material/dialog';
+import { AddCourseComponent } from '../add-course/add-course.component';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { CursosService } from 'src/app/_services/cursos.service';
 export class GestionComponent implements OnInit {
   cursos: any;
   checked = true;
-  cargando = false;
+  loading = false;
 
   addCourseForm = this.fb.group({
     name:  ['', Validators.required],
@@ -38,6 +39,7 @@ export class GestionComponent implements OnInit {
   constructor(
         private modalService: NgbModal,
         private toastr: ToastrService,
+        private dialog: MatDialog,
         private cursosService: CursosService,
         private fb: FormBuilder,
 	) { }
@@ -47,11 +49,11 @@ export class GestionComponent implements OnInit {
   }
 
   loadData(){
-      this.cargando = true;
+      this.loading = true;
     this.cursosService.getAll().subscribe(
         (resp:any) => {
             this.cursos = resp;
-            this.cargando = false;
+            this.loading = false;
         }
     );
   }
@@ -96,7 +98,37 @@ export class GestionComponent implements OnInit {
     this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true });
   }
 
+  openAddDialog(): void {
+    let dialogRef = this.dialog.open(AddCourseComponent, {
+        width: '850px',
+        data: 'This text is passed into the dialog',
+        disableClose: true,
+        autoFocus: true
+    });
+    /*
+    dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog closed: ${result}`);
+        this.dialogResult = result;
+        if (result == 'Confirm') {
+            this.toastr.success('Proyecto agregado exitosamente', 'Notificación', { timeOut: 3000 });
+            this.loadProjects();
+        }
+    })
+    */
+}
 
+deleteData(id, modal, event) {
+    event.target.parentElement.parentElement.blur();
+    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })
+        .result.then((result) => {
+            this.cursosService.delete(id)
+                .subscribe(res => {
+                    this.toastr.success('Curso eliminado correctamente', 'Notificación de eliminación', { timeOut: 3000 });
+                    this.loadData();
+                })
+        }, (reason) => {
+        });
+  }
 
 
   formatProfile(value){
