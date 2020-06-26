@@ -10,7 +10,7 @@
 
 <div class="row">
   <div class="col-md-12">
-   
+
     <form-wizard>
       <wizard-step [title]="'Basic Info'" [isValid]="basicForm.form.valid" (onNext)="onStep1Next($event)">
         <form #basicForm="ngForm">
@@ -39,7 +39,7 @@
         </form>
       </wizard-step>
 
-      <wizard-step [title]="'Company info'" [isValid]="step2Form.valid" (onNext)="onStep2Next($event)">
+      <wizard-step [title]="'Asignar estudiantes'" [isValid]="asignarForm.valid" (onNext)="onStep2Next($event)">
         <form [formGroup]="step2Form">
           <div class="row">
             <div class="col-md-6">
@@ -111,6 +111,6 @@
         </div>
       </wizard-step>
     </form-wizard>
-     
+
   </div>
 </div>

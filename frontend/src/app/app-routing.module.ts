@@ -23,47 +23,7 @@ const adminRoutes: Routes = [
     {
       path: 'cursos',
       loadChildren: () => import('./views/cursos/cursos.module').then(m => m.CursosModule)
-  },
-    {
-      path: 'uikits',
-      loadChildren: () => import('./views/ui-kits/ui-kits.module').then(m => m.UiKitsModule)
     },
-    {
-      path: 'forms',
-      loadChildren: () => import('./views/forms/forms.module').then(m => m.AppFormsModule)
-    },
-    {
-      path: 'invoice',
-      loadChildren: () => import('./views/invoice/invoice.module').then(m => m.InvoiceModule)
-    },
-    {
-      path: 'inbox',
-      loadChildren: () => import('./views/inbox/inbox.module').then(m => m.InboxModule)
-    },
-    {
-      path: 'calendar',
-      loadChildren: () => import('./views/calendar/calendar.module').then(m => m.CalendarAppModule)
-    },
-    {
-      path: 'chat',
-      loadChildren: () => import('./views/chat/chat.module').then(m => m.ChatModule)
-    },
-    {
-      path: 'contacts',
-      loadChildren: () => import('./views/contacts/contacts.module').then(m => m.ContactsModule)
-    },
-    {
-      path: 'tables',
-      loadChildren: () => import('./views/data-tables/data-tables.module').then(m => m.DataTablesModule)
-    },
-    {
-      path: 'pages',
-      loadChildren: () => import('./views/pages/pages.module').then(m => m.PagesModule)
-    },
-    {
-        path: 'icons',
-        loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)
-    }
   ];
 
 const routes: Routes = [
@@ -76,7 +36,7 @@ const routes: Routes = [
     redirectTo: 'dashboard/v1',
     pathMatch: 'full'
   },
-  
+
   {
     path: '',
     component: AuthLayoutComponent,

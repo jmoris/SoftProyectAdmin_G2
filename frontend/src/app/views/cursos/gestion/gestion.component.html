@@ -1,12 +1,13 @@
 <div class="breadcrumb">
-    <h1>Administrar Cursos</h1>
+    <h1>Cursos</h1>
     <ul>
-        <li><a href="">Dashboard</a></li>
         <li>Administrar Cursos</li>
     </ul>
 </div>
 <div class="separator-breadcrumb border-top"></div>
-
+<div class="module-loader" *ngIf="loading">
+    <div class="spinner spinner-bubble spinner-bubble-primary mr-3"></div>
+</div>
 <div class="row">
     <div class="col-lg-8 col-md-12">
         <!-- CARD ICON -->
@@ -15,9 +16,10 @@
               <div class="card card-icon mb-4">
                   <div class="card-body text-center">
                       <i class="i-Address-Book"></i>
-                      <p class="text-muted mt-2 mb-2"> Nuevo Curso </p>
-                      
-                      <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded" (click)="addCourse(addCourseConfirmModal, $event)" > Agregar </button>
+                      <div id="divAncho">
+                        <p class="text-muted mt-2 mb-2"> Nuevo Curso </p>
+                      </div>
+                      <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded" (click)="openAddDialog()" > Agregar </button>
                   </div>
               </div>
             </div>
@@ -25,7 +27,9 @@
               <div class="card card-icon mb-4">
                   <div class="card-body text-center">
                       <i class="i-Add-User"></i>
-                      <p class="text-muted mt-2 mb-2"> Asignar P. Guesped </p>
+                      <div id="divAncho">
+                        <p class="text-muted mt-2 mb-2"> Asignar P. Huesped </p>
+                      </div>
                       <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded" (click)="addGuestTeacher(addGuestTeacherConfirmModal, $event)" > Agregar </button>
                   </div>
               </div>
@@ -34,50 +38,49 @@
               <div class="card card-icon mb-4">
                   <div class="card-body text-center">
                       <i class="i-Add-User"></i>
-                      <p class="text-muted mt-2 mb-2"> Asignar Ayudante</p>
+                      <div id="divAncho">
+                        <p class="text-muted mt-2 mb-2"> Asignar Ayudante</p>
+                      </div>
                       <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded" (click)="addHelper(addHelperConfirmModal, $event)" > Agregar </button>
                   </div>
               </div>
             </div>
         </div>
 </div>
-    
+
 
 
     <div class="col-md-12">
       <div class="card o-hidden mb-4">
           <ngx-datatable style="height: calc(100vh - 270px); box-shadow: none" class="material fullscreen"
               [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="60" [scrollbarV]="true"
-              [scrollbarH]="true" [limit]="10" [rows]="usuarios">
+              [scrollbarH]="true" [limit]="10" [rows]="cursos" [loadingIndicator]="loading">
 
               <ngx-datatable-column name="name" [flexGrow]="25">
                   <ng-template ngx-datatable-header-template>
                       <label>
-                          Nombre
+                          Nombre del curso
                       </label>
                   </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column name="surname" [flexGrow]="25">
+              <ngx-datatable-column name="year" [flexGrow]="25">
                   <ng-template ngx-datatable-header-template>
                       <label>
-                          Apellido
+                          Año del curso
                       </label>
                   </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column name="email" [flexGrow]="25">
+              <ngx-datatable-column name="semester" [flexGrow]="25">
                   <ng-template ngx-datatable-header-template>
                       <label>
-                          Email
+                          Semestre del curso
                       </label>
                   </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column name="profile" [flexGrow]="20">
-                  <ng-template let-value="value" ngx-datatable-cell-template>
-                      <div [innerHTML]="formatProfile(value)"></div>
-                    </ng-template>
+              <ngx-datatable-column name="idUser" [flexGrow]="20">
                   <ng-template ngx-datatable-header-template>
                       <label>
-                          Perfil
+                          Profesor a cargo
                       </label>
                   </ng-template>
               </ngx-datatable-column>
@@ -89,10 +92,10 @@
                 </ngx-datatable-column>
           </ngx-datatable>
       </div>
-  </div>    
+  </div>
 
 
-  
+
 
 
 <!-- VENTANA MODAL QUE SE DESPLEGA PARA CONFIRMAR LA ELIMINACIÓN DE UN DATO-->
@@ -108,9 +111,9 @@
       <p><strong>¿Estas seguro de querer eliminar este usuario?</strong></p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary btn-rounded"
+      <button type="button" class="btn btn-primary btn-rounded"
         (click)="modal.dismiss('cancel')">Cancelar</button>
-      <button type="button" ngbAutofocus class="btn btn-wide btn-danger btn-rounded"
+      <button type="button" ngbAutofocus class="btn btn-danger btn-rounded"
         (click)="modal.close('Ok')">Borrar</button>
     </div>
   </ng-template>
@@ -163,7 +166,7 @@
             </div>
           </td>
         </tr>
-          
+
         </tbody>
       </table>
       <div *ngIf="!checked">
@@ -173,9 +176,9 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" ngbAutofocus class="btn btn-wide btn-success btn-rounded"
+    <button type="button" ngbAutofocus class="btn btn-primary btn-rounded"
       (click)="((this.addCourseForm.invalid)?checked=false:modal.close('Ok'))">Agregar </button>
-    <button type="button" class="btn btn-outline-secondary btn-rounded"
+    <button type="button" class="btn btn-danger btn-rounded"
       (click)="modal.dismiss('cancel')">Cancelar</button>
   </div>
 </ng-template>
@@ -229,12 +232,12 @@
             <label style="color:red;"><b>* Todos los campos deben ser completados.</b></label>
         </div>
       </form>
-  
+
     </div>
     <div class="modal-footer">
-      <button type="button" ngbAutofocus class="btn btn-wide btn-success btn-rounded"
+      <button type="button" ngbAutofocus class="btn btn-primary btn-rounded"
         (click)="((this.addCourseForm.invalid)?checked=false:modal.close('Ok'))">Agregar </button>
-      <button type="button" class="btn btn-outline-secondary btn-rounded"
+      <button type="button" class="btn btn-danger btn-rounded"
         (click)="modal.dismiss('cancel')">Cancelar</button>
     </div>
   </ng-template>
@@ -288,13 +291,32 @@
             <label style="color:red;"><b>* Todos los campos deben ser completados.</b></label>
         </div>
       </form>
-  
+
     </div>
     <div class="modal-footer">
-      <button type="button" ngbAutofocus class="btn btn-wide btn-success btn-rounded"
+      <button type="button" ngbAutofocus class="btn btn-primary btn-rounded"
         (click)="((this.addCourseForm.invalid)?checked=false:modal.close('Ok'))">Agregar </button>
+      <button type="button" class="btn btn-danger btn-rounded"
+        (click)="modal.dismiss('cancel')">Cancelar</button>
+    </div>
+  </ng-template>
+<!-- VENTANA MODAL QUE SE DESPLEGA PARA CONFIRMAR LA ELIMINACIÓN DE UN DATO-->
+<ng-template #deleteConfirmModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">Eliminación de proyecto</h4>
+      <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+        (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p><strong>¿Estas seguro de querer eliminar este proyecto?</strong></p>
+    </div>
+    <div class="modal-footer">
       <button type="button" class="btn btn-outline-secondary btn-rounded"
         (click)="modal.dismiss('cancel')">Cancelar</button>
+      <button type="button" ngbAutofocus class="btn btn-wide btn-danger btn-rounded"
+        (click)="modal.close('Ok')">Borrar</button>
     </div>
   </ng-template>
 
