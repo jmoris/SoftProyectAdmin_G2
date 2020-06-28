@@ -15,7 +15,7 @@
               <label for="password">Contraseña</label>
               <input id="password" class="form-control form-control-rounded" formControlName="password" type="password">
             </div>
-            <div style="text-align:center; width:100%;" *ngIf="!check"><label style="color:red">Datos del usuario incorrectos.</label></div>
+            <div style="text-align:center; width:100%;" *ngIf="!check"><label style="color:red"> {{ msgError }}  </label></div>
             <btn-loading btnClass="btn-primary btn-rounded btn-block mt-3" [loadingText]="loadingText" [loading]="loading">
               Iniciar Sesión
             </btn-loading>

@@ -16,6 +16,7 @@ export class SigninComponent implements OnInit {
     loadingText: string;
     signinForm: FormGroup;
     check:boolean = true;
+    msgError: string;
     constructor(
         private fb: FormBuilder,
         private auth: AuthenticationService,
@@ -48,11 +49,22 @@ export class SigninComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
-                    this.router.navigateByUrl('/dashboard/v1');
+                    if(!data.success){
+                        this.msgError = data.message;
+                        this.check = false;
+                        this.loading = false;
+                    }else{
+                        this.router.navigateByUrl('/dashboard/v1');
+                    }
                 },
                 error => {
                     //this.error = error;
-                    //console.log(error);
+                    if(error === 'Unknown Error'){
+                        this.msgError = 'No se puede conectar al servidor.';
+                        this.check = false;
+                        this.loading = false;
+                    }
+                    this.msgError = error.message;
                     this.check = false;
                     this.loading = false;
                 });

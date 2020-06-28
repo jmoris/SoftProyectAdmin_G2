@@ -14,7 +14,7 @@ class CoursesController extends Controller
 {
 
     public function getCursos(){
-        return Course::all();
+        return Course::with('user')->get();
     }
 
     public function getCurso($id){
