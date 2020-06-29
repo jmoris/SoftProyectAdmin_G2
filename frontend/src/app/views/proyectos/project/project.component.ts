@@ -3,7 +3,7 @@ import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
 import { echartStyles } from 'src/app/shared/echart-styles';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataLayerService } from 'src/app/shared/services/data-layer.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectsService } from 'src/app/_services/projects.service';
 
@@ -28,12 +28,23 @@ export class ProjectComponent implements OnInit {
     id : any;
 proyecto : any;
 equipo:any = [];
-  constructor(
+
+
+userRequerimentForm : FormGroup;
+softwareRequerimentForm : FormGroup;
+testCaseForm : FormGroup;
+
+
+
+
+  constructor
+  (
     private route: ActivatedRoute,
     private modalService: NgbModal,
     private dl: DataLayerService,
     private proyectoService : ProjectsService
-  ) {
+  )
+  {
     this.id = this.route.snapshot.params['id'];
     proyectoService.get(this.id).subscribe((data) => {
         this.proyecto = data[0];
@@ -42,11 +53,39 @@ equipo:any = [];
             this.equipo = data2;
         });
     });
+
+    this.userRequerimentForm = new FormGroup({
+      urInputCode   : new FormControl(''),
+      urPriority    : new FormControl(''),
+      urStability  : new FormControl(''),
+      urState      : new FormControl(''),
+      urCost        : new FormControl(''),
+      urDescription : new FormControl('')
+    });
+
+    this.softwareRequerimentForm = new FormGroup({
+      srInputCode   : new FormControl(''),
+      srPriority    : new FormControl(''),
+      srStability  : new FormControl(''),
+      srState      : new FormControl(''),
+      srCost        : new FormControl(''),
+      srDescription : new FormControl(''),
+      userRequerimentReference : new FormControl('')
+    });
+
+    this.testCaseForm = new FormGroup({
+      tcCode   : new FormControl(''),
+      tcState   : new FormControl(''),
+      urReference   : new FormControl(''),
+      aResult   : new FormControl(''),
+      oResult   : new FormControl('')
+    });
   }
 
   public onSelect(item) {
     console.log('tag selected: value is ' + item);
   }
+
 
 
 
@@ -91,8 +130,6 @@ equipo:any = [];
   {
     event.target.parentElement.parentElement.blur();
     this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true, size: 'lg' });
-
-
   }
 
   addTestCase(modal, event)
@@ -100,9 +137,25 @@ equipo:any = [];
     event.target.parentElement.parentElement.blur();
     this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true, size: 'lg' });
 
+  }
+
+
+  imprimirtc()
+  {
+    console.log(this.testCaseForm.value);
+  }
+
+  imprimirur()
+  {
+    console.log(this.userRequerimentForm.value);
 
   }
 
+  imprimirsr()
+  {
+    console.log(this.softwareRequerimentForm.value);
+  }
+ 
 
 
 }
