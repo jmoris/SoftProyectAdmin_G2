@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use JWTAuth;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
@@ -18,17 +19,33 @@ class AuthController extends Controller
         $input = $request->only('email', 'password');
         $token = null;
 
-        if (!$token = JWTAuth::attempt($input)) {
+        if(!DB::connection()->getDatabaseName()){
             return response()->json([
                 'success' => false,
-                'message' => 'Invalid Email or Password',
-            ], 401);
+                'message' => 'No se pudo conectar con la base de datos.',
+            ]);
         }
 
-        return response()->json([
-            'success' => true,
-            'token' => $token,
-        ]);
+        $user = User::where('email', $request->email)->first();
+        if($user!=null){
+                if (!$token = JWTAuth::attempt($input)) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'La contraseña del usuario es incorrecta.',
+                    ], 401);
+                }
+                return response()->json([
+                    'success' => true,
+                    'token' => $token,
+                ]);
+        }else{
+            return response()->json([
+                'success' => false,
+                'message' => 'El usuario no existe.',
+            ]);
+        }
+
+
     }
 
     /**
