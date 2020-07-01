@@ -16,6 +16,10 @@ class CreateTestCasesTable extends Migration
         Schema::create('test_cases', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->text('acceptableResult');
+            $table->text('optimunResult');
+            $table->text('state');
+
         });
     }
 

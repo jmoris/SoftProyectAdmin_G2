@@ -16,6 +16,11 @@ class CreateRegistriesTable extends Migration
         Schema::create('registries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->text('name');
+            $table->text('identifier');
+            $table->text('description');
+            $table->text('user');
+            $table->text('validity');
         });
     }
 
