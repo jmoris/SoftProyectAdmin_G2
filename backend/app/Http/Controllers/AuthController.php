@@ -19,7 +19,9 @@ class AuthController extends Controller
         $input = $request->only('email', 'password');
         $token = null;
 
-        if(!DB::connection()->getDatabaseName()){
+        try {
+            DB::connection()->getPdo();
+        } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'No se pudo conectar con la base de datos.',
