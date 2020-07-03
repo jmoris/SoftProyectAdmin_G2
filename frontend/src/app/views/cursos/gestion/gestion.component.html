@@ -83,6 +83,9 @@
                           Profesor a cargo
                       </label>
                   </ng-template>
+                  <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+                   {{ row.user.name + ' ' + row.user.surname }}
+                </ng-template>
               </ngx-datatable-column>
               <ngx-datatable-column [cellClass]="'va-middle'" name="Accion" [flexGrow]="5" [sortable]="false" prop="id">
                   <ng-template ngx-datatable-cell-template let-value="value">
