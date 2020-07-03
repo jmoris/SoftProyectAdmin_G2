@@ -16,6 +16,14 @@ class CreateUserRequirementsTable extends Migration
         Schema::create('user_requirements', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->text('source');
+            $table->integer('cost');
+            $table->text('stability');
+            $table->text('priority');
+            $table->text('state');
+            $table->integer('idUserType');
+            $table->text('idIncrement');
+            $table->text('type');
         });
     }
 
