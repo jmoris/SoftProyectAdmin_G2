@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 Route::post('login', 'AuthController@login');
 Route::post('register', 'AuthController@register');
 
-Route::group(['middleware' => 'api'], function () {
+Route::group(['middleware' => 'auth:api'], function () {
     Route::get('logout', 'AuthController@logout');
 
     Route::get('users', 'UsersController@getUsuarios');
@@ -50,6 +50,10 @@ Route::group(['middleware' => 'api'], function () {
     Route::delete('projects/detach', 'ProjectsController@eliminarAlumnoDeUnProyecto');
     Route::post('projects/createmass', 'ProjectsController@createAndAdd');
     Route::get('projects/getpm/{id}', 'ProjectsController@getJefeProyecto');
+
+
+    Route::apiResource('userrequirements', 'UserRequirementController');
+
 
     Route::get('info', function(){
 
