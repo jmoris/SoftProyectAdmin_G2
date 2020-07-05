@@ -53,6 +53,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
 
     Route::apiResource('userrequirements', 'UserRequirementController');
+    Route::apiResource('softwarerequirements', 'SoftwareRequirementController');
 
 
     Route::get('info', function(){
