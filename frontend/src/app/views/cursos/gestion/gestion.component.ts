@@ -18,6 +18,8 @@ export class GestionComponent implements OnInit {
   cursos: any;
   checked = true;
   loading = false;
+  dialogResult = "";
+
 
   addCourseForm = this.fb.group({
     name:  ['', Validators.required],
@@ -105,16 +107,16 @@ export class GestionComponent implements OnInit {
         disableClose: true,
         autoFocus: true
     });
-    /*
+    
     dialogRef.afterClosed().subscribe(result => {
         console.log(`Dialog closed: ${result}`);
         this.dialogResult = result;
         if (result == 'Confirm') {
-            this.toastr.success('Proyecto agregado exitosamente', 'Notificación', { timeOut: 3000 });
-            this.loadProjects();
+            this.toastr.success('Curso agregado exitosamente', 'Notificación', { timeOut: 3000 });
+            this.loadData();
         }
     })
-    */
+    
 }
 
 deleteData(id, modal, event) {

@@ -53,7 +53,7 @@ Route::group(['middleware' => 'api'], function () {
 
     Route::get('info', function(){
 
-        $results = DB::select( DB::raw("SELECT COUNT(profile) as count, profile FROM users GROUP BY profile;") );
+        $results = DB::select( DB::raw("SELECT COUNT(profile) as count, profile FROM users WHERE deleted_at IS NULL GROUP BY profile;") );
 
         $cursos_activos = DB::select( DB::raw("SELECT count(*) as activos FROM courses WHERE deleted_at IS NULL;") );
         $cursos_inactivos = DB::select( DB::raw("SELECT count(*) as inactivos FROM courses WHERE deleted_at IS NOT NULL;") );
