@@ -15,6 +15,7 @@ class CreateUserRequirementsTable extends Migration
     {
         Schema::create('user_requirements', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('internalId');
             $table->string('source');
             $table->integer('cost');
             $table->string('stability');
@@ -22,7 +23,11 @@ class CreateUserRequirementsTable extends Migration
             $table->string('state');
             $table->bigInteger('idUser');
             $table->string('type');
+            $table->string('description');
+            $table->bigInteger('project_id');
             $table->timestamps();
+
+            $table->foreign('project_id')->references('id')->on('projects');
         });
     }
 

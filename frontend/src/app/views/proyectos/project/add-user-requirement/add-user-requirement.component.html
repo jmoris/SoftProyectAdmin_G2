@@ -1,0 +1,65 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Nuevo requerimiento de usuario</h4>
+    <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+        (click)="onCloseCancel()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="row">
+            <div class="col-md-4 form-group mb-0">
+                <label for="firstName">Codigo</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">RU</span>
+                    </div>
+                    <input type="number" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                </div>
+            </div>
+            <div class="col-md-4 form-group mb-0">
+                <label for="firstName"> Prioridad </label>
+                <select class="form-control">
+                    <option>Deseable</option>
+                    <option>No deseable</option>
+                    <option>Critica</option>
+                </select>
+            </div>
+            <div class="col-md-4 form-group mb-0">
+                <label for="firstName"> Estabilidad </label>
+                <select class="form-control">
+                    <option>Transable</option>
+                    <option>Intransable</option>
+                </select>
+            </div>
+            <div class="col-md-4 form-group mb-3">
+                <label for="firstName">Estado</label>
+                <select class="form-control">
+                    <option>Incompleto</option>
+                    <option>Completo</option>
+                </select>
+            </div>
+            <div class="col-md-4 form-group mb-3">
+                <label for="firstName">Costo</label>
+                <input type="number" class="form-control" id="firstName" placeholder="1">
+            </div>
+            <div class="col-md-4 form-group mb-3">
+                <label for="firstName">Fuente</label>
+                <input type="text" class="form-control" id="firstName" placeholder="Cliente">
+            </div>
+            <div class="col-md-12 form-group mb-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Descripción</span>
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea"></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" (click)="onCloseCancel()" class="btn btn-secondary m-1">Cancelar</button>
+    <button type="button" (click)="onCloseConfirm()" class="btn btn-outline-primary m-1">Agregar</button>
+
+</div>

@@ -25,17 +25,19 @@ class UserRequirementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $project_id)
     {
         $validator = Validator::make($request->all(), [
             'source' => 'required',
             'cost' => 'required',
+            'internalId' => 'required',
             'stability' => 'required',
             'priority' => 'required',
             'state' => 'required',
             'type' => 'required',
             'idUser' => 'required',
-            'idIncrement' => 'required'
+            'idIncrement' => 'required',
+            'description' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -43,6 +45,7 @@ class UserRequirementController extends Controller
         }
 
         $usrq = new UserRequirement();
+        $usrq->internalId = $request->internalId;
         $usrq->source = $request->source;
         $usrq->cost = $request->cost;
         $usrq->stability = $request->stability;
@@ -51,6 +54,8 @@ class UserRequirementController extends Controller
         $usrq->idUser = $request->idUser;
         $usrq->idIncrement = $request->idIncrement;
         $usrq->type = $request->type;
+        $usrq->project_id = $project_id;
+        $usrq->description = $request->description;
         $usrq->save();
 
         return response()->json([
