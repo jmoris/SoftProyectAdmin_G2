@@ -9,6 +9,7 @@ import { ProjectsService } from 'src/app/_services/projects.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { AddUserRequirementComponent } from './add-user-requirement/add-user-requirement.component';
+import { UserRequirementService } from 'src/app/_services/userrequirements.service';
 
 
 @Component({
@@ -32,13 +33,17 @@ export class ProjectComponent implements OnInit {
     id : any;
 proyecto : any;
 equipo:any = [];
+userreqs: any = [];
+
+
   constructor(
     private route: ActivatedRoute,
     private modalService: NgbModal,
     private dl: DataLayerService,
     private toastr: ToastrService,
     private dialog: MatDialog,
-    private proyectoService : ProjectsService
+    private proyectoService : ProjectsService,
+    private userReqService : UserRequirementService
   ) {
       this.loading = true;
     this.id = this.route.snapshot.params['id'];
@@ -48,6 +53,9 @@ equipo:any = [];
         this.proyectoService.getUsersFromProject(this.id).subscribe((data2) => {
             this.equipo = data2;
             this.loading = false;
+        });
+        this.userReqService.getAll(this.id).subscribe((resp: any) => {
+            this.userreqs = resp;
         });
     });
   }
@@ -88,10 +96,40 @@ equipo:any = [];
     };
   }
 
+  formatUserReqColumns(data, type){
+      let str = '';
+      switch(type){
+            case 'priority':
+                if(data==0){
+                    str = 'Deseable';
+                }else if(data==1){
+                    str = 'No deseable';
+                }else{
+                    str = 'Critica';
+                }
+                break;
+            case 'stability':
+                if(data==0){
+                    str = 'Transable';
+                }else{
+                    str = 'Intransable';
+                }
+                break;
+            case 'status':
+                if(data==0){
+                    str = 'Incompleto';
+                }else{
+                    str = 'Completo';
+                }
+                break;
+      }
+      return str;
+  }
+
   addUserRequeriment(modal, event){
         let dialogRef = this.dialog.open(AddUserRequirementComponent, {
             width: '750px',
-            data: 'This text is passed into the dialog',
+            data: {project_id: this.id, internalId: this.userreqs.length + 1},
             disableClose: true,
             autoFocus: true
         });

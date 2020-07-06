@@ -22,12 +22,14 @@ export class AddUserRequirementComponent implements OnInit {
     private usersService: UserRequirementService) {
     this.form = new FormGroup({
       source: new FormControl("", [Validators.required]),
-      type: new FormControl("", [Validators.required]),
-      priority: new FormControl("", [Validators.required, Validators.email]),
+      //type: new FormControl("", [Validators.required]),
+      priority: new FormControl("", [Validators.required]),
       stability: new FormControl("", [Validators.required]),
       status: new FormControl("", [Validators.required]),
-      cost: new FormControl("", [Validators.required]),
-      code: new FormControl("", [Validators.required])
+      cost: new FormControl(1, [Validators.required]),
+      code: new FormControl(this.data.internalId, [Validators.required]),
+      description: new FormControl("", [Validators.required]),
+      project_id: new FormControl(this.data.project_id)
     });
   }
 
@@ -40,6 +42,8 @@ export class AddUserRequirementComponent implements OnInit {
   }
 
   onCloseConfirm() {
+    let userData = this.form.value;
+    console.log(userData);
     if (this.form.invalid) {
       (<any>Object).values(this.form.controls).forEach(control => {
         control.markAsTouched();
@@ -47,9 +51,9 @@ export class AddUserRequirementComponent implements OnInit {
       return;
     }
 
-    let userData = this.form.value;
 
-    this.usersService.insert(userData).subscribe({
+
+    this.usersService.insert(userData, this.data.project_id).subscribe({
       next: result => {
         console.log(result);
         this.dialogRef.close('Confirm');

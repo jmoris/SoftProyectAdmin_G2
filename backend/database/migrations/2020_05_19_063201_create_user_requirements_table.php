@@ -18,13 +18,13 @@ class CreateUserRequirementsTable extends Migration
             $table->integer('internalId');
             $table->string('source');
             $table->integer('cost');
-            $table->string('stability');
-            $table->string('priority');
-            $table->string('state');
-            $table->bigInteger('idUser');
-            $table->string('type');
+            $table->integer('stability');
+            $table->integer('priority');
+            $table->integer('status');
+            //$table->bigInteger('idUser');
+            //$table->string('type');
             $table->string('description');
-            $table->bigInteger('project_id');
+            $table->bigInteger('project_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('project_id')->references('id')->on('projects');

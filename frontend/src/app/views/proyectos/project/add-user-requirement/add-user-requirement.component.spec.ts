@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddUserRequirementComponent } from './add-user-requirement.component.';
+import { AddUserRequirementComponent } from './add-user-requirement.component';
 
 describe('AddUserRequirementComponent', () => {
   let component: AddUserRequirementComponent;

@@ -13,9 +13,9 @@ class UserRequirementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $ur = UserRequirement::all();
+        $ur = UserRequirement::where('project_id', $request->project_id)->get();
         return response()->json($ur);
     }
 
@@ -25,18 +25,16 @@ class UserRequirementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $project_id)
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'source' => 'required',
             'cost' => 'required',
-            'internalId' => 'required',
+            //'internalId' => 'required',
             'stability' => 'required',
             'priority' => 'required',
-            'state' => 'required',
-            'type' => 'required',
-            'idUser' => 'required',
-            'idIncrement' => 'required',
+            'status' => 'required',
+            'project_id' => 'required',
             'description' => 'required'
         ]);
 
@@ -45,16 +43,16 @@ class UserRequirementController extends Controller
         }
 
         $usrq = new UserRequirement();
-        $usrq->internalId = $request->internalId;
+        $usrq->internalId = UserRequirement::where('project_id', $request->project_id)->count() + 1;
         $usrq->source = $request->source;
         $usrq->cost = $request->cost;
         $usrq->stability = $request->stability;
         $usrq->priority = $request->priority;
-        $usrq->state = $request->state;
-        $usrq->idUser = $request->idUser;
-        $usrq->idIncrement = $request->idIncrement;
-        $usrq->type = $request->type;
-        $usrq->project_id = $project_id;
+        $usrq->status = $request->status;
+        //$usrq->idUser = $request->idUser;
+        //$usrq->idIncrement = $request->idIncrement;
+        //$usrq->type = $request->type;
+        $usrq->project_id = $request->project_id;
         $usrq->description = $request->description;
         $usrq->save();
 

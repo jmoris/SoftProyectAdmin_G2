@@ -132,33 +132,50 @@
 									<div class="col-md-10">
 										<div class="card o-hidden mb-4 mt-4 mr-4">
 											<ngx-datatable style="height: calc(100vh - 270px); box-shadow: none"
-												class="material fullscreen" [columnMode]="'force'" [headerHeight]="50"
+												class="material fullscreen" [columnMode]="'flex'" [headerHeight]="50"
 												[footerHeight]="50" [rowHeight]="60" [scrollbarV]="true" [limit]="10"
-												[rows]="products$ | async">
-												<ngx-datatable-column name="photo" [maxWidth]="80">
+												[rows]="userreqs">
+												<ngx-datatable-column name="internalId" [flexGrow]="10">
 													<ng-template ngx-datatable-header-template>
 														Codigo
-													</ng-template>
-													<ng-template ngx-datatable-cell-template let-value="value"
-														let-row="row">
-														<img height="32px" width="32px" style="border-radius: 4px"
-															[src]="value" alt="">
-													</ng-template>
+                                                    </ng-template>
+                                                    <ng-template let-value="value" ngx-datatable-cell-template>
+                                                        RU{{value | number: '2.0'}}
+                                                      </ng-template>
 												</ngx-datatable-column>
-												<ngx-datatable-column name="name" [width]="600">
+												<ngx-datatable-column name="description" [flexGrow]="50">
 													<ng-template ngx-datatable-header-template>
 														Descripción
 													</ng-template>
 												</ngx-datatable-column>
-												<ngx-datatable-column name="category" [maxWidth]="150">
+												<ngx-datatable-column name="priority" [flexGrow]="10">
 													<ng-template ngx-datatable-header-template>
-														Categoria
-													</ng-template>
+														Prioridad
+                                                    </ng-template>
+                                                    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                                        {{ formatUserReqColumns(value, 'priority') }}
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column name="stability" [flexGrow]="10">
+													<ng-template ngx-datatable-header-template>
+														Estabilidad
+                                                    </ng-template>
+                                                    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                                        {{ formatUserReqColumns(value, 'stability') }}
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column name="cost" [flexGrow]="10">
+													<ng-template ngx-datatable-header-template>
+														Costo
+                                                    </ng-template>
 												</ngx-datatable-column>
-												<ngx-datatable-column name="subtitle" [maxWidth]="150">
+												<ngx-datatable-column name="status" [flexGrow]="10">
 													<ng-template ngx-datatable-header-template>
-														Estatus
-													</ng-template>
+														Estado
+                                                    </ng-template>
+                                                    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                                        {{ formatUserReqColumns(value, 'status') }}
+                                                    </ng-template>
 												</ngx-datatable-column>
 											</ngx-datatable>
 										</div>

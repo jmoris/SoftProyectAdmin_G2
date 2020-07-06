@@ -6,7 +6,7 @@
     </button>
 </div>
 <div class="modal-body">
-    <form>
+    <form [formGroup]="form">
         <div class="row">
             <div class="col-md-4 form-group mb-0">
                 <label for="firstName">Codigo</label>
@@ -14,45 +14,48 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon3">RU</span>
                     </div>
-                    <input type="number" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <input type="number" formControlName="code" readonly class="form-control">
                 </div>
             </div>
             <div class="col-md-4 form-group mb-0">
                 <label for="firstName"> Prioridad </label>
-                <select class="form-control">
-                    <option>Deseable</option>
-                    <option>No deseable</option>
-                    <option>Critica</option>
+                <select formControlName="priority" class="form-control">
+                    <option value="" disabled="true" [selected]="true">Seleccione la prioridad</option>
+                    <option [value]="0">Deseable</option>
+                    <option [value]="1">No deseable</option>
+                    <option [value]="2">Critica</option>
                 </select>
             </div>
             <div class="col-md-4 form-group mb-0">
                 <label for="firstName"> Estabilidad </label>
-                <select class="form-control">
-                    <option>Transable</option>
-                    <option>Intransable</option>
+                <select formControlName="stability" class="form-control">
+                    <option value="" disabled="true" [selected]="true">Seleccione la estabilidad</option>
+                    <option [value]="0">Transable</option>
+                    <option [value]="1">Intransable</option>
                 </select>
             </div>
             <div class="col-md-4 form-group mb-3">
                 <label for="firstName">Estado</label>
-                <select class="form-control">
-                    <option>Incompleto</option>
-                    <option>Completo</option>
+                <select formControlName="status" class="form-control">
+                    <option value="" disabled="true" [selected]="true">Seleccione un estado</option>
+                    <option [value]="0">Incompleto</option>
+                    <option [value]="1">Completo</option>
                 </select>
             </div>
             <div class="col-md-4 form-group mb-3">
                 <label for="firstName">Costo</label>
-                <input type="number" class="form-control" id="firstName" placeholder="1">
+                <input type="number" formControlName="cost" class="form-control">
             </div>
             <div class="col-md-4 form-group mb-3">
                 <label for="firstName">Fuente</label>
-                <input type="text" class="form-control" id="firstName" placeholder="Cliente">
+                <input type="text" formControlName="source" class="form-control" placeholder="Cliente">
             </div>
             <div class="col-md-12 form-group mb-3">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Descripción</span>
                     </div>
-                    <textarea class="form-control" aria-label="With textarea"></textarea>
+                    <textarea class="form-control" formControlName="description" aria-label="With textarea"></textarea>
                 </div>
             </div>
         </div>
