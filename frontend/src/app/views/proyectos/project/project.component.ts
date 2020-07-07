@@ -60,6 +60,12 @@ userreqs: any = [];
     });
   }
 
+  loadData(){
+    this.userReqService.getAll(this.id).subscribe((resp: any) => {
+        this.userreqs = resp;
+    });
+  }
+
   public onSelect(item) {
     console.log('tag selected: value is ' + item);
   }
@@ -137,8 +143,8 @@ userreqs: any = [];
             console.log(`Dialog closed: ${result}`);
             this.dialogResult = result;
             if (result == 'Confirm') {
-                this.toastr.success('Usuario agregado exitosamente', 'Notificación', { timeOut: 3000 });
-            //this.cleanForm();
+                this.toastr.success('Requisito de usuario agregado exitosamente', 'Notificación', { timeOut: 3000 });
+            this.loadData();
             }
         })
     }

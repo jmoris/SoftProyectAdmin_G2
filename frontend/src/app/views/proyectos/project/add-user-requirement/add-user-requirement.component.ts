@@ -18,7 +18,7 @@ export class AddUserRequirementComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AddUserRequirementComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: String,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private usersService: UserRequirementService) {
     this.form = new FormGroup({
       source: new FormControl("", [Validators.required]),
@@ -53,7 +53,7 @@ export class AddUserRequirementComponent implements OnInit {
 
 
 
-    this.usersService.insert(userData, this.data.project_id).subscribe({
+    this.usersService.insert(userData).subscribe({
       next: result => {
         console.log(result);
         this.dialogRef.close('Confirm');
