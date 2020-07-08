@@ -81,6 +81,110 @@
 				</ng-template>
 			</li>
 			<li [ngbNavItem]="2">
+				<a ngbNavLink>Incrementos</a>
+				<ng-template ngbNavContent>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card o-hidden mb-4">
+								<div class="row">
+									<div class="col-md-2">
+										<div class="card o-hidden mb-4 mt-4 ml-4">
+											<div class="card-body text-center">
+												<div class="content">
+													<div class="col-md-12 form-group mb-0">
+														<select class="form-control">
+															<option>Incremento 1</option>
+															<option>Incremento 2</option>
+															<option>Incremento 3</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="card o-hidden mb-4 mt-4 ml-4">
+											<div class="card-body text-center">
+												<div class="content">
+													<p class="m-0 text-mid text-muted"> Incrementos / Completados </p>
+												</div>
+												<div class="row">
+													<div class="col-md-12">
+														<p class="text-primary text-40 line-height-1 m-0">20 </p>
+													<p class="text-success text-40 line-height-1 m-0">5</p>
+
+													</div>
+													
+												</div>
+											</div>
+										</div>
+										<div class="card o-hidden mb-4 ml-4 ">
+											<div class="card-body text-center">
+												<div class="content">
+													<p class="text-muted mt-0 mb-0">Nuevo Incremento</p>
+													<button _ngcontent-tkm-c169=""
+														class="btn btn-primary btn-rounded" (click)="addIncrement(addIncrementConfirmModal, $event)">Agregar <i class="i-Add ml-1"></i> </button>
+												</div>
+											</div>
+										</div>
+										<div class="card o-hidden mb-4 ml-4 ">
+											<div class="card-body text-center">
+												<div class="content">
+													<p class="text-muted mt-0 mb-0">Editar Incremento</p>
+													<button _ngcontent-tkm-c169=""
+														class="btn btn-primary btn-rounded" (click)="editIncrement(editIncrementConfirmModal, $event)">Editar  <i class="i-File-Edit ml-1"></i> </button>
+												</div>
+											</div>
+										</div> 
+										<div class="card o-hidden mb-4 ml-4 ">
+											<div class="card-body text-center">
+												<div class="content">
+													<p class="text-muted mt-0 mb-0">Eliminar Incremento</p>
+													<button _ngcontent-tkm-c169=""
+														class="btn btn-primary btn-rounded" (click)="deleteIncrement(deleteIncrementConfirmModal, $event)">Eliminar <i class="i-Delete-File ml-1"></i> </button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-10">
+										<div class="card o-hidden mb-4 mt-4 mr-4">
+											<ngx-datatable style="height: calc(100vh - 270px); box-shadow: none"
+												class="material fullscreen" [columnMode]="'force'" [headerHeight]="50"
+												[footerHeight]="50" [rowHeight]="60" [scrollbarV]="true" [limit]="10"
+												[rows]="products$ | async">
+												<ngx-datatable-column name="photo" [maxWidth]="80">
+													<ng-template ngx-datatable-header-template>
+														Codigo RU
+													</ng-template>
+													<ng-template ngx-datatable-cell-template let-value="value"
+														let-row="row">
+														<img height="32px" width="32px" style="border-radius: 4px"
+															[src]="value" alt="">
+													</ng-template>
+												</ngx-datatable-column>
+												<ngx-datatable-column name="name" [width]="300">
+													<ng-template ngx-datatable-header-template>
+														Descripcion
+													</ng-template>
+												</ngx-datatable-column>
+												<ngx-datatable-column name="category" [maxWidth]="150">
+													<ng-template ngx-datatable-header-template>
+														Fecha
+													</ng-template>
+												</ngx-datatable-column>
+												<ngx-datatable-column name="subtitle" [maxWidth]="150">
+													<ng-template ngx-datatable-header-template>
+														Estatus
+													</ng-template>
+												</ngx-datatable-column>
+											</ngx-datatable>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+			</li>
+			<li [ngbNavItem]="3">
 				<a ngbNavLink>Requerimientos de Usuario</a>
 				<ng-template ngbNavContent>
 					<div class="row">
@@ -167,7 +271,7 @@
 					</div>
 				</ng-template>
 			</li>
-			<li [ngbNavItem]="3">
+			<li [ngbNavItem]="4">
 				<a ngbNavLink>Requerimientos de Software</a>
 				<ng-template ngbNavContent>
 					<div class="row">
@@ -256,7 +360,7 @@
 					</div>
 				</ng-template>
 			</li>
-			<li [ngbNavItem]="4">
+			<li [ngbNavItem]="5">
 				<a ngbNavLink>Casos de prueba </a>
 				<ng-template ngbNavContent>
 					<div class="row">
@@ -536,8 +640,64 @@
 	</div>
 </ng-template>
 
-</div>
+<!-- VENTANA MODAL QUE SE DESPLEGA PARA AGREGA UN INCREMENTO -->
+<ng-template #addIncrementConfirmModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-title">Nuevo Incremento  </h4>
+		<button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+			(click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="testCaseForm">
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-primary m-1" (click)="imprimirtc()">Agregar</button>
+		<button type="button" class="btn btn-secondary m-1">Cancelar</button>
+	</div>
+</ng-template>
 
+<!-- VENTANA MODAL QUE SE DESPLEGA PARA EDITAR UN INCREMENTO -->
+<ng-template #editIncrementConfirmModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-title">Editar Incremento  </h4>
+		<button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+			(click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="testCaseForm">
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-primary m-1" (click)="imprimirtc()">Agregar</button>
+		<button type="button" class="btn btn-secondary m-1">Cancelar</button>
+	</div>
+</ng-template>
+
+<!-- VENTANA MODAL QUE SE DESPLEGA PARA ELIMINAR UN INCREMENTO -->
+<ng-template #deleteIncrementConfirmModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-title">Eliminar Incremento  </h4>
+		<button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+			(click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="testCaseForm">
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-primary m-1" (click)="imprimirtc()">Agregar</button>
+		<button type="button" class="btn btn-secondary m-1">Cancelar</button>
+	</div>
+</ng-template>
+
+</div>
 
 
 

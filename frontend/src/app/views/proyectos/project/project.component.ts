@@ -139,6 +139,24 @@ testCaseForm : FormGroup;
 
   }
 
+  addIncrement(modal, event)
+  {
+    event.target.parentElement.parentElement.blur();
+    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true, size: 'lg' });
+  }
+
+  editIncrement(modal, event)
+  {
+    event.target.parentElement.parentElement.blur();
+    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true, size: 'lg' });
+  }
+
+  deleteIncrement(modal, event)
+  {
+    event.target.parentElement.parentElement.blur();
+    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true, size: 'lg' });
+  }
+
 
   imprimirtc()
   {
