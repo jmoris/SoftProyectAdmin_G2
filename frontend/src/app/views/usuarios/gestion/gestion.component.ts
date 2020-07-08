@@ -25,7 +25,6 @@ export class GestionComponent implements OnInit {
   usuarios: any = [];
   users: Users[];
   checked = true;
-  cargando = false;
   displayedColumns: string[] = ["run", "name", "surname", "email", "profile", "edit", "delete"];
   dataSource: MatTableDataSource<Users> = new MatTableDataSource<Users>();
   dialogResult = "";
@@ -54,7 +53,6 @@ export class GestionComponent implements OnInit {
 
   getUsers() {
     this.loading = true;
-    this.cargando = true;
     this.usuariosService.getAll().subscribe(
       data => {
         if (!data) {
