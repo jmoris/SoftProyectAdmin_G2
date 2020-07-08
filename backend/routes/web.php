@@ -20,4 +20,4 @@ Route::get('nologin', function(){
         'status' => 400,
         'msg' => 'No autorizado'
     ], 400);
-});
+})->name('nologin');
