@@ -1,11 +1,21 @@
-<div class="breadcrumb">
-	<h1>Proyecto </h1>
-	<ul>
-		<li>{{ proyecto.name }}</li>
-	</ul>
+<div class="row">
+	<div class="breadcrumb col-md-9">
+		<h1>Proyectos</h1>
+		<ul>
+			<li> {{ proyecto.name}} </li>
+		</ul>
+
+
+	</div>
+	<div class="col-md-3 text-right">
+		<button class="btn btn-primary btn-rounded" (click)="openEditDialog()">
+			<i class="fas fa-cloud"></i> Editar proyecto
+		</button>
+	</div>
 </div>
 
 <div class="separator-breadcrumb border-top"></div>
+
 <div class="row">
 	<div class="col-md-12">
 		<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
