@@ -89,6 +89,8 @@
               </ngx-datatable-column>
               <ngx-datatable-column [cellClass]="'va-middle'" name="Accion" [flexGrow]="5" [sortable]="false" prop="id">
                   <ng-template ngx-datatable-cell-template let-value="value">
+                    <button class="btn btn-sm btn-outline-warning" (click)="verCurso(value, $event)"><i
+                        class="i-Edit icon-md"></i></button>&nbsp;&nbsp;
                       <button class="btn btn-sm btn-outline-danger" (click)="deleteData(value, deleteConfirmModal, $event)"><i
                           class="i-Close-Window icon-md"></i></button>
                   </ng-template>

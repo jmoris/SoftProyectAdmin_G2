@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('courses/assign', 'CoursesController@asignarProfesorACurso');
     Route::post('courses/createmass', 'CoursesController@createAndAdd');
     Route::get('courses/list/{id}', 'CoursesController@getUserList');
+    Route::post('courses/uploadfile/{id}', 'CoursesController@uploadFile');
 
     Route::get('projects', 'ProjectsController@getProyectos');
     Route::get('projects/{id}', 'ProjectsController@getProyecto');

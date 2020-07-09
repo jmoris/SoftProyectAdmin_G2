@@ -12,6 +12,7 @@ import { GestionComponent } from './gestion/gestion.component';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { MaterialModule } from 'src/app/material.module';
 import { FormWizardModule } from 'src/app/shared/components/form-wizard/form-wizard.module';
+import { CursoComponent } from './curso/curso.component';
 
 
 
@@ -30,6 +31,6 @@ import { FormWizardModule } from 'src/app/shared/components/form-wizard/form-wiz
     TagInputModule,
     MaterialModule,
   ],
-  declarations: [GestionComponent, AddCourseComponent]
+  declarations: [GestionComponent, AddCourseComponent, CursoComponent]
 })
 export class CursosModule { }

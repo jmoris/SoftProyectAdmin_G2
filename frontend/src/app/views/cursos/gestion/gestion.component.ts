@@ -7,6 +7,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { CursosService } from 'src/app/_services/cursos.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCourseComponent } from '../add-course/add-course.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -37,6 +38,7 @@ export class GestionComponent implements OnInit {
   });
 
   constructor(
+        private router: Router,
         private modalService: NgbModal,
         private toastr: ToastrService,
         private dialog: MatDialog,
@@ -115,6 +117,11 @@ export class GestionComponent implements OnInit {
         }
     })
     */
+}
+
+verCurso(value, event){
+    event.target.parentElement.parentElement.blur();
+    this.router.navigateByUrl('/cursos/gestion/' + value);
 }
 
 deleteData(id, modal, event) {
