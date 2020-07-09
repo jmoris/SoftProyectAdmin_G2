@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, TemplateRef } from '@angular/
 import { ActivatedRoute } from '@angular/router';
 import { CursosService } from 'src/app/_services/cursos.service';
 import { NgbTab, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-curso',
@@ -28,7 +29,8 @@ export class CursoComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private cursoService: CursosService,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private toastr: ToastrService,
     ) {
         this.loading = true;
         this.id = this.route.snapshot.params['id'];
@@ -58,6 +60,11 @@ export class CursoComponent implements OnInit {
         this.fileToUpload = files.item(0);
         this.cursoService.uploadFile(this.fileToUpload, this.id).subscribe((data:any) => {
             this.fileToUpload = null;
+            if(!data.success){
+                this.toastr.error(data.msg, 'Notificación de error', { timeOut: 3000 });
+                return;
+            }
+            this.toastr.success(data.msg, 'Notificación de exito', { timeOut: 3000 });
             this.carga = data;
             this.modalService.open(this.modalRef, {backdropClass: 'light-blue-backdrop'});
             this.loadData();
