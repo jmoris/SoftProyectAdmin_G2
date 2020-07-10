@@ -15,14 +15,18 @@ class CreateSoftwareRequirementsTable extends Migration
     {
         Schema::create('software_requirements', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
-            $table->text('priority');
-            $table->text('stability');
-            $table->text('state');
-            $table->text('cost');
+            $table->integer('internalId');
+            $table->integer('priority');
+            $table->integer('stability');
+            $table->integer('status');
+            $table->integer('cost');
             $table->text('description');
-            $table->integer('idSoftwareRequerements');
-            $table->integer('idUserRequeriments');
+            $table->bigInteger('user_requirement_id')->unsigned();
+            $table->bigInteger('project_id')->unsigned();
+            $table->timestamps();
+
+            $table->foreign('user_requirement_id')->references('id')->on('user_requirements');
+            $table->foreign('project_id')->references('id')->on('projects');
         });
     }
 

@@ -1,7 +1,7 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-title">Nuevo requerimiento de usuario</h4>
+    <h4 class="modal-title" id="modal-title">Nuevo requerimiento de Software</h4>
     <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
-        (click)="onCloseCancel()">
+    (click)="onCloseCancel()">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
@@ -12,14 +12,14 @@
                 <label for="firstName">Codigo</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon3">RU</span>
+                        <span class="input-group-text" id="basic-addon3">RS</span>
                     </div>
-                    <input type="number" formControlName="code" readonly class="form-control">
+                    <input type="number" class="form-control" formControlName="code" aria-describedby="basic-addon3">
                 </div>
             </div>
             <div class="col-md-4 form-group mb-0">
                 <label for="firstName"> Prioridad </label>
-                <select formControlName="priority" class="form-control">
+                <select class="form-control" formControlName="priority" >
                     <option value="" disabled="true" [selected]="true">Seleccione la prioridad</option>
                     <option [value]="0">Deseable</option>
                     <option [value]="1">No deseable</option>
@@ -28,41 +28,41 @@
             </div>
             <div class="col-md-4 form-group mb-0">
                 <label for="firstName"> Estabilidad </label>
-                <select formControlName="stability" class="form-control">
+                <select class="form-control" formControlName="stability">
                     <option value="" disabled="true" [selected]="true">Seleccione la estabilidad</option>
                     <option [value]="0">Transable</option>
                     <option [value]="1">Intransable</option>
                 </select>
             </div>
+        </div>
+        <div class="row">
             <div class="col-md-4 form-group mb-3">
                 <label for="firstName">Estado</label>
-                <select formControlName="status" class="form-control">
-                    <option value="" disabled="true" [selected]="true">Seleccione un estado</option>
+                <select class="form-control" formControlName="status">
+                    <option value="" disabled="true" [selected]="true">Seleccione el estado</option>
                     <option [value]="0">Incompleto</option>
                     <option [value]="1">Completo</option>
                 </select>
             </div>
             <div class="col-md-4 form-group mb-3">
                 <label for="firstName">Costo</label>
-                <input type="number" formControlName="cost" class="form-control">
+                <input type="number" class="form-control" formControlName="cost" placeholder="1">
             </div>
             <div class="col-md-4 form-group mb-3">
-                <label for="firstName">Fuente</label>
-                <input type="text" formControlName="source" class="form-control" placeholder="Cliente">
-            </div>
-            <div class="col-md-4 form-group mb-3">
-                <label for="firstName">Incremento</label>
-                <select formControlName="increment_id" class="form-control">
-                    <option value="" disabled="true" [selected]="true">Seleccione un incremento</option>
-                    <option *ngFor="let item of increments" [value]="item.id">{{ item.name }}</option>
+                <label for="firstName">Referencia Requerimiento de usuario </label>
+                <select class="form-control" formControlName="user_requirement_id" >
+                    <option value="" disabled="true" [selected]="true">Seleccione la referencia</option>
+                    <option *ngFor="let item of userRequirements" [value]="item.id">RU{{item.internalId | number: '2.0'}}</option>
                 </select>
             </div>
+        </div>
+        <div class="row">
             <div class="col-md-12 form-group mb-3">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Descripción</span>
                     </div>
-                    <textarea class="form-control" formControlName="description" aria-label="With textarea"></textarea>
+                    <textarea class="form-control" aria-label="With textarea" formControlName="description" ></textarea>
                 </div>
             </div>
         </div>
@@ -71,5 +71,4 @@
 <div class="modal-footer">
     <button type="button" (click)="onCloseCancel()" class="btn btn-secondary m-1">Cancelar</button>
     <button type="button" (click)="onCloseConfirm()" class="btn btn-outline-primary m-1">Agregar</button>
-
 </div>

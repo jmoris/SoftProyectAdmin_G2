@@ -24,10 +24,12 @@ class CreateUserRequirementsTable extends Migration
             //$table->bigInteger('idUser');
             //$table->string('type');
             $table->string('description');
+            $table->bigInteger('increment_id')->unsigned();
             $table->bigInteger('project_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('increment_id')->references('id')->on('increments');
         });
     }
 

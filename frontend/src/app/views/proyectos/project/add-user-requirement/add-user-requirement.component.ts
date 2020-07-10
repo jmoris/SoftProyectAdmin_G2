@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UsuariosService } from 'src/app/_services/usuarios.service';
 import { UserRequirementService } from 'src/app/_services/userrequirements.service';
+import { IncrementService } from 'src/app/_services/increments.service';
 
 @Component({
   selector: 'app-add-user-requirement',
@@ -16,10 +17,12 @@ export class AddUserRequirementComponent implements OnInit {
   cargando = false;
   usuarios: any;
   edit = false;
+  increments: any = [];
   constructor(
     public dialogRef: MatDialogRef<AddUserRequirementComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private usersService: UserRequirementService) {
+    private usersService: UserRequirementService,
+    private incrementService : IncrementService) {
 
     if(this.data.user_req){
         this.edit = true;
@@ -32,6 +35,7 @@ export class AddUserRequirementComponent implements OnInit {
             cost: new FormControl(this.data.user_req.cost, [Validators.required]),
             code: new FormControl(this.data.user_req.internalId, [Validators.required]),
             description: new FormControl(this.data.user_req.description, [Validators.required]),
+            increment_id: new FormControl(this.data.user_req.increment_id, [Validators.required]),
             project_id: new FormControl(this.data.project_id)
           });
     }else{
@@ -44,9 +48,14 @@ export class AddUserRequirementComponent implements OnInit {
             cost: new FormControl(1, [Validators.required]),
             code: new FormControl(this.data.internalId, [Validators.required]),
             description: new FormControl("", [Validators.required]),
+            increment_id: new FormControl("", [Validators.required]),
             project_id: new FormControl(this.data.project_id)
           });
     }
+    this.incrementService.getAll(this.data.project_id).subscribe((data:any) => {
+        this.increments = data;
+    });
+
   }
 
   ngOnInit(): void {
