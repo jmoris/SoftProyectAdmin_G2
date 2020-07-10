@@ -93,12 +93,12 @@ class UserRequirementController extends Controller
         $validator = Validator::make($request->all(), [
             'source' => 'required',
             'cost' => 'required',
+            //'internalId' => 'required',
             'stability' => 'required',
             'priority' => 'required',
-            'state' => 'required',
-            'type' => 'required',
-            'idUser' => 'required',
-            'idIncrement' => 'required'
+            'status' => 'required',
+            'project_id' => 'required',
+            'description' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -110,10 +110,12 @@ class UserRequirementController extends Controller
         $usrq->cost = $request->cost;
         $usrq->stability = $request->stability;
         $usrq->priority = $request->priority;
-        $usrq->state = $request->state;
-        $usrq->idUser = $request->idUser;
-        $usrq->idIncrement = $request->idIncrement;
-        $usrq->type = $request->type;
+        $usrq->status = $request->status;
+        //$usrq->idUser = $request->idUser;
+        //$usrq->idIncrement = $request->idIncrement;
+        //$usrq->type = $request->type;
+        $usrq->project_id = $request->project_id;
+        $usrq->description = $request->description;
         $usrq->save();
 
         return response()->json([

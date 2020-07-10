@@ -31,10 +31,10 @@ export class ProjectComponent implements OnInit {
   tagsCtrl1 = new FormControl(this.items);
   loading: boolean = false;
     id : any;
-proyecto : any;
-equipo:any = [];
-userreqs: any = [];
-
+    proyecto : any;
+    equipo:any = [];
+    userreqs: any = [];
+    infour : any = {};
 
   constructor(
     private route: ActivatedRoute,
@@ -54,15 +54,31 @@ userreqs: any = [];
             this.equipo = data2;
             this.loading = false;
         });
+        this.infour.completos = 0;
+        this.infour.incompletos = 0;
         this.userReqService.getAll(this.id).subscribe((resp: any) => {
             this.userreqs = resp;
+            resp.forEach(element => {
+                if(element.status == 0)
+                    this.infour.incompletos++;
+                else
+                    this.infour.completos++;
+            });
         });
     });
   }
 
   loadData(){
+    this.infour.completos = 0;
+    this.infour.incompletos = 0;
     this.userReqService.getAll(this.id).subscribe((resp: any) => {
         this.userreqs = resp;
+        resp.forEach(element => {
+            if(element.status == 0)
+                this.infour.incompletos++;
+            else
+                this.infour.completos++;
+        });
     });
   }
 
@@ -123,9 +139,9 @@ userreqs: any = [];
                 break;
             case 'status':
                 if(data==0){
-                    str = 'Incompleto';
+                    str = 'Pendiente';
                 }else{
-                    str = 'Completo';
+                    str = 'Finalizado';
                 }
                 break;
       }
@@ -148,6 +164,26 @@ userreqs: any = [];
             }
         })
     }
+
+    editUserRequeriment(modal, event){
+        console.log(modal);
+        let dialogRef = this.dialog.open(AddUserRequirementComponent, {
+            width: '750px',
+            data: {user_req:modal, project_id: this.id},
+            disableClose: true,
+            autoFocus: true
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog closed: ${result}`);
+            this.dialogResult = result;
+            if (result == 'Confirm') {
+                this.toastr.success('Requisito de usuario modificado exitosamente', 'Notificación', { timeOut: 3000 });
+            this.loadData();
+            }
+        })
+    }
+
+
   addSoftwareRequeriment(modal, event)
   {
     event.target.parentElement.parentElement.blur();

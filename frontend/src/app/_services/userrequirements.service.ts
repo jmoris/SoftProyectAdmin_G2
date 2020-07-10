@@ -14,6 +14,10 @@ export class UserRequirementService {
     return this.http.post<any>(`${env.apiUrl}/userrequirements`, data);
   }
 
+  update(data, id): Observable<boolean> {
+    return this.http.put<any>(`${env.apiUrl}/userrequirements/` + id, data);
+  }
+
   getAll(id){
       return this.http.get(`${env.apiUrl}/userrequirements?project_id=` + id);
   }
