@@ -10,7 +10,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { AddUserRequirementComponent } from './add-user-requirement/add-user-requirement.component';
 import { UserRequirementService } from 'src/app/_services/userrequirements.service';
-
+import { IncrementService } from 'src/app/_services/increments.service';
+import { AddIncrementComponent } from './add-increment/add-increment.component';
+import * as moment from 'moment/moment';
+import { AddSoftwareRequirementComponent } from './add-software-requirement/add-software-requirement.component';
+import { SoftwareRequirementsService } from 'src/app/_services/softwarerequirements.service';
 
 @Component({
   selector: 'app-project',
@@ -34,10 +38,16 @@ export class ProjectComponent implements OnInit {
     proyecto : any;
     equipo:any = [];
     userreqs: any = [];
+    softreqs: any = [];
     infour : any = {};
-userRequerimentForm : FormGroup;
-softwareRequerimentForm : FormGroup;
-testCaseForm : FormGroup;
+    infosr: any = {};
+    userRequerimentForm : FormGroup;
+    softwareRequerimentForm : FormGroup;
+    testCaseForm : FormGroup;
+    incrementForm: FormGroup;
+    increments: any = [];
+
+
 public constructor(
     private route: ActivatedRoute,
     private modalService: NgbModal,
@@ -45,13 +55,14 @@ public constructor(
     private toastr: ToastrService,
     private dialog: MatDialog,
     private proyectoService : ProjectsService,
-    private userReqService : UserRequirementService
+    private userReqService : UserRequirementService,
+    private incrementsService: IncrementService,
+    private softReqService: SoftwareRequirementsService
   ) {
       this.loading = true;
     this.id = this.route.snapshot.params['id'];
     proyectoService.get(this.id).subscribe((data) => {
         this.proyecto = data[0];
-        console.log(this.proyecto);
         this.proyectoService.getUsersFromProject(this.id).subscribe((data2) => {
             this.equipo = data2;
             this.loading = false;
@@ -67,25 +78,20 @@ public constructor(
                     this.infour.completos++;
             });
         });
-    });
-
-    this.userRequerimentForm = new FormGroup({
-      urInputCode   : new FormControl(''),
-      urPriority    : new FormControl(''),
-      urStability  : new FormControl(''),
-      urState      : new FormControl(''),
-      urCost        : new FormControl(''),
-      urDescription : new FormControl('')
-    });
-
-    this.softwareRequerimentForm = new FormGroup({
-      srInputCode   : new FormControl(''),
-      srPriority    : new FormControl(''),
-      srStability  : new FormControl(''),
-      srState      : new FormControl(''),
-      srCost        : new FormControl(''),
-      srDescription : new FormControl(''),
-      userRequerimentReference : new FormControl('')
+        this.infosr.completos = 0;
+        this.infosr.incompletos = 0;
+        this.softReqService.getAll(this.id).subscribe((resp: any ) => {
+            this.softreqs = resp;
+            resp.forEach(element => {
+                if(element.status == 0)
+                    this.infosr.incompletos++;
+                else
+                    this.infosr.completos++;
+            });
+        });
+        this.incrementsService.getAll(this.id).subscribe((resp:any) => {
+            this.increments = resp;
+        });
     });
 
     this.testCaseForm = new FormGroup({
@@ -109,14 +115,25 @@ public constructor(
                 this.infour.completos++;
         });
     });
+    this.infosr.completos = 0;
+    this.infosr.incompletos = 0;
+    this.softReqService.getAll(this.id).subscribe((resp: any ) => {
+        this.softreqs = resp;
+        resp.forEach(element => {
+            if(element.status == 0)
+                this.infosr.incompletos++;
+            else
+                this.infosr.completos++;
+        });
+    });
+    this.incrementsService.getAll(this.id).subscribe((resp:any) => {
+        this.increments = resp;
+    });
   }
 
   public onSelect(item) {
     console.log('tag selected: value is ' + item);
   }
-
-
-
 
   ngOnInit() {
     this.chartPie1 = {
@@ -216,8 +233,37 @@ public constructor(
 
   addSoftwareRequeriment(modal, event)
   {
-    event.target.parentElement.parentElement.blur();
-    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true, size: 'lg' });
+    let dialogRef = this.dialog.open(AddSoftwareRequirementComponent, {
+        width: '750px',
+        data: {project_id: this.id, internalId: this.softreqs.length + 1},
+        disableClose: true,
+        autoFocus: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog closed: ${result}`);
+        this.dialogResult = result;
+        if (result == 'Confirm') {
+            this.toastr.success('Requisito de usuario agregado exitosamente', 'Notificación', { timeOut: 3000 });
+        this.loadData();
+        }
+    })
+  }
+
+  editSoftRequeriment(modal, event){
+    let dialogRef = this.dialog.open(AddSoftwareRequirementComponent, {
+        width: '750px',
+        data: {soft_req:modal, project_id: this.id},
+        disableClose: true,
+        autoFocus: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog closed: ${result}`);
+        this.dialogResult = result;
+        if (result == 'Confirm') {
+            this.toastr.success('Requisito de software modificado exitosamente', 'Notificación', { timeOut: 3000 });
+        this.loadData();
+        }
+    })
   }
 
   addTestCase(modal, event)
@@ -227,10 +273,22 @@ public constructor(
 
   }
 
-  addIncrement(modal, event)
-  {
-    event.target.parentElement.parentElement.blur();
-    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true, size: 'lg' });
+  addIncrement(modal, event){
+    let dialogRef = this.dialog.open(AddIncrementComponent, {
+        width: '750px',
+        height: '450px',
+        data: {project_id: this.id},
+        disableClose: true,
+        autoFocus: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog closed: ${result}`);
+        this.dialogResult = result;
+        if (result == 'Confirm') {
+            this.toastr.success('Requisito de usuario agregado exitosamente', 'Notificación', { timeOut: 3000 });
+        this.loadData();
+        }
+    })
   }
 
   editIncrement(modal, event)
@@ -262,6 +320,9 @@ public constructor(
     console.log(this.softwareRequerimentForm.value);
   }
 
+  formatDate(date){
+    return moment(date).format('DD-MM-YYYY');
+  }
 
 
 }

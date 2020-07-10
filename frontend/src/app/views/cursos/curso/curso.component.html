@@ -13,6 +13,20 @@
         <div class="card o-hidden mb-4">
             <div class="row">
                 <div class="col-md-2">
+                    <div class="card o-hidden mb-4 ml-4 mt-4">
+                        <div class="card-body text-center">
+                            <i class="i-Add-User"></i>
+                            <div class="content">
+                                <p class="text-muted mt-2 mb-0">Carga de estudiantes
+                                </p>
+                                <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded"
+                                    (click)="fileInput.click();">Subir archivo</button>
+                                <input #fileInput accept=".xlsx, .xls" type="file"
+                                    (change)="handleFileInput($event.target.files, infoImportModal)" style="display:none;" />
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="card o-hidden mb-4 mt-4 ml-4">
                         <div class="card-body text-center">
                             <div class="content">
@@ -38,33 +52,18 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="card o-hidden mb-4 ml-4 ">
-                        <div class="card-body text-center">
-                            <i class="i-Add-User"></i>
-                            <div class="content">
-                                <p class="text-muted mt-2 mb-0">Carga de estudiantes
-                                </p>
-                                <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded"
-                                    (click)="fileInput.click();">Subir archivo</button>
-                                <input #fileInput accept=".xlsx, .xls" type="file"
-                                    (change)="handleFileInput($event.target.files, infoImportModal)" style="display:none;" />
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
                 <div class="col-md-10">
                     <div class="card o-hidden mb-4 mt-4 mr-4">
-                        <ngx-datatable style="height: calc(85vh - 270px); width:100%; box-shadow: none"
+                        <ngx-datatable style="height: calc(85vh - 270px); box-shadow: none"
                             class="material fullscreen" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
                             [rowHeight]="60" [scrollbarV]="true" [limit]="10" [rows]="users">
-                            <ngx-datatable-column name="enrollment" [flexGrow]="8">
+                            <ngx-datatable-column name="enrollment" [flexGrow]="1">
                                 <ng-template ngx-datatable-header-template>
                                     Matricula
                                 </ng-template>
                             </ngx-datatable-column>
-                            <ngx-datatable-column name="name" [flexGrow]="30">
+                            <ngx-datatable-column name="name" [flexGrow]="4">
                                 <ng-template ngx-datatable-header-template>
                                     Nombre
                                 </ng-template>
@@ -72,19 +71,22 @@
                                     {{ row.name + " "+ row.surname }}
                                 </ng-template>
                             </ngx-datatable-column>
-                            <ngx-datatable-column name="rut" [flexGrow]="10">
+                            <ngx-datatable-column name="rut" [flexGrow]="1">
                                 <ng-template ngx-datatable-header-template>
                                     RUT
                                 </ng-template>
                             </ngx-datatable-column>
-                            <ngx-datatable-column name="email" [flexGrow]="15">
+                            <ngx-datatable-column name="email" [flexGrow]="2">
                                 <ng-template ngx-datatable-header-template>
                                     Email
                                 </ng-template>
                             </ngx-datatable-column>
-                            <ngx-datatable-column name="profile" [flexGrow]="8">
+                            <ngx-datatable-column name="profile" [flexGrow]="1">
                                 <ng-template ngx-datatable-header-template>
                                     Perfil
+                                </ng-template>
+                                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                    {{ formatProfile(value) }}
                                 </ng-template>
                             </ngx-datatable-column>
                         </ngx-datatable>

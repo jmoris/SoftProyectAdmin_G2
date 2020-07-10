@@ -1,0 +1,51 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Nuevo Incremento  </h4>
+    <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+        (click)="onCloseCancel()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="incrementForm">
+        <div class="row">
+            <div class="col-md-12 form-group mb-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Descripción</span>
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea" formControlName="description" ></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group mb-0">
+                <label for="firstName"> Fecha inicio </label>
+                <div class="input-group">
+                    <input id="picker1" formControlName="initDate" class="form-control form-control-rounded" placeholder="yyyy-mm-dd" name="dp"
+                        ngbDatepicker #dp="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary btn-rounded" (click)="dp.toggle()" type="button">
+                            <i class="icon-regular i-Calendar-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 form-group mb-0">
+                <label for="firstName"> Fecha termino </label>
+                <div class="input-group">
+                    <input id="picker1" formControlName="endDate" class="form-control form-control-rounded" placeholder="yyyy-mm-dd" name="dp2"
+                        ngbDatepicker #dp2="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary btn-rounded" (click)="dp2.toggle()" type="button">
+                            <i class="icon-regular i-Calendar-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" (click)="onCloseConfirm()" class="btn btn-outline-primary m-1">Agregar</button>
+    <button type="button" (click)="onCloseCancel()" class="btn btn-secondary m-1">Cancelar</button>
+</div>

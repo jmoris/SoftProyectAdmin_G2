@@ -15,6 +15,8 @@ class CreateIncrementsTable extends Migration
     {
         Schema::create('increments', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('description');
             $table->timestamp('initDate')->nullable();
             $table->timestamp('endDate')->nullable();
             $table->bigInteger('project_id')->unsigned();

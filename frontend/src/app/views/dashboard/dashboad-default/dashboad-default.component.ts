@@ -25,7 +25,7 @@ export class DashboadDefaultComponent implements OnInit {
     constructor(private userService: UsuariosService) {
 
         this.salesChartPie = {
-            color: ['#62549c', '#e2cc6b', '#b3a564', '#7d6cbb', '#948025', '#6957af'],
+            color: ['#263db5','#d22346'],
             tooltip: {
                 show: true,
                 backgroundColor: 'rgba(0, 0, 0, .8)'
@@ -79,7 +79,7 @@ export class DashboadDefaultComponent implements OnInit {
                 teacher: 0
             };
             data.usuarios.forEach(element => {
-                
+
                 if (element.profile === 'admin') {
                     info2.admin = element.count;
                 } else if (element.profile === 'student') {

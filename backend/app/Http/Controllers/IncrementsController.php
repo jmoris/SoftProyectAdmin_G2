@@ -28,6 +28,7 @@ class IncrementsController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'description' => 'required',
             'initDate' => 'required',
             'endDate' => 'required',
             'project_id' => 'required'
@@ -38,8 +39,12 @@ class IncrementsController extends Controller
         }
 
         $increment = new Increment();
-        $increment->initDate = $request->initDate;
-        $increment->endDate = $request->endDate;
+        $increment->name = 'Incremento '.Increment::where('project_id', $request->project_id)->count();
+        $increment->description = $request->description;
+        $initDate = $request->initDate['year'].'-'.$request->initDate['month'].'-'.$request->initDate['day'];
+        $increment->initDate = date('Y-m-d', strtotime($initDate));
+        $endDate = $request->endDate['year'].'-'.$request->endDate['month'].'-'.$request->endDate['day'];
+        $increment->endDate = date('Y-m-d', strtotime($endDate));
         $increment->project_id = $request->project_id;
         $increment->save();
 
@@ -71,6 +76,8 @@ class IncrementsController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'description' => 'required',
             'initDate' => 'required',
             'endDate' => 'required',
         ]);
@@ -80,8 +87,11 @@ class IncrementsController extends Controller
         }
 
         $increment = Increment::find($id);
+        $increment->name = $request->name;
+        $increment->description = $request->description;
         $increment->initDate = $request->initDate;
         $increment->endDate = $request->endDate;
+        $increment->project_id = $request->project_id;
         $increment->save();
 
         return response()->json([

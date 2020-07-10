@@ -74,4 +74,15 @@ export class CursoComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    formatProfile(value) {
+        switch (value) {
+          case 'teacher':
+            return 'Docente';
+          case 'student':
+            return 'Estudiante';
+          case 'admin':
+            return 'Administrador';
+        }
+      }
+
 }

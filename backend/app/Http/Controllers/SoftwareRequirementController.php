@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\UserRequirement;
+use App\SoftwareRequirement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class UserRequirementController extends Controller
+class SoftwareRequirementController extends Controller
 {
-    /**
+        /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $ur = UserRequirement::where('project_id', $request->project_id)->get();
+        $ur = SoftwareRequirement::where('project_id', $request->project_id)->get();
         return response()->json($ur);
     }
 
@@ -28,39 +28,32 @@ class UserRequirementController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'source' => 'required',
-            'cost' => 'required',
-            //'internalId' => 'required',
             'stability' => 'required',
             'priority' => 'required',
             'status' => 'required',
             'project_id' => 'required',
             'description' => 'required',
-            'increment_id' => 'required'
+            'user_requirement_id' => 'required'
         ]);
 
         if ($validator->fails()) {
             return $validator->errors();
         }
 
-        $usrq = new UserRequirement();
-        $usrq->internalId = UserRequirement::where('project_id', $request->project_id)->count() + 1;
-        $usrq->source = $request->source;
+        $usrq = new SoftwareRequirement();
+        $usrq->internalId = SoftwareRequirement::where('project_id', $request->project_id)->count() + 1;
         $usrq->cost = $request->cost;
         $usrq->stability = $request->stability;
         $usrq->priority = $request->priority;
         $usrq->status = $request->status;
-        //$usrq->idUser = $request->idUser;
-        //$usrq->idIncrement = $request->idIncrement;
-        //$usrq->type = $request->type;
-        $usrq->increment_id = $request->increment_id;
+        $usrq->user_requirement_id = $request->user_requirement_id;
         $usrq->project_id = $request->project_id;
         $usrq->description = $request->description;
         $usrq->save();
 
         return response()->json([
             'success' => true,
-            'msg' => 'El requisito de usuario fue agregado exitosamente.'
+            'msg' => 'El requisito de software fue agregado exitosamente.'
         ]);
     }
 
@@ -72,13 +65,13 @@ class UserRequirementController extends Controller
      */
     public function show($id)
     {
-        $ur = UserRequirement::find($id);
+        $ur = SoftwareRequirement::find($id);
         if($ur){
             return response()->json($ur);
         }else{
             return response()->json([
                 'success' => false,
-                'msg' => 'El requisito de usuario no existe en la base de datos.'
+                'msg' => 'El requisito de software no existe en la base de datos.'
             ]);
         }
     }
@@ -93,37 +86,32 @@ class UserRequirementController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'source' => 'required',
-            'cost' => 'required',
-            //'internalId' => 'required',
             'stability' => 'required',
             'priority' => 'required',
             'status' => 'required',
             'project_id' => 'required',
             'description' => 'required',
-            'increment_id' => 'required'
+            'user_requirement_id' => 'required'
         ]);
 
         if ($validator->fails()) {
             return $validator->errors();
         }
 
-        $usrq = UserRequirement::find($id);
-        $usrq->source = $request->source;
+        $usrq = SoftwareRequirement::find($id);
+        $usrq->internalId = $request->code;
         $usrq->cost = $request->cost;
         $usrq->stability = $request->stability;
         $usrq->priority = $request->priority;
         $usrq->status = $request->status;
-        //$usrq->idUser = $request->idUser;
-        $usrq->increment_id = $request->increment_id;
-        //$usrq->type = $request->type;
+        $usrq->user_requirement_id = $request->user_requirement_id;
         $usrq->project_id = $request->project_id;
         $usrq->description = $request->description;
         $usrq->save();
 
         return response()->json([
             'success' => true,
-            'msg' => 'El requisito de usuario fue actualizado exitosamente.'
+            'msg' => 'El requisito de software fue actualizado exitosamente.'
         ]);
     }
 
@@ -135,12 +123,12 @@ class UserRequirementController extends Controller
      */
     public function destroy($id)
     {
-        $usrq = UserRequirement::find($id);
+        $usrq = SoftwareRequirement::find($id);
         if($usrq){
             $usrq->delete();
             return response()->json([
                 'success' => true,
-                'msg' => 'Requisito de usuario eliminado correctamente.'
+                'msg' => 'Requisito de software eliminado correctamente.'
             ]);
         }
         return response()->json([
