@@ -38,6 +38,7 @@ export class ProjectComponent implements OnInit {
 userRequerimentForm : FormGroup;
 softwareRequerimentForm : FormGroup;
 testCaseForm : FormGroup;
+public constructor(
     private route: ActivatedRoute,
     private modalService: NgbModal,
     private dl: DataLayerService,
@@ -260,7 +261,7 @@ testCaseForm : FormGroup;
   {
     console.log(this.softwareRequerimentForm.value);
   }
- 
+
 
 
 }

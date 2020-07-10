@@ -197,11 +197,12 @@ export class GestionComponent implements OnInit {
         this.getCourses();
       }
     })
+    }
 
-verCurso(value, event){
-    event.target.parentElement.parentElement.blur();
-    this.router.navigateByUrl('/cursos/gestion/' + value);
-}
+    verCurso(value){
+        this.router.navigateByUrl('/cursos/gestion/' + value);
+    }
+    deleteData(id,modal,event){
     event.target.parentElement.parentElement.blur();
     this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })
       .result.then((result) => {

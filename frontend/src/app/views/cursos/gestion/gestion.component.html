@@ -76,7 +76,7 @@
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef> Editar </th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button color="warn">
+          <button mat-icon-button color="warn" (click)="verCurso(element.id)">
             <mat-icon svgIcon="edit" class="mat-18"></mat-icon>
           </button>
         </td>
