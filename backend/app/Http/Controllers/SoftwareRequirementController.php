@@ -19,6 +19,13 @@ class SoftwareRequirementController extends Controller
         return response()->json($ur);
     }
 
+    public function getNextId($id){
+        $next_id = SoftwareRequirement::where('project_id', $id)->orderBy('internalId', 'desc')->first();
+        if($next_id==null)
+            return response()->json(['next_id' => 1]);
+        return response()->json(['next_id' => $next_id->internalId+1]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

@@ -24,6 +24,7 @@ class CreateSoftwareRequirementsTable extends Migration
             $table->bigInteger('user_requirement_id')->unsigned();
             $table->bigInteger('project_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_requirement_id')->references('id')->on('user_requirements');
             $table->foreign('project_id')->references('id')->on('projects');

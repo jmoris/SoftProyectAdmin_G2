@@ -22,7 +22,7 @@
 										<div class="card mb-4 mt-4 ml-4 ">
 											<div class="card-body">
 												<h6 class="mb-2 text-muted">Requerimientos de usuario</h6>
-												<p class="mb-2 text-24 font-weight-light text-title">{{ (100*(infour.completos / userreqs.length)).toFixed(1)  }}%</p>
+												<p class="mb-2 text-24 font-weight-light text-title">{{ (userreqs.length !=0) ? ((100*(infour.completos / userreqs.length)).toFixed(1)) : 0.0  }}%</p>
 												<p class="mb-1">
 													<ngb-progressbar type="success" [value]="(infour.completos/userreqs.length)*100" height="10px">
 													</ngb-progressbar>
@@ -34,7 +34,7 @@
 										<div class="card mb-4 mt-4 mr-4">
 											<div class="card-body">
 												<h6 class="mb-2 text-muted">Requerimientos de sistema</h6>
-												<p class="mb-2 text-24 font-weight-light text-title ">{{ (100*(infosr.completos / softreqs.length)).toFixed(1)  }}%</p>
+												<p class="mb-2 text-24 font-weight-light text-title ">{{ (softreqs.length !=0) ? (100*(infosr.completos / softreqs.length)).toFixed(1) : 0.0  }}%</p>
 												<p class="mb-1">
 													<ngb-progressbar type="success" [value]="(infosr.completos/softreqs.length)*100" height="10px">
 													</ngb-progressbar>
@@ -269,7 +269,7 @@
                                                     <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
                                                       <button class="btn btn-sm btn-outline-warning" (click)="editUserRequeriment(row, $event)"><i
                                                           class="i-Edit icon-md"></i></button>&nbsp;&nbsp;
-                                                        <button class="btn btn-sm btn-outline-danger" (click)="deleteData(value, deleteConfirmModal, $event)"><i
+                                                        <button class="btn btn-sm btn-outline-danger" (click)="deleteUserReq(row.id)"><i
                                                             class="i-Close-Window icon-md"></i></button>
                                                     </ng-template>
                                                   </ngx-datatable-column>
@@ -395,7 +395,7 @@
                                                     <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
                                                       <button class="btn btn-sm btn-outline-warning" (click)="editSoftRequeriment(row, $event)"><i
                                                           class="i-Edit icon-md"></i></button>&nbsp;&nbsp;
-                                                        <button class="btn btn-sm btn-outline-danger" (click)="deleteData(value, deleteConfirmModal, $event)"><i
+                                                        <button class="btn btn-sm btn-outline-danger" (click)="deleteSoftReq(row.id)"><i
                                                             class="i-Close-Window icon-md"></i></button>
                                                     </ng-template>
                                                   </ngx-datatable-column>
@@ -494,75 +494,6 @@
 		</ul>
 		<div [ngbNavOutlet]="nav" class="mt-2"></div>
 	</div>
-
-<!-- VENTANA MODAL QUE SE DESPLEGA PARA AGREGA UN REQUERIMIENTO DE USUARIO-->
-<ng-template #userRequerimentConfirmModal let-modal>
-	<div class="modal-header">
-		<h4 class="modal-title" id="modal-title">Nuevo requerimiento de usuario</h4>
-		<button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
-			(click)="modal.dismiss('Cross click')">
-			<span aria-hidden="true">&times;</span>
-		</button>
-	</div>
-	<div class="modal-body">
-		<form [formGroup]="userRequerimentForm">
-			<div class="row">
-				<div class="col-md-4 form-group mb-0">
-					<label for="firstName">Codigo</label>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text" >RU</span>
-						</div>
-						<input type="number" class="form-control" formControlName="urInputCode"  aria-describedby="basic-addon3">
-					</div>
-				</div>
-				<div class="col-md-4 form-group mb-0">
-					<label for="firstName"> Prioridad </label>
-					<select class="form-control" formControlName="urPriority" >
-						<option>Baja</option>
-						<option>Media</option>
-						<option>Alta</option>
-					</select>
-				</div>
-				<div class="col-md-4 form-group mb-0">
-					<label for="firstName"> Estabilidad </label>
-					<select class="form-control" formControlName="urStability"  >
-						<option>Transable</option>
-						<option>Intransable</option>
-					</select>
-				</div>
-				<div class="col-md-4 form-group mb-3">
-					<label for="firstName">Estado</label>
-					<select class="form-control" formControlName="urState" >
-						<option>Incompleto</option>
-						<option>Completo</option>
-					</select>
-				</div>
-				<div class="col-md-4 form-group mb-3">
-					<label for="firstName">Costo</label>
-					<input type="number" class="form-control" formControlName="urCost" placeholder="1">
-				</div>
-				<div class="col-md-12 form-group mb-3">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text">Descripción</span>
-						</div>
-						<textarea class="form-control" aria-label="With textarea" formControlName="urDescription"></textarea>
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-outline-primary m-1" (click)="imprimirur()">Agregar</button>
-		<button type="button" class="btn btn-secondary m-1">Cancelar</button>
-	</div>
-</ng-template>
-
-<!-- VENTANA MODAL QUE SE DESPLEGA PARA AGREGA UN REQUERIMIENTO DE SOFTWARE-->
-<ng-template #softwareRequerimentConfirmModal let-modal>
-
-</ng-template>
 
 <!-- VENTANA MODAL QUE SE DESPLEGA PARA AGREGA UN CASO DE PRUEBA -->
 <ng-template #testCaseConfirmModal let-modal>

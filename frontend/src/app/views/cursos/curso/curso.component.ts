@@ -37,7 +37,14 @@ export class CursoComponent implements OnInit {
         this.cursoService.get(this.id).subscribe((data:any) => {
             this.curso = data;
             this.cursoService.usersList(this.id).subscribe((userData:any) => {
-                this.stats.students = userData.length;
+
+                userData.forEach(element => {
+                    if(element.profile == 'student')
+                        this.stats.students++;
+                    else if(element.profile == 'teacher')
+                        this.stats.teachers++;
+                });
+
                 this.users.push(this.curso.user);
                 this.users = this.users.concat(userData);
                 this.loading = false;
@@ -48,7 +55,19 @@ export class CursoComponent implements OnInit {
     loadData(){
         this.loading = true;
         this.users = [];
+        this.stats = {
+            students: 0,
+            teachers: 1,
+            supports: 0
+        };
         this.cursoService.usersList(this.id).subscribe((userData:any) => {
+            userData.forEach(element => {
+                if(element.profile == 'student')
+                    this.stats.students++;
+                else if(element.profile == 'teacher')
+                    this.stats.teachers++;
+            });
+
             this.stats.students = userData.length;
             this.users.push(this.curso.user);
             this.users = this.users.concat(userData);

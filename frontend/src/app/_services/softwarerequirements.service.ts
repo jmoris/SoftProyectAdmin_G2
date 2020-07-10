@@ -22,5 +22,12 @@ export class SoftwareRequirementsService {
       return this.http.get(`${env.apiUrl}/softwarerequirements?project_id=` + id);
   }
 
+  getNextId(id){
+    return this.http.get(`${env.apiUrl}/softwarerequirements/nextid/` + id);
+  }
+
+  delete(id){
+    return this.http.delete<any>(`${env.apiUrl}/softwarerequirements/` + id);
+  }
 
 }

@@ -54,7 +54,9 @@ Route::group(['middleware' => 'auth:api'], function () {
 
 
     Route::apiResource('userrequirements', 'UserRequirementController');
+    Route::get('userrequirements/nextid/{id}', 'UserRequirementController@getNextId');
     Route::apiResource('softwarerequirements', 'SoftwareRequirementController');
+    Route::get('softwarerequirements/nextid/{id}', 'SoftwareRequirementController@getNextId');
     Route::apiResource('increments', 'IncrementsController');
 
     Route::get('info', function(){
@@ -84,5 +86,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('user', function(Request $request){
         return Auth::user();
     });
+
+});
+
+Route::get('testid', function(){
+    return App\UserRequirement::where('project_id', 1)->orderBy('internalId', 'desc')->first()->internalId+1;
+    return App\SoftwareRequirement::where('project_id', 1)->orderBy('internalId', 'desc')->first()->internalId + 1;
 
 });

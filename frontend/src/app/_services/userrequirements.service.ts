@@ -22,5 +22,13 @@ export class UserRequirementService {
       return this.http.get(`${env.apiUrl}/userrequirements?project_id=` + id);
   }
 
+  getNextId(id){
+    return this.http.get(`${env.apiUrl}/userrequirements/nextid/` + id);
+  }
+
+  delete(id){
+    return this.http.delete<any>(`${env.apiUrl}/userrequirements/` + id);
+  }
+
 
 }
