@@ -54,6 +54,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
 
     Route::apiResource('userrequirements', 'UserRequirementController');
+    Route::apiResource('softwarerequirements', 'SoftwareRequirementController');
     Route::apiResource('increments', 'IncrementsController');
 
     Route::get('info', function(){

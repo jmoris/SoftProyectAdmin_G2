@@ -16,6 +16,13 @@ class CreateSoftwareRequirementsTable extends Migration
         Schema::create('software_requirements', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->text('priority');
+            $table->text('stability');
+            $table->text('state');
+            $table->text('cost');
+            $table->text('description');
+            $table->integer('idSoftwareRequerements');
+            $table->integer('idUserRequeriments');
         });
     }
 
