@@ -1,0 +1,146 @@
+<div class="breadcrumb">
+    <h1>Cursos</h1>
+    <ul>
+        <li>{{ curso?.name + ' ' + curso?.year + '-' + curso?.semester}}</li>
+    </ul>
+</div>
+<div class="separator-breadcrumb border-top"></div>
+<div class="module-loader" *ngIf="loading">
+    <div class="spinner spinner-bubble spinner-bubble-primary mr-3"></div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card o-hidden mb-4">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="card o-hidden mb-4 mt-4 ml-4">
+                        <div class="card-body text-center">
+                            <div class="content">
+                                <p class="m-0 text-small text-muted">Estudiantes</p>
+                                <p class="text-primary text-40 line-height-1 m-0">{{ this.stats.students }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card o-hidden mb-4 mt-4 ml-4">
+                        <div class="card-body text-center">
+                            <div class="content">
+                                <p class="m-0 text-small text-muted">Ayudantes </p>
+                                <p class="text-success text-40 line-height-1 m-0">{{ this.stats.supports }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card o-hidden mb-4 mt-4 ml-4">
+                        <div class="card-body text-center">
+                            <div class="content">
+                                <p class="m-0 text-small text-muted">Profesores</p>
+                                <p class="text-danger text-40 line-height-1 m-0">{{ this.stats.teachers }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card o-hidden mb-4 ml-4 ">
+                        <div class="card-body text-center">
+                            <i class="i-Add-User"></i>
+                            <div class="content">
+                                <p class="text-muted mt-2 mb-0">Carga de estudiantes
+                                </p>
+                                <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded"
+                                    (click)="fileInput.click();">Subir archivo</button>
+                                <input #fileInput accept=".xlsx, .xls" type="file"
+                                    (change)="handleFileInput($event.target.files, infoImportModal)" style="display:none;" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-10">
+                    <div class="card o-hidden mb-4 mt-4 mr-4">
+                        <ngx-datatable style="height: calc(85vh - 270px); width:100%; box-shadow: none"
+                            class="material fullscreen" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
+                            [rowHeight]="60" [scrollbarV]="true" [limit]="10" [rows]="users">
+                            <ngx-datatable-column name="enrollment" [flexGrow]="8">
+                                <ng-template ngx-datatable-header-template>
+                                    Matricula
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="name" [flexGrow]="30">
+                                <ng-template ngx-datatable-header-template>
+                                    Nombre
+                                </ng-template>
+                                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                    {{ row.name + " "+ row.surname }}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="rut" [flexGrow]="10">
+                                <ng-template ngx-datatable-header-template>
+                                    RUT
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="email" [flexGrow]="15">
+                                <ng-template ngx-datatable-header-template>
+                                    Email
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="profile" [flexGrow]="8">
+                                <ng-template ngx-datatable-header-template>
+                                    Perfil
+                                </ng-template>
+                            </ngx-datatable-column>
+                        </ngx-datatable>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #infoImportModal let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">Estadisticas carga masiva de estudiantes</h4>
+            <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+                (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <table class="table table-bordered table-sm" style="width:100%;">
+                <tr>
+                    <td width="60%">Usuarios cargados: </td>
+                    <td>{{ carga.stats.cargados }}</td>
+                </tr>
+                <tr>
+                    <td width="50%">Usuarios fallidos: </td>
+                    <td>{{ carga.stats.fallidos.inexistentes.cantidad }}</td>
+                </tr>
+                <tr>
+                    <td width="50%">Usuarios existentes: </td>
+                    <td>{{ carga.stats.fallidos.existentes.cantidad }}</td>
+                </tr>
+            </table>
+            <div style="height: 500px; width:100%; overflow:auto">
+                <table class="table table-bordered table-sm" style="width:100%">
+                    <thead>
+                        <tr>
+                            <td><b>Correos de usuarios</b></td>
+                            <td><b>Estado</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of carga.stats.fallidos.inexistentes.detalle">
+                            <td width="60%">{{ item}}</td>
+                            <td width="40%"><font color="red">Inexistente</font></td>
+                        </tr>
+                        <tr *ngFor="let item of carga.stats.fallidos.existentes.detalle">
+                            <td width="60%">{{ item}}</td>
+                            <td width="40%"><font color="#ffcc00">Existente</font></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger btn-rounded"
+                (click)="modal.dismiss('cancel')">Cerrar</button>
+        </div>
+    </ng-template>
+</div>

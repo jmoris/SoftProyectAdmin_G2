@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 Route::post('login', 'AuthController@login');
 Route::post('register', 'AuthController@register');
 
-Route::group(['middleware' => 'api'], function () {
+Route::group(['middleware' => 'auth:api'], function () {
     Route::get('logout', 'AuthController@logout');
 
     Route::get('users', 'UsersController@getUsuarios');
@@ -39,6 +39,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('courses/assign', 'CoursesController@asignarProfesorACurso');
     Route::post('courses/createmass', 'CoursesController@createAndAdd');
     Route::get('courses/list/{id}', 'CoursesController@getUserList');
+    Route::post('courses/uploadfile/{id}', 'CoursesController@uploadFile');
 
     Route::get('projects', 'ProjectsController@getProyectos');
     Route::get('projects/{id}', 'ProjectsController@getProyecto');
@@ -50,6 +51,11 @@ Route::group(['middleware' => 'api'], function () {
     Route::delete('projects/detach', 'ProjectsController@eliminarAlumnoDeUnProyecto');
     Route::post('projects/createmass', 'ProjectsController@createAndAdd');
     Route::get('projects/getpm/{id}', 'ProjectsController@getJefeProyecto');
+
+
+    Route::apiResource('userrequirements', 'UserRequirementController');
+    Route::apiResource('softwarerequirements', 'SoftwareRequirementController');
+    Route::apiResource('increments', 'IncrementsController');
 
     Route::get('info', function(){
 

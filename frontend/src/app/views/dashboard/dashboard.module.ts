@@ -9,6 +9,7 @@ import { TagInputModule } from 'ngx-chips';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboadDefaultComponent } from './dashboad-default/dashboad-default.component';
+import { DashboadEstudianteComponent } from './dashboad-estudiante/dashboad-estudiante.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';

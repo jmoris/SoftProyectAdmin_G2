@@ -16,6 +16,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { DetailsProjectComponent } from './gestion/details-project/details-project.component';
 import { ProjectComponent } from './project/project.component';
 import { FormWizardModule } from 'src/app/shared/components/form-wizard/form-wizard.module';
+import { AddUserRequirementComponent } from './project/add-user-requirement/add-user-requirement.component';
 
 
 
@@ -34,6 +35,6 @@ import { FormWizardModule } from 'src/app/shared/components/form-wizard/form-wiz
     TagInputModule,
     MaterialModule,
   ],
-  declarations: [GestionComponent, AddProjectComponent, DetailsProjectComponent,ProjectComponent]
+  declarations: [GestionComponent, AddProjectComponent, DetailsProjectComponent,ProjectComponent, AddUserRequirementComponent]
 })
 export class ProyectoModule { }

@@ -17,6 +17,7 @@ class CreateIncrementsTable extends Migration
             $table->bigIncrements('id');
             $table->timestamp('initDate')->nullable();
             $table->timestamp('endDate')->nullable();
+            $table->bigInteger('project_id')->unsigned();
             $table->timestamps();
         });
     }

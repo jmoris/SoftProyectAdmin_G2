@@ -12,6 +12,7 @@ import { Course } from 'src/app/model-classes/course';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { ConfirmationDialogComponent } from '../../core/confirmation-dialog/confirmation-dialog.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -47,14 +48,13 @@ export class GestionComponent implements OnInit {
   });
 
   constructor(
-    private modalService: NgbModal,
-    private toastr: ToastrService,
-    private dialog: MatDialog,
-    private cursosService: CursosService,
-    private fb: FormBuilder,
-  ) {
-    this.getCourses();
-  }
+        private router: Router,
+        private modalService: NgbModal,
+        private toastr: ToastrService,
+        private dialog: MatDialog,
+        private cursosService: CursosService,
+        private fb: FormBuilder,
+	) { }
 
   getCourses() {
     this.loading = true;
@@ -197,10 +197,12 @@ export class GestionComponent implements OnInit {
         this.getCourses();
       }
     })
+    }
 
-  }
-
-  deleteData(id, modal, event) {
+    verCurso(value){
+        this.router.navigateByUrl('/cursos/gestion/' + value);
+    }
+    deleteData(id,modal,event){
     event.target.parentElement.parentElement.blur();
     this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })
       .result.then((result) => {
