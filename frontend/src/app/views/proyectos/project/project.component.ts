@@ -6,7 +6,7 @@ import { DataLayerService } from 'src/app/shared/services/data-layer.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectsService } from 'src/app/_services/projects.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { AddUserRequirementComponent } from './add-user-requirement/add-user-requirement.component';
 import { UserRequirementService } from 'src/app/_services/userrequirements.service';
@@ -15,6 +15,7 @@ import { AddIncrementComponent } from './add-increment/add-increment.component';
 import * as moment from 'moment/moment';
 import { AddSoftwareRequirementComponent } from './add-software-requirement/add-software-requirement.component';
 import { SoftwareRequirementsService } from 'src/app/_services/softwarerequirements.service';
+import { ConfirmationDialogComponent } from '../../core/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-project',
@@ -41,6 +42,8 @@ export class ProjectComponent implements OnInit {
     softreqs: any = [];
     infour : any = {};
     infosr: any = {};
+    next_userreq_id :any;
+    next_softreq_id :any;
     userRequerimentForm : FormGroup;
     softwareRequerimentForm : FormGroup;
     testCaseForm : FormGroup;
@@ -92,6 +95,12 @@ public constructor(
         this.incrementsService.getAll(this.id).subscribe((resp:any) => {
             this.increments = resp;
         });
+        this.userReqService.getNextId(this.id).subscribe((resp:any) => {
+            this.next_userreq_id = resp.next_id;
+        });
+        this.softReqService.getNextId(this.id).subscribe((resp:any) => {
+            this.next_softreq_id = resp.next_id;
+        });
     });
 
     this.testCaseForm = new FormGroup({
@@ -129,6 +138,15 @@ public constructor(
     this.incrementsService.getAll(this.id).subscribe((resp:any) => {
         this.increments = resp;
     });
+
+
+    this.userReqService.getNextId(this.id).subscribe((resp:any) => {
+        this.next_userreq_id = resp.next_id;
+    });
+    this.softReqService.getNextId(this.id).subscribe((resp:any) => {
+        this.next_softreq_id = resp.next_id;
+    });
+
   }
 
   public onSelect(item) {
@@ -198,7 +216,7 @@ public constructor(
   addUserRequeriment(modal, event){
         let dialogRef = this.dialog.open(AddUserRequirementComponent, {
             width: '750px',
-            data: {project_id: this.id, internalId: this.userreqs.length + 1},
+            data: {project_id: this.id, internalId: this.next_userreq_id},
             disableClose: true,
             autoFocus: true
         });
@@ -235,7 +253,7 @@ public constructor(
   {
     let dialogRef = this.dialog.open(AddSoftwareRequirementComponent, {
         width: '750px',
-        data: {project_id: this.id, internalId: this.softreqs.length + 1},
+        data: {project_id: this.id, internalId: this.next_softreq_id},
         disableClose: true,
         autoFocus: true
     });
@@ -291,33 +309,54 @@ public constructor(
     })
   }
 
-  editIncrement(modal, event)
-  {
-    event.target.parentElement.parentElement.blur();
-    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true, size: 'lg' });
+  deleteUserReq(id: string) {
+    this.openDeletionConfirmationDialog('requisito de usuario').afterClosed().subscribe(confirmation => {
+      console.log(confirmation);
+      if (confirmation.confirmed) {
+        this.userReqService.delete(id).subscribe({
+          next: result => {
+            console.log(result);
+            this.loadData();
+            this.toastr.success('Requisito de usuario eliminado correctamente', 'Notificación', { timeOut: 3000 });
+          },
+          error: result => {
+            console.log(result);
+          }
+        });
+      }
+    });
   }
 
-  deleteIncrement(modal, event)
-  {
-    event.target.parentElement.parentElement.blur();
-    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true, size: 'lg' });
+  deleteSoftReq(id: string) {
+    this.openDeletionConfirmationDialog('requisito de software').afterClosed().subscribe(confirmation => {
+      console.log(confirmation);
+      if (confirmation.confirmed) {
+        this.softReqService.delete(id).subscribe({
+          next: result => {
+            console.log(result);
+            this.loadData();
+            this.toastr.success('Requisito de software eliminado correctamente', 'Notificación', { timeOut: 3000 });
+          },
+          error: result => {
+            console.log(result);
+          }
+        });
+      }
+    });
   }
 
-
-  imprimirtc()
-  {
-    console.log(this.testCaseForm.value);
+  openDeletionConfirmationDialog(title) {
+    var deletionDialogConfig = this.getDialogConfig();
+    deletionDialogConfig.data = { message: '¿Desea eliminar este ' + title + '?' };
+    return this.dialog.open(ConfirmationDialogComponent, deletionDialogConfig);
   }
 
-  imprimirur()
-  {
-    console.log(this.userRequerimentForm.value);
+  getDialogConfig() {
+    const dialogConfig = new MatDialogConfig();
 
-  }
-
-  imprimirsr()
-  {
-    console.log(this.softwareRequerimentForm.value);
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    return dialogConfig;
   }
 
   formatDate(date){

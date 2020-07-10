@@ -27,6 +27,7 @@ class CreateUserRequirementsTable extends Migration
             $table->bigInteger('increment_id')->unsigned();
             $table->bigInteger('project_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('project_id')->references('id')->on('projects');
             $table->foreign('increment_id')->references('id')->on('increments');
