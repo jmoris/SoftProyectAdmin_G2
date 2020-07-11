@@ -15,6 +15,10 @@ export class CursosService {
         return this.http.get<any>(`${environment.apiUrl}/courses`);
     }
 
+    get(id){
+        return this.http.get<any>(`${environment.apiUrl}/courses/` + id);
+    }
+
     insert(data) {
         return this.http.post<any>(`${environment.apiUrl}/courses`, data);
     }
@@ -26,4 +30,16 @@ export class CursosService {
     insertComplete(data){
         return this.http.post<any>(`${environment.apiUrl}/courses/createmass`, data);
     }
+
+    usersList(id){
+        return this.http.get<any>(`${environment.apiUrl}/courses/list/` + id);
+    }
+
+    uploadFile(fileToUpload: File, id): Observable<boolean> {
+        const formData: FormData = new FormData();
+        formData.append('file', fileToUpload, fileToUpload.name);
+
+        return this.http.post<any>(`${environment.apiUrl}/courses/uploadfile/` + id, formData);
+    }
+
 }

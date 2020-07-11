@@ -14,6 +14,7 @@ import { GestionComponent } from './gestion/gestion.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AddUserComponent } from './add-user/add-user.component';
 import { MaterialModule } from 'src/app/material.module';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 
 @NgModule({
@@ -30,6 +31,6 @@ import { MaterialModule } from 'src/app/material.module';
     CustomFormsModule,
     TagInputModule
   ],
-  declarations: [GestionComponent, AddUserComponent]
+  declarations: [GestionComponent, AddUserComponent, EditUserComponent]
 })
 export class UsuarioModule { }

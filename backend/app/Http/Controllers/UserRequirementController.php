@@ -13,10 +13,17 @@ class UserRequirementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $ur = UserRequirement::all();
+        $ur = UserRequirement::where('project_id', $request->project_id)->get();
         return response()->json($ur);
+    }
+
+    public function getNextId($id){
+        $next_id = UserRequirement::where('project_id', $id)->orderBy('internalId', 'desc')->first();
+        if($next_id==null)
+            return response()->json(['next_id' => 1]);
+        return response()->json(['next_id' => $next_id->internalId + 1]);
     }
 
     /**
@@ -30,12 +37,13 @@ class UserRequirementController extends Controller
         $validator = Validator::make($request->all(), [
             'source' => 'required',
             'cost' => 'required',
+            //'internalId' => 'required',
             'stability' => 'required',
             'priority' => 'required',
-            'state' => 'required',
-            'type' => 'required',
-            'idUser' => 'required',
-            'idIncrement' => 'required'
+            'status' => 'required',
+            'project_id' => 'required',
+            'description' => 'required',
+            'increment_id' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -43,14 +51,18 @@ class UserRequirementController extends Controller
         }
 
         $usrq = new UserRequirement();
+        $usrq->internalId = UserRequirement::where('project_id', $request->project_id)->count() + 1;
         $usrq->source = $request->source;
         $usrq->cost = $request->cost;
         $usrq->stability = $request->stability;
         $usrq->priority = $request->priority;
-        $usrq->state = $request->state;
-        $usrq->idUser = $request->idUser;
-        $usrq->idIncrement = $request->idIncrement;
-        $usrq->type = $request->type;
+        $usrq->status = $request->status;
+        //$usrq->idUser = $request->idUser;
+        //$usrq->idIncrement = $request->idIncrement;
+        //$usrq->type = $request->type;
+        $usrq->increment_id = $request->increment_id;
+        $usrq->project_id = $request->project_id;
+        $usrq->description = $request->description;
         $usrq->save();
 
         return response()->json([
@@ -90,12 +102,13 @@ class UserRequirementController extends Controller
         $validator = Validator::make($request->all(), [
             'source' => 'required',
             'cost' => 'required',
+            //'internalId' => 'required',
             'stability' => 'required',
             'priority' => 'required',
-            'state' => 'required',
-            'type' => 'required',
-            'idUser' => 'required',
-            'idIncrement' => 'required'
+            'status' => 'required',
+            'project_id' => 'required',
+            'description' => 'required',
+            'increment_id' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -107,10 +120,12 @@ class UserRequirementController extends Controller
         $usrq->cost = $request->cost;
         $usrq->stability = $request->stability;
         $usrq->priority = $request->priority;
-        $usrq->state = $request->state;
-        $usrq->idUser = $request->idUser;
-        $usrq->idIncrement = $request->idIncrement;
-        $usrq->type = $request->type;
+        $usrq->status = $request->status;
+        //$usrq->idUser = $request->idUser;
+        $usrq->increment_id = $request->increment_id;
+        //$usrq->type = $request->type;
+        $usrq->project_id = $request->project_id;
+        $usrq->description = $request->description;
         $usrq->save();
 
         return response()->json([

@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('courses/assign', 'CoursesController@asignarProfesorACurso');
     Route::post('courses/createmass', 'CoursesController@createAndAdd');
     Route::get('courses/list/{id}', 'CoursesController@getUserList');
+    Route::post('courses/uploadfile/{id}', 'CoursesController@uploadFile');
 
     Route::get('projects', 'ProjectsController@getProyectos');
     Route::get('projects/{id}', 'ProjectsController@getProyecto');
@@ -53,12 +54,14 @@ Route::group(['middleware' => 'auth:api'], function () {
 
 
     Route::apiResource('userrequirements', 'UserRequirementController');
+    Route::get('userrequirements/nextid/{id}', 'UserRequirementController@getNextId');
     Route::apiResource('softwarerequirements', 'SoftwareRequirementController');
-
+    Route::get('softwarerequirements/nextid/{id}', 'SoftwareRequirementController@getNextId');
+    Route::apiResource('increments', 'IncrementsController');
 
     Route::get('info', function(){
 
-        $results = DB::select( DB::raw("SELECT COUNT(profile) as count, profile FROM users GROUP BY profile;") );
+        $results = DB::select( DB::raw("SELECT COUNT(profile) as count, profile FROM users WHERE deleted_at IS NULL GROUP BY profile;") );
 
         $cursos_activos = DB::select( DB::raw("SELECT count(*) as activos FROM courses WHERE deleted_at IS NULL;") );
         $cursos_inactivos = DB::select( DB::raw("SELECT count(*) as inactivos FROM courses WHERE deleted_at IS NOT NULL;") );
@@ -83,5 +86,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('user', function(Request $request){
         return Auth::user();
     });
+
+});
+
+Route::get('testid', function(){
+    return App\UserRequirement::where('project_id', 1)->orderBy('internalId', 'desc')->first()->internalId+1;
+    return App\SoftwareRequirement::where('project_id', 1)->orderBy('internalId', 'desc')->first()->internalId + 1;
 
 });

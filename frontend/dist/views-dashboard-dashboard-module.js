@@ -19,11 +19,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var DashboadDefaultComponent = /** @class */ (function () {
+    //'#62549c', '#7566b5', '#7d6cbb', '#8877bd', '#9181bd', '#6957af'
+    //'#62549c', '#638eb0', '#6d9abd', '#799fbd', '#9181bd', '#6957af' Celeste
+    //'#62549c', '#a69962', '#c2b16d', '#baad79', '#9181bd', '#6957af' Amarillo
     function DashboadDefaultComponent(userService) {
         var _this = this;
         this.userService = userService;
         this.salesChartPie = {
-            color: ['#62549c', '#7566b5', '#7d6cbb', '#8877bd', '#9181bd', '#6957af'],
+            color: ['#263db5', '#d22346'],
             tooltip: {
                 show: true,
                 backgroundColor: 'rgba(0, 0, 0, .8)'
@@ -252,21 +255,21 @@ var DashboadDefaultComponent = /** @class */ (function () {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         } if (rf & 2) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](24);
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.info.usuarios.admin);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.info == null ? null : ctx.info.usuarios == null ? null : ctx.info.usuarios.admin);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](8);
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.info.usuarios.teacher);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.info == null ? null : ctx.info.usuarios == null ? null : ctx.info.usuarios.teacher);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](8);
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.info.usuarios.student);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.info == null ? null : ctx.info.usuarios == null ? null : ctx.info.usuarios.student);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("options", ctx.salesChartPie)("merge", ctx.dataProyectos)("autoResize", true);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("options", ctx.salesChartPie)("merge", ctx.dataCursos)("autoResize", true);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](14);
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.info.cursos[0].activos + ctx.info.cursos[1].inactivos);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", (ctx.info == null ? null : ctx.info.cursos[0] == null ? null : ctx.info.cursos[0].activos) + (ctx.info == null ? null : ctx.info.cursos[1] == null ? null : ctx.info.cursos[1].inactivos), "");
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](8);
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.info.cursos[1].inactivos);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("", ctx.info == null ? null : ctx.info.cursos[1] == null ? null : ctx.info.cursos[1].inactivos, " ");
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](8);
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.info.cursos[0].activos);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.info == null ? null : ctx.info.cursos[0] == null ? null : ctx.info.cursos[0].activos);
         } }, directives: [ngx_echarts__WEBPACK_IMPORTED_MODULE_2__["ɵa"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL2Rhc2hib2FyZC9kYXNoYm9hZC1kZWZhdWx0L2Rhc2hib2FkLWRlZmF1bHQuY29tcG9uZW50LmNzcyJ9 */"] });
     return DashboadDefaultComponent;
 }());
@@ -277,6 +280,225 @@ var DashboadDefaultComponent = /** @class */ (function () {
                 selector: 'app-dashboad-default',
                 templateUrl: './dashboad-default.component.html',
                 styleUrls: ['./dashboad-default.component.css']
+            }]
+    }], function () { return [{ type: src_app_services_usuarios_service__WEBPACK_IMPORTED_MODULE_1__["UsuariosService"] }]; }, null); })();
+
+
+/***/ }),
+
+/***/ "./src/app/views/dashboard/dashboad-estudiante/dashboad-estudiante.component.ts":
+/*!**************************************************************************************!*\
+  !*** ./src/app/views/dashboard/dashboad-estudiante/dashboad-estudiante.component.ts ***!
+  \**************************************************************************************/
+/*! exports provided: DashboadEstudianteComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboadEstudianteComponent", function() { return DashboadEstudianteComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm5/core.js");
+/* harmony import */ var src_app_services_usuarios_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/_services/usuarios.service */ "./src/app/_services/usuarios.service.ts");
+
+
+
+
+var DashboadEstudianteComponent = /** @class */ (function () {
+    function DashboadEstudianteComponent(userService) {
+        var _this = this;
+        this.userService = userService;
+        this.salesChartPie = {
+            color: ['#62549c', '#7566b5', '#7d6cbb', '#8877bd', '#9181bd', '#6957af'],
+            tooltip: {
+                show: true,
+                backgroundColor: 'rgba(0, 0, 0, .8)'
+            },
+            xAxis: [{
+                    axisLine: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }
+            ],
+            yAxis: [{
+                    axisLine: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }
+            ],
+            series: [{
+                    name: 'Proyectos',
+                    type: 'pie',
+                    radius: '75%',
+                    center: ['50%', '50%'],
+                    data: [
+                        { value: 0, name: 'Activo' },
+                        { value: 0, name: 'Inactivo' }
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        this.userService.infoDash().subscribe(function (data) {
+            _this.info = data;
+            var info2 = null;
+            info2 = {
+                admin: 0,
+                student: 0,
+                teacher: 0
+            };
+            data.usuarios.forEach(function (element) {
+                if (element.profile === 'admin') {
+                    info2.admin = element.count;
+                }
+                else if (element.profile === 'student') {
+                    info2.student = element.count;
+                }
+                else if (element.profile === 'teacher') {
+                    info2.teacher = element.count;
+                }
+            });
+            _this.info.usuarios = info2;
+            _this.dataProyectos = {
+                series: {
+                    data: [
+                        { value: _this.info.proyectos[0].activos, name: 'Activo' },
+                        { value: _this.info.proyectos[1].inactivos, name: 'Inactivo' }
+                    ]
+                }
+            };
+            _this.dataCursos = {
+                series: {
+                    data: [
+                        { value: _this.info.cursos[0].activos, name: 'Activo' },
+                        { value: _this.info.cursos[1].inactivos, name: 'Inactivo' }
+                    ]
+                }
+            };
+        });
+    }
+    DashboadEstudianteComponent.prototype.ngOnInit = function () {
+    };
+    DashboadEstudianteComponent.prototype.onChartInit = function (e) {
+    };
+    DashboadEstudianteComponent.ɵfac = function DashboadEstudianteComponent_Factory(t) { return new (t || DashboadEstudianteComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_usuarios_service__WEBPACK_IMPORTED_MODULE_1__["UsuariosService"])); };
+    DashboadEstudianteComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: DashboadEstudianteComponent, selectors: [["app-dashboad-estudiante"]], decls: 52, vars: 3, consts: [[1, ""], [1, "row"], [1, "breadcrumb", "col-md-9"], ["href", ""], [1, "separator-breadcrumb", "border-top"], [1, "col-lg-12", "col-md-12"], [1, "card", "mb-4"], [1, "card-body"], [1, "card-title"], [1, "col-lg-4", "col-md-6", "col-sm-6"], [1, "card", "card-icon", "mb-4"], [1, "card-body", "text-center"], [1, "i-File-Clipboard-Text--Image"], [1, "text-muted", "mt-2", "mb-2"], [1, "text-primary", "text-24", "line-height-1", "m-0"], [1, "i-Diploma-2"], [1, "i-University"], [1, "col-lg-6", "col-sm-12"]], template: function DashboadEstudianteComponent_Template(rf, ctx) { if (rf & 1) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "h1");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "Bienvenido");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "ul");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "li");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "a", 3);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "Estudiante");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](9, "div", 4);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "div", 5);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "div", 6);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "div", 7);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "div", 8);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](15, "Has Participado en");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "div", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "div", 9);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "div", 10);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "div", 11);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](20, "i", 12);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](21, "p", 13);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](22, "Proyectos");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](23, "p", 14);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](24);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](25, "div", 9);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](26, "div", 10);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](27, "div", 11);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](28, "i", 15);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "p", 13);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](30, "Cursos");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "p", 14);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](32);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](33, "div", 9);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](34, "div", 10);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](35, "div", 11);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](36, "i", 16);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](37, "p", 13);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](38, "Semestres");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](39, "p", 14);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](40);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](41, "div", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](42, "div", 17);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](43, "div", 6);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](44, "div", 7);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](45, "div", 8);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](46, "Cursos Periodo Actual");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](47, "div", 17);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](48, "div", 6);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](49, "div", 7);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](50, "div", 8);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](51, "Proyectos Periodo Actual");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        } if (rf & 2) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](24);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.info.usuarios.teacher);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](8);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.info.usuarios.teacher);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](8);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.info.usuarios.student);
+        } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL2Rhc2hib2FyZC9kYXNoYm9hZC1lc3R1ZGlhbnRlL2Rhc2hib2FkLWVzdHVkaWFudGUuY29tcG9uZW50LmNzcyJ9 */"] });
+    return DashboadEstudianteComponent;
+}());
+
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](DashboadEstudianteComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-dashboad-estudiante',
+                templateUrl: './dashboad-estudiante.component.html',
+                styleUrls: ['./dashboad-estudiante.component.css']
             }]
     }], function () { return [{ type: src_app_services_usuarios_service__WEBPACK_IMPORTED_MODULE_1__["UsuariosService"] }]; }, null); })();
 
@@ -296,6 +518,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm5/router.js");
 /* harmony import */ var _dashboad_default_dashboad_default_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dashboad-default/dashboad-default.component */ "./src/app/views/dashboard/dashboad-default/dashboad-default.component.ts");
+/* harmony import */ var _dashboad_estudiante_dashboad_estudiante_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dashboad-estudiante/dashboad-estudiante.component */ "./src/app/views/dashboard/dashboad-estudiante/dashboad-estudiante.component.ts");
+
 
 
 
@@ -304,7 +528,11 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [
     {
         path: 'v1',
-        component: _dashboad_default_dashboad_default_component__WEBPACK_IMPORTED_MODULE_2__["DashboadDefaultComponent"]
+        component: _dashboad_default_dashboad_default_component__WEBPACK_IMPORTED_MODULE_2__["DashboadDefaultComponent"],
+    },
+    {
+        path: 'v2',
+        component: _dashboad_estudiante_dashboad_estudiante_component__WEBPACK_IMPORTED_MODULE_3__["DashboadEstudianteComponent"]
     }
 ];
 var DashboardRoutingModule = /** @class */ (function () {

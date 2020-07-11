@@ -16,6 +16,14 @@ export class UsuariosService {
         return this.http.get<any>(`${environment.apiUrl}/users`);
     }
 
+    getUserById(id){
+        return this.http.get<any>(`${environment.apiUrl}/users/` + id);
+    }
+
+    updateUser(id, data){
+        return this.http.put<any>(`${environment.apiUrl}/users/` + id, data);
+    }
+
     getStudents() {
         return this.http.get<any>(`${environment.apiUrl}/students`);
     }

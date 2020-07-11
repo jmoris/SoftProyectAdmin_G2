@@ -13,16 +13,19 @@ import { UsuariosService } from 'src/app/_services/usuarios.service';
 })
 export class DashboadDefaultComponent implements OnInit {
 
-    info : any;
+    info: any;
     salesChartPie: EChartOption;
-    dataProyectos : any;
-    dataCursos : any;
+    dataProyectos: any;
+    dataCursos: any;
     private timer: any;
 
+    //'#62549c', '#7566b5', '#7d6cbb', '#8877bd', '#9181bd', '#6957af'
+    //'#62549c', '#638eb0', '#6d9abd', '#799fbd', '#9181bd', '#6957af' Celeste
+    //'#62549c', '#a69962', '#c2b16d', '#baad79', '#9181bd', '#6957af' Amarillo
     constructor(private userService: UsuariosService) {
 
         this.salesChartPie = {
-            color: ['#62549c', '#7566b5', '#7d6cbb', '#8877bd', '#9181bd', '#6957af'],
+            color: ['#263db5','#d22346'],
             tooltip: {
                 show: true,
                 backgroundColor: 'rgba(0, 0, 0, .8)'
@@ -76,11 +79,12 @@ export class DashboadDefaultComponent implements OnInit {
                 teacher: 0
             };
             data.usuarios.forEach(element => {
-                if(element.profile === 'admin'){
+
+                if (element.profile === 'admin') {
                     info2.admin = element.count;
-                }else if(element.profile === 'student'){
+                } else if (element.profile === 'student') {
                     info2.student = element.count;
-                }else if(element.profile === 'teacher'){
+                } else if (element.profile === 'teacher') {
                     info2.teacher = element.count;
                 }
             });
@@ -109,7 +113,7 @@ export class DashboadDefaultComponent implements OnInit {
 
     }
 
-    onChartInit(e){
+    onChartInit(e) {
 
     }
 }

@@ -11,6 +11,7 @@ import { Users } from 'src/app/model-classes/users';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { ConfirmationDialogComponent } from '../../core/confirmation-dialog/confirmation-dialog.component';
+import { EditUserComponent } from '../edit-user/edit-user.component';
 
 
 
@@ -24,8 +25,7 @@ export class GestionComponent implements OnInit {
   usuarios: any = [];
   users: Users[];
   checked = true;
-  cargando = false;
-  displayedColumns: string[] = ["run", "name", "surname", "email", "profile", "delete"];
+  displayedColumns: string[] = ["run", "name", "surname", "email", "profile", "edit", "delete"];
   dataSource: MatTableDataSource<Users> = new MatTableDataSource<Users>();
   dialogResult = "";
   isDataLoading: boolean;
@@ -53,7 +53,6 @@ export class GestionComponent implements OnInit {
 
   getUsers() {
     this.loading = true;
-    this.cargando = true;
     this.usuariosService.getAll().subscribe(
       data => {
         if (!data) {
@@ -84,51 +83,15 @@ export class GestionComponent implements OnInit {
   ngOnInit() {
     this.dataSource.sortingDataAccessor = this.sortingCustomAccesor;
     this.getUsers();
-    //this.loadData();
   }
 
   public doFilter = (value: string) => {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
-  loadData() {
-
-    /*this.usuariosService.getAll().subscribe(
-      (resp: any) => {
-        this.usuarios = resp;
-        this.cargando = false;
-      }
-    );*/
-  }
-
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-  }
-
-  deleteData(id, modal, event) {
-    event.target.parentElement.parentElement.blur();
-    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })
-      .result.then((result) => {
-        this.usuariosService.delete(id)
-          .subscribe(res => {
-            this.toastr.success('Usuario eliminado correctamente', 'Notificación de eliminación', { timeOut: 3000 });
-            this.loadData();
-          })
-      }, (reason) => {
-      });
-  }
-
-  cleanForm() {
-    this.addUserForm = this.fb.group({
-      name: ['', Validators.required],
-      surname: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-      rut: ['', Validators.required],
-      profile: ['', Validators.required],
-      enrollment: ['', Validators.required]
-    });
   }
 
   openAddDialog(): void {
@@ -143,19 +106,17 @@ export class GestionComponent implements OnInit {
       this.dialogResult = result;
       if (result == 'Confirm') {
         this.toastr.success('Usuario agregado exitosamente', 'Notificación', { timeOut: 3000 });
-        //this.cleanForm();
         this.refreshTable();
       }
     })
   }
 
-  deleteUser(run: string) {
-    console.log('run: ' + run);
+  deleteUser(id: string) {
     this.openDeletionConfirmationDialog().afterClosed().subscribe(confirmation => {
 
       console.log(confirmation);
       if (confirmation.confirmed) {
-        this.usuariosService.delete(run).subscribe({
+        this.usuariosService.delete(id).subscribe({
           next: result => {
             console.log(result);
             this.refreshTable();
@@ -169,12 +130,30 @@ export class GestionComponent implements OnInit {
     });
   }
 
+  editUser(id: string) {
+
+    const dialogRef = this.dialog.open(EditUserComponent, {
+      data: id,
+      width: '600px',
+      disableClose: true,
+      autoFocus: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result == 'Confirm') {
+        this.refreshTable();
+        this.toastr.success('Usuario editado exitosamente', 'Notificación', { timeOut: 3000 });
+      }
+    });
+
+  }
+
   refreshTable() {
     this.getUsers();
   }
 
   openDeletionConfirmationDialog() {
-
     var deletionDialogConfig = this.getDialogConfig();
     deletionDialogConfig.data = { message: '¿Desea eliminar este usuario?' };
     return this.dialog.open(ConfirmationDialogComponent, deletionDialogConfig);
@@ -200,8 +179,6 @@ export class GestionComponent implements OnInit {
             return;
           }
           this.toastr.success('Usuario insertado correctamente', 'Notificación de inserción', { timeOut: 3000 });
-          this.cleanForm();
-          this.loadData();
         }, (error: any) => {
           console.log(error);
         });

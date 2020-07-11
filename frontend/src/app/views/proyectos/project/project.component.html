@@ -1,10 +1,12 @@
 <div class="breadcrumb">
 	<h1>Proyecto </h1>
 	<ul>
-		<li>{{ proyecto.name }}</li>
+		<li>{{ proyecto?.name }}</li>
 	</ul>
 </div>
-
+<div class="module-loader" *ngIf="loading">
+    <div class="spinner spinner-bubble spinner-bubble-primary mr-3"></div>
+</div>
 <div class="separator-breadcrumb border-top"></div>
 <div class="row">
 	<div class="col-md-12">
@@ -20,9 +22,9 @@
 										<div class="card mb-4 mt-4 ml-4 ">
 											<div class="card-body">
 												<h6 class="mb-2 text-muted">Requerimientos de usuario</h6>
-												<p class="mb-2 text-24 font-weight-light text-title">50%</p>
+												<p class="mb-2 text-24 font-weight-light text-title">{{ (userreqs.length !=0) ? ((100*(infour.completos / userreqs.length)).toFixed(1)) : 0.0  }}%</p>
 												<p class="mb-1">
-													<ngb-progressbar type="success" [value]="50" height="10px">
+													<ngb-progressbar type="success" [value]="(infour.completos/userreqs.length)*100" height="10px">
 													</ngb-progressbar>
 												</p>
 											</div>
@@ -32,9 +34,9 @@
 										<div class="card mb-4 mt-4 mr-4">
 											<div class="card-body">
 												<h6 class="mb-2 text-muted">Requerimientos de sistema</h6>
-												<p class="mb-2 text-24 font-weight-light text-title ">50%</p>
+												<p class="mb-2 text-24 font-weight-light text-title ">{{ (softreqs.length !=0) ? (100*(infosr.completos / softreqs.length)).toFixed(1) : 0.0  }}%</p>
 												<p class="mb-1">
-													<ngb-progressbar type="success" [value]="50" height="10px">
+													<ngb-progressbar type="success" [value]="(infosr.completos/softreqs.length)*100" height="10px">
 													</ngb-progressbar>
 												</p>
 											</div>
@@ -81,82 +83,65 @@
 				</ng-template>
 			</li>
 			<li [ngbNavItem]="2">
-				<a ngbNavLink>Requerimientos de Usuario</a>
+				<a ngbNavLink>Incrementos</a>
 				<ng-template ngbNavContent>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="card o-hidden mb-4">
 								<div class="row">
 									<div class="col-md-2">
-										<div class="card o-hidden mb-4 mt-4 ml-4">
+										<div class="card o-hidden mb-4 ml-4 mt-4">
 											<div class="card-body text-center">
 												<div class="content">
-													<p class="m-0 text-small text-muted">Total</p>
-													<p class="text-primary text-40 line-height-1 m-0">20</p>
-												</div>
-											</div>
-										</div>
-										<div class="card o-hidden mb-4 mt-4 ml-4">
-											<div class="card-body text-center">
-												<div class="content">
-													<p class="m-0 text-small text-muted">Finalizados </p>
-													<p class="text-success text-40 line-height-1 m-0">5</p>
-												</div>
-											</div>
-										</div>
-
-										<div class="card o-hidden mb-4 mt-4 ml-4">
-											<div class="card-body text-center">
-												<div class="content">
-													<p class="m-0 text-small text-muted">Pendientes</p>
-													<p class="text-danger text-40 line-height-1 m-0">15</p>
-												</div>
-											</div>
-										</div>
-
-										<div class="card o-hidden mb-4 ml-4 ">
-											<div class="card-body text-center">
-												<i class="i-Add-User"></i>
-												<div class="content">
-													<p class="text-muted mt-2 mb-0">Requerimiento de Usuario
-													</p>
+													<p class="text-muted mt-0 mb-0">Nuevo Incremento</p>
 													<button _ngcontent-tkm-c169=""
-														class="btn btn-primary btn-rounded" (click)="addUserRequeriment(userRequerimentConfirmModal, $event)" >Nuevo</button>
+														class="btn btn-primary btn-rounded" (click)="addIncrement(addIncrementConfirmModal, $event)">Agregar <i class="i-Add ml-1"></i> </button>
 												</div>
 											</div>
 										</div>
-
+										<div class="card o-hidden mb-4 mt-4 ml-4">
+											<div class="card-body text-center">
+												<div class="content">
+													<p class="m-0 text-small text-muted">Total de incrementos</p>
+													<p class="text-primary text-40 line-height-1 m-0">{{ increments.length }}</p>
+												</div>
+											</div>
+                                        </div>
 									</div>
 									<div class="col-md-10">
 										<div class="card o-hidden mb-4 mt-4 mr-4">
 											<ngx-datatable style="height: calc(100vh - 270px); box-shadow: none"
-												class="material fullscreen" [columnMode]="'force'" [headerHeight]="50"
+												class="material fullscreen" [columnMode]="'flex'" [headerHeight]="50"
 												[footerHeight]="50" [rowHeight]="60" [scrollbarV]="true" [limit]="10"
-												[rows]="products$ | async">
-												<ngx-datatable-column name="photo" [maxWidth]="80">
+												[rows]="increments">
+												<ngx-datatable-column name="id" [flexGrow]="1">
 													<ng-template ngx-datatable-header-template>
-														Codigo
-													</ng-template>
-													<ng-template ngx-datatable-cell-template let-value="value"
-														let-row="row">
-														<img height="32px" width="32px" style="border-radius: 4px"
-															[src]="value" alt="">
+														Numero incremento
+                                                    </ng-template>
+                                                    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                                        {{ increments.indexOf(row)+1 }}
+                                                    </ng-template>
+												</ngx-datatable-column>
+												<ngx-datatable-column name="description" [flexGrow]="3">
+													<ng-template ngx-datatable-header-template>
+														Descripcion
 													</ng-template>
 												</ngx-datatable-column>
-												<ngx-datatable-column name="name" [width]="600">
+												<ngx-datatable-column name="initDate" [flexGrow]="1">
 													<ng-template ngx-datatable-header-template>
-														Descripción
-													</ng-template>
+														Fecha inicio
+                                                    </ng-template>
+                                                    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                                        {{ formatDate(value) }}
+                                                    </ng-template>
 												</ngx-datatable-column>
-												<ngx-datatable-column name="category" [maxWidth]="150">
+												<ngx-datatable-column name="endDate" [flexGrow]="1">
 													<ng-template ngx-datatable-header-template>
-														Categoria
-													</ng-template>
-												</ngx-datatable-column>
-												<ngx-datatable-column name="subtitle" [maxWidth]="150">
-													<ng-template ngx-datatable-header-template>
-														Estatus
-													</ng-template>
+														Fecha termino
+                                                    </ng-template>
+                                                    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                                        {{ formatDate(value) }}
+                                                    </ng-template>
 												</ngx-datatable-column>
 											</ngx-datatable>
 										</div>
@@ -168,85 +153,126 @@
 				</ng-template>
 			</li>
 			<li [ngbNavItem]="3">
-				<a ngbNavLink>Requerimientos de Software</a>
+				<a ngbNavLink>Requerimientos de Usuario</a>
 				<ng-template ngbNavContent>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="card o-hidden mb-4">
 								<div class="row">
 									<div class="col-md-2">
+
+                                        <div class="card o-hidden mb-4 mt-4 ml-4">
+											<div class="card-body text-center">
+												<div class="content">
+													<div class="col-md-12 form-group mb-0">
+														<select class="form-control">
+															<option>Todos los incrementos</option>
+															<option *ngFor="let item of increments" [value]="item.id">{{ item.name }}</option>
+														</select>
+													</div>
+												</div>
+											</div>
+                                        </div>
+
+                                        <div class="card o-hidden mb-4 ml-4 ">
+											<div class="card-body text-center">
+												<i class="i-Add-User"></i>
+												<div class="content">
+													<p class="text-muted mt-2 mb-0">Requerimiento de Usuario
+													</p>
+													<button _ngcontent-tkm-c169=""
+														class="btn btn-primary btn-rounded" (click)="addUserRequeriment(userRequerimentConfirmModal, $event)" >Nuevo</button>
+												</div>
+											</div>
+                                        </div>
+
+
 										<div class="card o-hidden mb-4 mt-4 ml-4">
 											<div class="card-body text-center">
 												<div class="content">
 													<p class="m-0 text-small text-muted">Total</p>
-													<p class="text-primary text-40 line-height-1 m-0">20</p>
+													<p class="text-primary text-40 line-height-1 m-0">{{ userreqs.length }}</p>
 												</div>
 											</div>
-										</div>
+                                        </div>
+
 										<div class="card o-hidden mb-4 mt-4 ml-4">
 											<div class="card-body text-center">
 												<div class="content">
 													<p class="m-0 text-small text-muted">Finalizados </p>
-													<p class="text-success text-40 line-height-1 m-0">5</p>
+													<p class="text-success text-40 line-height-1 m-0">{{ infour.completos }}</p>
 												</div>
 											</div>
 										</div>
+
 										<div class="card o-hidden mb-4 mt-4 ml-4">
 											<div class="card-body text-center">
 												<div class="content">
 													<p class="m-0 text-small text-muted">Pendientes</p>
-													<p class="text-danger text-40 line-height-1 m-0">15</p>
+													<p class="text-danger text-40 line-height-1 m-0">{{ infour.incompletos }}</p>
 												</div>
 											</div>
 										</div>
-										<div class="card o-hidden mb-4 ml-4 ">
-											<div class="card-body text-center">
-												<i class="i-Add-User"></i>
-												<div class="content">
-													<p class="text-muted mt-2 mb-0">Requerimiento de Software
-													</p>
-													<button _ngcontent-tkm-c169=""
-														class="btn btn-primary btn-rounded" (click)="addSoftwareRequeriment(softwareRequerimentConfirmModal, $event)">Nuevo</button>
-												</div>
-											</div>
-										</div>
+
+
+
 									</div>
 									<div class="col-md-10">
 										<div class="card o-hidden mb-4 mt-4 mr-4">
-											<ngx-datatable style="height: calc(100vh - 270px); box-shadow: none"
-												class="material fullscreen" [columnMode]="'force'" [headerHeight]="50"
+											<ngx-datatable style="height: calc(85vh - 270px); box-shadow: none"
+												class="material fullscreen" [columnMode]="'flex'" [headerHeight]="50"
 												[footerHeight]="50" [rowHeight]="60" [scrollbarV]="true" [limit]="10"
-												[rows]="products$ | async">
-												<ngx-datatable-column name="photo" [maxWidth]="80">
+												[rows]="userreqs">
+												<ngx-datatable-column name="internalId" [flexGrow]="9">
 													<ng-template ngx-datatable-header-template>
 														Codigo
-													</ng-template>
-													<ng-template ngx-datatable-cell-template let-value="value"
-														let-row="row">
-														<img height="32px" width="32px" style="border-radius: 4px"
-															[src]="value" alt="">
-													</ng-template>
+                                                    </ng-template>
+                                                    <ng-template let-value="value" ngx-datatable-cell-template>
+                                                        RU{{value | number: '2.0'}}
+                                                      </ng-template>
 												</ngx-datatable-column>
-												<ngx-datatable-column name="subtitle">
+												<ngx-datatable-column name="description" [flexGrow]="50">
 													<ng-template ngx-datatable-header-template>
 														Descripción
 													</ng-template>
 												</ngx-datatable-column>
-												<ngx-datatable-column name="name" [maxWidth]="100">
+												<ngx-datatable-column name="priority" [flexGrow]="9">
 													<ng-template ngx-datatable-header-template>
-														Req - Usuario
-													</ng-template>
-												</ngx-datatable-column>
-												<ngx-datatable-column name="category" [maxWidth]="150" >
+														Prioridad
+                                                    </ng-template>
+                                                    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                                        {{ formatUserReqColumns(value, 'priority') }}
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column name="stability" [flexGrow]="9">
 													<ng-template ngx-datatable-header-template>
-														Categoria
-													</ng-template>
-												</ngx-datatable-column>
-												<ngx-datatable-column name="subtitle" [maxWidth]="150">
+														Estabilidad
+                                                    </ng-template>
+                                                    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                                        {{ formatUserReqColumns(value, 'stability') }}
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column name="cost" [flexGrow]="9">
 													<ng-template ngx-datatable-header-template>
-														Estatus
-													</ng-template>
+														Costo
+                                                    </ng-template>
 												</ngx-datatable-column>
+												<ngx-datatable-column name="status" [flexGrow]="9">
+													<ng-template ngx-datatable-header-template>
+														Estado
+                                                    </ng-template>
+                                                    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                                        {{ formatUserReqColumns(value, 'status') }}
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column [cellClass]="'va-middle'" name="Accion" [flexGrow]="10" [sortable]="false" prop="id">
+                                                    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                                                      <button class="btn btn-sm btn-outline-warning" (click)="editUserRequeriment(row, $event)"><i
+                                                          class="i-Edit icon-md"></i></button>&nbsp;&nbsp;
+                                                        <button class="btn btn-sm btn-outline-danger" (click)="deleteUserReq(row.id)"><i
+                                                            class="i-Close-Window icon-md"></i></button>
+                                                    </ng-template>
+                                                  </ngx-datatable-column>
 											</ngx-datatable>
 										</div>
 									</div>
@@ -257,6 +283,132 @@
 				</ng-template>
 			</li>
 			<li [ngbNavItem]="4">
+				<a ngbNavLink>Requerimientos de Software</a>
+				<ng-template ngbNavContent>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card o-hidden mb-4">
+								<div class="row">
+									<div class="col-md-2">
+                                        <div class="card o-hidden mb-4 mt-4 ml-4">
+											<div class="card-body text-center">
+												<div class="content">
+													<div class="col-md-12 form-group mb-0">
+														<select class="form-control">
+															<option>Todos los requisitos</option>
+															<option *ngFor="let item of userreqs" [value]="item.id">RU{{item.internalId | number: '2.0'}}</option>
+														</select>
+													</div>
+												</div>
+											</div>
+                                        </div>
+
+                                        <div class="card o-hidden mb-4 ml-4 mt-4">
+											<div class="card-body text-center">
+												<i class="i-Add-User"></i>
+												<div class="content">
+													<p class="text-muted mt-2 mb-0">Requerimiento de Software
+													</p>
+													<button _ngcontent-tkm-c169=""
+														class="btn btn-primary btn-rounded" (click)="addSoftwareRequeriment(softwareRequerimentConfirmModal, $event)">Nuevo</button>
+												</div>
+											</div>
+                                        </div>
+
+										<div class="card o-hidden mb-4 mt-4 ml-4">
+											<div class="card-body text-center">
+												<div class="content">
+													<p class="m-0 text-small text-muted">Total</p>
+													<p class="text-primary text-40 line-height-1 m-0">{{ softreqs.length }}</p>
+												</div>
+											</div>
+                                        </div>
+
+										<div class="card o-hidden mb-4 mt-4 ml-4">
+											<div class="card-body text-center">
+												<div class="content">
+													<p class="m-0 text-small text-muted">Finalizados </p>
+													<p class="text-success text-40 line-height-1 m-0">{{ infosr.completos }}</p>
+												</div>
+											</div>
+										</div>
+
+										<div class="card o-hidden mb-4 mt-4 ml-4">
+											<div class="card-body text-center">
+												<div class="content">
+													<p class="m-0 text-small text-muted">Pendientes</p>
+													<p class="text-danger text-40 line-height-1 m-0">{{ infosr.incompletos }}</p>
+												</div>
+											</div>
+										</div>
+
+									</div>
+									<div class="col-md-10">
+										<div class="card o-hidden mb-4 mt-4 mr-4">
+											<ngx-datatable style="height: calc(85vh - 270px); box-shadow: none"
+												class="material fullscreen" [columnMode]="'flex'" [headerHeight]="50"
+												[footerHeight]="50" [rowHeight]="60" [scrollbarV]="true" [limit]="10"
+												[rows]="softreqs">
+												<ngx-datatable-column name="internalId" [flexGrow]="9">
+													<ng-template ngx-datatable-header-template>
+														Codigo
+                                                    </ng-template>
+                                                    <ng-template let-value="value" ngx-datatable-cell-template>
+                                                        RS{{value | number: '2.0'}}
+                                                      </ng-template>
+												</ngx-datatable-column>
+												<ngx-datatable-column name="description" [flexGrow]="50">
+													<ng-template ngx-datatable-header-template>
+														Descripción
+													</ng-template>
+												</ngx-datatable-column>
+												<ngx-datatable-column name="priority" [flexGrow]="9">
+													<ng-template ngx-datatable-header-template>
+														Prioridad
+                                                    </ng-template>
+                                                    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                                        {{ formatUserReqColumns(value, 'priority') }}
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column name="stability" [flexGrow]="9">
+													<ng-template ngx-datatable-header-template>
+														Estabilidad
+                                                    </ng-template>
+                                                    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                                        {{ formatUserReqColumns(value, 'stability') }}
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column name="cost" [flexGrow]="9">
+													<ng-template ngx-datatable-header-template>
+														Costo
+                                                    </ng-template>
+												</ngx-datatable-column>
+												<ngx-datatable-column name="status" [flexGrow]="9">
+													<ng-template ngx-datatable-header-template>
+														Estado
+                                                    </ng-template>
+                                                    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                                        {{ formatUserReqColumns(value, 'status') }}
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column [cellClass]="'va-middle'" name="Accion" [flexGrow]="10" [sortable]="false" prop="id">
+                                                    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                                                      <button class="btn btn-sm btn-outline-warning" (click)="editSoftRequeriment(row, $event)"><i
+                                                          class="i-Edit icon-md"></i></button>&nbsp;&nbsp;
+                                                        <button class="btn btn-sm btn-outline-danger" (click)="deleteSoftReq(row.id)"><i
+                                                            class="i-Close-Window icon-md"></i></button>
+                                                    </ng-template>
+                                                  </ngx-datatable-column>
+											</ngx-datatable>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+			</li>
+			<li [ngbNavItem]="5">
 				<a ngbNavLink>Casos de prueba </a>
 				<ng-template ngbNavContent>
 					<div class="row">
@@ -343,150 +495,12 @@
 		<div [ngbNavOutlet]="nav" class="mt-2"></div>
 	</div>
 
-<!-- VENTANA MODAL QUE SE DESPLEGA PARA AGREGA UN REQUERIMIENTO DE USUARIO-->
-<ng-template #userRequerimentConfirmModal let-modal>
-	<div class="modal-header">
-		<h4 class="modal-title" id="modal-title">Nuevo requerimiento de usuario</h4>
-		<button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
-			(click)="modal.dismiss('Cross click')">
-			<span aria-hidden="true">&times;</span>
-		</button>
-	</div>
-	<div class="modal-body">
-		<form [formGroup]="userRequerimentForm">
-			<div class="row">
-				<div class="col-md-4 form-group mb-0">
-					<label for="firstName">Codigo</label>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text" >RU</span>
-						</div>
-						<input type="number" class="form-control" formControlName="urInputCode"  aria-describedby="basic-addon3">
-					</div>
-				</div>
-				<div class="col-md-4 form-group mb-0">
-					<label for="firstName"> Prioridad </label>
-					<select class="form-control" formControlName="urPriority" >
-						<option>Baja</option>
-						<option>Media</option>
-						<option>Alta</option>
-					</select>
-				</div>
-				<div class="col-md-4 form-group mb-0">
-					<label for="firstName"> Estabilidad </label>
-					<select class="form-control" formControlName="urStability"  >
-						<option>Transable</option>
-						<option>Intransable</option>
-					</select>
-				</div>
-				<div class="col-md-4 form-group mb-3">
-					<label for="firstName">Estado</label>
-					<select class="form-control" formControlName="urState" >
-						<option>Incompleto</option>
-						<option>Completo</option>
-					</select>
-				</div>
-				<div class="col-md-4 form-group mb-3">
-					<label for="firstName">Costo</label>
-					<input type="number" class="form-control" formControlName="urCost" placeholder="1">
-				</div>
-				<div class="col-md-12 form-group mb-3">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text">Descripción</span>
-						</div>
-						<textarea class="form-control" aria-label="With textarea" formControlName="urDescription"></textarea>
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-outline-primary m-1" (click)="imprimirur()">Agregar</button>
-		<button type="button" class="btn btn-secondary m-1">Cancelar</button>
-	</div>
-</ng-template>
-
-<!-- VENTANA MODAL QUE SE DESPLEGA PARA AGREGA UN REQUERIMIENTO DE SOFTWARE-->
-<ng-template #softwareRequerimentConfirmModal let-modal>
-	<div class="modal-header">
-		<h4 class="modal-title" id="modal-title">Nuevo requerimiento de Software</h4>
-		<button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
-			(click)="modal.dismiss('Cross click')">
-			<span aria-hidden="true">&times;</span>
-		</button>
-	</div>
-	<div class="modal-body">
-		<form [formGroup]="softwareRequerimentForm">
-			<div class="row">
-				<div class="col-md-4 form-group mb-0">
-					<label for="firstName">Codigo</label>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon3">RS</span>
-						</div>
-						<input type="number" class="form-control" formControlName="srInputCode" aria-describedby="basic-addon3">
-					</div>
-				</div>
-				<div class="col-md-4 form-group mb-0">
-					<label for="firstName"> Prioridad </label>
-					<select class="form-control" formControlName="srPriority" >
-						<option>Baja</option>
-						<option>Media</option>
-						<option>Alta</option>
-					</select>
-				</div>
-				<div class="col-md-4 form-group mb-0">
-					<label for="firstName"> Estabilidad </label>
-					<select class="form-control" formControlName="srStability">
-						<option>Transable</option>
-						<option>Intransable</option>
-					</select>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4 form-group mb-3">
-					<label for="firstName">Estado</label>
-					<select class="form-control" formControlName="srState">
-						<option>Incompleto</option>
-						<option>Completo</option>
-					</select>
-				</div>
-				<div class="col-md-4 form-group mb-3">
-					<label for="firstName">Costo</label>
-					<input type="number" class="form-control" formControlName="srCost" placeholder="1">
-				</div>
-				<div class="col-md-4 form-group mb-3">
-					<label for="firstName">Referencia Requerimiento de usuario </label>
-					<select class="form-control" formControlName="userRequerimentReference" >
-						<option>RU001</option>
-					</select>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 form-group mb-3">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text">Descripción</span>
-						</div>
-						<textarea class="form-control" aria-label="With textarea" formControlName="srDescription" ></textarea>
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-outline-primary m-1" (click)="imprimirsr()">Agregar</button>
-		<button type="button" class="btn btn-secondary m-1">Cancelar</button>
-	</div>
-</ng-template>
-
 <!-- VENTANA MODAL QUE SE DESPLEGA PARA AGREGA UN CASO DE PRUEBA -->
 <ng-template #testCaseConfirmModal let-modal>
 	<div class="modal-header">
 		<h4 class="modal-title" id="modal-title">Nuevo caso de prueba </h4>
 		<button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
-			(click)="modal.dismiss('Cross click')">
+            (click)="onCloseCancel()">
 			<span aria-hidden="true">&times;</span>
 		</button>
 	</div>
@@ -543,7 +557,6 @@
 </ng-template>
 
 </div>
-
 
 
 

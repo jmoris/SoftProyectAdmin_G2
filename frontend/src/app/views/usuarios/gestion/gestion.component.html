@@ -6,7 +6,7 @@
 </div>
 <div class="separator-breadcrumb border-top"></div>
 <div class="module-loader" *ngIf="loading">
-    <div class="spinner spinner-bubble spinner-bubble-primary mr-3"></div>
+  <div class="spinner spinner-bubble spinner-bubble-primary mr-3"></div>
 </div>
 <div class="row">
   <!-- ICON BG -->
@@ -33,144 +33,53 @@
     </div>
   </div>
 </div>
-    <div fxFlex="50">
-      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" matSortActive="run" matSortDirection="asc"
-        matSortDisableClear>
-        <ng-container matColumnDef="run">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> R.U.N </th>
-          <td mat-cell *matCellDef="let element"> {{element.rut}} </td>
-        </ng-container>
+<div fxFlex="50">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" matSortActive="run" matSortDirection="asc"
+    matSortDisableClear>
+    <ng-container matColumnDef="run">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> R.U.N </th>
+      <td mat-cell *matCellDef="let element"> {{element.rut}} </td>
+    </ng-container>
 
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
 
-        <ng-container matColumnDef="surname">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
-          <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
-        </ng-container>
+    <ng-container matColumnDef="surname">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
+      <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
+    </ng-container>
 
-        <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-        </ng-container>
-        <ng-container matColumnDef="profile">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Perfil </th>
-          <td mat-cell *matCellDef="let element"> {{formatProfile(element.profile)}} </td>
-        </ng-container>
-        <ng-container matColumnDef="delete">
-          <th mat-header-cell *matHeaderCellDef> Eliminar </th>
-          <td mat-cell *matCellDef="let element">
-            <button mat-icon-button color="warn" (click)="deleteUser(element.id)">
-              <mat-icon svgIcon="delete" class="mat-18"></mat-icon>
-            </button>
-          </td>
-        </ng-container>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+    <ng-container matColumnDef="profile">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Perfil </th>
+      <td mat-cell *matCellDef="let element"> {{formatProfile(element.profile)}} </td>
+    </ng-container>
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef> Editar </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn" (click)="editUser(element.id)">
+          <mat-icon svgIcon="edit" class="mat-18"></mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn" (click)="deleteUser(element.id)">
+          <mat-icon svgIcon="delete" class="mat-18"></mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
 
-      <!--Progress spinner -->
-      <mat-card *ngIf="isDataLoading" style="display: flex; justify-content: center; align-items: center">
-        <mat-progress-spinner color="primary" mode="indeterminate">
-        </mat-progress-spinner>
-      </mat-card>
-
-      <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" class="mat-elevation-z8">
-      </mat-paginator>
-
-  <!-- VENTANA MODAL QUE SE DESPLEGA PARA CONFIRMAR LA ELIMINACIÓN DE UN DATO-->
-  <ng-template #deleteConfirmModal let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-title">Eliminación de usuario</h4>
-      <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
-        (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <p><strong>¿Estas seguro de querer eliminar este usuario?</strong></p>
-    </div>
-    <div alignt="rowHeight" class="modal-footer">
-      <button type="button" ngbAutofocus class="btn btn-primary btn-rounded"
-        (click)="modal.close('Ok')">Borrar</button>
-        <button type="button" class="btn btn-danger btn-rounded"
-        (click)="modal.dismiss('cancel')">Cancelar</button>
-    </div>
-  </ng-template>
-
-  <!-- VENTANA MODAL QUE SE DESPLEGA PARA AGREGAR UN USUARIO -->
-  <ng-template #userAddConfirmModal let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-title">Agregar un usuario</h4>
-      <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
-        (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form [formGroup]="addUserForm" (ngSubmit)="addUserOnSubmit()">
-        <table class="table">
-          <tbody>
-            <tr>
-              <td>Nombre:</td>
-              <td><input type="text" formControlName="name" ng-model="user.name" size="25" maxlength="100" required>
-              </td>
-            </tr>
-            <tr>
-              <td>Apellido:</td>
-              <td><input type="text" formControlName="surname" ng-model="email.text" size="25" maxlength="100" required>
-              </td>
-            </tr>
-            <tr>
-              <td>Email:</td>
-              <td><input type="text" formControlName="email" ng-model="email.text" size="25" maxlength="100" required>
-              </td>
-            </tr>
-            <tr>
-              <td>Contraseña:</td>
-              <td><input type="password" formControlName="password" ng-model="email.text" size="25" maxlength="100"
-                  required></td>
-            </tr>
-            <tr>
-              <td>Rut:</td>
-              <td><input type="text" formControlName="rut" ng-model="email.text" size="25" maxlength="100" required>
-              </td>
-            </tr>
-            <tr>
-              <td>Matricula:</td>
-              <td><input type="text" formControlName="enrollment" ng-model="email.text" size="25" maxlength="100"
-                  required></td>
-            </tr>
-            <tr>
-              <td>Perfil:</td>
-              <td>
-                <div>
-                  <select class="form-control" id="UserType" formControlName="profile" required>
-                    <option value="" selected disabled> Seleccionar Opcion</option>
-                    <option value="admin"> Administrador</option>
-                    <option value="teacher"> Docente </option>
-                    <!--<option value="Ayudante"> Ayudante</option>-->
-                    <option value="student"> Estudiante </option>
-                  </select>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div *ngIf="!checked">
-          <label style="color:red;"><b>* Todos los campos deben ser completados.</b></label>
-        </div>
-      </form>
-
-    </div>
-    <div class="modal-footer">
-      <button type="button" ngbAutofocus class="btn btn-wide btn-success btn-rounded"
-        (click)="((this.addUserForm.invalid)?checked=false:modal.close('Ok'))">Agregar </button>
-      <button type="button" class="btn btn-outline-secondary btn-rounded"
-        (click)="modal.dismiss('cancel')">Cancelar</button>
-    </div>
-  </ng-template>
-
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" class="mat-elevation-z8">
+  </mat-paginator>
+</div>

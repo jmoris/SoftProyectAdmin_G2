@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Increment;
 use App\Project;
 use App\Role;
 use App\RoleUser;
