@@ -22,7 +22,8 @@
                                 <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded"
                                     (click)="fileInput.click();">Subir archivo</button>
                                 <input #fileInput accept=".xlsx, .xls" type="file"
-                                    (change)="handleFileInput($event.target.files, infoImportModal)" style="display:none;" />
+                                    (change)="handleFileInput($event.target.files, infoImportModal)"
+                                    style="display:none;" />
                             </div>
                         </div>
                     </div>
@@ -55,41 +56,38 @@
                 </div>
                 <div class="col-md-10">
                     <div class="card o-hidden mb-4 mt-4 mr-4">
-                        <ngx-datatable style="height: calc(85vh - 270px); box-shadow: none"
-                            class="material fullscreen" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
-                            [rowHeight]="60" [scrollbarV]="true" [limit]="10" [rows]="users">
-                            <ngx-datatable-column name="enrollment" [flexGrow]="1">
-                                <ng-template ngx-datatable-header-template>
-                                    Matricula
-                                </ng-template>
-                            </ngx-datatable-column>
-                            <ngx-datatable-column name="name" [flexGrow]="4">
-                                <ng-template ngx-datatable-header-template>
-                                    Nombre
-                                </ng-template>
-                                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                                    {{ row.name + " "+ row.surname }}
-                                </ng-template>
-                            </ngx-datatable-column>
-                            <ngx-datatable-column name="rut" [flexGrow]="1">
-                                <ng-template ngx-datatable-header-template>
-                                    RUT
-                                </ng-template>
-                            </ngx-datatable-column>
-                            <ngx-datatable-column name="email" [flexGrow]="2">
-                                <ng-template ngx-datatable-header-template>
-                                    Email
-                                </ng-template>
-                            </ngx-datatable-column>
-                            <ngx-datatable-column name="profile" [flexGrow]="1">
-                                <ng-template ngx-datatable-header-template>
-                                    Perfil
-                                </ng-template>
-                                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                                    {{ formatProfile(value) }}
-                                </ng-template>
-                            </ngx-datatable-column>
-                        </ngx-datatable>
+                        <table mat-table [dataSource]="dataSource" matSort class="col-lg-12" matSortActive="run"
+                            matSortDirection="asc" matSortDisableClear>
+                            <ng-container matColumnDef="enrollment">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Matricula </th>
+                                <td mat-cell *matCellDef="let element"> {{element.enrollment}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                                <td mat-cell *matCellDef="let element"> {{element.name + " " + element.surname}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="rut">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> RUT </th>
+                                <td mat-cell *matCellDef="let element"> {{element.rut}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="email">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="profile">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Perfil </th>
+                                <td mat-cell *matCellDef="let element"> {{formatProfile(element.profile)}} </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+
+                        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" class="mat-elevation-z8">
+                        </mat-paginator>
                     </div>
                 </div>
             </div>
@@ -129,11 +127,15 @@
                     <tbody>
                         <tr *ngFor="let item of carga.stats.fallidos.inexistentes.detalle">
                             <td width="60%">{{ item}}</td>
-                            <td width="40%"><font color="red">Inexistente</font></td>
+                            <td width="40%">
+                                <font color="red">Inexistente</font>
+                            </td>
                         </tr>
                         <tr *ngFor="let item of carga.stats.fallidos.existentes.detalle">
                             <td width="60%">{{ item}}</td>
-                            <td width="40%"><font color="#ffcc00">Existente</font></td>
+                            <td width="40%">
+                                <font color="#ffcc00">Existente</font>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
