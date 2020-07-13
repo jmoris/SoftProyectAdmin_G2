@@ -19,7 +19,9 @@ class CreateCoursesTable extends Migration
             $table->integer('year');
             $table->string('semester');
             $table->bigInteger('idUser');
+            $table->softDeletes();
             $table->timestamps();
+
         });
     }
 

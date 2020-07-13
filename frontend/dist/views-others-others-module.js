@@ -21,7 +21,7 @@ var NotFoundComponent = /** @class */ (function () {
     NotFoundComponent.prototype.ngOnInit = function () {
     };
     NotFoundComponent.ɵfac = function NotFoundComponent_Factory(t) { return new (t || NotFoundComponent)(); };
-    NotFoundComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: NotFoundComponent, selectors: [["app-not-found"]], decls: 9, vars: 0, consts: [[1, "not-found-wrap", "text-center"], [1, "text-60"], [1, "text-36", "subheading", "mb-3"], [1, "mb-5", "text-muted", "text-18"], ["routerLink", "/dashboard/v1", 1, "btn", "btn-lg", "btn-primary", "btn-rounded"]], template: function NotFoundComponent_Template(rf, ctx) { if (rf & 1) {
+    NotFoundComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: NotFoundComponent, selectors: [["app-not-found"]], decls: 9, vars: 0, consts: [[1, "not-found-wrap", "text-center"], [1, "text-60"], [1, "text-36", "subheading", "mb-3"], [1, "mb-5", "text-muted", "text-18"], ["routerLink", "/", 1, "btn", "btn-lg", "btn-primary", "btn-rounded"]], template: function NotFoundComponent_Template(rf, ctx) { if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "h1", 1);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " 404 ");

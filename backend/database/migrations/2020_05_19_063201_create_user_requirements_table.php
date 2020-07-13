@@ -15,7 +15,22 @@ class CreateUserRequirementsTable extends Migration
     {
         Schema::create('user_requirements', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('internalId');
+            $table->string('source');
+            $table->integer('cost');
+            $table->integer('stability');
+            $table->integer('priority');
+            $table->integer('status');
+            //$table->bigInteger('idUser');
+            //$table->string('type');
+            $table->string('description');
+            $table->bigInteger('increment_id')->unsigned();
+            $table->bigInteger('project_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('increment_id')->references('id')->on('increments');
         });
     }
 

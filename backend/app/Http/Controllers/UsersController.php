@@ -109,7 +109,7 @@ class UsersController extends Controller
      */
     public function getEstudiantes()
     {
-        $array = User::where('profile', '=', 'student');
+        $array = User::where('profile', '=', 'student')->get();
         if(empty($array))
         {
             return response()->json([
@@ -125,7 +125,7 @@ class UsersController extends Controller
      */
     public function getProfesores()
     {
-        $array = User::where('profile', '=', 'teacher');
+        $array = User::where('profile', '=', 'teacher')->get();
         if(empty($array))
         {
             return response()->json([
@@ -141,7 +141,7 @@ class UsersController extends Controller
      */
     public function getUsuarios()
     {
-        $array = User::where('profile', '=', 'teacher')->orWhere('profile', '=', 'student')->get();
+        $array = User::all();
         if(empty($array))
         {
             return response()->json([

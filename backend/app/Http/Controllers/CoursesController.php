@@ -5,19 +5,21 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Tools\UserProfile;
 use App\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class CoursesController extends Controller
 {
 
     public function getCursos(){
-        return Course::all();
+        return Course::with('user')->get();
     }
 
     public function getCurso($id){
-        $curso = Course::find($id);
+        $curso = Course::where('id', $id)->with('user')->first();
         if($curso!=null){
             return response()->json($curso);
         }else{
@@ -122,6 +124,131 @@ class CoursesController extends Controller
             return response()->json([
                 'status' => 500,
                 'msg' => 'El usuario/curso no existe.'
+            ]);
+        }
+    }
+
+    public function getUserList(Request $request, $id){
+        $curso = Course::find($id);
+        if($curso!=null){
+            return response()->json($curso->users);
+        }else{
+            return response()->json([
+                'msg' => 'El curso no existe'
+            ], 500);
+        }
+    }
+
+    public function createAndAdd(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'year' => 'required',
+            'semester' => 'required',
+            'teacher_id' => 'required',
+            'students' => 'required|array',
+        ]);
+
+        if ($validator->fails()) {
+            return ['errors'=>$validator->errors()];
+        }
+
+        $curso = new Course();
+        $curso->name = $request->name;
+        $curso->year = $request->year;
+        $curso->semester = $request->semester;
+        $curso->idUser = $request->teacher_id;
+
+        try {
+            $curso->save();
+            $n = 0;
+            foreach($request->students as $student){
+                $curso->users()->sync($student['user_id'], false);
+                $n++;
+            }
+        }catch(Exception $ex){
+            return response()->json([
+                'status' => false,
+                'msg' => 'El curso no se pudo crear.',
+                'error' => $ex->getMessage()
+            ]);
+        }
+
+        return response()->json(["status" => true, "enrolled" => $n, "msg" => "Proyecto creado correctamente."]);
+    }
+
+    function uploadFile(Request $request, $id){
+        $this->validate($request, [
+        'file'  => 'required|mimes:xls,xlsx'
+        ]);
+
+        $curso = Course::find($id);
+        try{
+
+        $path = $request->file('file')->getRealPath();
+
+        $spreadsheet = IOFactory::load($path);
+
+        $cellNombre = $email = $spreadsheet->getActiveSheet()->getCell('A1')->getValue();
+        $cellApellido = $email = $spreadsheet->getActiveSheet()->getCell('B1')->getValue();
+        $cellEmail = $email = $spreadsheet->getActiveSheet()->getCell('C1')->getValue();
+        if($cellNombre!='Nombre'&&$cellApellido!='Apellido(s)'&&$cellEmail!='Dirección de correo')
+            return response()->json([
+                'success' => false,
+                'msg' => 'El formato del archivo es incorrecto.'
+            ]);
+        $lectura = true;
+        $contador = 2;
+        $cargados = 0;
+        $errores = [
+            'inexistentes' => [],
+            'existentes' => []
+        ];
+
+        while($lectura){
+            $email = $spreadsheet->getActiveSheet()->getCell('C'.$contador)->getValue();
+            if($email==''||$email==null){
+                $lectura = false;
+                break;
+            }
+            $user = User::where('email', $email)->first();
+            if($user==null){
+                $errores['inexistentes'][] = (string)$email;
+            }else{
+                $exists = $user->courses->contains($id);
+                if($exists){
+                    $errores['existentes'][] = (string)$email;
+                }else{
+                    $curso->users()->sync($user, false);
+                    $cargados++;
+                }
+            }
+            $contador++;
+        }
+
+        return response()->json([
+            'success' => true,
+            'msg' => "Carga masiva de usuarios finalizada.",
+            'stats' => [
+                'cargados' => $cargados,
+                'fallidos' => [
+                    'inexistentes' => [
+                        'cantidad' => count($errores['inexistentes']),
+                        'detalle' => $errores['inexistentes']
+                    ],
+                    'existentes' => [
+                        'cantidad' => count($errores['existentes']),
+                        'detalle' => $errores['existentes']
+                    ]
+                ],
+            ]
+        ]);
+        }catch(Exception $ex){
+            return $ex;
+            return response()->json([
+                'success' => false,
+                'msg' => "Carga masiva de usuarios fallida.",
+                'error' => $ex->getMessage()
             ]);
         }
     }

@@ -97,10 +97,7 @@ export class AddUserComponent implements OnInit {
     }
 
     let userData = this.form.value;
-    console.log('nombre: ' + userData.name);
-    console.log('rut: ' + userData.rut);
-    console.log('perfil: '+ userData.profile);
-
+    
     this.usersService.insert(userData).subscribe({
       next: result => {
         console.log(result);

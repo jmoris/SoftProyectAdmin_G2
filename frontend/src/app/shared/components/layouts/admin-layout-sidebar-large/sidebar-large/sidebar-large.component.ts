@@ -65,7 +65,6 @@ export class SidebarLargeComponent implements OnInit {
     this.setActiveMainItem(item);
   }
   setActiveMainItem(item) {
-    console.log(item);
     this.nav.forEach(i => {
       i.active = false;
     });

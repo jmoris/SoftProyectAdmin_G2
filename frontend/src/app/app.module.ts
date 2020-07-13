@@ -17,6 +17,8 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { getSpanishPaginatorIntl } from './spanish-paginator-intl';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { MomentDateFormatter } from './_helpers/momentdate.formatter';
 
 /**
  * Custom angular notifier options
@@ -85,6 +87,7 @@ const customNotifierOptions: NotifierOptions = {
     { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: NgbDateParserFormatter, useClass: MomentDateFormatter }
   ],
   bootstrap: [AppComponent]
 })

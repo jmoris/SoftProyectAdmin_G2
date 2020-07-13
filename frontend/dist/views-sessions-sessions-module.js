@@ -255,9 +255,13 @@ __webpack_require__.r(__webpack_exports__);
 function SigninComponent_div_17_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 21);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "label", 22);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "Datos del usuario incorrectos.");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    var ctx_r422 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx_r422.msgError, " ");
 } }
 var _c0 = function () { return { y: "120px", opacity: "0", delay: "100ms", duration: "400ms" }; };
 var _c1 = function (a1) { return { value: "*", params: a1 }; };
@@ -292,10 +296,22 @@ var SigninComponent = /** @class */ (function () {
         this.auth.login(f.email, f.password)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])())
             .subscribe(function (data) {
-            _this.router.navigateByUrl('/dashboard/v1');
+            if (!data.success) {
+                _this.msgError = data.message;
+                _this.check = false;
+                _this.loading = false;
+            }
+            else {
+                _this.router.navigateByUrl('/dashboard/v1');
+            }
         }, function (error) {
             //this.error = error;
-            //console.log(error);
+            if (error === 'Unknown Error') {
+                _this.msgError = 'No se puede conectar al servidor.';
+                _this.check = false;
+                _this.loading = false;
+            }
+            _this.msgError = error.message;
             _this.check = false;
             _this.loading = false;
         });
@@ -326,7 +342,7 @@ var SigninComponent = /** @class */ (function () {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](16, "input", 12);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](17, SigninComponent_div_17_Template, 3, 0, "div", 13);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](17, SigninComponent_div_17_Template, 3, 1, "div", 13);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "btn-loading", 14);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](19, " Iniciar Sesi\u00F3n ");
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
