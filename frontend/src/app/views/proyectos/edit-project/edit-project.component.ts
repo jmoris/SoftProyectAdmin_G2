@@ -13,7 +13,7 @@ import { UsuariosService } from 'src/app/_services/usuarios.service';
 @Component({
   selector: 'app-edit-project',
   templateUrl: './edit-project.component.html',
-  styleUrls: ['./edit-project.component.css']
+  styleUrls: ['./edit-project.component.scss']
 })
 export class EditProjectComponent implements OnInit {
 
@@ -80,7 +80,7 @@ export class EditProjectComponent implements OnInit {
 
   onCloseConfirm() {
     if (this.form.invalid) {
-      (<any>Object).values(this.form.controls).forEach(control => {
+      (<any>Object).values(this.form.controls).forEach((control: { markAsTouched: () => void; }) => {
         control.markAsTouched();
       });
       return;
@@ -104,8 +104,8 @@ export class EditProjectComponent implements OnInit {
     return this.form.get(controlName).hasError(errorName);
   }
 
-  onStep1Next(e) {}
-  onStep2Next(e) {
+  onStep1Next(e: any) {}
+  onStep2Next(e: any) {
     this.dataSource2.data = this.selection.selected;
     this.dataSource2.sort = this.sort2;
     this.dataSource2.paginator = this.paginator2;
@@ -114,7 +114,7 @@ export class EditProjectComponent implements OnInit {
       });
   }
 
-  onComplete(e) {
+  onComplete(e: any) {
       const frm = this.form.value;
       frm.students = this.asignarForm.value.usuarios;
       this.projectService.insertComplete(frm).subscribe((data) => {
@@ -138,27 +138,27 @@ export class EditProjectComponent implements OnInit {
     } else {
         const usersControl = <FormArray>this.seleccionarForm.controls.usuarios;
         this.dataSource.data.forEach(row => this.selection.select(row));
-        this.estudiantes.forEach(element => {
+        this.estudiantes.forEach((element: { id: any; }) => {
             usersControl.push(this.formBuilder.group({user_id: element.id}));
         });
 
     }
   }
 
-  seleccionar(row) {
+  seleccionar(row: { id: any; }) {
     const usersControl = <FormArray>this.seleccionarForm.controls.usuarios;
     const selected = this.selection.isSelected(row);
     if (selected) {
         usersControl.push(this.formBuilder.group({user_id: row.id}));
     } else {
-        usersControl.removeAt(usersControl.value.findIndex(student => student.id === row.id));
+        usersControl.removeAt(usersControl.value.findIndex((student: { id: any; }) => student.id === row.id));
     }
   }
 
-  searchById(id) {
+  searchById(id: any) {
     const usuarios: any = this.seleccionarForm.controls.usuarios.value;
     let search: any = null;
-    usuarios.forEach(element => {
+    usuarios.forEach((element: { user_id: any; }) => {
         // tslint:disable-next-line: triple-equals
         if (element.user_id == id) {
             search = element;
@@ -167,7 +167,7 @@ export class EditProjectComponent implements OnInit {
     return search; ;
   }
 
-    selectRol(user, rol) {
+    selectRol(user: { id: any; }, rol: { id: any; }) {
         const searched = this.searchById(user.id);
         searched.role_id = rol.id;
         const usersControl = <FormArray>this.asignarForm.controls.usuarios;

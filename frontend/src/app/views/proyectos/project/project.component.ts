@@ -151,7 +151,7 @@ testCaseForm: FormGroup;
   }
 
   openEditDialog(): void {
-      const dialogRef = this.dialog.open(EditProjectComponent, {
+      let dialogRef = this.dialog.open(EditProjectComponent, {
       width: '850px',
       data: 'This text is passed into the dialog',
       disableClose: true,
