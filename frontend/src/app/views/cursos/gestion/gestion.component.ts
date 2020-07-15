@@ -13,6 +13,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { ConfirmationDialogComponent } from '../../core/confirmation-dialog/confirmation-dialog.component';
 import { Router } from '@angular/router';
+import { EditCourseComponent } from '../edit-course/edit-course.component';
 
 
 @Component({
@@ -199,9 +200,23 @@ export class GestionComponent implements OnInit {
     })
     }
 
-    verCurso(value){
-        this.router.navigateByUrl('/cursos/gestion/' + value);
+    editCourse(id: String){
+      const dialogRef = this.dialog.open(EditCourseComponent, {
+        data: id,
+        width: '850px',
+        disableClose: true,
+        autoFocus: true
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        if (result == 'Confirm') {
+          this.getCourses();
+          this.toastr.success('Curso editado exitosamente', 'Notificación', { timeOut: 3000 });
+        }
+      });
     }
+    
     deleteData(id,modal,event){
     event.target.parentElement.parentElement.blur();
     this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })
