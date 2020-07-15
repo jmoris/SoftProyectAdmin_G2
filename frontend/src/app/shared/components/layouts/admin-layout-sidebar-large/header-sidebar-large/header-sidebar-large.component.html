@@ -1,6 +1,7 @@
 <div class="main-header">
     <div class="logo">
-        <img src="./assets/images/logo.png" alt="">
+        <img src="../../../../../../assets/images/logo_Aprodes.png" alt="">
+
     </div>
 
     <div class="menu-toggle" (click)="toggelSidebar()">
@@ -11,7 +12,7 @@
 
     <div class="d-flex align-items-center">
         <!-- Mega menu -->
-        <div ngbDropdown class="mega-menu d-none d-md-block">
+        <!--<div ngbDropdown class="mega-menu d-none d-md-block">
             <button ngbDropdownToggle href="#" class="btn text-muted dropdown-toggle mr-3">Mega Menu</button>
             <div ngbDropdownMenu perfectScrollbar>
                 <div class="row m-0">
@@ -54,12 +55,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <!-- Search bar -->
-        <div class="search-bar">
-            <input type="text" placeholder="Search" (focus)="searchService.searchOpen = true">
+        <!--<div class="search-bar">
+            <input type="text" placeholder="Buscar" (focus)="searchService.searchOpen = true">
             <i class="search-icon text-muted i-Magnifi-Glass1"></i>
-        </div>
+        </div>-->
     </div>
 
     <div style="margin: auto"></div>
@@ -72,7 +73,7 @@
             <div ngbDropdownMenu class="menu-icon-grid-dropdown">
                 <div class="menu-icon-grid">
                     <a href="#"><i class="i-Shop-4"></i> Home</a>
-                    <a href="#"><i class="i-Library"></i> UI Kits</a>
+                    <a href="#/dashboard/v2"><i class="i-Lock-User"></i> Gestionar Usuarios</a>
                     <a href="#"><i class="i-Drop"></i> Apps</a>
                     <a href="#"><i class="i-File-Clipboard-File--Text"></i> Forms</a>
                     <a href="#"><i class="i-Checked-User"></i> Sessions</a>
@@ -81,7 +82,7 @@
             </div>
         </div>
 
-        <div ngbDropdown [placement]="'bottom-right'">
+       <!-- <div ngbDropdown [placement]="'bottom-right'">
             <div class="badge-top-container">
                 <span class="badge badge-primary">{{notifications.length}}</span>
                 <i ngbDropdownToggle class="i-Bell text-muted header-icon" role="button"></i>
@@ -102,18 +103,17 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
 
         <div ngbDropdown [placement]="'bottom-right'" class="user col align-self-end">
             <img src="./assets/images/faces/1.jpg" id="userDropdown" ngbDropdownToggle alt="">
 
             <div ngbDropdownMenu aria-labelledby="userDropdown" class="header-account-dropdown">
                 <div class="dropdown-header">
-                    <i class="i-Lock-User mr-1"></i> Timothy Carlson
+                    <i class="i-Lock-User mr-1"></i> Usuario
                 </div>
-                <button class="dropdown-item">Account settings</button>
-                <button class="dropdown-item">Billing history</button>
-                <button class="dropdown-item" (click)="signout()">Sign out</button>
+                <button class="dropdown-item">Configuracion de cuenta</button>
+                <button class="dropdown-item" routerLink="/">Cerrar sesion</button>
             </div>
         </div>
 

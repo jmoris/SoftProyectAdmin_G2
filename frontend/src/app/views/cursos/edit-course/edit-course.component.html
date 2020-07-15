@@ -1,0 +1,61 @@
+<div>
+    <div class="row">
+        <div class="col-md-11">
+            <h2 mat-dialog-title>{{title}}</h2>
+        </div>
+        <div class="col-md-1 ">
+            <a href="javascript:void(0)">
+                <i mat-button mat-dialog-close class="i-Close-Window text-danger"></i>
+            </a>
+        </div>
+    </div>
+    <hr />
+    <mat-dialog-content class="mat-dialog-content">
+        <form [formGroup]="form">
+            <div class="form-div">
+                <mat-form-field appearance="standard" class="input">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Nombre del proyecto" formControlName="name" maxlength="20" />
+                    <mat-error>Debe ingresar un nombre para el proyecto
+                    </mat-error>
+                    <mat-hint></mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="standard" class="input">
+                    <mat-label>Profesor a cargo</mat-label>
+                    <mat-select formControlName="teacher_id">
+                        <mat-option  [value]="">
+                        </mat-option>
+                    </mat-select>
+                    <mat-error >Debe ingresar un profesor para el
+                        proyecto
+                    </mat-error>
+                    <mat-hint></mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="form-div">
+                <mat-form-field appearance="standard" class="input">
+                    <mat-label>Semestre</mat-label>
+                    <mat-select formControlName="semester">
+                        <mat-option [value]="1">
+                            Primavera
+                        </mat-option>
+                        <mat-option [value]="2">
+                            Otoño
+                        </mat-option>
+                    </mat-select>
+                    <mat-error >Debe seleccionar un semestre para el
+                        proyecto</mat-error>
+                    <mat-hint></mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="standard" class="input">
+                    <mat-label>Año</mat-label>
+                    <input matInput type="number" placeholder="Año del proyecto" formControlName="year" min="2000"
+                        max="2100" />
+                    <mat-error >Debe ingresar un año para el
+                        proyecto</mat-error>
+                    <mat-hint></mat-hint>
+                </mat-form-field>
+            </div>
+        </form>
+    </mat-dialog-content>
+</div>

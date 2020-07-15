@@ -10,11 +10,12 @@
         justify-content: space-between;
         background: $background;
         z-index: 100;
+        top: 0px;
         .menu-toggle {
             width: 90px;
             display: flex;
             flex-direction: column;
-            align-items: center;       
+            align-items: center;
             cursor: pointer;
             margin-right: 12px;
             div {
@@ -24,7 +25,7 @@
                 margin: 3px 0;
             }
         }
-    
+
         .search-bar {
             display: flex;
             align-items: center;
@@ -52,7 +53,7 @@
                 display: inline-block;
             }
         }
-    
+
         .logo {
             width: $sidebar-left-width;
             img {
@@ -120,7 +121,7 @@
                     background: inherit;
                 }
             }
-            
+
         }
     }
 }
@@ -134,7 +135,7 @@
             }
             .menu-toggle {
                 width: 24px;
-                margin-right: 36px;       
+                margin-right: 36px;
             }
         }
     }
@@ -155,7 +156,7 @@
         .main-header {
             .menu-toggle {
                 width: 24px;
-                margin-right: 36px;       
+                margin-right: 36px;
             }
         }
     }
@@ -186,7 +187,7 @@
             left: -180px !important;
         }
     }
-    
+
 
 }
 
@@ -198,6 +199,6 @@
             }
         }
     }
-    
+
 
 }
