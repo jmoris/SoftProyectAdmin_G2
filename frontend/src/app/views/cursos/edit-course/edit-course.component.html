@@ -23,10 +23,9 @@
                 <mat-form-field appearance="standard" class="input">
                     <mat-label>Profesor a cargo</mat-label>
                     <mat-select formControlName="teacher_id">
-                        <mat-option  [value]="">
-                        </mat-option>
+                        <mat-option [value]="teacher">{{ teacher }}</mat-option>
                     </mat-select>
-                    <mat-error >Debe ingresar un profesor para el
+                    <mat-error>Debe ingresar un profesor para el
                         proyecto
                     </mat-error>
                     <mat-hint></mat-hint>
@@ -36,14 +35,11 @@
                 <mat-form-field appearance="standard" class="input">
                     <mat-label>Semestre</mat-label>
                     <mat-select formControlName="semester">
-                        <mat-option [value]="1">
-                            Primavera
-                        </mat-option>
-                        <mat-option [value]="2">
-                            Otoño
+                        <mat-option *ngfor="let semester of semesters" [value]="semester">
+
                         </mat-option>
                     </mat-select>
-                    <mat-error >Debe seleccionar un semestre para el
+                    <mat-error>Debe seleccionar un semestre para el
                         proyecto</mat-error>
                     <mat-hint></mat-hint>
                 </mat-form-field>
@@ -51,11 +47,16 @@
                     <mat-label>Año</mat-label>
                     <input matInput type="number" placeholder="Año del proyecto" formControlName="year" min="2000"
                         max="2100" />
-                    <mat-error >Debe ingresar un año para el
+                    <mat-error>Debe ingresar un año para el
                         proyecto</mat-error>
                     <mat-hint></mat-hint>
                 </mat-form-field>
             </div>
         </form>
     </mat-dialog-content>
+    <mat-dialog-actions class="modal-footer">
+        <button class="btn btn-primary btn-rounded" mat-raised-button (click)="onCloseConfirm()"
+            [disabled]="form.invalid">Aceptar</button>
+        <button class="btn btn-danger btn-rounded" mat-raised-button (click)="onCloseCancel()">Cancelar</button>
+    </mat-dialog-actions>
 </div>
