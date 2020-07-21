@@ -5,6 +5,7 @@ import { BlankLayoutComponent } from './shared/components/layouts/blank-layout/b
 import { AdminLayoutSidebarLargeComponent } from './shared/components/layouts/admin-layout-sidebar-large/admin-layout-sidebar-large.component';
 import { PrincipalComponent } from './views/principal/principal.component';
 import { AuthGuard } from './_helpers/auth.guard';
+import { FullInfoGuard } from './_helpers/fullinfo.guard';
 
 const adminRoutes: Routes = [
 
@@ -60,7 +61,7 @@ const routes: Routes = [
   {
     path: '',
     component: AdminLayoutSidebarLargeComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, FullInfoGuard],
     children: adminRoutes
   },
   {

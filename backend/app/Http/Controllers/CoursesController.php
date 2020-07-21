@@ -230,7 +230,7 @@ class CoursesController extends Controller
 
                 \App\Jobs\InvitarUsuario::dispatch((string)$email, ($nombre.' '.$apellido), $password)->onQueue('invitaciones');
 
-                $curso->users()->sync($user, false);
+                $curso->users()->sync($usuario, false);
             }else{
                 $exists = $user->courses->contains($id);
                 if($exists){
