@@ -74,7 +74,6 @@ const customNotifierOptions: NotifierOptions = {
     ConfirmationDialogComponent
   ],
   imports: [
-    CommonModule,
     BrowserModule,
     SharedModule,
     HttpClientModule,

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CursosService } from 'src/app/_services/cursos.service';
+import { UsuariosService } from 'src/app/_services/usuarios.service';
 
 @Component({
   selector: 'app-edit-course',
@@ -13,15 +14,18 @@ export class EditCourseComponent implements OnInit {
   title: String;
   hide = true;
   loading: boolean;
-  currentYear: number = new Date().getFullYear();;
-  semesters: string[] = ['Primavera', 'Verano'];
-  teacher:String;
+  currentYear: number = new Date().getFullYear();
+  semesters: string[] = ['Otoño', 'Primavera'];
+  teachers: any = [];
 
   constructor(
     public dialogRef: MatDialogRef<EditCourseComponent>,
     private courseService: CursosService,
+    private userService: UsuariosService,
     @Inject(MAT_DIALOG_DATA) private data) {
     this.title = "Editar curso";
+    this.getTeachersData();
+    this.getCourseData();
   }
 
   form = new FormGroup({
@@ -32,27 +36,31 @@ export class EditCourseComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.getUserData();
   }
 
-  getUserData() {
+  getCourseData() {
     this.loading = true;
+    console.log("Estos datos: ", this.data);
     this.courseService.get(this.data).subscribe({
       next: result => {
-        console.log(result);
+        console.log("Resultado servicio: ", result);
         this.form.get('name').setValue(result.name);
-        this.teacher = result.user.name;
-        console.log('usuario', this.teacher);
-        this.form.get('teacher_id').setValue(this.teacher);
+        console.log("Profesor: ", result.user.id);
+        this.form.get('teacher_id').setValue(result.user.id);
         this.form.get('year').setValue(result.year);
         this.form.get('semester').setValue(this.formatSemester(result.semester));
-        this.semesters = result.semester;
-       
         this.loading = false;
       }, error: result => {
         console.log(result);
       }
     });
+  }
+
+  getTeachersData() {
+    this.userService.getTeachers().subscribe((data) => {
+      this.teachers = data;
+    });
+
   }
 
   onCloseCancel(): void {
@@ -61,8 +69,26 @@ export class EditCourseComponent implements OnInit {
   }
 
   onCloseConfirm(): void {
+    if (this.form.invalid) {
+      (<any>Object).values(this.form.controls).forEach(control => {
+        control.markAsTouched();
+      });
+      return;
+    }
 
+    let courseData = this.form.value;
+    courseData.semester = this.formatSemesterNumber(courseData.semester);
+    console.log("CourseData: ", courseData.teacher_id);
+    this.courseService.updateCourse(this.data, courseData).subscribe({
+      next: result => {
+        console.log(result);
+        this.dialogRef.close('Confirm');
 
+      },
+      error: result => {
+        console.log(result);
+      }
+    });
   }
 
   formatSemester(value) {
@@ -71,6 +97,15 @@ export class EditCourseComponent implements OnInit {
         return 'Otoño';
       case '2':
         return 'Primavera';
+    }
+  }
+
+  formatSemesterNumber(value) {
+    switch (value) {
+      case 'Otoño':
+        return 2;
+      case 'Primavera':
+        return 1;
     }
   }
   public hasError = (controlName: string, errorName: string) => {

@@ -12,6 +12,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { ConfirmationDialogComponent } from '../../core/confirmation-dialog/confirmation-dialog.component';
 import { EditUserComponent } from '../edit-user/edit-user.component';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 
 
@@ -25,7 +26,9 @@ export class GestionComponent implements OnInit {
   usuarios: any = [];
   users: Users[];
   checked = true;
-  displayedColumns: string[] = ["run", "name", "surname", "email", "profile", "edit", "delete"];
+  isEnabled = true;
+  buttonDisabled: FormGroup;
+  displayedColumns: string[] = ["run", "name", "surname", "email", "profile", "edit", "delete", "disable"];
   dataSource: MatTableDataSource<Users> = new MatTableDataSource<Users>();
   dialogResult = "";
   isDataLoading: boolean;
@@ -194,6 +197,15 @@ export class GestionComponent implements OnInit {
         return 'Estudiante';
       case 'admin':
         return 'Administrador';
+    }
+  }
+
+  activeUserToggle(changeEvent: MatSlideToggleChange) {
+    if (changeEvent.checked) {
+      console.log(changeEvent.checked);
+    } else {
+      console.log(changeEvent.checked);
+      this.dataSource.data = this.users;
     }
   }
 

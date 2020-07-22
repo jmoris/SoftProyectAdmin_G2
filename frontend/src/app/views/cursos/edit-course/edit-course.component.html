@@ -13,6 +13,9 @@
     <mat-dialog-content class="mat-dialog-content">
         <form [formGroup]="form">
             <div class="form-div">
+                <div class="module-loader" *ngIf="loading">
+                    <div class="spinner spinner-bubble spinner-bubble-primary mr-3"></div>
+                </div>
                 <mat-form-field appearance="standard" class="input">
                     <mat-label>Nombre</mat-label>
                     <input matInput placeholder="Nombre del proyecto" formControlName="name" maxlength="20" />
@@ -23,9 +26,11 @@
                 <mat-form-field appearance="standard" class="input">
                     <mat-label>Profesor a cargo</mat-label>
                     <mat-select formControlName="teacher_id">
-                        <mat-option [value]="teacher">{{ teacher }}</mat-option>
+                        <mat-option *ngFor="let teacher of teachers" [value]="teacher.id">
+                            {{ teacher.name + ' ' + teacher.surname}}
+                        </mat-option>
                     </mat-select>
-                    <mat-error>Debe ingresar un profesor para el
+                    <mat-error *ngIf="hasError('teacher_id', 'required')">Debe ingresar un profesor para el
                         proyecto
                     </mat-error>
                     <mat-hint></mat-hint>
@@ -35,8 +40,8 @@
                 <mat-form-field appearance="standard" class="input">
                     <mat-label>Semestre</mat-label>
                     <mat-select formControlName="semester">
-                        <mat-option *ngfor="let semester of semesters" [value]="semester">
-
+                        <mat-option *ngFor="let semester of semesters" [value]="semester">
+                            {{semester}}
                         </mat-option>
                     </mat-select>
                     <mat-error>Debe seleccionar un semestre para el
@@ -56,7 +61,7 @@
     </mat-dialog-content>
     <mat-dialog-actions class="modal-footer">
         <button class="btn btn-primary btn-rounded" mat-raised-button (click)="onCloseConfirm()"
-            [disabled]="form.invalid">Aceptar</button>
+            [disabled]="form.invalid">{{title}}</button>
         <button class="btn btn-danger btn-rounded" mat-raised-button (click)="onCloseCancel()">Cancelar</button>
     </mat-dialog-actions>
 </div>
