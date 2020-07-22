@@ -12,6 +12,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ProyectoRoutingModule } from './proyectos-routing.module';
 import { GestionComponent } from './gestion/gestion.component';
 import { AddProjectComponent } from './add-project/add-project.component';
+import { EditProjectComponent } from './edit-project/edit-project.component';
 import { MaterialModule } from 'src/app/material.module';
 import { DetailsProjectComponent } from './gestion/details-project/details-project.component';
 import { ProjectComponent } from './project/project.component';

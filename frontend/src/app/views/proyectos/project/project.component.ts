@@ -3,8 +3,8 @@ import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
 import { echartStyles } from 'src/app/shared/echart-styles';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataLayerService } from 'src/app/shared/services/data-layer.service';
-import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectsService } from 'src/app/_services/projects.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
@@ -16,6 +16,11 @@ import * as moment from 'moment/moment';
 import { AddSoftwareRequirementComponent } from './add-software-requirement/add-software-requirement.component';
 import { SoftwareRequirementsService } from 'src/app/_services/softwarerequirements.service';
 import { ConfirmationDialogComponent } from '../../core/confirmation-dialog/confirmation-dialog.component';
+import { EditProjectComponent } from '../edit-project/edit-project.component';
+import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { NotifierService } from 'angular-notifier';
+import { AddProjectComponent } from '../add-project/add-project.component';
 
 @Component({
   selector: 'app-project',
@@ -24,15 +29,16 @@ import { ConfirmationDialogComponent } from '../../core/confirmation-dialog/conf
 })
 
 export class ProjectComponent implements OnInit {
+  private readonly notifier: NotifierService;
 
   active = 1;
-  name="nombreProyecto";
+  name = 'nombreProyecto';
   chartPie1: any;
   chartLineOption3: any;
   products$: any;
   dialogResult = "";
   items = ['Javascript', 'Typescript'];
-  autocompletes$;
+  autocompletes$: any;
   tagsCtrl1 = new FormControl(this.items);
   loading: boolean = false;
     id : any;
@@ -211,6 +217,22 @@ public constructor(
                 break;
       }
       return str;
+  }
+  openAddDialog() {
+    const dialogRef = this.dialog.open(AddProjectComponent, {
+      width: '850px',
+      data: 'This text is passed into the dialog',
+      disableClose: true,
+      autoFocus: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      this.dialogResult = result;
+      // tslint:disable-next-line: triple-equals
+      if (result == 'Confirm') {
+          this.toastr.success('Proyecto agregado exitosamente', 'Notificación', { timeOut: 3000 });
+      }
+  });
   }
 
   addUserRequeriment(modal, event){
