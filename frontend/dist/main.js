@@ -414,6 +414,53 @@ var ErrorInterceptor = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/_helpers/fullinfo.guard.ts":
+/*!********************************************!*\
+  !*** ./src/app/_helpers/fullinfo.guard.ts ***!
+  \********************************************/
+/*! exports provided: FullInfoGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FullInfoGuard", function() { return FullInfoGuard; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm5/router.js");
+/* harmony import */ var _services_authentication_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../_services/authentication.service */ "./src/app/_services/authentication.service.ts");
+
+
+
+
+
+
+var FullInfoGuard = /** @class */ (function () {
+    function FullInfoGuard(router, authenticationService) {
+        this.router = router;
+        this.authenticationService = authenticationService;
+    }
+    FullInfoGuard.prototype.canActivate = function (route, state) {
+        var currentUser = this.authenticationService.currentUserValue;
+        if (currentUser.user.rut != '1-9') {
+            // logged in so return true
+            return true;
+        }
+        // not logged in so redirect to login page with the return url
+        this.router.navigate(['/sessions/signup'], { queryParams: { returnUrl: state.url } });
+        return false;
+    };
+    FullInfoGuard.ɵfac = function FullInfoGuard_Factory(t) { return new (t || FullInfoGuard)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_services_authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"])); };
+    FullInfoGuard.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: FullInfoGuard, factory: FullInfoGuard.ɵfac, providedIn: 'root' });
+    return FullInfoGuard;
+}());
+
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](FullInfoGuard, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
+        args: [{ providedIn: 'root' }]
+    }], function () { return [{ type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"] }, { type: _services_authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"] }]; }, null); })();
+
+
+/***/ }),
+
 /***/ "./src/app/_helpers/jwt.interceptor.ts":
 /*!*********************************************!*\
   !*** ./src/app/_helpers/jwt.interceptor.ts ***!
@@ -567,6 +614,16 @@ var AuthenticationService = /** @class */ (function () {
             return user;
         }));
     };
+    AuthenticationService.prototype.updateInfo = function (rut, enrollment, password) {
+        var _this = this;
+        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl + "/updateinfo", { rut: rut, enrollment: enrollment, password: password })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (user) {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            _this.currentUserSubject.next(user);
+            return user;
+        }));
+    };
     AuthenticationService.prototype.logout = function () {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
@@ -603,6 +660,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_components_layouts_admin_layout_sidebar_large_admin_layout_sidebar_large_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./shared/components/layouts/admin-layout-sidebar-large/admin-layout-sidebar-large.component */ "./src/app/shared/components/layouts/admin-layout-sidebar-large/admin-layout-sidebar-large.component.ts");
 /* harmony import */ var _views_principal_principal_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./views/principal/principal.component */ "./src/app/views/principal/principal.component.ts");
 /* harmony import */ var _helpers_auth_guard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./_helpers/auth.guard */ "./src/app/_helpers/auth.guard.ts");
+/* harmony import */ var _helpers_fullinfo_guard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./_helpers/fullinfo.guard */ "./src/app/_helpers/fullinfo.guard.ts");
+
 
 
 
@@ -663,7 +722,7 @@ var routes = [
     {
         path: '',
         component: _shared_components_layouts_admin_layout_sidebar_large_admin_layout_sidebar_large_component__WEBPACK_IMPORTED_MODULE_4__["AdminLayoutSidebarLargeComponent"],
-        canActivate: [_helpers_auth_guard__WEBPACK_IMPORTED_MODULE_6__["AuthGuard"]],
+        canActivate: [_helpers_auth_guard__WEBPACK_IMPORTED_MODULE_6__["AuthGuard"], _helpers_fullinfo_guard__WEBPACK_IMPORTED_MODULE_7__["FullInfoGuard"]],
         children: adminRoutes
     },
     {
