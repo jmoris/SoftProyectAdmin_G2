@@ -21,8 +21,6 @@ import { AddUserRequirementComponent } from './project/add-user-requirement/add-
 import { AddIncrementComponent } from './project/add-increment/add-increment.component';
 import { AddSoftwareRequirementComponent } from './project/add-software-requirement/add-software-requirement.component';
 
-
-
 @NgModule({
   imports: [
     CommonModule,
@@ -38,6 +36,8 @@ import { AddSoftwareRequirementComponent } from './project/add-software-requirem
     TagInputModule,
     MaterialModule,
   ],
-  declarations: [GestionComponent, AddProjectComponent, DetailsProjectComponent,ProjectComponent, AddUserRequirementComponent, AddIncrementComponent, AddSoftwareRequirementComponent]
+  declarations: [GestionComponent,EditProjectComponent, AddProjectComponent, DetailsProjectComponent,ProjectComponent, AddUserRequirementComponent, AddIncrementComponent, AddSoftwareRequirementComponent]
+
 })
 export class ProyectoModule { }
+
