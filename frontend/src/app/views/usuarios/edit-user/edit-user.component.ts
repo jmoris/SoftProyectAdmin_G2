@@ -9,7 +9,7 @@ import { UsuariosService } from 'src/app/_services/usuarios.service';
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
-  
+
   title: String;
   hide = true;
   loading: boolean;
@@ -27,12 +27,12 @@ export class EditUserComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EditUserComponent>,
     private userService: UsuariosService,
-    @Inject(MAT_DIALOG_DATA) private data) { 
-      this.title = "Editar usuario";
-    }
+    @Inject(MAT_DIALOG_DATA) private data) {
+    this.title = "Editar usuario";
+    this.getUserData();
+  }
 
   ngOnInit(): void {
-    this.getUserData();
   }
 
   getUserData() {

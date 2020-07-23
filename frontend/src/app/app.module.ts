@@ -19,6 +19,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import { getSpanishPaginatorIntl } from './spanish-paginator-intl';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { MomentDateFormatter } from './_helpers/momentdate.formatter';
+import { CommonModule } from '@angular/common';
 
 /**
  * Custom angular notifier options
