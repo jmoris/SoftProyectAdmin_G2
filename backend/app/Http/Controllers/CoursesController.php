@@ -8,8 +8,10 @@ use App\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use Illuminate\Support\Str;
 
 class CoursesController extends Controller
 {
@@ -208,6 +210,8 @@ class CoursesController extends Controller
         ];
 
         while($lectura){
+            $nombre = $spreadsheet->getActiveSheet()->getCell('A'.$contador)->getValue();
+            $apellido = $spreadsheet->getActiveSheet()->getCell('B'.$contador)->getValue();
             $email = $spreadsheet->getActiveSheet()->getCell('C'.$contador)->getValue();
             if($email==''||$email==null){
                 $lectura = false;
@@ -216,6 +220,19 @@ class CoursesController extends Controller
             $user = User::where('email', $email)->first();
             if($user==null){
                 $errores['inexistentes'][] = (string)$email;
+                $usuario = new User();
+                $usuario->name = $nombre;
+                $usuario->surname = $apellido;
+                $usuario->email = (string)$email;
+                $password = Str::random(8);
+                $usuario->password = bcrypt($password);
+                $usuario->rut = "1-9";
+                $usuario->profile = "student";
+                $usuario->save();
+
+                \App\Jobs\InvitarUsuario::dispatch((string)$email, ($nombre.' '.$apellido), $password)->onQueue('invitaciones');
+
+                $curso->users()->sync($usuario, false);
             }else{
                 $exists = $user->courses->contains($id);
                 if($exists){

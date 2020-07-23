@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use JWTAuth;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
@@ -39,6 +41,7 @@ class AuthController extends Controller
                 return response()->json([
                     'success' => true,
                     'token' => $token,
+                    'user' => $user
                 ]);
         }else{
             return response()->json([
@@ -48,6 +51,34 @@ class AuthController extends Controller
         }
 
 
+    }
+
+    public function updateInfo(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'rut' => 'required',
+            'enrollment' => 'required',
+            'password' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
+        $user = Auth::user();
+
+        $user = User::find($user->id);
+        $user->rut=$request->rut;
+        $user->enrollment=$request->enrollment;
+        $user->password=bcrypt($request->password);
+
+        $user->save();
+
+        return response()->json([
+            'status' => 200,
+            'success' => true,
+            'msg' => 'Usuario modificado correctamente.'
+        ]);
     }
 
     /**
