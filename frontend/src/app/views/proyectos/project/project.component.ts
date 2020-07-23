@@ -15,11 +15,7 @@ import * as moment from 'moment/moment';
 import { AddSoftwareRequirementComponent } from './add-software-requirement/add-software-requirement.component';
 import { SoftwareRequirementsService } from 'src/app/_services/softwarerequirements.service';
 import { ConfirmationDialogComponent } from '../../core/confirmation-dialog/confirmation-dialog.component';
-import { EditProjectComponent } from '../edit-project/edit-project.component';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
-import { NotifierService } from 'angular-notifier';
-import { AddProjectComponent } from '../add-project/add-project.component';
+import { TestCaseService } from 'src/app/_services/testcases.service';
 
 @Component({
   selector: 'app-project',
@@ -30,25 +26,28 @@ import { AddProjectComponent } from '../add-project/add-project.component';
 export class ProjectComponent implements OnInit {
   private readonly notifier: NotifierService;
 
-  active = 1;
-  name = 'nombreProyecto';
-  chartPie1: any;
-  chartLineOption3: any;
-  products$: any;
-  dialogResult = "";
-  items = ['Javascript', 'Typescript'];
-  autocompletes$: any;
-  tagsCtrl1 = new FormControl(this.items);
-  loading: boolean = false;
+    active = 1;
+    name="nombreProyecto";
+    chartPie1: any;
+    chartLineOption3: any;
+    products$: any;
+    dialogResult = "";
+    items = ['Javascript', 'Typescript'];
+    autocompletes$;
+    tagsCtrl1 = new FormControl(this.items);
+    loading: boolean = false;
     id : any;
     proyecto : any;
     equipo:any = [];
     userreqs: any = [];
     softreqs: any = [];
+    testcases: any = [];
     infour : any = {};
     infosr: any = {};
+    infotc: any = {};
     next_userreq_id :any;
     next_softreq_id :any;
+    next_testcase_id: any;
     userRequerimentForm : FormGroup;
     softwareRequerimentForm : FormGroup;
     testCaseForm : FormGroup;
@@ -64,6 +63,7 @@ public constructor(
     private dialog: MatDialog,
     private proyectoService : ProjectsService,
     private userReqService : UserRequirementService,
+    private testCaseService : TestCaseService,
     private incrementsService: IncrementService,
     private softReqService: SoftwareRequirementsService
   ) {
@@ -86,6 +86,17 @@ public constructor(
                     this.infour.completos++;
             });
         });
+        this.infotc.completos = 0;
+        this.infotc.incompletos = 0;
+        this.testCaseService.getAll(this.id).subscribe((resp:any) => {
+            this.testcases = resp;
+            resp.forEach(element => {
+                if(element.status == 0)
+                    this.infotc.incompletos++;
+                else
+                    this.infotc.completos++;
+            });
+        });
         this.infosr.completos = 0;
         this.infosr.incompletos = 0;
         this.softReqService.getAll(this.id).subscribe((resp: any ) => {
@@ -105,6 +116,9 @@ public constructor(
         });
         this.softReqService.getNextId(this.id).subscribe((resp:any) => {
             this.next_softreq_id = resp.next_id;
+        });
+        this.testCaseService.getNextId(this.id).subscribe((resp:any) => {
+            this.next_testcase_id = resp.next_id;
         });
     });
 
@@ -140,16 +154,29 @@ public constructor(
                 this.infosr.completos++;
         });
     });
+    this.infotc.completos = 0;
+    this.infotc.incompletos = 0;
+    this.testCaseService.getAll(this.id).subscribe((resp:any) => {
+        this.testcases = resp;
+        resp.forEach(element => {
+            if(element.status == 0)
+                this.infotc.incompletos++;
+            else
+                this.infotc.completos++;
+        });
+    });
+
     this.incrementsService.getAll(this.id).subscribe((resp:any) => {
         this.increments = resp;
     });
-
-
     this.userReqService.getNextId(this.id).subscribe((resp:any) => {
         this.next_userreq_id = resp.next_id;
     });
     this.softReqService.getNextId(this.id).subscribe((resp:any) => {
         this.next_softreq_id = resp.next_id;
+    });
+    this.testCaseService.getNextId(this.id).subscribe((resp:any) => {
+        this.next_testcase_id = resp.next_id;
     });
 
   }

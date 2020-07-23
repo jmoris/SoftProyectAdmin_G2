@@ -454,35 +454,39 @@
 									</div>
 									<div class="col-md-10">
 										<div class="card o-hidden mb-4 mt-4 mr-4">
-											<ngx-datatable style="height: calc(100vh - 270px); box-shadow: none"
-												class="material fullscreen" [columnMode]="'force'" [headerHeight]="50"
+											<ngx-datatable style="height: calc(85vh - 270px); box-shadow: none"
+												class="material fullscreen" [columnMode]="'flex'" [headerHeight]="50"
 												[footerHeight]="50" [rowHeight]="60" [scrollbarV]="true" [limit]="10"
-												[rows]="products$ | async">
-												<ngx-datatable-column name="photo" [maxWidth]="80">
+												[rows]="testcases">
+												<ngx-datatable-column name="internalId" [flexGrow]="9">
 													<ng-template ngx-datatable-header-template>
 														Codigo
-													</ng-template>
-													<ng-template ngx-datatable-cell-template let-value="value"
-														let-row="row">
-														<img height="32px" width="32px" style="border-radius: 4px"
-															[src]="value" alt="">
-													</ng-template>
+                                                    </ng-template>
+                                                    <ng-template let-value="value" ngx-datatable-cell-template>
+                                                        CU{{value | number: '2.0'}}
+                                                      </ng-template>
 												</ngx-datatable-column>
-												<ngx-datatable-column name="name" [width]="300">
+												<ngx-datatable-column name="description" [flexGrow]="50">
 													<ng-template ngx-datatable-header-template>
-														Descripcion
+														Descripción
 													</ng-template>
 												</ngx-datatable-column>
-												<ngx-datatable-column name="category" [maxWidth]="150">
+												<ngx-datatable-column name="status" [flexGrow]="9">
 													<ng-template ngx-datatable-header-template>
-														Fecha
-													</ng-template>
-												</ngx-datatable-column>
-												<ngx-datatable-column name="subtitle" [maxWidth]="150">
-													<ng-template ngx-datatable-header-template>
-														Estatus
-													</ng-template>
-												</ngx-datatable-column>
+														Estado
+                                                    </ng-template>
+                                                    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                                        {{ formatUserReqColumns(value, 'status') }}
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column [cellClass]="'va-middle'" name="Accion" [flexGrow]="10" [sortable]="false" prop="id">
+                                                    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                                                      <button class="btn btn-sm btn-outline-warning" (click)="editSoftRequeriment(row, $event)"><i
+                                                          class="i-Edit icon-md"></i></button>&nbsp;&nbsp;
+                                                        <button class="btn btn-sm btn-outline-danger" (click)="deleteSoftReq(row.id)"><i
+                                                            class="i-Close-Window icon-md"></i></button>
+                                                    </ng-template>
+                                                  </ngx-datatable-column>
 											</ngx-datatable>
 										</div>
 									</div>
