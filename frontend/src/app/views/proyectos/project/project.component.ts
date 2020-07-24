@@ -15,6 +15,11 @@ import * as moment from 'moment/moment';
 import { AddSoftwareRequirementComponent } from './add-software-requirement/add-software-requirement.component';
 import { SoftwareRequirementsService } from 'src/app/_services/softwarerequirements.service';
 import { ConfirmationDialogComponent } from '../../core/confirmation-dialog/confirmation-dialog.component';
+import { EditProjectComponent } from '../edit-project/edit-project.component';
+import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { NotifierService } from 'angular-notifier';
+import { AddProjectComponent } from '../add-project/add-project.component';
 import { TestCaseService } from 'src/app/_services/testcases.service';
 
 @Component({
