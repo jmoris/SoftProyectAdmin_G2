@@ -20,7 +20,7 @@ class TestCaseController extends Controller
     }
 
     public function getNextId($id){
-        $next_id = TestCase::where('project_id', $id)->orderBy('internalId', 'desc')->first();
+        $next_id = TestCase::withTrashed()->where('project_id', $id)->orderBy('internalId', 'desc')->first();
         if($next_id==null)
             return response()->json(['next_id' => 1]);
         return response()->json(['next_id' => $next_id->internalId + 1]);
@@ -47,7 +47,7 @@ class TestCaseController extends Controller
         }
 
         $testc = new TestCase();
-        $testc->internalId = TestCase::where('project_id', $request->project_id)->count() + 1;
+        $testc->internalId = TestCase::withTrashed()->where('project_id', $request->project_id)->count() + 1;
         $testc->description = $request->description;
         $testc->acceptableResult = $request->acceptableResult;
         $testc->optimumResult = $request->optimumResult;

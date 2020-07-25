@@ -20,7 +20,7 @@ class SoftwareRequirementController extends Controller
     }
 
     public function getNextId($id){
-        $next_id = SoftwareRequirement::where('project_id', $id)->orderBy('internalId', 'desc')->first();
+        $next_id = SoftwareRequirement::withTrashed()->where('project_id', $id)->orderBy('internalId', 'desc')->first();
         if($next_id==null)
             return response()->json(['next_id' => 1]);
         return response()->json(['next_id' => $next_id->internalId+1]);
@@ -48,7 +48,7 @@ class SoftwareRequirementController extends Controller
         }
 
         $usrq = new SoftwareRequirement();
-        $usrq->internalId = SoftwareRequirement::where('project_id', $request->project_id)->count() + 1;
+        $usrq->internalId = SoftwareRequirement::withTrashed()->where('project_id', $request->project_id)->count() + 1;
         $usrq->cost = $request->cost;
         $usrq->stability = $request->stability;
         $usrq->priority = $request->priority;

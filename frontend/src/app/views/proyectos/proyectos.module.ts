@@ -19,6 +19,7 @@ import { FormWizardModule } from 'src/app/shared/components/form-wizard/form-wiz
 import { AddUserRequirementComponent } from './project/add-user-requirement/add-user-requirement.component';
 import { AddIncrementComponent } from './project/add-increment/add-increment.component';
 import { AddSoftwareRequirementComponent } from './project/add-software-requirement/add-software-requirement.component';
+import { AddTestCaseComponent } from './project/add-test-case/add-test-case.component';
 
 
 
@@ -37,6 +38,6 @@ import { AddSoftwareRequirementComponent } from './project/add-software-requirem
     TagInputModule,
     MaterialModule,
   ],
-  declarations: [GestionComponent, AddProjectComponent, DetailsProjectComponent,ProjectComponent, AddUserRequirementComponent, AddIncrementComponent, AddSoftwareRequirementComponent]
+  declarations: [GestionComponent, AddProjectComponent, DetailsProjectComponent,ProjectComponent, AddUserRequirementComponent, AddIncrementComponent, AddSoftwareRequirementComponent, AddTestCaseComponent]
 })
 export class ProyectoModule { }

@@ -17,6 +17,8 @@ import { AddSoftwareRequirementComponent } from './add-software-requirement/add-
 import { SoftwareRequirementsService } from 'src/app/_services/softwarerequirements.service';
 import { ConfirmationDialogComponent } from '../../core/confirmation-dialog/confirmation-dialog.component';
 import { TestCaseService } from 'src/app/_services/testcases.service';
+import { AddTestCaseComponent } from './add-test-case/add-test-case.component';
+import { EChartOption } from 'echarts';
 
 @Component({
   selector: 'app-project',
@@ -53,7 +55,8 @@ export class ProjectComponent implements OnInit {
     testCaseForm : FormGroup;
     incrementForm: FormGroup;
     increments: any = [];
-
+    dataTestCases: any;
+    salesChartPie: EChartOption;
 
 public constructor(
     private route: ActivatedRoute,
@@ -67,6 +70,52 @@ public constructor(
     private incrementsService: IncrementService,
     private softReqService: SoftwareRequirementsService
   ) {
+    this.salesChartPie = {
+        color: ['#263db5','#d22346'],
+        tooltip: {
+            show: true,
+            backgroundColor: 'rgba(0, 0, 0, .8)'
+        },
+
+        xAxis: [{
+            axisLine: {
+                show: false
+            },
+            splitLine: {
+                show: false
+            }
+        }
+
+        ],
+        yAxis: [{
+            axisLine: {
+                show: false
+            },
+            splitLine: {
+                show: false
+            }
+        }
+        ],
+        series: [{
+            name: 'Casos de prueba',
+            type: 'pie',
+            ...echartStyles.pieRing,
+            radius: '75%',
+            center: ['50%', '50%'],
+            data: [
+                { value: 0, name: 'Activo' },
+                { value: 0, name: 'Inactivo' }
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+        ]
+    };
       this.loading = true;
     this.id = this.route.snapshot.params['id'];
     proyectoService.get(this.id).subscribe((data) => {
@@ -96,6 +145,14 @@ public constructor(
                 else
                     this.infotc.completos++;
             });
+            this.dataTestCases = {
+                series: {
+                    data: [
+                        { value: this.infotc.completos, name: 'Exitosos' },
+                        { value: this.infotc.incompletos, name: 'Fallidos' }
+                    ]
+                }
+            };
         });
         this.infosr.completos = 0;
         this.infosr.incompletos = 0;
@@ -108,6 +165,7 @@ public constructor(
                     this.infosr.completos++;
             });
         });
+
         this.incrementsService.getAll(this.id).subscribe((resp:any) => {
             this.increments = resp;
         });
@@ -120,6 +178,7 @@ public constructor(
         this.testCaseService.getNextId(this.id).subscribe((resp:any) => {
             this.next_testcase_id = resp.next_id;
         });
+
     });
 
     this.testCaseForm = new FormGroup({
@@ -164,8 +223,16 @@ public constructor(
             else
                 this.infotc.completos++;
         });
+        this.dataTestCases = {
+            series: {
+                data: [
+                    { value: this.infotc.completos, name: 'Exitosos' },
+                    { value: this.infotc.incompletos, name: 'Fallidos' }
+                ]
+            }
+        };
     });
-
+    console.log(this.dataTestCases);
     this.incrementsService.getAll(this.id).subscribe((resp:any) => {
         this.increments = resp;
     });
@@ -186,33 +253,6 @@ public constructor(
   }
 
   ngOnInit() {
-    this.chartPie1 = {
-      ...echartStyles.defaultOptions, ...{
-        legend: {
-          show: true,
-          bottom: 0,
-        },
-        series: [{
-          type: 'pie',
-          ...echartStyles.pieRing,
-
-          label: echartStyles.pieLabelCenterHover,
-          data: [{
-            name: 'Exitosos',
-            value: 80,
-            itemStyle: {
-              color: '#663399',
-            }
-          }, {
-            name: 'Fallidos',
-            value: 20,
-            itemStyle: {
-              color: '#ced4da',
-            }
-          }]
-        }]
-      }
-    };
   }
 
   formatUserReqColumns(data, type){
@@ -243,6 +283,13 @@ public constructor(
                 break;
       }
       return str;
+  }
+
+  formatStatusTestCase(data){
+    if(data==0)
+        return 'Exitoso';
+    else
+        return 'Fracaso';
   }
 
   addUserRequeriment(modal, event){
@@ -316,11 +363,57 @@ public constructor(
     })
   }
 
-  addTestCase(modal, event)
+addTestCase(modal, event)
   {
-    event.target.parentElement.parentElement.blur();
-    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true, size: 'lg' });
+    let dialogRef = this.dialog.open(AddTestCaseComponent, {
+        width: '750px',
+        data: {project_id: this.id, internalId: this.next_testcase_id},
+        disableClose: true,
+        autoFocus: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog closed: ${result}`);
+        this.dialogResult = result;
+        if (result == 'Confirm') {
+            this.toastr.success('Caso de prueba agregado exitosamente', 'Notificación', { timeOut: 3000 });
+        this.loadData();
+        }
+    })
+  }
 
+editTestCase(modal, event){
+    console.log(modal);
+    let dialogRef = this.dialog.open(AddTestCaseComponent, {
+        width: '750px',
+        data: {test_case:modal, project_id: this.id},
+        disableClose: true,
+        autoFocus: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog closed: ${result}`);
+        this.dialogResult = result;
+        if (result == 'Confirm') {
+            this.toastr.success('Caso de prueba modificado exitosamente', 'Notificación', { timeOut: 3000 });
+        this.loadData();
+        }
+    })
+}
+deleteTestCase(id: string) {
+    this.openDeletionConfirmationDialog('caso de prueba').afterClosed().subscribe(confirmation => {
+      console.log(confirmation);
+      if (confirmation.confirmed) {
+        this.testCaseService.delete(id).subscribe({
+          next: result => {
+            console.log(result);
+            this.loadData();
+            this.toastr.success('Caso de prueba eliminado correctamente', 'Notificación', { timeOut: 3000 });
+          },
+          error: result => {
+            console.log(result);
+          }
+        });
+      }
+    });
   }
 
   addIncrement(modal, event){
