@@ -66,7 +66,7 @@ export class AddCourseComponent implements OnInit {
       semester: new FormControl("", [Validators.required]),
     });
     this.seleccionarForm = new FormGroup({
-        usuarios: new FormArray([], [Validators.required, Validators.minLength(1)])
+        usuarios: new FormArray([], [])
     });
   }
 
