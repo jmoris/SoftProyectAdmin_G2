@@ -20,6 +20,7 @@ import { FormWizardModule } from 'src/app/shared/components/form-wizard/form-wiz
 import { AddUserRequirementComponent } from './project/add-user-requirement/add-user-requirement.component';
 import { AddIncrementComponent } from './project/add-increment/add-increment.component';
 import { AddSoftwareRequirementComponent } from './project/add-software-requirement/add-software-requirement.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { AddSoftwareRequirementComponent } from './project/add-software-requirem
     FormWizardModule,
     TagInputModule,
     MaterialModule,
+    CKEditorModule
   ],
   declarations: [GestionComponent,EditProjectComponent, AddProjectComponent, DetailsProjectComponent,ProjectComponent, AddUserRequirementComponent, AddIncrementComponent, AddSoftwareRequirementComponent]
 
