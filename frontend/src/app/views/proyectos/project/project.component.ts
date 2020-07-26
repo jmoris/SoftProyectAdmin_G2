@@ -3,11 +3,10 @@ import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
 import { echartStyles } from 'src/app/shared/echart-styles';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataLayerService } from 'src/app/shared/services/data-layer.service';
-import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectsService } from 'src/app/_services/projects.service';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ToastrService } from 'ngx-toastr';
+import { MatDialogConfig } from '@angular/material/dialog';
 import { AddUserRequirementComponent } from './add-user-requirement/add-user-requirement.component';
 import { UserRequirementService } from 'src/app/_services/userrequirements.service';
 import { IncrementService } from 'src/app/_services/increments.service';
@@ -16,6 +15,11 @@ import * as moment from 'moment/moment';
 import { AddSoftwareRequirementComponent } from './add-software-requirement/add-software-requirement.component';
 import { SoftwareRequirementsService } from 'src/app/_services/softwarerequirements.service';
 import { ConfirmationDialogComponent } from '../../core/confirmation-dialog/confirmation-dialog.component';
+import { EditProjectComponent } from '../edit-project/edit-project.component';
+import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { NotifierService } from 'angular-notifier';
+import { AddProjectComponent } from '../add-project/add-project.component';
 import { TestCaseService } from 'src/app/_services/testcases.service';
 
 @Component({
@@ -25,6 +29,7 @@ import { TestCaseService } from 'src/app/_services/testcases.service';
 })
 
 export class ProjectComponent implements OnInit {
+  private readonly notifier: NotifierService;
 
     active = 1;
     name="nombreProyecto";
@@ -243,6 +248,22 @@ public constructor(
                 break;
       }
       return str;
+  }
+  openAddDialog() {
+    const dialogRef = this.dialog.open(AddProjectComponent, {
+      width: '850px',
+      data: 'This text is passed into the dialog',
+      disableClose: true,
+      autoFocus: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      this.dialogResult = result;
+      // tslint:disable-next-line: triple-equals
+      if (result == 'Confirm') {
+          this.toastr.success('Proyecto agregado exitosamente', 'Notificación', { timeOut: 3000 });
+      }
+  });
   }
 
   addUserRequeriment(modal, event){
