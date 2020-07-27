@@ -19,13 +19,13 @@ export class DashboadDefaultComponent implements OnInit {
     dataCursos: any;
     private timer: any;
 
-    //'#62549c', '#7566b5', '#7d6cbb', '#8877bd', '#9181bd', '#6957af'
-    //'#62549c', '#638eb0', '#6d9abd', '#799fbd', '#9181bd', '#6957af' Celeste
-    //'#62549c', '#a69962', '#c2b16d', '#baad79', '#9181bd', '#6957af' Amarillo
+    // '#62549c', '#7566b5', '#7d6cbb', '#8877bd', '#9181bd', '#6957af'
+    // '#62549c', '#638eb0', '#6d9abd', '#799fbd', '#9181bd', '#6957af' Celeste
+    // '#62549c', '#a69962', '#c2b16d', '#baad79', '#9181bd', '#6957af' Amarillo
     constructor(private userService: UsuariosService) {
 
         this.salesChartPie = {
-            color: ['#263db5','#d22346'],
+            color: ['#263db5', '#d22346'],
             tooltip: {
                 show: true,
                 backgroundColor: 'rgba(0, 0, 0, .8)'
