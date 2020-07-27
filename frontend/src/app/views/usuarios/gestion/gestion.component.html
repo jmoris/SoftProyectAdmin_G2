@@ -16,7 +16,8 @@
         <i class="i-Add-User"></i>
         <div class="content">
           <p class="text-muted mt-2 mb-0">Carga Masiva</p>
-          <button type="button" class="btn btn-primary btn-rounded m-1">Importar</button>
+          <button *ngIf="userType == 'admin' || userType == 'teacher'" type="button"
+            class="btn btn-primary btn-rounded m-1">Importar</button>
         </div>
       </div>
     </div>
@@ -27,7 +28,8 @@
         <i class="i-Add-User"></i>
         <div class="content">
           <p class="text-muted mt-2 mb-0">Nuevo Usuario</p>
-          <button type="button" class="btn btn-primary btn-rounded m-1" (click)="openAddDialog()">Agregar</button>
+          <button *ngIf="userType == 'admin' || userType == 'teacher'" type="button"
+            class="btn btn-primary btn-rounded m-1" (click)="openAddDialog()">Agregar</button>
         </div>
       </div>
     </div>
