@@ -150,7 +150,7 @@ class CoursesController extends Controller
             'year' => 'required',
             'semester' => 'required',
             'teacher_id' => 'required',
-            'students' => 'required|array',
+            'students' => 'array',
         ]);
 
         if ($validator->fails()) {
