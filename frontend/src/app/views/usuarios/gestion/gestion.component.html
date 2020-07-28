@@ -16,7 +16,8 @@
         <i class="i-Add-User"></i>
         <div class="content">
           <p class="text-muted mt-2 mb-0">Carga Masiva</p>
-          <button type="button" class="btn btn-primary btn-rounded m-1">Importar</button>
+          <button *ngIf="userType == 'admin' || userType == 'teacher'" type="button"
+            class="btn btn-primary btn-rounded m-1">Importar</button>
         </div>
       </div>
     </div>
@@ -27,7 +28,8 @@
         <i class="i-Add-User"></i>
         <div class="content">
           <p class="text-muted mt-2 mb-0">Nuevo Usuario</p>
-          <button type="button" class="btn btn-primary btn-rounded m-1" (click)="openAddDialog()">Agregar</button>
+          <button *ngIf="userType == 'admin' || userType == 'teacher'" type="button"
+            class="btn btn-primary btn-rounded m-1" (click)="openAddDialog()">Agregar</button>
         </div>
       </div>
     </div>
@@ -73,6 +75,12 @@
         <button mat-icon-button color="warn" (click)="deleteUser(element.id)">
           <mat-icon svgIcon="delete" class="mat-18"></mat-icon>
         </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="disable">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <mat-slide-toggle color="primary" (change)="activeUserToggle($event)"></mat-slide-toggle>
       </td>
     </ng-container>
 
