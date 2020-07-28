@@ -39,7 +39,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MaterialModule,
     CKEditorModule
   ],
-  declarations: [GestionComponent, AddProjectComponent, DetailsProjectComponent,ProjectComponent, AddUserRequirementComponent, AddIncrementComponent, AddSoftwareRequirementComponent, AddTestCaseComponent]
+  declarations: [GestionComponent, AddProjectComponent, DetailsProjectComponent,ProjectComponent, AddUserRequirementComponent, AddIncrementComponent, AddSoftwareRequirementComponent, AddTestCaseComponent,EditProjectComponent]
 })
 export class ProyectoModule { }
 
