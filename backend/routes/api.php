@@ -60,6 +60,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('softwarerequirements', 'SoftwareRequirementController');
     Route::get('softwarerequirements/nextid/{id}', 'SoftwareRequirementController@getNextId');
     Route::apiResource('increments', 'IncrementsController');
+    Route::apiResource('testcases', 'TestCaseController');
+    Route::get('testcases/nextid/{id}', 'TestCaseController@getNextId');
 
     Route::get('info', function(){
 

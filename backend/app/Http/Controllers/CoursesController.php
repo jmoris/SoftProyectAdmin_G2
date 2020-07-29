@@ -68,6 +68,7 @@ class CoursesController extends Controller
             'name' => 'required',
             'year' => 'required',
             'semester' => 'required',
+            'teacher_id' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -77,7 +78,8 @@ class CoursesController extends Controller
         $curso->name = $request->name;
         $curso->year = $request->year;
         $curso->semester = $request->semester;
-        $curso->idUser = Auth::user()->id;
+        $curso->idUser = $request->teacher_id;
+        //Auth::user()->id;
         $curso->save();
 
         return response()->json([
@@ -148,7 +150,7 @@ class CoursesController extends Controller
             'year' => 'required',
             'semester' => 'required',
             'teacher_id' => 'required',
-            'students' => 'required|array',
+            'students' => 'array',
         ]);
 
         if ($validator->fails()) {

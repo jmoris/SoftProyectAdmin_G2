@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-title">{{ (!edit)? 'Nuevo':'Modificación' }}  requerimiento de Software</h4>
+    <h4 class="modal-title" id="modal-title">{{ (!edit)? 'Nuevo':'Modificación' }}  caso de prueba </h4>
     <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
     (click)="onCloseCancel()">
         <span aria-hidden="true">&times;</span>
@@ -8,35 +8,16 @@
 <div class="modal-body">
     <form [formGroup]="form">
         <div class="row">
-            <div class="col-md-4 form-group mb-0">
+            <div class="col-md-6 form-group mb-0">
                 <label for="firstName">Codigo</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon3">RS</span>
+                        <span class="input-group-text" id="basic-addon3">CP</span>
                     </div>
                     <input type="number" class="form-control" formControlName="code" aria-describedby="basic-addon3">
                 </div>
             </div>
-            <div class="col-md-4 form-group mb-0">
-                <label for="firstName"> Prioridad </label>
-                <select class="form-control" formControlName="priority" >
-                    <option value="" disabled="true" [selected]="true">Seleccione la prioridad</option>
-                    <option [value]="0">Deseable</option>
-                    <option [value]="1">No deseable</option>
-                    <option [value]="2">Critica</option>
-                </select>
-            </div>
-            <div class="col-md-4 form-group mb-0">
-                <label for="firstName"> Estabilidad </label>
-                <select class="form-control" formControlName="stability">
-                    <option value="" disabled="true" [selected]="true">Seleccione la estabilidad</option>
-                    <option [value]="0">Transable</option>
-                    <option [value]="1">Intransable</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 form-group mb-3">
+            <div class="col-md-6 form-group mb-3">
                 <label for="firstName">Estado</label>
                 <select class="form-control" formControlName="status">
                     <option value="" disabled="true" [selected]="true">Seleccione el estado</option>
@@ -45,24 +26,34 @@
                 </select>
             </div>
             <!--<div class="col-md-4 form-group mb-3">
-                <label for="firstName">Costo</label>
-                <input type="number" class="form-control" formControlName="cost" placeholder="1">
-            </div>
-            <div class="col-md-4 form-group mb-3">
                 <label for="firstName">Referencia Requerimiento de usuario </label>
                 <select class="form-control" formControlName="user_requirement_id" >
                     <option value="" disabled="true" [selected]="true">Seleccione la referencia</option>
                     <option *ngFor="let item of userRequirements" [value]="item.id">RU{{item.internalId | number: '2.0'}}</option>
                 </select>
             </div>-->
-        </div>
-        <div class="row">
+                <div class="col-md-12 form-group mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Descripción</span>
+                        </div>
+                        <textarea class="form-control" aria-label="With textarea" formControlName="description" ></textarea>
+                    </div>
+                </div>
             <div class="col-md-12 form-group mb-3">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">Descripción</span>
+                        <span class="input-group-text">Resultado Aceptable </span>
                     </div>
-                    <textarea class="form-control" aria-label="With textarea" formControlName="description" ></textarea>
+                    <textarea class="form-control" aria-label="With textarea" formControlName="acceptableResult"></textarea>
+                </div>
+            </div>
+            <div class="col-md-12 form-group mb-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Resultado optimo</span>
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea" formControlName="optimumResult"></textarea>
                 </div>
             </div>
         </div>
