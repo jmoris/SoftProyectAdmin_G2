@@ -43,4 +43,11 @@ export class UsuariosService {
     infoDash(){
         return this.http.get<any>(`${environment.apiUrl}/info`);
     }
+
+    uploadFile(fileToUpload: File): Observable<boolean> {
+        const formData: FormData = new FormData();
+        formData.append('file', fileToUpload, fileToUpload.name);
+
+        return this.http.post<any>(`${environment.apiUrl}/users/uploadfile`, formData);
+    }
 }

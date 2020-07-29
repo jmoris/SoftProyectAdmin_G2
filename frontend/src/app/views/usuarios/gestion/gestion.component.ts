@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -30,6 +30,9 @@ export class GestionComponent implements OnInit {
   dialogResult = "";
   isDataLoading: boolean;
   loading: boolean;
+  carga: any;
+  fileToUpload: File = null;
+  @ViewChild('infoImportModal') modalRef: TemplateRef<any>;
 
   addUserForm = this.fb.group({
     name: ['', Validators.required],
@@ -185,6 +188,21 @@ export class GestionComponent implements OnInit {
       }, (reason) => {
       });
   }
+
+  handleFileInput(files: FileList, modal) {
+    this.fileToUpload = files.item(0);
+    this.usuariosService.uploadFile(this.fileToUpload).subscribe((data: any) => {
+        this.fileToUpload = null;
+        if (!data.success) {
+            this.toastr.error(data.msg, 'Notificación de error', { timeOut: 3000 });
+            return;
+        }
+        this.toastr.success(data.msg, 'Notificación de exito', { timeOut: 3000 });
+        this.carga = data;
+        this.modalService.open(this.modalRef, { backdropClass: 'light-blue-backdrop' });
+        this.getUsers();
+    });
+}
 
   formatProfile(value) {
     switch (value) {
