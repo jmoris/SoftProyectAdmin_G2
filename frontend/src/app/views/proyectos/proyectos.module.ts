@@ -21,6 +21,9 @@ import { AddUserRequirementComponent } from './project/add-user-requirement/add-
 import { AddIncrementComponent } from './project/add-increment/add-increment.component';
 import { AddSoftwareRequirementComponent } from './project/add-software-requirement/add-software-requirement.component';
 import { AddTestCaseComponent } from './project/add-test-case/add-test-case.component';
+import { DocumentsComponent } from './project/documents/documents.component';
+
+
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
@@ -39,7 +42,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MaterialModule,
     CKEditorModule
   ],
-  declarations: [GestionComponent, AddProjectComponent, DetailsProjectComponent,ProjectComponent, AddUserRequirementComponent, AddIncrementComponent, AddSoftwareRequirementComponent, AddTestCaseComponent,EditProjectComponent]
+  declarations: [GestionComponent, AddProjectComponent, DetailsProjectComponent,ProjectComponent, AddUserRequirementComponent, AddIncrementComponent, AddSoftwareRequirementComponent, AddTestCaseComponent,EditProjectComponent,DocumentsComponent]
 })
 export class ProyectoModule { }
 
