@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('enrollment')->nullable();
             $table->string('rut');
             $table->string('profile');
+            $table->boolean('active')->default('true');
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

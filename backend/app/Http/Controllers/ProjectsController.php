@@ -20,7 +20,7 @@ class ProjectsController extends Controller
     public function getProyectos(Request $request)
     {
 
-        $projecto = Project::withCount('user_roles')->get();
+        $projecto = Project::withCount('user_roles')->with('course')->get();
         if (empty($projecto))
         {
             $returnData = array(
@@ -124,11 +124,15 @@ class ProjectsController extends Controller
         $id = $request->input('id');
         $name = $request->input('name');
         $description = $request->input('description');
+        $course = $request->input('course');
+        $doctype = $request->input('doctype');
 
         $projecto = new Project;
         $projecto->id = $id;
         $projecto->name = $name;
         $projecto->description = $description;
+        $projecto->course_id = $course;
+        $projecto->doctype = $doctype;
 
         try {
             $projecto->save();
@@ -156,7 +160,7 @@ class ProjectsController extends Controller
     public function agregarAlumnosAProyecto(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'students' => 'required|array',
+            'students' => 'array',
             'project_id' => 'required',
         ]);
 
@@ -227,7 +231,9 @@ class ProjectsController extends Controller
             'year' => 'required',
             'semester' => 'required',
             'description' => 'required',
-            'students' => 'required|array',
+            'students' => 'array',
+            'course' => 'required',
+            'doctype' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -239,6 +245,8 @@ class ProjectsController extends Controller
         $projecto->description = $request->description;
         $projecto->year = $request->year;
         $projecto->semester = $request->semester;
+        $projecto->course_id = $request->course;
+        $projecto->doctype = $request->doctype;
 
         try {
             $projecto->save();
@@ -255,7 +263,8 @@ class ProjectsController extends Controller
         }catch(Exception $ex){
             return response()->json([
                 'status' => false,
-                'msg' => 'El proyecto no se pudo crear.'
+                'msg' => 'El proyecto no se pudo crear.',
+                'error' => $ex->getMessage()
             ]);
         }
 

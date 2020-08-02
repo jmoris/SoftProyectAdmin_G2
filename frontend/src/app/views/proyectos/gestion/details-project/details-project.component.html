@@ -5,7 +5,7 @@
         <div fxLayout="row" class="item">
             <div fxFlex="50">
                 <b>Jefe profecto:</b>
-                {{ data.project_manager.name + " " + data.project_manager.surname}}
+                {{ (data.project_manager)?(data.project_manager.name + " " + data.project_manager.surname):'No asignado'}}
             </div>
         </div>
     </mat-list-item>

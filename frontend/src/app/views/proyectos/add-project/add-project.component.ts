@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
+import { CursosService } from 'src/app/_services/cursos.service';
 
 @Component({
   selector: 'app-add-project',
@@ -24,6 +25,7 @@ export class AddProjectComponent implements OnInit {
   asignarForm: FormGroup;
   currentYear: number = new Date().getFullYear();;
   roles:any = [];
+  cursos:any = [];
   estudiantes: any = [];
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
   dataSource2: MatTableDataSource<any> = new MatTableDataSource<any>();
@@ -45,7 +47,8 @@ export class AddProjectComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: String,
     private projectService: ProjectsService,
     private userService: UsuariosService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private cursosService: CursosService
   ) {
     this.userService.getStudents().subscribe((data) => {
         if (!data) {
@@ -60,17 +63,22 @@ export class AddProjectComponent implements OnInit {
     this.projectService.getRoles().subscribe((data) => {
         this.roles = data;
     });
+    this.cursosService.getAll().subscribe((data) => {
+        this.cursos = data;
+    });
     this.form = new FormGroup({
       name: new FormControl("", [Validators.required]),
       description: new FormControl("", [Validators.required]),
       year: new FormControl(this.currentYear, [Validators.required]),
       semester: new FormControl("", [Validators.required]),
+      course: new FormControl("", [Validators.required]),
+      doctype: new FormControl("", [Validators.required])
     });
     this.seleccionarForm = new FormGroup({
-        usuarios: new FormArray([], [Validators.required, Validators.minLength(1)])
+        usuarios: new FormArray([], [])
     });
     this.asignarForm = new FormGroup({
-        usuarios: new FormArray([], [Validators.required, Validators.minLength(this.dataSource2.data.length)])
+        usuarios: new FormArray([], [])
       });
   }
 
@@ -110,7 +118,7 @@ export class AddProjectComponent implements OnInit {
     this.dataSource2.sort = this.sort2;
     this.dataSource2.paginator = this.paginator2;
     this.asignarForm = new FormGroup({
-        usuarios: new FormArray([], [Validators.required, Validators.minLength(this.dataSource2.data.length)])
+        usuarios: new FormArray([], [])
       });
   }
 
