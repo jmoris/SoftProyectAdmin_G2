@@ -3,8 +3,12 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserRequirementService } from 'src/app/_services/userrequirements.service';
 import { IncrementService } from 'src/app/_services/increments.service';
-
+import { ViewChild } from '@angular/core'
+import { NgIf } from '@angular/common';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
+import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
+import {interval , timer } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -14,108 +18,128 @@ import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 })
 export class DocumentsComponent implements OnInit {
 
+  type;
+  complete_document;
+  simple_document;
+
   public Editor = DecoupledEditor;
+  @ViewChild('editor') editorComponent: DecoupledEditor;
+  documents_simplificado: any = [];
+  documents_completo: any = [];
+
+  anterior;
+  actual;
 
 
-  selectDocument;
-  documents: any = [];
-  d_requeriments: any = [];
-  d_desing: any = [];
-  d_implementation:any = [];
-  d_testing: any = [];
-  d_historical:any = [];
-  show_data_document:any = [];
-
- 
   constructor
   (
+    private toastr: ToastrService
   ) 
    {
+    
+    this.complete_document = true;
+    this.simple_document = false;
     //Creamos el array con todos los documentos
-    this.documents = ["Documento de requisitos","Documento de Diseño","Documento de Implementación","Documento de Pruebas","Documento Histórico"];
+    this.type = "complete";
 
-    //Sub items del documento de requerimientos
-    this.d_requeriments = [
-      "1.   Introducción",
-      "1.1  Proposito del Sistema",
-      "1.2  Alcance del Proyecto",
-      "1.3  Contexto",
-      "1.4  Referencias",
-      "2.   Descripcion General",
-      "2.1  Suposiciones y Dependencias",
-      "2.2  Restricciones Generales",
-      "3.   Requisitos de Usuario",
-      "4.   Planificacion"
+
+    this.anterior = "1. Introduccion"; 
+    this.actual = "1. Introduccion"; 
+
+    this.documents_completo =
+    [
+    "1. Introduccion"
+    ,
+    "   1.1    Proposito del sistema",
+    "   1.2   Alcance del proyecto",
+    "   1.3   Contexto",
+    "   1.4   Definiciones",
+    "   1.5   Referencias",
+    "2. Descripcion General"
+    ,
+    "   2.1   Suposiciones y Dependencias",
+    "   2.2   Restriccion Generales",
+    "   2.3   Usuarios",
+    "   2.4   Producto",
+    "   2.5   Ambiente",
+    "   2.6   Proyectos relaciones"
+    ,
+    "3. Requisitos del Sistema",
+    "   3.1   Requisitos de Usuario",
+    "   3.2   Requisitos de Sistema",
+    "4. Diseño"
+    ,
+    "   4.1   Arquitectura Fisica",
+    "   4.2   Arquitectura Logica",
+    "   4.3   Modelo de datos",
+    "   4.4   Detalle de los Modulos",
+    "   4.5   Navegacion",
+    "   4.6   Diseño de diagrama de clases",
+    "   4.7   Interfaz",
+    "5. Modulos"
+    ,
+    "6. Implementacion del proyecto"
+    ,
+    "   6.1   Interfaces generales de los modulos implementados",
+    "   6.2   Interfaces de las principales funciones implementadas"
+    ,
+    "7. Manual de instalacion de software"
+    ,
+    "   7.1   Requerimientos tecnicos",
+    "   7.2   Instalcion paso a paso",
+    "8. Casos de prueba"
+    ,
+    "9. Matriz de trazado"
+    ,
+    "   9.1   RU/RS",
+    "   9.2   MD/RS",
+    "   9.3   RU/CP",
+    "   9.4   RS/CP",
     ];
-    //Sub items del documentos de diseño
-    this.d_desing = [
-      "1.   Introducción",
-      "1.1  Proposito del Sistema",
-      "1.2  Alcance del proyecto",
-      "1.3  Contexto",
-      "1.4  Referencias",
-      "2.   Diseño Arquitectonico",
-      "2.2  Arquitectura Logica",
-      "2.3  Modelo de Datos",
-      "3.   Diseño Detallado",
-      "3.1  Diseño de Diagrama de Clases",
-      "3.2  Diseño de Intergaz de Usuario"
-    ];
-    //Sub items del documento de implementacion
-    this.d_implementation = [
-      "1.   Introduccion",
-      "1.2  Alcance del Proyecto",
-      "1.3  Contexto",
-      "1.4  Referencias",
-      "2.   Implementacion del Proyecto",
-      "2.1  Interfaces generales de modulos implementadas",
-      "2.2  Interfaces de principales funcionalidades implementadas",
-      "3.   Manual de instalacion de Software",
-      "3.1  Requerimientos Tecnicos",
-      "3.2  Instalacion paso a paso"
-    ];
-    //Sub items del documento de pruebas
-    this.d_testing = [
-      "1.   Introduccion",
-      "1.1  Alcance del Sistema",
-      "1.2  Alcance del Proyecto",
-      "1.3  Contexto",
-      "1.4  Referencias",
-      "2    Casos de Prueba",
-      "3    Matriz de Trazado",
-      "3.1  Requisitos de Usuario / Casos de prueba",
-      "3.2  Requisitos de Sistema / Casos de prueba"
-    ];
-    //Sub items de documentos historico
-    this.d_historical = [
-      "1.   Introducción",
-      "1.1  Proposito",
-      "1.2  Alcance",
-      "1.3  Contexto",
-      "1.4  Definiciones",
-      "1.5  Referencias",
-      "2.   Descripcion General",
-      "2.1  Usuarios",
-      "2.2  Productos",
-      "2.3  Ambiente",
-      "2.4  Proyectos Relacionados",
-      "3.   Diseño",
-      "3.1  Arquitectura Fisica",
-      "3.2  Arquitectura Logica",
-      "3.3  Modelo de Datos",
-      "3.4  Detalle de Modulos",
-      "3.5  Navegacion",
-      "3.6  Interfaz",
-      "4.   Requisitos del Sistema",
-      "4.1  Requisitos de Usuario",
-      "4.2  Requisitos de Software",
-      "5.   Modulos",
-      "6.   Casos de Prueba",
-      "7.   Matrices de Trazado (RU/RS) (MD/RS) (RU/CP) (RS/CP)"
-    ];
-    //Seteamos el show_data_document para documento de requisitos
-    this.show_data_document = this.d_requeriments;
-    this.selectDocument = 'asdsd';
+
+    this.documents_simplificado = 
+    [
+      "1. Introduccion"
+      ,
+      "   1.1 Proposito del sistema",
+      "   1.2 Alcance del proyecto",
+      "   1.3 Contexto",
+      "   1.4 Referencias",
+      "2. Descripcion General"
+      ,
+      "   2.1 Suposiciones y Dependencias",
+      "   2.2 Restriccion Generales",
+      "   2.3 Usuarios"
+      ,
+      "3. Requisitos de Usuario"
+      ,
+      "4. Diseño Arquitectonico"
+      ,
+      "   4.1 Arquitectura Fisica",
+      "   4.2 Arquitectura Logica",
+      "   4.3 Modelo de datos"
+      ,
+      "5. Diseño detallado"
+      ,
+      "   5.1 Diseño de diagrama de clases",
+      "   5.2 Diseño de interfaces de usuario"
+      ,
+      "6. Implementacion del proyecto"
+      ,
+      "   6.1 Interfaces generales de los modulos implementados",
+      "   6.2 Interfaces de las principales funciones implementadas"
+      ,
+      "7. Manual de instalacion de software"
+      ,
+      "   7.1 Requerimientos tecnicos",
+      "   7.2 Instalcion paso a paso",
+      "8. Casos de prueba"
+      ,
+      "9. Matriz de trazado"
+      ,
+      "   9.1 RU/CP",
+      "   9.2 RS/CP",
+      ];
 
 
   }
@@ -124,27 +148,23 @@ export class DocumentsComponent implements OnInit {
    * 
    * @param e Cambiamos la seccion del documento
    */
-  changed(e){
-    if(e.localeCompare("Documento de requisitos")==0)
-    {
-      this.show_data_document = this.d_requeriments;
-    }
-    if(e.localeCompare("Documento de Diseño")==0)
-    {
-      this.show_data_document = this.d_desing;
-    }
-    if(e.localeCompare("Documento de Implementación")==0)
-    {
-      this.show_data_document = this.d_implementation;
-    }
-    if(e.localeCompare("Documento de Pruebas")==0)
-    {
-      this.show_data_document = this.d_testing;
-    }
-    if(e.localeCompare("Documento Histórico")==0)
-    {
-      this.show_data_document = this.d_historical;
-    }
+  changed(e)
+  {
+    this.anterior = this.actual;
+    this.actual = e;
+    
+    console.log("Anterior: " + this.anterior + "----- " + "Actual :"+ e );
+    
+
+  } 
+
+
+//**Guardamos el contenido del editor al hacer click */
+public guardar()
+{
+  const data = this.getEditor().getData();
+  console.log(this.type + "  "  + " data: " + data );
+  this.toastr.success('Guardado', 'Guardando Documento', { timeOut: 3000, closeButton: true, progressBar: true });
 
 }
 
@@ -156,10 +176,23 @@ public onReady( editor ) {
 }
 
 ngOnInit(): void {
+  const intervalo = interval(10000);
+  intervalo.subscribe((n) =>
+  {
+    const data = this.getEditor().getData();
 
+    console.log(this.type + "  "  + " data: " + data );
+    console.log('Guardado Automatico - aki hay que guardar');
+    this.toastr.success('Guardado Automatico', 'Guardando Documento', { timeOut: 3000, closeButton: true, progressBar: true });
+
+  });
+  
 }
 
-
-
+public getEditor() {
+  // Warning: This may return "undefined" if the editor is hidden behind the `*ngIf` directive or
+  // if the editor is not fully initialised yet.
+  return this.editorComponent.editorInstance;
+}
 
 }
