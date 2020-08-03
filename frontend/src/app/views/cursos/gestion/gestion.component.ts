@@ -14,6 +14,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { ConfirmationDialogComponent } from '../../core/confirmation-dialog/confirmation-dialog.component';
 import { Router } from '@angular/router';
 import { EditCourseComponent } from '../edit-course/edit-course.component';
+import { AddAssistantTeacherComponent } from '../add-assistant-teacher/add-assistant-teacher.component';
+import { AddAssistantStudentComponent } from '../add-assistant-student/add-assistant-student.component';
 
 
 @Component({
@@ -180,6 +182,40 @@ export class GestionComponent implements OnInit {
   addHelper(modal, event) {
     event.target.parentElement.parentElement.blur();
     this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true });
+  }
+
+  openAddAsistantTeacher(): void {
+    let dialogRef = this.dialog.open(AddAssistantTeacherComponent, {
+      width: '500px',
+      data: 'This text is passed into the dialog',
+      disableClose: true,
+      autoFocus: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      this.dialogResult = result;
+      if (result == 'Confirm') {
+        this.toastr.success('Profesor huésped asignado correctamente', 'Notificación', { timeOut: 3000 });
+      }
+    })
+  }
+
+  openAddAsistantStudent(): void {
+    let dialogRef = this.dialog.open(AddAssistantStudentComponent, {
+      width: '500px',
+      data: 'This text is passed into the dialog',
+      disableClose: true,
+      autoFocus: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      this.dialogResult = result;
+      if (result == 'Confirm') {
+        this.toastr.success('Ayudante asignado correctamente', 'Notificación', { timeOut: 3000 });
+      }
+    })
   }
 
   openAddDialog(): void {

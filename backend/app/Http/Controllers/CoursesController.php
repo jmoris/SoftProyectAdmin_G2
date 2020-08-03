@@ -272,21 +272,37 @@ class CoursesController extends Controller
         }
     }
 
-    /*
+    
 
     public function asignarAyudanteACurso(Request $request)
     {
         $this->validate($request, [
-            'idCurso' => 'required',
-            'idAyudante' => 'required',
+            'iduser' => 'required',
+            'idcourse' => 'required',
         ]);
+        $user = User::find($request->iduser);
+        $course = Course::find($request->idcourse);
 
-        $idCurso = $request->input('idCurso');
-        $idAyudante = $request->input('idAyudante');
+        if($curso!=null&&$ayudante!=null){
+            if(UserProfile::isAssistant($user)){
+                $course->users()->sync($user, false);
+                return response()->json([
+                    'status' => 200,
+                    'msg' => 'Ayudante asignado correctamente.'
+                ]);
+            }else{
+                return response()->json([
+                    'status' => 500,
+                    'msg' => 'El usuario no es estudiante.'
+                ]);
+            }
+        }else{
+            return response()->json([
+                'status' => 500,
+                'msg' => 'El usuario/curso no existe.'
+            ]);
+        }
 
-        $curso = Course::find($idCurso);
-        $ayudante = User::find($idAyudante);
-
-
-    */
+    }
+    
 }

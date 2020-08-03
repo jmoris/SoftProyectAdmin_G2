@@ -27,6 +27,15 @@ export class CursosService {
         return this.http.delete<any>(`${environment.apiUrl}/courses/` + id);
     }
 
+    agregarProfeAcurso(data) {
+        console.log("datos en service: ", data);
+        return this.http.post<any>(`${environment.apiUrl}/courses/assign`, data);
+    }
+
+    agregarAyudanteAcurso(data) {
+        return this.http.post<any>(`${environment.apiUrl}/courses/assignAssistant`, data);
+    }
+
     insertComplete(data) {
         return this.http.post<any>(`${environment.apiUrl}/courses/createmass`, data);
     }
