@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('users', 'UsersController@crearUsuario');
     Route::put('users/{id}', 'UsersController@editarUsuario');
     Route::delete('users/{id}', 'UsersController@eliminarUsuario');
+    Route::post('users/uploadfile', 'UsersController@uploadFile');
 
     Route::get('roles', 'ProjectsController@getRoles');
 
