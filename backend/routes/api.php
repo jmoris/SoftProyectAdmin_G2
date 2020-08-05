@@ -20,6 +20,8 @@ Route::post('register', 'AuthController@register');
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('logout', 'AuthController@logout');
+    Route::post('updateinfo', 'AuthController@updateInfo');
+
 
     Route::get('users', 'UsersController@getUsuarios');
     Route::get('students', 'UsersController@getEstudiantes');
@@ -28,6 +30,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('users', 'UsersController@crearUsuario');
     Route::put('users/{id}', 'UsersController@editarUsuario');
     Route::delete('users/{id}', 'UsersController@eliminarUsuario');
+    Route::post('users/uploadfile', 'UsersController@uploadFile');
 
     Route::get('roles', 'ProjectsController@getRoles');
 
@@ -37,6 +40,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::put('courses/{id}', 'CoursesController@editarCurso');
     Route::delete('courses/{id}', 'CoursesController@eliminarCurso');
     Route::post('courses/assign', 'CoursesController@asignarProfesorACurso');
+    Route::post('courses/assignAssistant', 'CoursesController@asignarAyudanteACurso');
     Route::post('courses/createmass', 'CoursesController@createAndAdd');
     Route::get('courses/list/{id}', 'CoursesController@getUserList');
     Route::post('courses/uploadfile/{id}', 'CoursesController@uploadFile');
@@ -58,6 +62,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('softwarerequirements', 'SoftwareRequirementController');
     Route::get('softwarerequirements/nextid/{id}', 'SoftwareRequirementController@getNextId');
     Route::apiResource('increments', 'IncrementsController');
+    Route::apiResource('testcases', 'TestCaseController');
+    Route::get('testcases/nextid/{id}', 'TestCaseController@getNextId');
 
     Route::get('info', function(){
 

@@ -13,6 +13,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { ConfirmationDialogComponent } from '../../core/confirmation-dialog/confirmation-dialog.component';
 import { Router } from '@angular/router';
+import { EditCourseComponent } from '../edit-course/edit-course.component';
+import { AddAssistantTeacherComponent } from '../add-assistant-teacher/add-assistant-teacher.component';
+import { AddAssistantStudentComponent } from '../add-assistant-student/add-assistant-student.component';
 
 
 @Component({
@@ -48,13 +51,13 @@ export class GestionComponent implements OnInit {
   });
 
   constructor(
-        private router: Router,
-        private modalService: NgbModal,
-        private toastr: ToastrService,
-        private dialog: MatDialog,
-        private cursosService: CursosService,
-        private fb: FormBuilder,
-	) { }
+    private router: Router,
+    private modalService: NgbModal,
+    private toastr: ToastrService,
+    private dialog: MatDialog,
+    private cursosService: CursosService,
+    private fb: FormBuilder,
+  ) { }
 
   getCourses() {
     this.loading = true;
@@ -181,6 +184,40 @@ export class GestionComponent implements OnInit {
     this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true });
   }
 
+  openAddAsistantTeacher(): void {
+    let dialogRef = this.dialog.open(AddAssistantTeacherComponent, {
+      width: '500px',
+      data: 'This text is passed into the dialog',
+      disableClose: true,
+      autoFocus: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      this.dialogResult = result;
+      if (result == 'Confirm') {
+        this.toastr.success('Profesor huésped asignado correctamente', 'Notificación', { timeOut: 3000 });
+      }
+    })
+  }
+
+  openAddAsistantStudent(): void {
+    let dialogRef = this.dialog.open(AddAssistantStudentComponent, {
+      width: '500px',
+      data: 'This text is passed into the dialog',
+      disableClose: true,
+      autoFocus: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      this.dialogResult = result;
+      if (result == 'Confirm') {
+        this.toastr.success('Ayudante asignado correctamente', 'Notificación', { timeOut: 3000 });
+      }
+    })
+  }
+
   openAddDialog(): void {
     let dialogRef = this.dialog.open(AddCourseComponent, {
       width: '850px',
@@ -197,12 +234,26 @@ export class GestionComponent implements OnInit {
         this.getCourses();
       }
     })
-    }
+  }
 
-    verCurso(value){
-        this.router.navigateByUrl('/cursos/gestion/' + value);
-    }
-    deleteData(id,modal,event){
+  editCourse(id: String) {
+    const dialogRef = this.dialog.open(EditCourseComponent, {
+      data: id,
+      width: '850px',
+      disableClose: true,
+      autoFocus: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result == 'Confirm') {
+        this.getCourses();
+        this.toastr.success('Curso editado exitosamente', 'Notificación', { timeOut: 3000 });
+      }
+    });
+  }
+
+  deleteData(id, modal, event) {
     event.target.parentElement.parentElement.blur();
     this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })
       .result.then((result) => {

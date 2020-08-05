@@ -20,7 +20,7 @@ class UserRequirementController extends Controller
     }
 
     public function getNextId($id){
-        $next_id = UserRequirement::where('project_id', $id)->orderBy('internalId', 'desc')->first();
+        $next_id = UserRequirement::withTrashed()->where('project_id', $id)->orderBy('internalId', 'desc')->first();
         if($next_id==null)
             return response()->json(['next_id' => 1]);
         return response()->json(['next_id' => $next_id->internalId + 1]);
@@ -51,7 +51,7 @@ class UserRequirementController extends Controller
         }
 
         $usrq = new UserRequirement();
-        $usrq->internalId = UserRequirement::where('project_id', $request->project_id)->count() + 1;
+        $usrq->internalId = UserRequirement::withTrashed()->where('project_id', $request->project_id)->count() + 1;
         $usrq->source = $request->source;
         $usrq->cost = $request->cost;
         $usrq->stability = $request->stability;

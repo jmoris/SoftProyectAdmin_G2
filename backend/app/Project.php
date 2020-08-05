@@ -11,4 +11,8 @@ class Project extends Model
     public function user_roles(){
         return $this->belongsToMany(RoleUser::class);
     }
+
+    public function course(){
+        return $this->hasOne(Course::class, 'id', 'course_id');
+    }
 }

@@ -12,6 +12,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ProyectoRoutingModule } from './proyectos-routing.module';
 import { GestionComponent } from './gestion/gestion.component';
 import { AddProjectComponent } from './add-project/add-project.component';
+import { EditProjectComponent } from './edit-project/edit-project.component';
 import { MaterialModule } from 'src/app/material.module';
 import { DetailsProjectComponent } from './gestion/details-project/details-project.component';
 import { ProjectComponent } from './project/project.component';
@@ -19,8 +20,11 @@ import { FormWizardModule } from 'src/app/shared/components/form-wizard/form-wiz
 import { AddUserRequirementComponent } from './project/add-user-requirement/add-user-requirement.component';
 import { AddIncrementComponent } from './project/add-increment/add-increment.component';
 import { AddSoftwareRequirementComponent } from './project/add-software-requirement/add-software-requirement.component';
+import { AddTestCaseComponent } from './project/add-test-case/add-test-case.component';
+import { DocumentsComponent } from './project/documents/documents.component';
 
 
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   imports: [
@@ -36,7 +40,9 @@ import { AddSoftwareRequirementComponent } from './project/add-software-requirem
     FormWizardModule,
     TagInputModule,
     MaterialModule,
+    CKEditorModule
   ],
-  declarations: [GestionComponent, AddProjectComponent, DetailsProjectComponent,ProjectComponent, AddUserRequirementComponent, AddIncrementComponent, AddSoftwareRequirementComponent]
+  declarations: [GestionComponent, AddProjectComponent, DetailsProjectComponent,ProjectComponent, AddUserRequirementComponent, AddIncrementComponent, AddSoftwareRequirementComponent, AddTestCaseComponent,EditProjectComponent,DocumentsComponent]
 })
 export class ProyectoModule { }
+

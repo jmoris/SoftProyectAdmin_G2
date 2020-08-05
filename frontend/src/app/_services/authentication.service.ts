@@ -16,11 +16,11 @@ export class AuthenticationService {
     public currentUser: Observable<User>;
 
     constructor(private http: HttpClient, private router: Router) {
-        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+        this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
-    public get currentUserValue(): User {
+    public get currentUserValue(): any {
         return this.currentUserSubject.value;
     }
 
@@ -34,10 +34,27 @@ export class AuthenticationService {
             }));
     }
 
+    updateInfo(rut: string, enrollment: string, password: string) {
+        return this.http.post<any>(`${environment.apiUrl}/updateinfo`, { rut, enrollment, password })
+            .pipe(map(user => {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                this.currentUserSubject.next(user);
+                return user;
+            }));
+    }
+
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
         this.router.navigateByUrl("/sessions/signin");
+    }
+
+    getUserType(): String {
+        let tokenInfo = this.currentUserValue;
+        console.log("info: ", tokenInfo.user.profile);
+        return tokenInfo.user.profile;
+        
     }
 }

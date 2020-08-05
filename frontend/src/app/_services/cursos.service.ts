@@ -9,13 +9,13 @@ import { Router } from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class CursosService {
 
-    constructor(private http: HttpClient, private router: Router) {}
+    constructor(private http: HttpClient, private router: Router) { }
 
     getAll() {
         return this.http.get<any>(`${environment.apiUrl}/courses`);
     }
 
-    get(id){
+    get(id) {
         return this.http.get<any>(`${environment.apiUrl}/courses/` + id);
     }
 
@@ -23,16 +23,29 @@ export class CursosService {
         return this.http.post<any>(`${environment.apiUrl}/courses`, data);
     }
 
-    delete(id){
+    delete(id) {
         return this.http.delete<any>(`${environment.apiUrl}/courses/` + id);
     }
 
-    insertComplete(data){
+    agregarProfeAcurso(data) {
+        console.log("datos en service: ", data);
+        return this.http.post<any>(`${environment.apiUrl}/courses/assign`, data);
+    }
+
+    agregarAyudanteAcurso(data) {
+        return this.http.post<any>(`${environment.apiUrl}/courses/assignAssistant`, data);
+    }
+
+    insertComplete(data) {
         return this.http.post<any>(`${environment.apiUrl}/courses/createmass`, data);
     }
 
-    usersList(id){
+    usersList(id) {
         return this.http.get<any>(`${environment.apiUrl}/courses/list/` + id);
+    }
+
+    updateCourse(id, data) {
+        return this.http.put<any>(`${environment.apiUrl}/courses/` + id, data);
     }
 
     uploadFile(fileToUpload: File, id): Observable<boolean> {

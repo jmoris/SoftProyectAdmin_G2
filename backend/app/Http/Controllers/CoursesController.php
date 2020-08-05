@@ -8,8 +8,10 @@ use App\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use Illuminate\Support\Str;
 
 class CoursesController extends Controller
 {
@@ -66,6 +68,7 @@ class CoursesController extends Controller
             'name' => 'required',
             'year' => 'required',
             'semester' => 'required',
+            'teacher_id' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -75,7 +78,8 @@ class CoursesController extends Controller
         $curso->name = $request->name;
         $curso->year = $request->year;
         $curso->semester = $request->semester;
-        $curso->idUser = Auth::user()->id;
+        $curso->idUser = $request->teacher_id;
+        //Auth::user()->id;
         $curso->save();
 
         return response()->json([
@@ -146,7 +150,7 @@ class CoursesController extends Controller
             'year' => 'required',
             'semester' => 'required',
             'teacher_id' => 'required',
-            'students' => 'required|array',
+            'students' => 'array',
         ]);
 
         if ($validator->fails()) {
@@ -206,6 +210,8 @@ class CoursesController extends Controller
         ];
 
         while($lectura){
+            $nombre = $spreadsheet->getActiveSheet()->getCell('A'.$contador)->getValue();
+            $apellido = $spreadsheet->getActiveSheet()->getCell('B'.$contador)->getValue();
             $email = $spreadsheet->getActiveSheet()->getCell('C'.$contador)->getValue();
             if($email==''||$email==null){
                 $lectura = false;
@@ -214,6 +220,19 @@ class CoursesController extends Controller
             $user = User::where('email', $email)->first();
             if($user==null){
                 $errores['inexistentes'][] = (string)$email;
+                $usuario = new User();
+                $usuario->name = $nombre;
+                $usuario->surname = $apellido;
+                $usuario->email = (string)$email;
+                $password = Str::random(8);
+                $usuario->password = bcrypt($password);
+                $usuario->rut = "1-9";
+                $usuario->profile = "student";
+                $usuario->save();
+
+                \App\Jobs\InvitarUsuario::dispatch((string)$email, ($nombre.' '.$apellido), $password)->onQueue('invitaciones');
+
+                $curso->users()->sync($usuario, false);
             }else{
                 $exists = $user->courses->contains($id);
                 if($exists){
@@ -253,21 +272,37 @@ class CoursesController extends Controller
         }
     }
 
-    /*
+    
 
     public function asignarAyudanteACurso(Request $request)
     {
         $this->validate($request, [
-            'idCurso' => 'required',
-            'idAyudante' => 'required',
+            'iduser' => 'required',
+            'idcourse' => 'required',
         ]);
+        $user = User::find($request->iduser);
+        $course = Course::find($request->idcourse);
 
-        $idCurso = $request->input('idCurso');
-        $idAyudante = $request->input('idAyudante');
+        if($curso!=null&&$ayudante!=null){
+            if(UserProfile::isAssistant($user)){
+                $course->users()->sync($user, false);
+                return response()->json([
+                    'status' => 200,
+                    'msg' => 'Ayudante asignado correctamente.'
+                ]);
+            }else{
+                return response()->json([
+                    'status' => 500,
+                    'msg' => 'El usuario no es estudiante.'
+                ]);
+            }
+        }else{
+            return response()->json([
+                'status' => 500,
+                'msg' => 'El usuario/curso no existe.'
+            ]);
+        }
 
-        $curso = Course::find($idCurso);
-        $ayudante = User::find($idAyudante);
-
-
-    */
+    }
+    
 }

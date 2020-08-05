@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-title">Nuevo requerimiento de Software</h4>
+    <h4 class="modal-title" id="modal-title">{{ (!edit)? 'Nuevo':'Modificación' }}  requerimiento de Software</h4>
     <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
     (click)="onCloseCancel()">
         <span aria-hidden="true">&times;</span>
@@ -44,7 +44,7 @@
                     <option [value]="1">Completo</option>
                 </select>
             </div>
-            <div class="col-md-4 form-group mb-3">
+            <!--<div class="col-md-4 form-group mb-3">
                 <label for="firstName">Costo</label>
                 <input type="number" class="form-control" formControlName="cost" placeholder="1">
             </div>
@@ -54,7 +54,7 @@
                     <option value="" disabled="true" [selected]="true">Seleccione la referencia</option>
                     <option *ngFor="let item of userRequirements" [value]="item.id">RU{{item.internalId | number: '2.0'}}</option>
                 </select>
-            </div>
+            </div>-->
         </div>
         <div class="row">
             <div class="col-md-12 form-group mb-3">
@@ -70,5 +70,5 @@
 </div>
 <div class="modal-footer">
     <button type="button" (click)="onCloseCancel()" class="btn btn-secondary m-1">Cancelar</button>
-    <button type="button" (click)="onCloseConfirm()" class="btn btn-outline-primary m-1">Agregar</button>
+    <button type="button" (click)="onCloseConfirm()" class="btn btn-outline-primary m-1">Aceptar</button>
 </div>

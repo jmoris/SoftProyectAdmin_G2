@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-title">Nuevo requerimiento de usuario</h4>
+    <h4 class="modal-title" id="modal-title">{{ (!edit)? 'Nuevo':'Modificación' }} requerimiento de usuario</h4>
     <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
         (click)="onCloseCancel()">
         <span aria-hidden="true">&times;</span>
@@ -70,6 +70,6 @@
 </div>
 <div class="modal-footer">
     <button type="button" (click)="onCloseCancel()" class="btn btn-secondary m-1">Cancelar</button>
-    <button type="button" (click)="onCloseConfirm()" class="btn btn-outline-primary m-1">Agregar</button>
+    <button type="button" (click)="onCloseConfirm()" class="btn btn-outline-primary m-1">Aceptar</button>
 
 </div>

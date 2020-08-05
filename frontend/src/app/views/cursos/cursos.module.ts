@@ -13,6 +13,9 @@ import { AddCourseComponent } from './add-course/add-course.component';
 import { MaterialModule } from 'src/app/material.module';
 import { FormWizardModule } from 'src/app/shared/components/form-wizard/form-wizard.module';
 import { CursoComponent } from './curso/curso.component';
+import { EditCourseComponent } from './edit-course/edit-course.component';
+import { AddAssistantTeacherComponent } from './add-assistant-teacher/add-assistant-teacher.component';
+import { AddAssistantStudentComponent } from './add-assistant-student/add-assistant-student.component';
 
 
 
@@ -31,6 +34,6 @@ import { CursoComponent } from './curso/curso.component';
     TagInputModule,
     MaterialModule,
   ],
-  declarations: [GestionComponent, AddCourseComponent, CursoComponent]
+  declarations: [GestionComponent, AddCourseComponent, CursoComponent, EditCourseComponent, AddAssistantTeacherComponent, AddAssistantStudentComponent]
 })
 export class CursosModule { }

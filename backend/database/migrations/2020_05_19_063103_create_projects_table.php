@@ -19,8 +19,12 @@ class CreateProjectsTable extends Migration
             $table->string('description');
             $table->integer('year');
             $table->integer('semester');
+            $table->bigInteger('course_id')->unsigned();
+            $table->integer('doctype');
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('course_id')->references('id')->on('courses');
         });
     }
 

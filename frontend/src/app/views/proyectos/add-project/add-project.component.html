@@ -56,6 +56,33 @@
                             <mat-hint></mat-hint>
                         </mat-form-field>
                     </div>
+                    <div class="form-div">
+                        <mat-form-field appearance="standard" class="input">
+                            <mat-label>Curso</mat-label>
+                            <mat-select formControlName="course">
+                                <mat-option *ngFor="let curso of cursos" [value]="curso.id">
+                                    {{ curso.name }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="hasError('semester', 'required')">Debe seleccionar un semestre para el
+                                proyecto</mat-error>
+                            <mat-hint></mat-hint>
+                        </mat-form-field>
+                        <mat-form-field appearance="standard" class="input">
+                            <mat-label>Tipo documentación</mat-label>
+                            <mat-select formControlName="doctype">
+                                <mat-option [value]="1">
+                                    Simplificado
+                                </mat-option>
+                                <mat-option [value]="2">
+                                    Completo
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="hasError('semester', 'required')">Debe seleccionar un semestre para el
+                                proyecto</mat-error>
+                            <mat-hint></mat-hint>
+                        </mat-form-field>
+                    </div>
                 </form>
             </wizard-step>
             <wizard-step [title]="'Buscar estudiantes'" [isValid]="seleccionarForm.valid" (onNext)="onStep2Next($event)"

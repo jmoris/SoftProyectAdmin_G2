@@ -4,11 +4,12 @@
 
     </div>
 
-    <div class="menu-toggle" (click)="toggelSidebar()">
+    <!--<div class="menu-toggle" (click)="toggelSidebar()">
         <div></div>
         <div></div>
         <div></div>
     </div>
+    !-->
 
     <div class="d-flex align-items-center">
         <!-- Mega menu -->
@@ -66,9 +67,9 @@
     <div style="margin: auto"></div>
 
     <div class="header-part-right">
-        <i class="i-Magnifi-Glass1 header-icon" role="button" (click)="searchService.searchOpen = true"></i>
-        <i fullScreenWindow class="i-Full-Screen header-icon d-none d-sm-inline-block" role="button"></i>
-        <div ngbDropdown [placement]="'bottom-right'" class="d-none d-sm-inline-block">
+       <!--<i class="i-Magnifi-Glass1 header-icon" role="button" (click)="searchService.searchOpen = true"></i>
+       <i fullScreenWindow class="i-Full-Screen header-icon d-none d-sm-inline-block" role="button"></i>
+        <div ngbDropdown [placement]="'bottom-right'" class="d-none d-sm-inline-block"> 
             <i ngbDropdownToggle class="i-Gear text-muted header-icon" role="button"></i>
             <div ngbDropdownMenu class="menu-icon-grid-dropdown">
                 <div class="menu-icon-grid">
@@ -79,10 +80,10 @@
                     <a href="#"><i class="i-Checked-User"></i> Sessions</a>
                     <a href="#"><i class="i-Ambulance"></i> Support</a>
                 </div>
-            </div>
-        </div>
+            </div> 
+        </div> 
 
-       <!-- <div ngbDropdown [placement]="'bottom-right'">
+        <div ngbDropdown [placement]="'bottom-right'">
             <div class="badge-top-container">
                 <span class="badge badge-primary">{{notifications.length}}</span>
                 <i ngbDropdownToggle class="i-Bell text-muted header-icon" role="button"></i>
@@ -106,7 +107,7 @@
         </div>-->
 
         <div ngbDropdown [placement]="'bottom-right'" class="user col align-self-end">
-            <img src="./assets/images/faces/1.jpg" id="userDropdown" ngbDropdownToggle alt="">
+            <img src="./assets/images/faces/generic-profile.png" id="userDropdown" ngbDropdownToggle alt="">
 
             <div ngbDropdownMenu aria-labelledby="userDropdown" class="header-account-dropdown">
                 <div class="dropdown-header">

@@ -8,6 +8,7 @@
     <div class="spinner spinner-bubble spinner-bubble-primary mr-3"></div>
 </div>
 <div class="separator-breadcrumb border-top"></div>
+
 <div class="row">
 	<div class="col-md-12">
 		<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
@@ -69,7 +70,7 @@
 											<div class="card-body">
 												<div class="card-title">Casos de prueba</div>
 												<div class="col-md-12">
-													<div echarts [options]="chartPie1" [autoResize]="true"
+													<div echarts [options]="salesChartPie" [autoResize]="true" [merge]="dataTestCases"
 														style="height: 200px;"></div>
 												</div>
 											</div>
@@ -416,31 +417,7 @@
 							<div class="card o-hidden mb-4">
 								<div class="row">
 									<div class="col-md-2">
-										<div class="card o-hidden mb-4 mt-4 ml-4">
-											<div class="card-body text-center">
-												<div class="content">
-													<p class="m-0 text-small text-muted">Total Realizados </p>
-													<p class="text-primary text-40 line-height-1 m-0">20</p>
-												</div>
-											</div>
-										</div>
-										<div class="card o-hidden mb-4 mt-4 ml-4">
-											<div class="card-body text-center">
-												<div class="content">
-													<p class="m-0 text-small text-muted">Exitosos </p>
-													<p class="text-success text-40 line-height-1 m-0">5</p>
-												</div>
-											</div>
-										</div>
-										<div class="card o-hidden mb-4 mt-4 ml-4">
-											<div class="card-body text-center">
-												<div class="content">
-													<p class="m-0 text-small text-muted">Fracasados</p>
-													<p class="text-danger text-40 line-height-1 m-0">15</p>
-												</div>
-											</div>
-										</div>
-										<div class="card o-hidden mb-4 ml-4 ">
+                                        <div class="card o-hidden mb-4 ml-4 mt-4">
 											<div class="card-body text-center">
 												<i class="i-Add-User"></i>
 												<div class="content">
@@ -450,38 +427,69 @@
 												</div>
 											</div>
 										</div>
+                                        <div class="card o-hidden mb-4 mt-4 ml-4">
+											<div class="card-body text-center">
+												<div class="content">
+													<p class="m-0 text-small text-muted">Total</p>
+													<p class="text-primary text-40 line-height-1 m-0">{{ testcases.length }}</p>
+												</div>
+											</div>
+                                        </div>
+
+										<div class="card o-hidden mb-4 mt-4 ml-4">
+											<div class="card-body text-center">
+												<div class="content">
+													<p class="m-0 text-small text-muted">Exitos </p>
+													<p class="text-success text-40 line-height-1 m-0">{{ infotc.completos }}</p>
+												</div>
+											</div>
+										</div>
+
+										<div class="card o-hidden mb-4 mt-4 ml-4">
+											<div class="card-body text-center">
+												<div class="content">
+													<p class="m-0 text-small text-muted">Fracasos</p>
+													<p class="text-danger text-40 line-height-1 m-0">{{ infotc.incompletos }}</p>
+												</div>
+											</div>
+										</div>
+
 									</div>
 									<div class="col-md-10">
 										<div class="card o-hidden mb-4 mt-4 mr-4">
-											<ngx-datatable style="height: calc(100vh - 270px); box-shadow: none"
-												class="material fullscreen" [columnMode]="'force'" [headerHeight]="50"
+											<ngx-datatable style="height: calc(85vh - 270px); box-shadow: none"
+												class="material fullscreen" [columnMode]="'flex'" [headerHeight]="50"
 												[footerHeight]="50" [rowHeight]="60" [scrollbarV]="true" [limit]="10"
-												[rows]="products$ | async">
-												<ngx-datatable-column name="photo" [maxWidth]="80">
+												[rows]="testcases">
+												<ngx-datatable-column name="internalId" [flexGrow]="9">
 													<ng-template ngx-datatable-header-template>
 														Codigo
-													</ng-template>
-													<ng-template ngx-datatable-cell-template let-value="value"
-														let-row="row">
-														<img height="32px" width="32px" style="border-radius: 4px"
-															[src]="value" alt="">
-													</ng-template>
+                                                    </ng-template>
+                                                    <ng-template let-value="value" ngx-datatable-cell-template>
+                                                        CP{{value | number: '2.0'}}
+                                                      </ng-template>
 												</ngx-datatable-column>
-												<ngx-datatable-column name="name" [width]="300">
+												<ngx-datatable-column name="description" [flexGrow]="50">
 													<ng-template ngx-datatable-header-template>
-														Descripcion
+														Descripción
 													</ng-template>
 												</ngx-datatable-column>
-												<ngx-datatable-column name="category" [maxWidth]="150">
+												<ngx-datatable-column name="status" [flexGrow]="9">
 													<ng-template ngx-datatable-header-template>
-														Fecha
-													</ng-template>
-												</ngx-datatable-column>
-												<ngx-datatable-column name="subtitle" [maxWidth]="150">
-													<ng-template ngx-datatable-header-template>
-														Estatus
-													</ng-template>
-												</ngx-datatable-column>
+														Estado
+                                                    </ng-template>
+                                                    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                                        {{ formatStatusTestCase(value) }}
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column [cellClass]="'va-middle'" name="Accion" [flexGrow]="10" [sortable]="false" prop="id">
+                                                    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                                                      <button class="btn btn-sm btn-outline-warning" (click)="editTestCase(row, $event)"><i
+                                                          class="i-Edit icon-md"></i></button>&nbsp;&nbsp;
+                                                        <button class="btn btn-sm btn-outline-danger" (click)="deleteTestCase(row.id)"><i
+                                                            class="i-Close-Window icon-md"></i></button>
+                                                    </ng-template>
+                                                  </ngx-datatable-column>
 											</ngx-datatable>
 										</div>
 									</div>
@@ -491,71 +499,20 @@
 					</div>
 				</ng-template>
 			</li>
+			<li [ngbNavItem]="6">
+				<a ngbNavLink> Documentos  </a>
+				<ng-template ngbNavContent>
+					<div class="row">
+						<documents-component>
+							
+						</documents-component>
+						
+					</div>
+				</ng-template>
+			</li>
 		</ul>
 		<div [ngbNavOutlet]="nav" class="mt-2"></div>
 	</div>
-
-<!-- VENTANA MODAL QUE SE DESPLEGA PARA AGREGA UN CASO DE PRUEBA -->
-<ng-template #testCaseConfirmModal let-modal>
-	<div class="modal-header">
-		<h4 class="modal-title" id="modal-title">Nuevo caso de prueba </h4>
-		<button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
-            (click)="onCloseCancel()">
-			<span aria-hidden="true">&times;</span>
-		</button>
-	</div>
-	<div class="modal-body">
-		<form [formGroup]="testCaseForm">
-			<div class="row">
-				<div class="col-md-4 form-group mb-0">
-					<label for="firstName">Codigo</label>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon3">TESTECASE-</span>
-						</div>
-						<input type="number" class="form-control" formControlName="tcCode" aria-describedby="basic-addon3">
-					</div>
-				</div>
-				<div class="col-md-4 form-group mb-3">
-					<label for="firstName">Estado</label>
-					<select class="form-control" formControlName="tcState">
-						<option>Incompleto</option>
-						<option>Completo</option>
-					</select>
-				</div>
-				<div class="col-md-4 form-group mb-3">
-					<label for="firstName">Requerimiento de usuario</label>
-					<select class="form-control" formControlName="urReference">
-						<option>RU001</option>
-						<option>RU002</option>
-					</select>
-				</div>
-				<div class="col-md-12 form-group mb-3">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text">Resultado Aceptable </span>
-						</div>
-						<textarea class="form-control" aria-label="With textarea" formControlName="aResult"></textarea>
-					</div>
-				</div>
-
-				<div class="col-md-12 form-group mb-3">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text">Resultado optimo</span>
-						</div>
-						<textarea class="form-control" aria-label="With textarea" formControlName="oResult"></textarea>
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-outline-primary m-1" (click)="imprimirtc()">Agregar</button>
-		<button type="button" class="btn btn-secondary m-1">Cancelar</button>
-	</div>
-</ng-template>
-
 </div>
 
 

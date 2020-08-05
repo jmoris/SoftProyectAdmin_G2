@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -12,6 +12,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { ConfirmationDialogComponent } from '../../core/confirmation-dialog/confirmation-dialog.component';
 import { EditUserComponent } from '../edit-user/edit-user.component';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 
 
@@ -25,11 +27,17 @@ export class GestionComponent implements OnInit {
   usuarios: any = [];
   users: Users[];
   checked = true;
-  displayedColumns: string[] = ["run", "name", "surname", "email", "profile", "edit", "delete"];
+  isEnabled = true;
+  userType: String;
+  buttonDisabled: FormGroup;
+  displayedColumns: string[] = ["run", "name", "surname", "email", "profile", "edit", "delete", "disable"];
   dataSource: MatTableDataSource<Users> = new MatTableDataSource<Users>();
   dialogResult = "";
   isDataLoading: boolean;
   loading: boolean;
+  carga: any;
+  fileToUpload: File = null;
+  @ViewChild('infoImportModal') modalRef: TemplateRef<any>;
 
   addUserForm = this.fb.group({
     name: ['', Validators.required],
@@ -47,6 +55,7 @@ export class GestionComponent implements OnInit {
     private usuariosService: UsuariosService,
     private dialog: MatDialog,
     private fb: FormBuilder,
+    private auth: AuthenticationService,
   ) {
     this.getUsers();
   }
@@ -83,6 +92,16 @@ export class GestionComponent implements OnInit {
   ngOnInit() {
     this.dataSource.sortingDataAccessor = this.sortingCustomAccesor;
     this.getUsers();
+    console.log("userType:", this.auth.getUserType());
+    this.userType = this.auth.getUserType();
+
+
+    if (this.userType == "admin") {
+      this.displayedColumns = ["run", "name", "surname", "email", "profile", "edit", "delete", "disable"];
+    }
+    else if (this.userType == "teacher") {
+      this.displayedColumns = ["run", "name", "surname", "email", "profile"];
+    }
   }
 
   public doFilter = (value: string) => {
@@ -186,6 +205,21 @@ export class GestionComponent implements OnInit {
       });
   }
 
+  handleFileInput(files: FileList, modal) {
+    this.fileToUpload = files.item(0);
+    this.usuariosService.uploadFile(this.fileToUpload).subscribe((data: any) => {
+        this.fileToUpload = null;
+        if (!data.success) {
+            this.toastr.error(data.msg, 'Notificación de error', { timeOut: 3000 });
+            return;
+        }
+        this.toastr.success(data.msg, 'Notificación de exito', { timeOut: 3000 });
+        this.carga = data;
+        this.modalService.open(this.modalRef, { backdropClass: 'light-blue-backdrop' });
+        this.getUsers();
+    });
+}
+
   formatProfile(value) {
     switch (value) {
       case 'teacher':
@@ -194,6 +228,15 @@ export class GestionComponent implements OnInit {
         return 'Estudiante';
       case 'admin':
         return 'Administrador';
+    }
+  }
+
+  activeUserToggle(changeEvent: MatSlideToggleChange) {
+    if (changeEvent.checked) {
+      console.log(changeEvent.checked);
+    } else {
+      console.log(changeEvent.checked);
+      this.dataSource.data = this.users;
     }
   }
 

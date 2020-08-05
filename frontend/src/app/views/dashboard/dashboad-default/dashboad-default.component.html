@@ -1,15 +1,15 @@
 <div class="">
     <div class="row">
         <div class="breadcrumb col-md-9">
-            <h1>Dashboard</h1>
+            <h1>Bienvenido</h1>
             <ul>
-                <li><a href="">Dashboard</a></li>
+                <li><a href="">Administrador/a</a></li>
             </ul>
         </div>
     </div>
     <div class="separator-breadcrumb border-top"></div>
     <div class="row">
-        <div class="col-lg-8 col-md-12">
+        <div class="col-lg-12 col-md-12">
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="card-title">Usuarios</div>
@@ -35,7 +35,7 @@
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="card card-icon mb-4">
                                 <div class="card-body text-center">
-                                    <i class="i-Business-Mens"></i>
+                                    <i class="i-MaleFemale"></i>
                                     <p class="text-muted mt-2 mb-2">Estudiantes</p>
                                     <p class="text-primary text-24 line-height-1 m-0">{{ info?.usuarios?.student }}</p>
                                 </div>
@@ -45,35 +45,36 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-sm-12">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <div class="card-title">Proyectos</div>
-                    <div echarts [options]="salesChartPie" [merge]="dataProyectos" [autoResize]="true"
-                        style="height: 182px;"></div>
-
-                </div>
-            </div>
-        </div>
     </div>
     <div class="row">
-        <div class="col-lg-4 col-sm-12">
+        <div class="col-lg-6 col-sm-12">
             <div class="card mb-4">
                 <div class="card-body">
-                    <div class="card-title">Cursos</div>
-                    <div echarts [options]="salesChartPie" [merge]="dataCursos" [autoResize]="true"
-                        style="height: 182px;"></div>
-
+                    <div class="card-title">Cursos Periodo Actual</div>
+                     <div echarts [options]="salesChartPie" [merge]="dataCursos" [autoResize]="true" style="height: 182px;"></div>
+                
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-8 col-md-12">
+        <div class="col-lg-6 col-sm-12">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="card-title">Proyectos Periodo Actual</div>
+                     <div echarts [options]="salesChartPie" [merge]="dataCursos" [autoResize]="true" style="height: 182px;"></div>
+                
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="card-title">Cursos</div>
                     <div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="card card-icon mb-4">
                                 <div class="card-body text-center">
                                     <i class="i-Library"></i>
@@ -83,7 +84,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="card card-icon mb-4">
                                 <div class="card-body text-center">
                                     <i class="i-Close-Window"></i>
@@ -93,7 +94,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="card card-icon mb-4">
                                 <div class="card-body text-center">
                                     <i class="i-Book"></i>
@@ -107,10 +108,6 @@
             </div>
         </div>
 
-    </div>
-
-
-
-
-
 </div>
+
+

@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
+import { CursosService } from 'src/app/_services/cursos.service';
 
 @Component({
   selector: 'app-add-project',
@@ -24,29 +25,32 @@ export class AddProjectComponent implements OnInit {
   asignarForm: FormGroup;
   currentYear: number = new Date().getFullYear();;
   roles:any = [];
+  cursos:any = [];
   estudiantes: any = [];
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
   dataSource2: MatTableDataSource<any> = new MatTableDataSource<any>();
   isDataLoading: boolean;
   selected = [];
-  displayedColumns: string[] = [ "select", "name", "surname", "email"];
-  displayedColumns2: string[] = [ "name", "surname", "email", "rol"];
+  displayedColumns: string[] = [ 'select', 'name', 'surname', 'email'];
+  displayedColumns2: string[] = [ 'name', 'surname', 'email', 'rol'];
   ColumnMode = ColumnMode;
   SelectionType = SelectionType;
   selection = new SelectionModel<any>(true, []);
 
-  @ViewChild('sort1') sort : MatSort;
-  @ViewChild('sort2') sort2 : MatSort;
-  @ViewChild('paginator') paginator : MatPaginator;
-  @ViewChild('paginator2') paginator2 : MatPaginator;
+  @ViewChild('sort1') sort: MatSort;
+  @ViewChild('sort2') sort2: MatSort;
+  @ViewChild('paginator') paginator: MatPaginator;
+  @ViewChild('paginator2') paginator2: MatPaginator;
 
   constructor(
     public dialogRef: MatDialogRef<AddProjectComponent>,
     @Inject(MAT_DIALOG_DATA) public data: String,
     private projectService: ProjectsService,
     private userService: UsuariosService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private cursosService: CursosService
   ) {
+    // tslint:disable-next-line: no-shadowed-variable
     this.userService.getStudents().subscribe((data) => {
         if (!data) {
             return;
@@ -57,20 +61,26 @@ export class AddProjectComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
           this.isDataLoading = false;
     });
+    // tslint:disable-next-line: no-shadowed-variable
     this.projectService.getRoles().subscribe((data) => {
         this.roles = data;
     });
+    this.cursosService.getAll().subscribe((data) => {
+        this.cursos = data;
+    });
     this.form = new FormGroup({
-      name: new FormControl("", [Validators.required]),
-      description: new FormControl("", [Validators.required]),
+      name: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
       year: new FormControl(this.currentYear, [Validators.required]),
       semester: new FormControl("", [Validators.required]),
+      course: new FormControl("", [Validators.required]),
+      doctype: new FormControl("", [Validators.required])
     });
     this.seleccionarForm = new FormGroup({
-        usuarios: new FormArray([], [Validators.required, Validators.minLength(1)])
+        usuarios: new FormArray([], [])
     });
     this.asignarForm = new FormGroup({
-        usuarios: new FormArray([], [Validators.required, Validators.minLength(this.dataSource2.data.length)])
+        usuarios: new FormArray([], [])
       });
   }
 
@@ -85,7 +95,7 @@ export class AddProjectComponent implements OnInit {
       });
       return;
     }
-    let projectData = this.form.value;
+    const projectData = this.form.value;
     console.log('Info name: ' + projectData.name);
     this.projectService.insert(projectData).subscribe({
       next: result => {
@@ -97,12 +107,12 @@ export class AddProjectComponent implements OnInit {
   }
 
   onCloseCancel() {
-    this.dialogRef.close("Cancel");
+    this.dialogRef.close('Cancel');
   }
 
   public hasError = (controlName: string, errorName: string) => {
     return this.form.get(controlName).hasError(errorName);
-  };
+  }
 
   onStep1Next(e) {}
   onStep2Next(e) {
@@ -110,17 +120,17 @@ export class AddProjectComponent implements OnInit {
     this.dataSource2.sort = this.sort2;
     this.dataSource2.paginator = this.paginator2;
     this.asignarForm = new FormGroup({
-        usuarios: new FormArray([], [Validators.required, Validators.minLength(this.dataSource2.data.length)])
+        usuarios: new FormArray([], [])
       });
   }
 
   onComplete(e) {
-      let frm = this.form.value;
+      const frm = this.form.value;
       frm.students = this.asignarForm.value.usuarios;
       this.projectService.insertComplete(frm).subscribe((data) => {
           console.log(data);
           this.dialogRef.close('Confirm');
-      })
+      });
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -132,44 +142,44 @@ export class AddProjectComponent implements OnInit {
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    if(this.isAllSelected()){
+    if (this.isAllSelected()) {
         this.seleccionarForm.controls.usuarios.setValue([]);
         this.selection.clear();
-    }else{
-        let usersControl = <FormArray>this.seleccionarForm.controls.usuarios;
+    } else {
+        const usersControl = <FormArray>this.seleccionarForm.controls.usuarios;
         this.dataSource.data.forEach(row => this.selection.select(row));
         this.estudiantes.forEach(element => {
-            usersControl.push(this.formBuilder.group({user_id:element.id}));
+            usersControl.push(this.formBuilder.group({user_id: element.id}));
         });
 
     }
   }
 
-  seleccionar(row){
-    let usersControl = <FormArray>this.seleccionarForm.controls.usuarios;
-    let selected = this.selection.isSelected(row);
-    if(selected){
+  seleccionar(row) {
+    const usersControl = <FormArray>this.seleccionarForm.controls.usuarios;
+    const selected = this.selection.isSelected(row);
+    if (selected) {
         usersControl.push(this.formBuilder.group({user_id: row.id}));
-    }else{
-        usersControl.removeAt(usersControl.value.findIndex(student => student.id === row.id))
+    } else {
+        usersControl.removeAt(usersControl.value.findIndex(student => student.id === row.id));
     }
   }
 
-  searchById(id){
-    let usuarios : any = this.seleccionarForm.controls.usuarios.value;
-    let search : any = null;
+  searchById(id) {
+    const usuarios: any = this.seleccionarForm.controls.usuarios.value;
+    let search: any = null;
     usuarios.forEach(element => {
-        if (element.user_id==id){
+        if (element.user_id == id) {
             search = element;
         }
     });
-    return search;;
+    return search; ;
   }
 
-    selectRol(user, rol){
-        let searched = this.searchById(user.id);
+    selectRol(user, rol) {
+        const searched = this.searchById(user.id);
         searched.role_id = rol.id;
-        let usersControl = <FormArray>this.asignarForm.controls.usuarios;
+        const usersControl = <FormArray>this.asignarForm.controls.usuarios;
         usersControl.push(this.formBuilder.group({
             user_id: new FormControl(searched.user_id, [Validators.required]),
             role_id: new FormControl(searched.role_id, [Validators.required])

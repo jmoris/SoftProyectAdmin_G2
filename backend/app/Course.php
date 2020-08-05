@@ -16,4 +16,8 @@ class Course extends Model
     public function user(){
         return $this->hasOne(User::class, 'id', 'idUser');
     }
+
+    public function projects(){
+        return $this->hasMany(Project::class);
+    }
 }

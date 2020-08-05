@@ -25,7 +25,7 @@
                         <mat-form-field appearance="standard" class="input">
                             <mat-label>Profesor a cargo</mat-label>
                                 <mat-select formControlName="teacher_id">
-                                    <mat-option *ngFor="let teacher of teachers" [value]="teacher.id">{{ teacher.name }}</mat-option>
+                                    <mat-option *ngFor="let teacher of teachers" [value]="teacher.id">{{ teacher.name + ' ' + teacher.surname }}</mat-option>
                                 </mat-select>
                             <mat-error *ngIf="hasError('teacher_id', 'required')">Debe ingresar un profesor para el
                                 proyecto
@@ -38,10 +38,10 @@
                             <mat-label>Semestre</mat-label>
                             <mat-select formControlName="semester">
                                 <mat-option [value]="1">
-                                    Primavera
+                                    Otoño
                                 </mat-option>
                                 <mat-option [value]="2">
-                                    Otoño
+                                    Primavera
                                 </mat-option>
                             </mat-select>
                             <mat-error *ngIf="hasError('semester', 'required')">Debe seleccionar un semestre para el
@@ -59,12 +59,12 @@
                     </div>
                 </form>
             </wizard-step>
-            <wizard-step [title]="'Selección estudiantes'" [isValid]="seleccionarForm.valid" (onComplete)="onComplete($event)"
-                style="width: 50vh!important;">
+            <wizard-step [title]="'Selección estudiantes'" [isValid]="seleccionarForm.valid"
+                (onComplete)="onComplete($event)" style="width: 50vh!important;">
                 <form [formGroup]="seleccionarForm">
                     <div class="col-md-12">
-                        <table mat-table style="width:100%" [dataSource]="dataSource" #sort="matSort" matSort class="mat-elevation-z8"
-                            matSortActive="run" matSortDirection="asc" matSortDisableClear>
+                        <table mat-table style="width:100%" [dataSource]="dataSource" #sort="matSort" matSort
+                            class="mat-elevation-z8" matSortActive="run" matSortDirection="asc" matSortDisableClear>
                             <ng-container matColumnDef="select">
                                 <th mat-header-cell *matHeaderCellDef>
                                     <mat-checkbox (change)="$event ? masterToggle() : null"
