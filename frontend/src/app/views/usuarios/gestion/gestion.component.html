@@ -16,8 +16,8 @@
                 <i class="i-Add-User"></i>
                 <div class="content">
                     <p class="text-muted mt-2 mb-0">Carga Masiva</p>
-                    <button _ngcontent-tkm-c169="" class="btn btn-primary btn-rounded"
-                        (click)="fileInput.click();">Importar</button>
+                    <button *ngIf="userType=='admin'||userType=='teacher'" _ngcontent-tkm-c169=""
+                        class="btn btn-primary btn-rounded" (click)="fileInput.click();">Importar</button>
                     <input #fileInput accept=".xlsx, .xls" type="file"
                         (change)="handleFileInput($event.target.files, infoImportModal)" style="display:none;" />
                 </div>
@@ -30,8 +30,8 @@
                 <i class="i-Add-User"></i>
                 <div class="content">
                     <p class="text-muted mt-2 mb-0">Nuevo Usuario</p>
-                    <button type="button" class="btn btn-primary btn-rounded m-1"
-                        (click)="openAddDialog()">Agregar</button>
+                    <button *ngIf="userType=='admin'||userType=='teacher'" type="button"
+                        class="btn btn-primary btn-rounded m-1" (click)="openAddDialog()">Agregar</button>
                 </div>
             </div>
         </div>
@@ -82,9 +82,11 @@
         <ng-container matColumnDef="disable">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
-              <mat-slide-toggle color="primary" (change)="activeUserToggle($event)"></mat-slide-toggle>
+                <mat-slide-toggle color="primary" [(ngModel)]="isEnabled" (change)="onChange($event)">
+                    
+                </mat-slide-toggle>
             </td>
-          </ng-container>
+        </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

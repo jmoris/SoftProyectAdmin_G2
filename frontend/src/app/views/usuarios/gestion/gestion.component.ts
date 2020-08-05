@@ -208,17 +208,17 @@ export class GestionComponent implements OnInit {
   handleFileInput(files: FileList, modal) {
     this.fileToUpload = files.item(0);
     this.usuariosService.uploadFile(this.fileToUpload).subscribe((data: any) => {
-        this.fileToUpload = null;
-        if (!data.success) {
-            this.toastr.error(data.msg, 'Notificación de error', { timeOut: 3000 });
-            return;
-        }
-        this.toastr.success(data.msg, 'Notificación de exito', { timeOut: 3000 });
-        this.carga = data;
-        this.modalService.open(this.modalRef, { backdropClass: 'light-blue-backdrop' });
-        this.getUsers();
+      this.fileToUpload = null;
+      if (!data.success) {
+        this.toastr.error(data.msg, 'Notificación de error', { timeOut: 3000 });
+        return;
+      }
+      this.toastr.success(data.msg, 'Notificación de exito', { timeOut: 3000 });
+      this.carga = data;
+      this.modalService.open(this.modalRef, { backdropClass: 'light-blue-backdrop' });
+      this.getUsers();
     });
-}
+  }
 
   formatProfile(value) {
     switch (value) {
@@ -231,12 +231,27 @@ export class GestionComponent implements OnInit {
     }
   }
 
+  //Método de prueba para setear un valor al switch.
+  onChange(value) {
+    if (value.checked == true) {
+      this.isEnabled = true;
+      console.log(this.isEnabled);
+    } else {
+      this.isEnabled = false;
+      console.log(this.isEnabled);
+    }
+  }
+
+
   activeUserToggle(changeEvent: MatSlideToggleChange) {
+
+
     if (changeEvent.checked) {
       console.log(changeEvent.checked);
     } else {
       console.log(changeEvent.checked);
       this.dataSource.data = this.users;
+      console.log("ESTOS DATILLOS EN USUARIO: ", this.dataSource.data);
     }
   }
 
