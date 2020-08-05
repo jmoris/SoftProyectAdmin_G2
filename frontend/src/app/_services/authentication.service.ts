@@ -50,4 +50,11 @@ export class AuthenticationService {
         this.currentUserSubject.next(null);
         this.router.navigateByUrl("/sessions/signin");
     }
+
+    getUserType(): String {
+        let tokenInfo = this.currentUserValue;
+        console.log("info: ", tokenInfo.user.profile);
+        return tokenInfo.user.profile;
+        
+    }
 }

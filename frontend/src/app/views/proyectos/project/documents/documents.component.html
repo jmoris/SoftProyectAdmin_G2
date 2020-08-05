@@ -1,0 +1,29 @@
+<div class="col-md-12">
+    <div class="card o-hidden mb-4">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="card o-hidden mt-4  ml-4 mb-2">
+                    <select *ngIf="complete_document" (change)="changed($event.target.value)" class="form-control">
+                        <option *ngFor="let item of documents_completo" [value]="item">{{ item }}</option>
+                    </select>
+                    <select *ngIf="simple_document"  (change)="changed($event.target.value)" class="form-control">
+                        <option *ngFor="let item of documents_simplificado" [value]="item">{{ item }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card o-hidden mt-4 mr-4 ml-0 mb-2 ">
+                    <button type="button"  (click)="guardar()" class="btn btn-primary btn-block" >Guardar </button>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card o-hidden mr-4 ml-4">
+                    <ckeditor #editor [editor]="Editor"  (ready)="onReady($event)"></ckeditor>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+

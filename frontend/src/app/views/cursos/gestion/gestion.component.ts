@@ -49,13 +49,13 @@ export class GestionComponent implements OnInit {
   });
 
   constructor(
-        private router: Router,
-        private modalService: NgbModal,
-        private toastr: ToastrService,
-        private dialog: MatDialog,
-        private cursosService: CursosService,
-        private fb: FormBuilder,
-	) { }
+    private router: Router,
+    private modalService: NgbModal,
+    private toastr: ToastrService,
+    private dialog: MatDialog,
+    private cursosService: CursosService,
+    private fb: FormBuilder,
+  ) { }
 
   getCourses() {
     this.loading = true;
@@ -198,26 +198,26 @@ export class GestionComponent implements OnInit {
         this.getCourses();
       }
     })
-    }
+  }
 
-    editCourse(id: String){
-      const dialogRef = this.dialog.open(EditCourseComponent, {
-        data: id,
-        width: '850px',
-        disableClose: true,
-        autoFocus: true
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-        if (result == 'Confirm') {
-          this.getCourses();
-          this.toastr.success('Curso editado exitosamente', 'Notificación', { timeOut: 3000 });
-        }
-      });
-    }
-    
-    deleteData(id,modal,event){
+  editCourse(id: String) {
+    const dialogRef = this.dialog.open(EditCourseComponent, {
+      data: id,
+      width: '850px',
+      disableClose: true,
+      autoFocus: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result == 'Confirm') {
+        this.getCourses();
+        this.toastr.success('Curso editado exitosamente', 'Notificación', { timeOut: 3000 });
+      }
+    });
+  }
+
+  deleteData(id, modal, event) {
     event.target.parentElement.parentElement.blur();
     this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })
       .result.then((result) => {

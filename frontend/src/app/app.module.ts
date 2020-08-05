@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms'
-import { ReactiveFormsModule} from '@angular/forms'
-import { MaterialModule } from './material.module'
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms';
+import { MaterialModule } from './material.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +19,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import { getSpanishPaginatorIntl } from './spanish-paginator-intl';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { MomentDateFormatter } from './_helpers/momentdate.formatter';
+import { CommonModule } from '@angular/common';
 
 /**
  * Custom angular notifier options

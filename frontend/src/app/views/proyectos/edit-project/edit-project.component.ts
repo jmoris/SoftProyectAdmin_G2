@@ -1,31 +1,29 @@
-import { Component, OnInit, Inject, ViewChild, QueryList } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
+import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AddProjectComponent } from '../add-project/add-project.component';
 import { ProjectsService } from 'src/app/_services/projects.service';
 import { UsuariosService } from 'src/app/_services/usuarios.service';
-import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { SelectionModel } from '@angular/cdk/collections';
-import { CursosService } from 'src/app/_services/cursos.service';
 
 @Component({
-  selector: 'app-add-project',
-  templateUrl: './add-project.component.html',
-  styleUrls: ['./add-project.component.scss']
+  selector: 'app-edit-project',
+  templateUrl: './edit-project.component.html',
+  styleUrls: ['./edit-project.component.scss']
 })
-export class AddProjectComponent implements OnInit {
-
+export class EditProjectComponent implements OnInit {
 
   form: FormGroup;
   seleccionarForm: FormGroup;
   hide = true;
   isCompleted: boolean;
   asignarForm: FormGroup;
-  currentYear: number = new Date().getFullYear();;
-  roles:any = [];
-  cursos:any = [];
+  currentYear: number = new Date().getFullYear(); ;
+  roles: any = [];
   estudiantes: any = [];
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
   dataSource2: MatTableDataSource<any> = new MatTableDataSource<any>();
@@ -47,10 +45,8 @@ export class AddProjectComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: String,
     private projectService: ProjectsService,
     private userService: UsuariosService,
-    private formBuilder: FormBuilder,
-    private cursosService: CursosService
+    private formBuilder: FormBuilder
   ) {
-    // tslint:disable-next-line: no-shadowed-variable
     this.userService.getStudents().subscribe((data) => {
         if (!data) {
             return;
@@ -61,24 +57,20 @@ export class AddProjectComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
           this.isDataLoading = false;
     });
-    // tslint:disable-next-line: no-shadowed-variable
     this.projectService.getRoles().subscribe((data) => {
         this.roles = data;
-    });
-    this.cursosService.getAll().subscribe((data) => {
-        this.cursos = data;
     });
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       year: new FormControl(this.currentYear, [Validators.required]),
-      semester: new FormControl("", [Validators.required]),
+      semester: new FormControl('', [Validators.required]),
     });
     this.seleccionarForm = new FormGroup({
-        usuarios: new FormArray([], [])
+        usuarios: new FormArray([], [Validators.required, Validators.minLength(1)])
     });
     this.asignarForm = new FormGroup({
-        usuarios: new FormArray([], [])
+        usuarios: new FormArray([], [Validators.required, Validators.minLength(this.dataSource2.data.length)])
       });
   }
 
@@ -88,7 +80,7 @@ export class AddProjectComponent implements OnInit {
 
   onCloseConfirm() {
     if (this.form.invalid) {
-      (<any>Object).values(this.form.controls).forEach(control => {
+      (<any>Object).values(this.form.controls).forEach((control: { markAsTouched: () => void; }) => {
         control.markAsTouched();
       });
       return;
@@ -112,17 +104,17 @@ export class AddProjectComponent implements OnInit {
     return this.form.get(controlName).hasError(errorName);
   }
 
-  onStep1Next(e) {}
-  onStep2Next(e) {
+  onStep1Next(e: any) {}
+  onStep2Next(e: any) {
     this.dataSource2.data = this.selection.selected;
     this.dataSource2.sort = this.sort2;
     this.dataSource2.paginator = this.paginator2;
     this.asignarForm = new FormGroup({
-        usuarios: new FormArray([], [])
+        usuarios: new FormArray([], [Validators.required, Validators.minLength(this.dataSource2.data.length)])
       });
   }
 
-  onComplete(e) {
+  onComplete(e: any) {
       const frm = this.form.value;
       frm.students = this.asignarForm.value.usuarios;
       this.projectService.insertComplete(frm).subscribe((data) => {
@@ -146,27 +138,28 @@ export class AddProjectComponent implements OnInit {
     } else {
         const usersControl = <FormArray>this.seleccionarForm.controls.usuarios;
         this.dataSource.data.forEach(row => this.selection.select(row));
-        this.estudiantes.forEach(element => {
+        this.estudiantes.forEach((element: { id: any; }) => {
             usersControl.push(this.formBuilder.group({user_id: element.id}));
         });
 
     }
   }
 
-  seleccionar(row) {
+  seleccionar(row: { id: any; }) {
     const usersControl = <FormArray>this.seleccionarForm.controls.usuarios;
     const selected = this.selection.isSelected(row);
     if (selected) {
         usersControl.push(this.formBuilder.group({user_id: row.id}));
     } else {
-        usersControl.removeAt(usersControl.value.findIndex(student => student.id === row.id));
+        usersControl.removeAt(usersControl.value.findIndex((student: { id: any; }) => student.id === row.id));
     }
   }
 
-  searchById(id) {
+  searchById(id: any) {
     const usuarios: any = this.seleccionarForm.controls.usuarios.value;
     let search: any = null;
-    usuarios.forEach(element => {
+    usuarios.forEach((element: { user_id: any; }) => {
+        // tslint:disable-next-line: triple-equals
         if (element.user_id == id) {
             search = element;
         }
@@ -174,7 +167,7 @@ export class AddProjectComponent implements OnInit {
     return search; ;
   }
 
-    selectRol(user, rol) {
+    selectRol(user: { id: any; }, rol: { id: any; }) {
         const searched = this.searchById(user.id);
         searched.role_id = rol.id;
         const usersControl = <FormArray>this.asignarForm.controls.usuarios;

@@ -8,6 +8,7 @@
     <div class="spinner spinner-bubble spinner-bubble-primary mr-3"></div>
 </div>
 <div class="separator-breadcrumb border-top"></div>
+
 <div class="row">
 	<div class="col-md-12">
 		<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
@@ -495,6 +496,16 @@
 								</div>
 							</div>
 						</div>
+					</div>
+				</ng-template>
+			</li>
+			<li [ngbNavItem]="6">
+				<a ngbNavLink> Documentos  </a>
+				<ng-template ngbNavContent>
+					<div class="row">
+						<documents-component>
+							
+						</documents-component>
 					</div>
 				</ng-template>
 			</li>
